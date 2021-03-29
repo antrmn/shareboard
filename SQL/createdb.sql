@@ -6,9 +6,9 @@ use ShareBoard;
 CREATE TABLE user (
 	id int AUTO_INCREMENT PRIMARY KEY,
     username varchar(30) UNIQUE NOT NULL,
-    password varchar(50) NOT NULL,
+    password varchar(255) NOT NULL,
     email varchar(50) UNIQUE NOT NULL,
-    creation_date date DEFAULT CURRENT_TIMESTAMP
+    creation_date TIMESTAMP DEFAULT NOW()
 );
 
 CREATE TABLE admin (
@@ -18,6 +18,7 @@ CREATE TABLE admin (
 
 CREATE TABLE category (
 	id int AUTO_INCREMENT PRIMARY KEY,
+    description VARCHAR(100),
     name varchar(50) UNIQUE NOT NULL
 );
 
@@ -26,10 +27,10 @@ CREATE TABLE post (
     category_id int NOT NULL,
 	author_id int NOT NULL,
     title VARCHAR(100) NOT NULL,
-    text VARCHAR(255) NOT NULL,
-	karma int DEFAULT 0,
-    type VARCHAR(10) DEFAULT 'text',
-    creation_date date DEFAULT CURRENT_TIMESTAMP,
+    text VARCHAR(1000) NOT NULL,
+	#karma int DEFAULT 0,
+    type ENUM('text','img') DEFAULT 'text',
+	creation_date TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY(author_id) REFERENCES user(id),
     FOREIGN KEY(category_id) REFERENCES category(id) ON DELETE CASCADE
 );
@@ -39,8 +40,8 @@ CREATE TABLE comment(
     post_id int NOT NULL,
 	author_id int NOT NULL,
     text varchar(1000) NOT NULL,
-    karma int DEFAULT 0,
-    creation_date date DEFAULT CURRENT_TIMESTAMP,
+    #karma int DEFAULT 0,
+    creation_date TIMESTAMP DEFAULT NOW(),
 	FOREIGN KEY(author_id) REFERENCES user(id),
     FOREIGN KEY(post_id) REFERENCES post(post_id) ON DELETE CASCADE
 );
