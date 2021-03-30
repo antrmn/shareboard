@@ -29,7 +29,7 @@ CREATE TABLE post (
     title VARCHAR(100) NOT NULL,
     text VARCHAR(1000) NOT NULL,
 	#karma int DEFAULT 0,
-    type ENUM('text','img') DEFAULT 'text',
+    type VARCHAR(8) DEFAULT 'TEXT',
 	creation_date TIMESTAMP DEFAULT NOW(),
     FOREIGN KEY(author_id) REFERENCES user(id),
     FOREIGN KEY(category_id) REFERENCES category(id) ON DELETE CASCADE
