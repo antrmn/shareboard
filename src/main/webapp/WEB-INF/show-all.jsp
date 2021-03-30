@@ -8,12 +8,11 @@
     <jsp:useBean id="posts" scope="request" type="java.util.List"/>
     <c:if test="${empty posts}">Nessun post.</c:if>
     <c:forEach items="${posts}" var="post">
-        <div>
-            <ul>
-                <li>${post.title}</li>
-                <li>${post.text}</li>
-            </ul>
+        <div style="border: 1px solid black">
+            <strong>${post.title}<br></strong>
+                ${post.text}<br>
         </div>
+        <br>
     </c:forEach>
 </div>
 </body>

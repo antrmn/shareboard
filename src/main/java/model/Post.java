@@ -3,7 +3,7 @@ package model;
 import java.util.Date;
 
 public class Post {
-    public enum Type {POST, IMG}
+    public enum Type {TEXT, IMG}
 
     private int id;
     private Type type;
