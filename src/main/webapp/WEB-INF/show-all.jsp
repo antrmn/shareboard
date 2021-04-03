@@ -9,6 +9,7 @@
     <c:if test="${empty posts}">Nessun post.</c:if>
     <c:forEach items="${posts}" var="post">
         <div style="border: 1px solid black">
+            <small>${post.author.username}         ${post.category.name} <br></small>
             <strong>${post.title}<br></strong>
                 ${post.text}<br>
         </div>
