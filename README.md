@@ -1,4 +1,4 @@
-# Shareboard 
+# Shareboard [![Java CI with Maven](https://github.com/ra-c/shareboard/actions/workflows/maven.yml/badge.svg)](https://github.com/ra-c/shareboard/actions/workflows/maven.yml)
 
 ShareBoard intende diventare un social media atto a promuovere lo scambio di idee e di informazioni tra persone che condividono gli stessi interessi. ShareBoard funge da &quot;aggregatore di contenuti&quot; mantenuto da utenti che collaborano condividendo post o interagendo con essi. L&#39;obiettivo è quello di offrire un punto di riferimento per chiunque volesse condividere il proprio lavoro, una propria idea in rete o anche per interagire e stare in contatto con utenti con un certo interesse in comune.
 
