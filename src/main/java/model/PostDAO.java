@@ -11,16 +11,14 @@ public class PostDAO {
 
     public List<Post> doRetrieveAll(){
         try(Connection con = ConPool.getConnection()){
-            PreparedStatement ps =
-                    con.prepareStatement("SELECT post.post_id, post.title, post.text, post.type, post.creation_date, " +
-                                             "user.id, user.username, " +
-                                             "category.id, category.name, " +
-                                             "SUM(postvotes.vote)" +
-                                             "FROM post " +
-                                             "INNER JOIN user ON post.author_id=user.id " +
-                                             "INNER JOIN category ON post.category_id=category.id " +
-                                             "INNER JOIN postvotes ON post.post_id = postvotes.post_id;");
-            // TODO: Sum non funziona
+
+            PreparedStatement ps = con.prepareStatement("SELECT post.post_id, post.title, post.text, post.type, post.creation_date, user.id, user.username, category.id, category.name, SUM(postvotes.vote)\n" +
+                                                            "FROM post\n" +
+                                                            "LEFT JOIN user ON post.author_id=user.id\n" +
+                                                            "INNER JOIN category ON post.category_id=category.id \n" +
+                                                            "LEFT JOIN postvotes ON post.post_id = postvotes.post_id\n" +
+                                                            "GROUP BY post.post_id;");
+
             ResultSet rs = ps.executeQuery();
             List<Post> list = new ArrayList<>();
             while(rs.next()){
