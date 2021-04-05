@@ -10,6 +10,16 @@ public class Post {
     private Date creationDate;
     private String title;
     private String text;
+    private int voti;
+
+    public int getVoti() {
+        return voti;
+    }
+
+    public void setVoti(int voti) {
+        this.voti = voti;
+    }
+
     private Category category;
     private User author;
 

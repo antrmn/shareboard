@@ -12,6 +12,7 @@
             <small>${post.author.username}         ${post.category.name} <br></small>
             <strong>${post.title}<br></strong>
                 ${post.text}<br>
+            <small>${post.voti} voti</small>
         </div>
         <br>
     </c:forEach>

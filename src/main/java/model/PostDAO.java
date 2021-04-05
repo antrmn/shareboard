@@ -14,10 +14,13 @@ public class PostDAO {
             PreparedStatement ps =
                     con.prepareStatement("SELECT post.post_id, post.title, post.text, post.type, post.creation_date, " +
                                              "user.id, user.username, " +
-                                             "category.id, category.name " +
+                                             "category.id, category.name, " +
+                                             "SUM(postvotes.vote)" +
                                              "FROM post " +
                                              "INNER JOIN user ON post.author_id=user.id " +
-                                             "INNER JOIN category ON post.category_id=category.id;");
+                                             "INNER JOIN category ON post.category_id=category.id " +
+                                             "INNER JOIN postvotes ON post.post_id = postvotes.post_id;");
+            // TODO: Sum non funziona
             ResultSet rs = ps.executeQuery();
             List<Post> list = new ArrayList<>();
             while(rs.next()){
@@ -35,6 +38,7 @@ public class PostDAO {
                 category.setId(rs.getInt(8));
                 category.setName(rs.getString(9));
                 post.setCategory(category);
+                post.setVoti(rs.getInt(10));
                 list.add(post);
             }
 
