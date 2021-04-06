@@ -51,6 +51,76 @@ public class PostDAO {
             throw new RuntimeException(e);
         }
     }
+
+    public Post doRetrieve(int id){
+        try(Connection con = ConPool.getConnection()){
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT post.post_id, post.title, post.text, post.type, post.creation_date," +
+                            "user.id, user.username, " +
+                            "category.id, category.name, " +
+                            "SUM(postvotes.vote) " +
+                            "FROM post " +
+                            "WHERE post_id=? " +
+                            "INNER JOIN user ON post.author_id=user.id " +
+                            "INNER JOIN category ON post.category_id=category.id " +
+                            "LEFT JOIN postvotes ON post.post_id = postvotes.post_id " +
+                            "GROUP BY post.post_id;");
+
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if(!rs.next()){
+                throw new RuntimeException("Errore");
+            }
+
+            Post post = new Post();
+            post.setId(rs.getInt(1));
+            post.setTitle(rs.getString(2));
+            post.setText(rs.getString(3));
+            post.setType(Post.Type.valueOf(rs.getString(4)));
+            post.setCreationDate(rs.getDate(5));
+            User user = new User();
+            user.setId(rs.getInt(6));
+            user.setUsername(rs.getString(7));
+            post.setAuthor(user);
+            Category category = new Category();
+            category.setId(rs.getInt(8));
+            category.setName(rs.getString(9));
+            post.setCategory(category);
+            post.setVoti(rs.getInt(10));
+            post.setN_comments(rs.getInt(11));
+
+            PreparedStatement ps_commenti =
+                    con.prepareStatement("SELECT comment.id, comment.text, comment.creation_date, " +
+                                                    "user.id, user.username, " +
+                                                    "SUM(commentvotes.vote) " +
+                                             "WHERE comment.post_id=? " +
+                                             "INNER JOIN user ON comment.author_id=user.id " +
+                                             "LEFT JOIN commentvotes ON comment.id = commentvotes.comment_id");
+
+            ps_commenti.setInt(1,id);
+
+            ps_commenti.executeQuery();
+            List<Comment> list = new ArrayList<>();
+            while(rs.next()){
+                Comment c = new Comment();
+                c.setId(rs.getInt(1));
+                c.setText(rs.getString(2));
+                c.setCreationDate(rs.getDate(3));
+                User u = new User();
+                u.setId(rs.getInt(4));
+                u.setUsername(rs.getString(5));
+                c.setAuthor(u);
+                c.setVotes(rs.getInt(6));
+                list.add(c);
+            }
+
+            post.setN_comments(list.size());
+            post.setComments(list);
+            return post;
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+    }
 }
 
 

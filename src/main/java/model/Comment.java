@@ -7,6 +7,15 @@ public class Comment {
     private Post post;
     private User author;
     private String text;
+    private int votes;
+
+    public int getVotes() {
+        return votes;
+    }
+
+    public void setVotes(int votes) {
+        this.votes = votes;
+    }
 
     public int getId() {
         return id;
