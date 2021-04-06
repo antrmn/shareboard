@@ -8,6 +8,7 @@ public class Comment {
     private User author;
     private String text;
     private int votes;
+    private Date creationDate;
 
     public int getVotes() {
         return votes;
@@ -56,6 +57,4 @@ public class Comment {
     public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
-
-    private Date creationDate;
 }

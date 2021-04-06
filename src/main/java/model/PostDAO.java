@@ -57,8 +57,7 @@ public class PostDAO {
             PreparedStatement ps =
                     con.prepareStatement("SELECT post.post_id, post.title, post.text, post.type, post.creation_date, user.id, user.username, \n" +
                             "category.id, category.name, \n" +
-                            "SUM(postvotes.vote), \n" +
-                            "COUNT(post.post_id) \n" +
+                            "SUM(postvotes.vote) \n" +
                             "FROM post \n" +
                             "INNER JOIN user ON post.author_id=user.id \n" +
                             "INNER JOIN category ON post.category_id=category.id \n" +
@@ -87,7 +86,6 @@ public class PostDAO {
             category.setName(rs.getString(9));
             post.setCategory(category);
             post.setVoti(rs.getInt(10));
-            post.setN_comments(rs.getInt(11));
 
             PreparedStatement ps_commenti =
                     con.prepareStatement("SELECT comment.id, comment.text, comment.creation_date, " +
@@ -96,22 +94,24 @@ public class PostDAO {
                                              "FROM comment  \n" +
                                              "INNER JOIN user ON comment.author_id=user.id \n" +
                                              "LEFT JOIN commentvotes ON comment.id = commentvotes.comment_id \n" +
-                                             "WHERE comment.post_id=?; ");
+                                             "WHERE comment.post_id=? \n" +
+                                             "GROUP BY comment.id; "); //Group by necessario per non avere record
+                                                                       // col solo valore "voti"
 
             ps_commenti.setInt(1,id);
 
-            ps_commenti.executeQuery();
+            ResultSet rs_commenti = ps_commenti.executeQuery();
             List<Comment> list = new ArrayList<>();
-            while(rs.next()){
+            while(rs_commenti.next()){
                 Comment c = new Comment();
-                c.setId(rs.getInt(1));
-                c.setText(rs.getString(2));
-                c.setCreationDate(rs.getDate(3));
+                c.setId(rs_commenti.getInt(1));
+                c.setText(rs_commenti.getString(2));
+                c.setCreationDate(rs_commenti.getDate(3));
                 User u = new User();
-                u.setId(rs.getInt(4));
-                u.setUsername(rs.getString(5));
+                u.setId(rs_commenti.getInt(4));
+                u.setUsername(rs_commenti.getString(5));
                 c.setAuthor(u);
-                c.setVotes(rs.getInt(6));
+                c.setVotes(rs_commenti.getInt(6));
                 list.add(c);
             }
 
