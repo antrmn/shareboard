@@ -11,13 +11,18 @@ public class PostDAO {
 
     public List<Post> doRetrieveAll(){
         try(Connection con = ConPool.getConnection()){
-
-            PreparedStatement ps = con.prepareStatement("SELECT post.post_id, post.title, post.text, post.type, post.creation_date, user.id, user.username, category.id, category.name, SUM(postvotes.vote) " +
-                                                            "FROM post " +
-                                                            "LEFT JOIN user ON post.author_id=user.id " +
-                                                            "INNER JOIN category ON post.category_id=category.id " +
-                                                            "LEFT JOIN postvotes ON post.post_id = postvotes.post_id " +
-                                                            "GROUP BY post.post_id;");
+            PreparedStatement ps =
+                    con.prepareStatement("SELECT post.post_id, post.title, post.text, post.type, post.creation_date," +
+                                                "user.id, user.username, " +
+                                                "category.id, category.name, " +
+                                                "SUM(postvotes.vote), " +
+                                                "COUNT(DISTINCT comment.id) " +
+                                             "FROM post " +
+                                             "INNER JOIN user ON post.author_id=user.id " +
+                                             "INNER JOIN category ON post.category_id=category.id " +
+                                             "LEFT JOIN postvotes ON post.post_id = postvotes.post_id " +
+                                             "LEFT JOIN comment ON post.post_id = comment.post_id " +
+                                             "GROUP BY post.post_id;");
 
             ResultSet rs = ps.executeQuery();
             List<Post> list = new ArrayList<>();
@@ -37,6 +42,7 @@ public class PostDAO {
                 category.setName(rs.getString(9));
                 post.setCategory(category);
                 post.setVoti(rs.getInt(10));
+                post.setN_comments(rs.getInt(11));
                 list.add(post);
             }
 

@@ -1,6 +1,7 @@
 package model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Post {
     public enum Type {TEXT, IMG}
@@ -11,6 +12,24 @@ public class Post {
     private String title;
     private String text;
     private int voti;
+    private List<Comment> comments;
+    private int n_comments;
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public int getN_comments() {
+        return n_comments;
+    }
+
+    public void setN_comments(int n_comments) {
+        this.n_comments = n_comments;
+    }
 
     public int getVoti() {
         return voti;
