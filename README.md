@@ -13,7 +13,7 @@ L&#39;utente non registrato (guest) avrà la possibilità di:
 - Registrarsi o accedere
 - Ricercare post nel sito per titolo o contenuto
 - Visualizzare il profilo di uno specifico utente
-- Include una biografia dell&#39;utente e la sua cronologia dei messaggi/commenti
+  + Include una biografia dell&#39;utente e la sua cronologia dei messaggi/commenti
 - Seguire (_follow_) o smettere di seguire una sezione di suo interesse
 - Occorre registrarsi per mantenere le sezioni seguite in modo permanente
 - Le sezioni seguite saranno visualizzate nella homepage in una sezione apposita
