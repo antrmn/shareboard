@@ -55,15 +55,15 @@ public class PostDAO {
     public Post doRetrieve(int id){
         try(Connection con = ConPool.getConnection()){
             PreparedStatement ps =
-                    con.prepareStatement("SELECT post.post_id, post.title, post.text, post.type, post.creation_date," +
-                            "user.id, user.username, " +
-                            "category.id, category.name, " +
-                            "SUM(postvotes.vote) " +
-                            "FROM post " +
-                            "WHERE post_id=? " +
-                            "INNER JOIN user ON post.author_id=user.id " +
-                            "INNER JOIN category ON post.category_id=category.id " +
-                            "LEFT JOIN postvotes ON post.post_id = postvotes.post_id " +
+                    con.prepareStatement("SELECT post.post_id, post.title, post.text, post.type, post.creation_date, user.id, user.username, \n" +
+                            "category.id, category.name, \n" +
+                            "SUM(postvotes.vote), \n" +
+                            "COUNT(post.post_id) \n" +
+                            "FROM post \n" +
+                            "INNER JOIN user ON post.author_id=user.id \n" +
+                            "INNER JOIN category ON post.category_id=category.id \n" +
+                            "LEFT JOIN postvotes ON post.post_id = postvotes.post_id \n" +
+                            "WHERE post.post_id=? \n" +
                             "GROUP BY post.post_id;");
 
             ps.setInt(1, id);
@@ -91,11 +91,12 @@ public class PostDAO {
 
             PreparedStatement ps_commenti =
                     con.prepareStatement("SELECT comment.id, comment.text, comment.creation_date, " +
-                                                    "user.id, user.username, " +
-                                                    "SUM(commentvotes.vote) " +
-                                             "WHERE comment.post_id=? " +
-                                             "INNER JOIN user ON comment.author_id=user.id " +
-                                             "LEFT JOIN commentvotes ON comment.id = commentvotes.comment_id");
+                                             "user.id, user.username, \n" +
+                                             "SUM(commentvotes.vote)\n" +
+                                             "FROM comment  \n" +
+                                             "INNER JOIN user ON comment.author_id=user.id \n" +
+                                             "LEFT JOIN commentvotes ON comment.id = commentvotes.comment_id \n" +
+                                             "WHERE comment.post_id=?; ");
 
             ps_commenti.setInt(1,id);
 
