@@ -32,4 +32,11 @@ INSERT INTO shareboard.postvotes VALUES
 (3, 3, -1),
 (4, 3, -1);
 
+TRUNCATE TABLE shareboard.comment;
+INSERT INTO shareboard.comment (post_id, author_id, text) VALUES 
+(1, 1, "TEXT"),
+(1, 1, "TEXT"),
+(1, 1, "TEXT"),
+(1, 1, "TEXT");
+
 SET FOREIGN_KEY_CHECKS = 1;
