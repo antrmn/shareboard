@@ -15,8 +15,8 @@ L&#39;utente non registrato (guest) avrà la possibilità di:
 - Visualizzare il profilo di uno specifico utente
   + Include una biografia dell&#39;utente e la sua cronologia dei messaggi/commenti
 - Seguire (_follow_) o smettere di seguire una sezione di suo interesse
-- Occorre registrarsi per mantenere le sezioni seguite in modo permanente
-- Le sezioni seguite saranno visualizzate nella homepage in una sezione apposita
+  + Occorre registrarsi per mantenere le sezioni seguite in modo permanente
+  + Le sezioni seguite saranno visualizzate nella homepage in una sezione apposita
 
 **Funzionalità lato utente registrato**
 
@@ -34,13 +34,13 @@ L&#39;amministratore può effettuare tutte le operazioni concesse ad un utente o
 
 - Aggiungere e rimuovere sezioni
 - Gestione sezioni
-- Modifica attributi quali la descrizione
+  + Modifica attributi quali la descrizione
 - Moderare i post e i commenti
-- Rimuovendoli o modificandoli
+  + Rimuovendoli o modificandoli
 - Sospendere un utente dall&#39;utilizzo della piattaforma o di una sezione specifica
-- Permanentemente o per un lasso di tempo definito
+  + Permanentemente o per un lasso di tempo definito
 - Visualizzare e modificare informazioni degli utenti
-- Include anche informazioni non accessibili a tutti gli utenti (indirizzo e-mail)
+  + Include anche informazioni non accessibili a tutti gli utenti (indirizzo e-mail)
 
 ## Contenuti
 
@@ -54,14 +54,14 @@ Ogni **post** è caratterizzato quindi da:
 - Sezione
 - Autore del post
 - Commenti
-  - Ogni commento può essere votato in maniera analoga ai post
+  + Ogni commento può essere votato in maniera analoga ai post
 
 I post possono essere cercati per tutto il sito usando l&#39;apposita funzione _cerca._
 
 Il sito è suddiviso in **sezioni**. Ogni sezione rappresenta una determinata area di interesse (ad esempio Arte, Musica o Videogiochi) e consente una suddivisione dei post in macrocategorie. Ogni sezione è caratterizzata da
 
 - Insieme dei post inviati
-  - Possono essere visionati in ordine di invio, in ordine di popolarità…
+  + Possono essere visionati in ordine di invio, in ordine di popolarità…
 - Nome
 - Logo
 - Breve descrizione
