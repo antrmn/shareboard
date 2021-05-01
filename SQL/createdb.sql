@@ -20,7 +20,7 @@ CREATE TABLE admin (
 
 CREATE TABLE category (
 	id int AUTO_INCREMENT PRIMARY KEY,
-    description VARCHAR(100),
+    description VARCHAR(255),
     name varchar(50) UNIQUE NOT NULL
 );
 
