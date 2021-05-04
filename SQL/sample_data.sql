@@ -1,42 +1,99 @@
-SET FOREIGN_KEY_CHECKS = 0;
+-- MySQL dump 10.13  Distrib 8.0.23, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: shareboard
+-- ------------------------------------------------------
+-- Server version	8.0.22
 
-TRUNCATE TABLE shareboard.category;
-INSERT INTO shareboard.category (description, name) values 
-('Descrizione1', 'Sezione1'),
-('Descrizione2', 'Sezione2');
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-TRUNCATE TABLE shareboard.user;
-INSERT INTO shareboard.user (username, password, email, creation_date) VALUES  
-('Utente1', 'password1', 'utente1@email.it', '2021-03-30 12:41:26'),
-('Utente2', 'password2', 'utente2@email.it', '2021-03-30 12:41:26'),
-('Utente3', 'password3', 'utente3@email.it', '2021-03-30 12:41:26'),
-('Utente4', 'password4', 'utente4@email.it', '2021-03-30 12:41:26'),
-('Utente5', 'password5', 'utente5@email.it', '2021-03-30 12:41:26');
+--
+-- Dumping data for table `admin`
+--
 
-TRUNCATE TABLE shareboard.post;
-INSERT INTO shareboard.post (category_id, author_id, title, text, type, creation_date) VALUES
-(1, 5, 'Post1', ' Fusce ultricies sagittis pharetra. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque nunc leo, ultrices sit amet pretium sit amet, lacinia at nisi. Integer faucibus vitae augue eu porttitor. Pellentesque rhoncus neque ac purus vulputate vulputate. Donec vel mauris ac odio vestibulum mollis. In porta sollicitudin eros. In hac habitasse platea dictumst. Integer maximus diam eu leo varius ultrices. Aliquam sit amet ex a ex mattis posuere. Aenean scelerisque nisl sit amet arcu rhoncus posuere. Fusce viverra, erat quis luctus dignissim, magna turpis imperdiet tortor, non sodales enim purus ac velit. Morbi ornare leo sit amet aliquam condimentum. Praesent a ultrices ex, eu aliquet diam. Mauris quis malesuada libero, ac dignissim tellus. Nunc non erat justo.', 'TEXT', '2021-03-30 12:49:31'),
-(2, 4, 'Post2', 'Vivamus quis pharetra metus. Maecenas tempor molestie convallis. Fusce sit amet risus eget nibh ultrices dictum. Sed porta viverra tellus, in dignissim massa rhoncus id. Sed porttitor purus eget mi vehicula euismod. Quisque nec auctor lorem, at sagittis nisi. Nulla massa urna, rhoncus sed ex hendrerit, commodo consequat ipsum. Suspendisse iaculis dui vel convallis porttitor. Nam diam lorem, facilisis nec ultrices placerat, malesuada vel augue. Suspendisse metus quam, consectetur in dui sed, accumsan volutpat orci. Proin maximus enim id facilisis elementum. Nunc gravida lorem quis felis fermentum, at blandit dui dapibus. Nulla elementum eros sed dolor tempus, in luctus felis ornare. Pellentesque dignissim metus et aliquet semper. Curabitur porta est ut luctus tincidunt. Curabitur vitae consequat libero. ', 'TEXT', '2021-03-30 12:49:31'),
-(1, 3, 'Post3', 'Vestibulum a turpis eget turpis porttitor laoreet at vitae ex. Nam fermentum ante magna, eu fringilla lorem egestas feugiat. Nulla id varius odio, nec commodo risus. Phasellus at quam in ipsum interdum tempus. Nullam quis ultricies sem. Quisque commodo pharetra diam sed vulputate. Cras velit orci, pharetra sit amet facilisis id, lacinia id mi. Integer iaculis ac lectus vitae semper. ', 'TEXT', '2021-03-30 12:49:31'),
-(2, 1, 'Post4', 'Testo', 'TEXT', '2021-03-30 12:49:31'),
-(1, 3, 'Post5', 'Testo', 'TEXT', '2021-03-30 12:49:31'),
-(2, 2, 'Post6', 'Testo', 'TEXT', '2021-03-30 12:49:31');
-	
-TRUNCATE TABLE shareboard.postvotes;
-INSERT INTO shareboard.postvotes VALUES 
-(2, 1, 1),
-(2, 2, 1),
-(2, 3, 1),
-(2, 4, 1),
-(3, 2, 1),
-(3, 3, -1),
-(4, 3, -1);
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES (1);
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 
-TRUNCATE TABLE shareboard.comment;
-INSERT INTO shareboard.comment (post_id, author_id, text) VALUES 
-(1, 1, "TEXT"),
-(1, 1, "TEXT"),
-(1, 1, "TEXT"),
-(1, 1, "TEXT");
+--
+-- Dumping data for table `ban`
+--
 
-SET FOREIGN_KEY_CHECKS = 1;
+/*!40000 ALTER TABLE `ban` DISABLE KEYS */;
+INSERT INTO `ban` VALUES (1,1,NULL,4,'2021-05-04 10:30:27',NULL,1),(2,1,1,5,'2021-05-04 10:30:27',NULL,0);
+/*!40000 ALTER TABLE `ban` ENABLE KEYS */;
+
+--
+-- Dumping data for table `comment`
+--
+
+/*!40000 ALTER TABLE `comment` DISABLE KEYS */;
+INSERT INTO `comment` VALUES (1,1,1,NULL,'Commento 1','2021-05-04 10:28:13'),(2,1,1,1,'Risposta a commento 1','2021-05-04 10:28:13'),(3,1,1,NULL,'Commento2','2021-05-04 10:28:13'),(4,1,1,2,'Risposta a risposta a commento 1','2021-05-04 10:28:13');
+/*!40000 ALTER TABLE `comment` ENABLE KEYS */;
+
+--
+-- Dumping data for table `comment_vote`
+--
+
+/*!40000 ALTER TABLE `comment_vote` DISABLE KEYS */;
+INSERT INTO `comment_vote` VALUES (2,1,1),(2,2,1),(2,3,1),(2,4,1),(3,2,1),(3,3,-1),(4,3,-1);
+/*!40000 ALTER TABLE `comment_vote` ENABLE KEYS */;
+
+--
+-- Dumping data for table `follow`
+--
+
+/*!40000 ALTER TABLE `follow` DISABLE KEYS */;
+INSERT INTO `follow` VALUES (1,1),(1,2),(3,2);
+/*!40000 ALTER TABLE `follow` ENABLE KEYS */;
+
+--
+-- Dumping data for table `post`
+--
+
+/*!40000 ALTER TABLE `post` DISABLE KEYS */;
+INSERT INTO `post` VALUES (1,1,1,'Post1','Appartengo a sezion1 e autore1','TEXT','2021-03-30 12:49:31'),(2,1,3,'Post2','Appartengo a sezione1 e autore3','TEXT','2021-03-30 12:49:31'),(3,2,2,'Post3','Appartengo a sezione2 e autore2','TEXT','2021-03-30 12:49:31'),(4,3,4,'Post4','Appartengo a sezione3 e autore4','TEXT','2021-03-30 12:49:31'),(5,5,5,'Post5','Appartengo a sezione5 e autore5','TEXT','2021-03-30 12:49:31');
+/*!40000 ALTER TABLE `post` ENABLE KEYS */;
+
+--
+-- Dumping data for table `post_vote`
+--
+
+/*!40000 ALTER TABLE `post_vote` DISABLE KEYS */;
+INSERT INTO `post_vote` VALUES (2,1,1),(2,2,1),(2,3,1),(2,4,1),(3,2,1),(3,3,-1),(4,3,-1);
+/*!40000 ALTER TABLE `post_vote` ENABLE KEYS */;
+
+--
+-- Dumping data for table `section`
+--
+
+/*!40000 ALTER TABLE `section` DISABLE KEYS */;
+INSERT INTO `section` VALUES (3,'Descrizione1','Sezione1',NULL),(4,'Descrizione2','Sezione2',NULL),(5,'Descrizione3','Sezione3',NULL);
+/*!40000 ALTER TABLE `section` ENABLE KEYS */;
+
+--
+-- Dumping data for table `user`
+--
+
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'Utente1','password1','utente1@email.it',NULL,NULL,'2021-03-30 12:41:26'),(2,'Utente2','password2','utente2@email.it',NULL,NULL,'2021-03-30 12:41:26'),(3,'Utente3','password3','utente3@email.it',NULL,NULL,'2021-03-30 12:41:26'),(4,'Utente4','password4','utente4@email.it',NULL,NULL,'2021-03-30 12:41:26'),(5,'Utente5','password5','utente5@email.it',NULL,NULL,'2021-03-30 12:41:26');
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2021-05-04 12:34:06
