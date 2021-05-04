@@ -3,6 +3,8 @@ body{
     font-family: Verdana;
     color: white;
     height:3000px;
+    /*display:flex;*/
+    /*flex-direction:column;*/
 }
 /*#test{*/
 /*    display:flex;*/
@@ -17,19 +19,41 @@ navbar{
     right: 0;
     top: 0;
     /*z-index: 80;*/
+    z-index: 1;
     /*margin-top: 0;*/
     background-color: #1A1A1B;
     display:flex;
     justify-content: space-between;
 }
 
+footer {
+    left: 0;
+    right: 0;
+    background-color: #1A1A1B;
+    text-align: center;
+}
+
+navbar a{
+    color:white;
+    text-decoration: none;
+}
+
+navbar a:visited {color:white;}
+navbar a:hover {color:white;}
+navbar a:active {color:white;}
+
 #nav-logo{
     /*width:40%;*/
     /*height:40%;*/
 }
 
+.test{
+    position: relative;
+    left:30px;
+}
+
 #nav-search{
-    flex:2;
+    flex:70%;
 }
 
 #nav-search form{
@@ -37,11 +61,6 @@ navbar{
     /*flex:2;*/
     flex-grow: 1;
     width: 100%;
-}
-
-.test{
-    position: relative;
-    left:30px;
 }
 
 #nav-search input{
@@ -59,7 +78,7 @@ navbar{
     display: inline-flex;
     margin-left: 50px;
     align-items: center;
-    flex:15;
+    flex:80%;
 }
 
 #left *{
@@ -69,18 +88,18 @@ navbar{
 #logo-current{
     display: flex;
     align-items: center;
-    flex:1;
+    flex:15%;
     /*justify-content: space-between;*/
 }
 
 #nav-logo{
     display: inline-flex;
     align-items: center;
-    flex:0.2;
+    flex:10%;
 }
 
 #nav-crt-sctn{
-    flex:0.2;
+    flex:10%;
 }
 
 #nav-profile{
@@ -88,7 +107,7 @@ navbar{
     margin-right: 50px;
     align-items: center;
     justify-content: center;
-    flex:1.5;
+    /*flex:30%;*/
 }
 
 .lightGreyButton{
@@ -127,17 +146,19 @@ navbar{
 }
 
 #left-sidebar{
-    flex:1.5;
-    border-radius: 1px;
-    border-color: #868789;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 270px;
     overflow-y: scroll;
     overflow-x: hidden;
-    position:fixed;
+    z-index: 4;
+    top: 48px;
 }
 
 #post-container{
-    flex:9;
+    flex:80%;
     heigh:100%;
-    border-radius: 1px;
+    border-radius: 10px;
     border-color: #868789;
 }
