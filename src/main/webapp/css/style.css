@@ -3,14 +3,7 @@ body{
     font-family: Verdana;
     color: white;
     height:3000px;
-    /*display:flex;*/
-    /*flex-direction:column;*/
 }
-/*#test{*/
-/*    display:flex;*/
-/*    flex-direction: column;*/
-/*    align-items: center;*/
-/*}*/
 
 navbar{
     /*flex: 0;*/
@@ -42,10 +35,6 @@ navbar a:visited {color:white;}
 navbar a:hover {color:white;}
 navbar a:active {color:white;}
 
-#nav-logo{
-    /*width:40%;*/
-    /*height:40%;*/
-}
 
 .test{
     position: relative;
@@ -65,13 +54,20 @@ navbar a:active {color:white;}
 
 #nav-search input{
     background-color: #272729;
-    border-radius: 4px;
+    border-color: #868789;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px 1px;
     height:36px;
     color: #868789;
     outline: none;
     padding: 0 16px 0 40px;
     /*width: 100%;*/
     flex-grow: 0.9;
+}
+
+#nav-search input:hover, #nav-search input::selection{
+    border-color: #c3c3c3;
 }
 
 #left{
@@ -96,10 +92,19 @@ navbar a:active {color:white;}
     display: inline-flex;
     align-items: center;
     flex:10%;
+    flex-grow: 0.1;
+    flex-shrink: 0.1;
 }
 
 #nav-crt-sctn{
     flex:10%;
+}
+
+#nav-crt-sctn:hover{
+    border-color: #868789;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px 1px;
 }
 
 #nav-profile{
@@ -143,6 +148,8 @@ navbar a:active {color:white;}
 #container{
     display: flex;
     margin-top: 80px;
+    align-items: center;
+    flex-direction: column;
 }
 
 #left-sidebar{
@@ -162,3 +169,22 @@ navbar a:active {color:white;}
     border-radius: 10px;
     border-color: #868789;
 }
+
+#filter{
+    flex:100%;
+}
+
+.greyContainer{
+    background-color: #1A1A1B;
+    border-color: #868789;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px 1px;
+    padding: 10px 20px 10px 20px;
+}
+
+/*@media screen and (min-width: 480px) {*/
+/*    #nav-profile {*/
+/*        display:none;*/
+/*    }*/
+/*}*/

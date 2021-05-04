@@ -1,1 +1,1 @@
-<div id="post-container">prova</div>
+<div id="post-container" class="greyContainer">BEL POST</div>

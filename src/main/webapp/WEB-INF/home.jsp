@@ -17,6 +17,7 @@
 
         <div id="container">
 <%--            <jsp:include page="components/leftsidebar.jsp"/>--%>
+            <jsp:include page="components/filter.jsp"/>
             <jsp:include page="components/postcontainer.jsp"/>
         </div>
     </div>
