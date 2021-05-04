@@ -1,0 +1,143 @@
+body{
+    background-color: black;
+    font-family: Verdana;
+    color: white;
+    height:3000px;
+}
+/*#test{*/
+/*    display:flex;*/
+/*    flex-direction: column;*/
+/*    align-items: center;*/
+/*}*/
+
+navbar{
+    /*flex: 0;*/
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    /*z-index: 80;*/
+    /*margin-top: 0;*/
+    background-color: #1A1A1B;
+    display:flex;
+    justify-content: space-between;
+}
+
+#nav-logo{
+    /*width:40%;*/
+    /*height:40%;*/
+}
+
+#nav-search{
+    flex:2;
+}
+
+#nav-search form{
+    display:flex;
+    /*flex:2;*/
+    flex-grow: 1;
+    width: 100%;
+}
+
+.test{
+    position: relative;
+    left:30px;
+}
+
+#nav-search input{
+    background-color: #272729;
+    border-radius: 4px;
+    height:36px;
+    color: #868789;
+    outline: none;
+    padding: 0 16px 0 40px;
+    /*width: 100%;*/
+    flex-grow: 0.9;
+}
+
+#left{
+    display: inline-flex;
+    margin-left: 50px;
+    align-items: center;
+    flex:15;
+}
+
+#left *{
+    align-items: center;
+}
+
+#logo-current{
+    display: flex;
+    align-items: center;
+    flex:1;
+    /*justify-content: space-between;*/
+}
+
+#nav-logo{
+    display: inline-flex;
+    align-items: center;
+    flex:0.2;
+}
+
+#nav-crt-sctn{
+    flex:0.2;
+}
+
+#nav-profile{
+    display: inline-flex;
+    margin-right: 50px;
+    align-items: center;
+    justify-content: center;
+    flex:1.5;
+}
+
+.lightGreyButton{
+    background-color: #d7dadc;
+    border-radius: 10px;
+    color:#1A1A1B;
+    padding: 4px 16px 4px 16px;
+}
+
+.lightGreyButton:hover{
+    background-color: #a5a5ae;
+}
+
+.darkGreyButton{
+    background-color: #1A1A1B;
+    border-radius: 10px;
+    border-color: #d7dadc;
+    color:white;
+    padding: 4px 16px 4px 16px;
+    text-align: center;
+}
+
+.darkGreyButton:hover{
+    background-color: #242323;
+}
+
+.button-container{
+    display:inline-flex;
+    justify-content: space-between;
+    flex-flow: row;
+}
+
+#container{
+    display: flex;
+    margin-top: 80px;
+}
+
+#left-sidebar{
+    flex:1.5;
+    border-radius: 1px;
+    border-color: #868789;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position:fixed;
+}
+
+#post-container{
+    flex:9;
+    heigh:100%;
+    border-radius: 1px;
+    border-color: #868789;
+}
