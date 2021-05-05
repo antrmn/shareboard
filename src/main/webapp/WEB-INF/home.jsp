@@ -8,7 +8,7 @@
 </head>
 <body>
         <jsp:include page="components/navbar.jsp">
-            <jsp:param name="isLogged" value="true" />
+            <jsp:param name="isLogged" value="false" />
             <jsp:param name="currentSection" value="Home" />
             <jsp:param name="userName" value="Testus" />
             <jsp:param name="userKarma" value="4316" />

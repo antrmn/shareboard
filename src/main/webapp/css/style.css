@@ -102,13 +102,17 @@ navbar *{
 
 #nav-crt-sctn{
     margin-right: 36px;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px 1px;
+    border-color: rgba(134, 135, 137, 0);
 }
 
 #nav-crt-sctn:hover{
     border-color: #868789;
-    border-radius: 5px;
-    border-style: solid;
-    border-width: 1px 1px;
+    /*border-radius: 5px;*/
+    /*border-style: solid;*/
+    /*border-width: 1px 1px;*/
 }
 
 #nav-profile{
@@ -152,11 +156,20 @@ navbar *{
     }
 }
 
+.roundButton{
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: Noto Sans,Arial,sans-serif;
+    padding: 4px 16px 4px 16px;
+    border-style: solid;
+    min-height: 32px;
+    min-width: 32px;
+}
+
 .lightGreyButton{
     background-color: #d7dadc;
-    border-radius: 10px;
     color:#1A1A1B;
-    padding: 4px 16px 4px 16px;
 }
 
 .lightGreyButton:hover{
@@ -164,12 +177,9 @@ navbar *{
 }
 
 .darkGreyButton{
-    background-color: #1A1A1B;
-    border-radius: 10px;
+    background-color:  var(--shareboard-container-1);
     border-color: #d7dadc;
     color:white;
-    padding: 4px 16px 4px 16px;
-    text-align: center;
 }
 
 .darkGreyButton:hover{

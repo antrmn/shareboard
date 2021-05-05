@@ -5,12 +5,12 @@
     <div id="left">
         <span id="nav-logo" >
             <a href = "${context}/home" style="display:inline-flex">
-                <i class="fas fa-share-alt-square" style = "color: #0079D3; font-size: 25px;"></i>
+                <i class="fas fa-share-alt-square" style = "color: #ff4500; font-size: 25px;"></i>
                 <h3>Shareboard</h3>
             </a>
         </span>
         <span id="nav-crt-sctn" style="display:inline-flex" onclick="openSectionDrodown()">
-            <i class="fas fa-map-marker-alt"></i>
+            <i class="fas fa-map-marker-alt" style = "color:#0079D3"></i>
             <span>${param.currentSection}</span>
             <i class="fas fa-sort-down" ></i>
         </span>
@@ -39,8 +39,8 @@
             </c:when>
             <c:otherwise>
                 <div id = "button-container">
-                    <button type="submit" class = "darkGreyButton">Log In</button>
-                    <button type="submit" class = "lightGreyButton">Sign Up</button>
+                    <button type="submit" class = "roundButton darkGreyButton">Log In</button>
+                    <button type="submit" class = "roundButton lightGreyButton">Sign Up</button>
                 </div>
             </c:otherwise>
         </c:choose>
