@@ -227,6 +227,11 @@ navbar *{
     border-radius:unset !important;
 }
 
+.post:hover {
+    border-color: #c3c3c3;
+}
+
+
 #post-container *{
     align-items: center;
 }
