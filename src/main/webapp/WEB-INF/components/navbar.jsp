@@ -25,7 +25,7 @@
     <div id="nav-profile">
         <c:choose>
             <c:when test="${param.isLogged eq 'true'}">
-                <i class="fas fa-edit"></i>
+                <a href = "/create"style="margin-right: 20px;"><i class="fas fa-edit"></i></a>
                 <a id = "profile-container" href = "${pageContext.request.contextPath}/profile/?id=${requestScope.user_id}"  >
                     <i id = "nav-profile-photo" class="fas fa-user-circle"></i>
                     <div id="nav-profile-data" >

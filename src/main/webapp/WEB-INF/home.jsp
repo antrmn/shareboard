@@ -17,12 +17,19 @@
         <div id="body-container">
             <div id="left-container">
                 <jsp:include page="components/filter.jsp"/>
-                <jsp:include page="components/postcontainer.jsp"/>
+                <div id="post-container">
+                    <jsp:include page="components/post.jsp"/>
+                    <jsp:include page="components/post.jsp"/>
+                    <jsp:include page="components/post.jsp"/>
+                    <jsp:include page="components/post.jsp"/>
+                    <jsp:include page="components/post.jsp"/>
+                </div>
             </div>
 
             <div id="right-container">
                 <jsp:include page="components/filter.jsp"/>
-                <jsp:include page="components/postcontainer.jsp"/>
+                <jsp:include page="components/post.jsp"/>
+
             </div>
         </div>
 <%--    <jsp:include page="components/footer.jsp"/>--%>
