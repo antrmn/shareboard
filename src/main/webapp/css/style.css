@@ -1,29 +1,36 @@
+:root{
+    --background-main-color: black;
+    --shareboard-container-1: #1A1A1B;
+    --shareboard-container-2: #272729;
+    --shareboard-border-color1:#313132;
+}
+
 body{
-    background-color: black;
+    background-color: var(--background-main-color);
     font-family: Verdana;
     color: white;
     height:3000px;
 }
 
+footer {
+    left: 0;
+    right: 0;
+    background-color: var(--shareboard-container-1);
+    text-align: center;
+}
+
 navbar{
-    /*flex: 0;*/
     left: 0;
     position: fixed;
     right: 0;
     top: 0;
-    /*z-index: 80;*/
     z-index: 1;
-    /*margin-top: 0;*/
-    background-color: #1A1A1B;
+    background-color: var(--shareboard-container-1);
     display:flex;
     justify-content: space-between;
-}
-
-footer {
-    left: 0;
-    right: 0;
-    background-color: #1A1A1B;
-    text-align: center;
+    border-bottom-color: #313132;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
 }
 
 navbar a{
@@ -35,8 +42,11 @@ navbar a:visited {color:white;}
 navbar a:hover {color:white;}
 navbar a:active {color:white;}
 
+navbar *{
+    align-items: center;
+}
 
-.test{
+#search-icon{
     position: relative;
     left:30px;
 }
@@ -53,7 +63,7 @@ navbar a:active {color:white;}
 }
 
 #nav-search input{
-    background-color: #272729;
+    background-color: var(--shareboard-container-2);
     border-color: #868789;
     border-radius: 5px;
     border-style: solid;
@@ -72,32 +82,26 @@ navbar a:active {color:white;}
 
 #left{
     display: inline-flex;
-    margin-left: 50px;
+    margin-left: 25px;
     align-items: center;
-    flex:80%;
-}
-
-#left *{
-    align-items: center;
+    flex:75%;
 }
 
 #logo-current{
     display: flex;
     align-items: center;
-    flex:15%;
-    /*justify-content: space-between;*/
+    margin-right: 50px;
+
 }
 
 #nav-logo{
     display: inline-flex;
     align-items: center;
-    flex:10%;
-    flex-grow: 0.1;
-    flex-shrink: 0.1;
+    margin-right: 50px;
 }
 
 #nav-crt-sctn{
-    flex:10%;
+    margin-right: 36px;
 }
 
 #nav-crt-sctn:hover{
@@ -110,9 +114,42 @@ navbar a:active {color:white;}
 #nav-profile{
     display: inline-flex;
     margin-right: 50px;
+    margin-left: auto;
     align-items: center;
     justify-content: center;
+    padding-left: 36px;
+    /*border-left-width: 1px;*/
+    /*border-left-style: dashed;*/
+    /*border-left-color: #868789;*/
     /*flex:30%;*/
+}
+
+#nav-profile-photo{
+    display:inline-block;
+    margin-bottom:0px;
+    font-size: 30px;
+}
+
+#nav-profile-data{
+    display:inline-block;
+}
+
+@media screen and (max-width: 480px) {
+    #nav-profile-data{
+        display:none;
+    }
+
+    #left{
+        margin-left: 10px;
+    }
+
+    #nav-profile{
+        margin-right: 10px;
+    }
+
+    #nav-logo h3{
+        display:none;
+    }
 }
 
 .lightGreyButton{
@@ -145,46 +182,46 @@ navbar a:active {color:white;}
     flex-flow: row;
 }
 
-#container{
+#profile-container{
+    display:inline-flex;
+    justify-content:center;
+    /*flex-direction: column;*/
+}
+
+#body-container{
     display: flex;
     margin-top: 80px;
-    align-items: center;
+    /*align-items: center;*/
+    flex-direction: row;
+    /*margin: 0 auto;*/
+}
+
+#left-container{
+    display:flex;
+    justify-content:center;
     flex-direction: column;
-}
-
-#left-sidebar{
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 270px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    z-index: 4;
-    top: 48px;
-}
-
-#post-container{
-    flex:80%;
-    heigh:100%;
-    border-radius: 10px;
-    border-color: #868789;
+    flex:70%;
+    margin-left: 25px;
+    margin-right: 25px;
 }
 
 #filter{
-    flex:100%;
+    margin-bottom:25px;
 }
 
+/*#post-container{*/
+/*    flex:80%;*/
+/*    height:100%;*/
+/*    border-radius: 10px;*/
+/*    border-color: #868789;*/
+/*}*/
+
+
 .greyContainer{
-    background-color: #1A1A1B;
-    border-color: #868789;
+    background-color: var(--shareboard-container-1);
+    border-color: var(--shareboard-border-color1);
     border-radius: 5px;
     border-style: solid;
     border-width: 1px 1px;
     padding: 10px 20px 10px 20px;
 }
-
-/*@media screen and (min-width: 480px) {*/
-/*    #nav-profile {*/
-/*        display:none;*/
-/*    }*/
-/*}*/
