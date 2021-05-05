@@ -210,8 +210,8 @@ navbar *{
 }
 
 #filter *{
-    padding: 6px 8px;
-    margin-right: 10px;
+    padding: 12px 12px;
+    margin: 5px 10px 5px 5px;
 }
 
 #filter a:hover{
@@ -247,5 +247,5 @@ navbar *{
     border-radius: 5px;
     border-style: solid;
     border-width: 1px 1px;
-    padding: 10px 12px;
+    /*padding: 10px 12px;*/
 }
