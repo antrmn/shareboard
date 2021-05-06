@@ -9,10 +9,12 @@
                 <h3>Shareboard</h3>
             </a>
         </span>
-        <span id="nav-crt-sctn" style="display:inline-flex" onclick="openSectionDrodown()">
+        <span id="nav-crt-sctn" onclick="openSectionDrodown()">
             <i class="fas fa-map-marker-alt" style = "color:#0079D3"></i>
-            <span>${param.currentSection}</span>
-            <i class="fas fa-sort-down" ></i>
+            <span>
+                <span>${param.currentSection}</span>
+                <i class="fas fa-sort-down" ></i>
+            </span>
         </span>
 
         <div id="nav-search" >

@@ -21,7 +21,7 @@
             </button>
         </span>
 
-        <span>
+        <span id = "post-media-container">
             <c:choose>
                 <c:when test="${param.type eq 'img'}">
                     <img class=" post-generic-holder post-image-holder" src="https://dogecoin.org/static/11cf6c18151cbb22c6a25d704ae7b313/dd8fa/doge-main.jpg">
@@ -32,7 +32,7 @@
             </c:choose>
         </span>
         <span >
-            <h3 style = "display: block; margin-bottom: 1px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+            <h3 style = "display: block; margin-bottom: 1px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor</h3>
             <div id="post-meta-container">
                 <a href="/section" style = "font-size: 12px;font-weight: 400;line-height: 16px">s/test</a>
                 <a href="/user" style = "font-size: 12px;font-weight: 400;line-height: 16px">Posted by: testus</a>

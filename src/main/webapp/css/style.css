@@ -106,6 +106,7 @@ navbar *{
     border-style: solid;
     border-width: 1px 1px;
     border-color: rgba(134, 135, 137, 0);
+    display:inline-flex;
 }
 
 #nav-crt-sctn:hover{
@@ -138,7 +139,7 @@ navbar *{
     display:inline-block;
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 320px) {
     #nav-profile-data{
         display:none;
     }
@@ -152,11 +153,50 @@ navbar *{
     }
 
     #nav-logo h3{
+        display:none;
+    }
+
+    #right-container{
         display:none;
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 481px) {
+
+    #nav-logo{
+        margin-right: 25px;
+    }
+
+    #nav-profile-data{
+        display:none;
+    }
+
+    #nav-crt-sctn span{
+        display: none;
+    }
+
+    #left{
+        margin-left: 10px;
+    }
+
+    #nav-profile{
+        margin-right: 10px;
+    }
+
+    #nav-logo h3{
+        display:none;
+    }
+
+    #right-container{
+        display:none;
+    }
+
+    /*#post-media-container{*/
+    /*    order:3;*/
+    /*}*/
+}
+
+@media screen and (max-width: 769px) {
     #nav-profile-data{
         display:none;
     }
@@ -172,6 +212,10 @@ navbar *{
     #nav-logo h3{
         display:none;
     }
+
+    /*#post-media-container{*/
+    /*    order:3;*/
+    /*}*/
 }
 
 .roundButton{
