@@ -9,12 +9,25 @@
                 <h3>Shareboard</h3>
             </a>
         </span>
-        <span id="nav-crt-sctn" onclick="openSectionDrodown()">
+        <span id="nav-crt-sctn" onclick="openSectionDropown()" class="interactable">
             <i class="fas fa-map-marker-alt" style = "color:#0079D3"></i>
             <span>
                 <span>${param.currentSection}</span>
                 <i class="fas fa-sort-down" ></i>
             </span>
+            <div id="myDropdown" class="dropdown-content greyContainer">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                  <a href="#contact">Contact</a>
+                  <a href="#contact">Contact</a>
+                  <a href="#contact">Contact</a>  <a href="#contact">Contact</a>
+                  <a href="#contact">Contact</a>
+                  <a href="#contact">Contact</a>
+                  <a href="#contact">Contact</a>
+                  <a href="#contact">Contact</a>
+
+            </div>
         </span>
 
         <div id="nav-search" >
