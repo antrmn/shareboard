@@ -1,18 +1,46 @@
-<div class="post greyContainer">
-<%--    <a href="/link">--%>
-        <span style = "background-color: #1a1919; padding-left: 10px">
-            <i class="fas fa-chevron-up" style = "display: block"></i>
-            Vote
-            <i class="fas fa-chevron-down" style = "display: block"></i>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<div class="post greyContainer interactable">
+        <span id = vote-container>
+            <button onclick="doUpvote();" class="voteButton interactable" >
+                 <i class="fas fa-chevron-up voteIcon upvoteIcon" ></i>
+            </button>
+            <div style="text-align: center">
+                <c:choose>
+                    <c:when test="${param.votes > 0}">
+                        <c:set var="vote" value="${param.votes}" />
+                    </c:when>
+                    <c:otherwise>
+                        <c:set var="vote" value="Vote" />
+                    </c:otherwise>
+                </c:choose>
+                ${vote}
+            </div>
+            <button class="voteButton interactable" onclick="doDownvote();">
+                <i class="fas fa-chevron-down voteIcon downvoteIcon"></i>
+            </button>
+        </span>
+
+        <span>
+            <c:choose>
+                <c:when test="${param.type eq 'img'}">
+                    <img class=" post-generic-holder post-image-holder" src="https://dogecoin.org/static/11cf6c18151cbb22c6a25d704ae7b313/dd8fa/doge-main.jpg">
+                </c:when>
+                <c:otherwise>
+                    <i class="fas fa-comment post-generic-holder" ></i>
+                </c:otherwise>
+            </c:choose>
         </span>
         <span >
-            <i class="fas fa-comment" style = "padding:20px 40px 20px 40px; background-color: #242323; border-radius: 4px; margin:10px"></i>
-        </span>
-        <span >
-            <a style = "display: block">Title</a>
-            <a href="/section">s/test</a>
-            <a href="/user">Posted by: testus</a>
-            <a href="/post" style = "display: block">69 comments</a>
+            <h3 style = "display: block; margin-bottom: 1px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</h3>
+            <div id="post-meta-container">
+                <a href="/section" style = "font-size: 12px;font-weight: 400;line-height: 16px">s/test</a>
+                <a href="/user" style = "font-size: 12px;font-weight: 400;line-height: 16px">Posted by: testus</a>
+                <a href="/post" id = "post-comment-container" style = "display: block; font-size: 12px;font-weight: 400;line-height: 16px; width: 100px">
+                    <i class="fas fa-comment-dots"></i>
+                    69 comments
+                </a>
+            </div>
         </span>
 <%--    </a>--%>
 </div>

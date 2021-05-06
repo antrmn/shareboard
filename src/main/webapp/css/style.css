@@ -156,6 +156,24 @@ navbar *{
     }
 }
 
+@media screen and (max-width: 768px) {
+    #nav-profile-data{
+        display:none;
+    }
+
+    #left{
+        margin-left: 10px;
+    }
+
+    #nav-profile{
+        margin-right: 10px;
+    }
+
+    #nav-logo h3{
+        display:none;
+    }
+}
+
 .roundButton{
     border-radius: 20px;
     font-size: 14px;
@@ -201,7 +219,7 @@ navbar *{
 #body-container{
     display: flex;
     margin-top: 80px;
-    /*align-items: center;*/
+    align-items: flex-start;
     flex-direction: row;
     /*margin: 0 auto;*/
 }
@@ -210,9 +228,13 @@ navbar *{
     display:flex;
     justify-content:center;
     flex-direction: column;
-    flex:70%;
+    flex:85%;
     margin-left: 25px;
     margin-right: 25px;
+}
+
+#right-container{
+    flex:15%;
 }
 
 #filter{
@@ -241,6 +263,56 @@ navbar *{
     border-color: #c3c3c3;
 }
 
+.vote-container{
+    width: 40px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: #151516;
+}
+
+.voteButton{
+    background-color: transparent;
+    border-color: transparent
+}
+
+.voteIcon{
+    display: block;
+    color: #818384;
+    padding:3px;
+}
+
+.voteIcon:hover{
+    background-color: #676869;
+    border-radius: 3px;
+}
+
+.upvoteIcon:hover{
+    color: orangered;
+}
+
+.downvoteIcon:hover{
+    color: #0079D3
+}
+
+.interactable:hover{
+    cursor: pointer;
+}
+
+.post-image-holder{
+    padding:unset !important;
+    height: 60px;
+    width: 80px;
+}
+
+.post-generic-holder{
+    padding:20px 40px 20px 40px;
+    background-color: #242323;
+    border-radius: 4px;
+    margin:10px;
+    /*box-sizing: border-box;*/
+}
 
 #post-container *{
     align-items: center;
@@ -249,6 +321,27 @@ navbar *{
 #post-container:first-child{
     border-top-left-radius: 5px !important;
     border-top-right-radius: 5px !important;
+}
+
+#post-meta-container{
+    margin-top:0px;
+}
+
+#post-meta-container *{
+    color:#818384;
+}
+
+#post-comment-container{
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    margin-top:5px;
+}
+
+#post-comment-container:hover{
+    background-color: #676869;
+    border-radius: 2px;
 }
 
 .greyContainer{
