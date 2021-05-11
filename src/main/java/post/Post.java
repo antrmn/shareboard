@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.util.List;
 
 public class Post {
+
     public enum Type {TEXT, IMG}
 
     private Integer id;

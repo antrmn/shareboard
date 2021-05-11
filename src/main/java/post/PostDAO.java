@@ -12,15 +12,59 @@ public class PostDAO {
     private Connection con;
 
     public PostDAO(Connection con) throws SQLException {
-        if( (this.con = con) == null)
-            throw new SQLException("Null connection");
+        this.con = con;
     }
 
+    private List<String> readableColumns = List.of("id", "title", "content", "type", "creation_date",
+            "user.id", "username", "is_admin", "section.id", "section.name", "votes", "n_comments", "v1.vote AS vote" );
+
+    private List<String> updatableColumns = List.of("title", "content", "type", "author_id", "section_id");
+
+    private String selectStatement = "SELECT %s FROM v_post AS post " +
+                                        "JOIN v_user AS user ON author_id = user.id " +
+                                        "JOIN section ON section_id = section.id " +
+                                        " %s %s " +
+                                     "ORDER BY %s %s LIMIT ? OFFSET ?";
+
+    private String view = "v_post";
+    private String table = "post";
+
+    private String fillUpdateStatement(Post post, List<Pair<Object, Integer>> params){
+        StringJoiner valuesToSet = new StringJoiner(",");
+        if(post.getTitle() != null){
+            params.add(new Pair(post.getTitle(), Types.VARCHAR));
+            valuesToSet.add("title=?");
+        }
+        if(post.getContent() != null){
+            params.add(new Pair(post.getContent(), Types.VARCHAR));
+            valuesToSet.add("content=?");
+        }
+        if(post.getType() != null){
+            params.add(new Pair(post.getType().name(), Types.VARCHAR));
+            valuesToSet.add("type=?");
+        }
+        if(post.getSection() != null && post.getSection().getId() != null){
+            params.add(new Pair(post.getSection().getId(), Types.INTEGER));
+            valuesToSet.add("section_id=?");
+        }
+        if(post.getAuthor() != null && post.getAuthor().getId() != null){
+            params.add(new Pair(post.getAuthor().getId(), Types.VARCHAR));
+            valuesToSet.add("author_id=?");
+        }
+        return valuesToSet.toString();
+    }
+    private void fillInsertStatement(Post post, List<Pair<Object, Integer>> params){
+        params.add(new Pair(post.getTitle(), Types.VARCHAR));
+        params.add(new Pair(post.getContent(), Types.VARCHAR));
+        params.add(new Pair(post.getType() == null ? null : post.getType().name(), Types.VARCHAR));
+        params.add(new Pair(post.getAuthor() == null ? null : post.getAuthor().getId(), Types.INTEGER));
+        params.add(new Pair(post.getSection() == null ? null : post.getSection().getId(), Types.INTEGER));
+    }
     
     public List<Post> fetch(PostSpecification specification) throws SQLException {
-        String query = String.format("SELECT %s FROM v_post AS post %s %s ORDER BY %s %s LIMIT ? OFFSET ?",
-                specification.columnsToRetrieve, specification.joins, specification.wheres,
-                specification.sortBy, specification.sortOrder);
+        String query = "SELECT %s FROM %s %s %s ORDER BY %s %s LIMIT ? OFFSET ?";
+        String.format(query, readableColumns, viewTable, specification.joins, specification.wheres,
+                        specification.sortBy, specification.sortOrder);
 
         List<Pair<Object,Integer>> params = specification.params;
 
@@ -44,33 +88,14 @@ public class PostDAO {
     }
 
     public int update(Post post) throws SQLException {
-        String statement = "UPDATE post SET %s WHERE id = ?";
+        String statement = "UPDATE %s SET %s WHERE id = ?";
 
         ArrayList<Pair<Object, Integer>> params = new ArrayList<>();
-        StringJoiner valuesToSet = new StringJoiner(",");
+        String valuesToSet = fillUpdateStatement(post, params);
 
-        if(post.getTitle() != null){
-            params.add(new Pair(post.getTitle(), Types.VARCHAR));
-            valuesToSet.add("title=?");
-        }
-        if(post.getContent() != null){
-            params.add(new Pair(post.getContent(), Types.VARCHAR));
-            valuesToSet.add("content=?");
-        }
-        if(post.getType() != null){
-            params.add(new Pair(post.getType().name(), Types.VARCHAR));
-            valuesToSet.add("type=?");
-        }
-        if(post.getSection() != null && post.getSection().getId() != null){
-            params.add(new Pair(post.getSection().getId(), Types.INTEGER));
-            valuesToSet.add("section_id=?");
-        }
-        if(post.getAuthor() != null && post.getAuthor().getId() != null){
-            params.add(new Pair(post.getAuthor().getId(), Types.VARCHAR));
-            valuesToSet.add("author_id=?");
-        }
+        String.format(statement, table, valuesToSet);
 
-        if(valuesToSet.length()==0){
+        if(valuesToSet.isBlank() || params.isEmpty()){
             throw new RuntimeException("Empty SET clause");
         }
 
@@ -91,46 +116,44 @@ public class PostDAO {
     }
 
     public int create(List<Post> posts) throws SQLException {
-        String columnToSet = "title, content, type, author_id, section_id";
-        String statement = String.format("INSERT INTO post (%s) VALUES ", columnToSet);
-        String questionMarks = "(?,?,?,?,?)";
+        String statement = "INSERT INTO %s (%s) VALUES %s";
 
-        ArrayList<Pair<Object, Types>> params = new ArrayList<>();
-        StringJoiner set = new StringJoiner(",");
+        StringJoiner _questionMarks = new StringJoiner(",","(",")");
+        for(int i=0; i<updatableColumns.size(); i++)
+            _questionMarks.add("?");
+        String questionMarks = _questionMarks.toString();
 
+        ArrayList<Pair<Object, Integer>> params = new ArrayList<>();
+        StringJoiner values = new StringJoiner(",");
         for(Post post : posts){
-            params.add(new Pair(post.getTitle(), Types.VARCHAR));
-            params.add(new Pair(post.getContent(), Types.VARCHAR));
-            params.add(new Pair(post.getType() == null ? null : post.getType().name(), Types.VARCHAR));
-            params.add(new Pair(post.getAuthor() == null ? null : post.getAuthor().getId(), Types.INTEGER));
-            params.add(new Pair(post.getSection() == null ? null : post.getSection().getId(), Types.INTEGER));
-            set.add(questionMarks);
+            fillInsertStatement(post, params);
+            values.add(questionMarks);
         }
 
-        if(set.length()==0){
+        if(values.length()==0){
             throw new RuntimeException("Empty VALUES clause");
         }
 
-        statement = String.format(statement, set);
+        statement = String.format(statement, table, updatableColumns, values);
         PreparedStatement ps = con.prepareStatement(statement);
 
         int i=1;
-        for (Pair<Object, Types> param : params){
-            ps.setObject(i++, param.getLeft(), (SQLType) param.getRight());
+        for (Pair<Object, Integer> param : params){
+            ps.setObject(i++, param.getLeft(), param.getRight());
         }
 
         return ps.executeUpdate();
     }
 
     public int delete(int[] ids) throws SQLException {
-        String statement = "DELETE FROM post WHERE id IN (%s)";
+        String statement = "DELETE FROM %s WHERE id IN (%s)";
 
         StringJoiner sj = new StringJoiner(",");
         for (int id : ids){
             sj.add("?");
         }
 
-        statement = String.format(statement, sj);
+        statement = String.format(statement, table,sj);
         PreparedStatement ps = con.prepareStatement(statement);
 
         int i=1;
@@ -138,7 +161,7 @@ public class PostDAO {
             ps.setInt(i++, id);
         }
 
-        return ps.executeUpdate(statement);
+        return ps.executeUpdate();
     }
 
     public int create(Post post) throws SQLException {
