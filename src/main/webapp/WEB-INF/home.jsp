@@ -1,4 +1,5 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,8 +36,14 @@
             </div>
 
             <div id="right-container">
-                <jsp:include page="components/post.jsp"/>
-                <jsp:include page="components/post.jsp"/>
+                <div class="greyContainer">
+                    <p>
+                        Shareboard è un sito bello, non puoi dire che è brutto
+                    </p>
+                </div>
+                <div class="greyContainer">lorem</div>
+<%--                <jsp:include page="components/post.jsp"/>--%>
+<%--                <jsp:include page="components/post.jsp"/>--%>
             </div>
         </div>
 <%--    <jsp:include page="components/footer.jsp"/>--%>

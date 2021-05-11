@@ -9,28 +9,32 @@
                 <h3>Shareboard</h3>
             </a>
         </span>
-        <span id="nav-crt-sctn" onclick="openSectionDropown()" class="interactable">
+        <span id="nav-crt-sctn" onclick="openSectionDropdown(true)" class="interactable">
             <i class="fas fa-map-marker-alt" style = "color:#0079D3"></i>
             <span>
                 <span>${param.currentSection}</span>
                 <i class="fas fa-sort-down" ></i>
             </span>
             <div id="myDropdown" class="dropdown-content greyContainer">
+                <div style = "padding: 12px 16px; color: #77797a; font-size: 10px; font-weight: 500; line-height: 16px;text-transform: uppercase; ">Home Feeds</div>
                 <a href="#home">Home</a>
+                <a href="#home">Popular</a>
                 <a href="#about">About</a>
+                <div style = "padding: 12px 16px; color: #77797a; font-size: 10px; font-weight: 500; line-height: 16px;text-transform: uppercase; ">Sections</div>
+                <a href="#contact" style="display: inline; padding:8px 24px;">Contact</a>
+                <i class="far fa-star" style="margin-left: 8px;"></i>
                 <a href="#contact">Contact</a>
-                  <a href="#contact">Contact</a>
-                  <a href="#contact">Contact</a>
-                  <a href="#contact">Contact</a>  <a href="#contact">Contact</a>
-                  <a href="#contact">Contact</a>
-                  <a href="#contact">Contact</a>
-                  <a href="#contact">Contact</a>
-                  <a href="#contact">Contact</a>
-                 <a href="#contact">Contact</a>
-                 <a href="#contact">Contact</a>
-                 <a href="#contact">Contact</a>
-                 <a href="#contact">Contact</a>
-
+                <a href="#contact">Contact</a>
+                <a href="#contact">Contact</a>
+                <a href="#contact">Contact</a>
+                <a href="#contact">Contact</a>
+                <a href="#contact">Contact</a>
+                <a href="#contact">Contact</a>
+                <a href="#contact">Contact</a>
+                <a href="#contact">Contact</a>
+                <a href="#contact">Contact</a>
+                <a href="#contact">Contact</a>
+                <a href="#contact">Contact</a>
             </div>
         </span>
 
@@ -45,7 +49,7 @@
         <c:choose>
             <c:when test="${param.isLogged eq 'true'}">
                 <a href = "/create"style="margin-right: 20px;"><i class="fas fa-edit"></i></a>
-                <a id = "profile-container" href = "${pageContext.request.contextPath}/profile/?id=${requestScope.user_id}"  >
+                <span id = "profile-container" class = "interactable" href = "${pageContext.request.contextPath}/profile/?id=${requestScope.user_id}" onclick="openProfileDropdown(true)" >
                     <i id = "nav-profile-photo" class="fas fa-user-circle"></i>
                     <div id="nav-profile-data" >
                         <p style="display: block; margin-bottom:0px; ">${param.userName}</p>
@@ -54,7 +58,18 @@
                             <p style="display: inline-block; font-size: 11px; margin-top:0px;">${param.userKarma} Karma</p>
                         </div>
                     </div>
-                </a>
+                    <i class="fas fa-sort-down" style="display: inline-block;"></i>
+                    <div id="profile-drowdown" class="dropdown-content greyContainer">
+                        <a href="/profile">
+                            <i class="fas fa-address-card"></i>
+                            Profile
+                        </a>
+                        <a href="/logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Log Out
+                        </a>
+                    </div>
+                </span>
             </c:when>
             <c:otherwise>
                 <div id = "button-container">

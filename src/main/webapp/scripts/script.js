@@ -1,31 +1,49 @@
-// window.onclick = function(event) {
-//     console.log(event.target)
-//     if (!event.target.matches('#nav-crt-sctn')) {
-//         console.log("NOPE")
-//         var dropdowns = document.getElementsByClassName("dropdown-content");
-//         var i;
-//         for (i = 0; i < dropdowns.length; i++) {
-//             var openDropdown = dropdowns[i];
-//             if (openDropdown.classList.contains('show')) {
-//                 openDropdown.classList.remove('show');
-//             }
-//         }
-//     }
-// }
+window.onclick = function(event) {
+    console.log(event.target)
 
-let toggle = false;
-function openSectionDropown() {
-    console.log("TESTEST")
-    if (toggle){
-        var dropdowns = document.getElementsByClassName("dropdown-content");
-        var i;
+    if ($(event.target).has("#myDropdown").length) {
+        console.log("NOPE");
+        openSectionDropdown(false);
+    }
+
+    if ($(event.target).has("#profile-drowdown").length){
+        console.log("NOPE2");
+        openProfileDropdown(false);
+    }
+}
+
+function openSectionDropdown(toggle) {
+    if (!toggle){
+        console.log("TESTEST2")
+        let dropdowns = document.getElementsByClassName("dropdown-content");
+        let i;
         for (i = 0; i < dropdowns.length; i++) {
-            var openDropdown = dropdowns[i];
+            let openDropdown = dropdowns[i];
             if (openDropdown.classList.contains('show')) {
                 openDropdown.classList.remove('show');
             }
         }
     } else{
+        openSectionDropdown(false);
         document.getElementById("myDropdown").classList.toggle("show");
+        //document.getElementById("myDropdown").classList.add("show")
+    }
+}
+
+function openProfileDropdown(toggle) {
+    if (!toggle){
+        console.log("TESTEST")
+        let dropdowns = document.getElementsByClassName("dropdown-content");
+        let i;
+        for (i = 0; i < dropdowns.length; i++) {
+            let openDropdown = dropdowns[i];
+            if (openDropdown.classList.contains('show')) {
+                openDropdown.classList.remove('show');
+            }
+        }
+    } else{
+        openSectionDropdown(false);
+        document.getElementById("profile-drowdown").classList.toggle("show");
+        //document.getElementById("profile-drowdown").classList.add("show")
     }
 }

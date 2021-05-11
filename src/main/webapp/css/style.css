@@ -120,6 +120,10 @@ navbar *{
     display: block;
 }
 
+/*.dropdown-content a:hover {*/
+/*    background-color: #868789;*/
+/*}*/
+
 .dropdown a:hover {background-color: #ddd;}
 
 .show {display: block;}
@@ -243,6 +247,14 @@ navbar *{
     display:inline-flex;
     justify-content:center;
     /*flex-direction: column;*/
+    border-color: rgba(134, 135, 137, 0);
+    border-style:solid;
+    border-width: 1px;
+
+}
+
+profile-container:hover{
+    border-color: #868789;
 }
 /*NAVBAR END*/
 
