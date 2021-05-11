@@ -1,14 +1,45 @@
-package model;
+package comment;
 
+import user.User;
+import post.Post;
+
+import java.time.Instant;
 import java.util.Date;
 
 public class Comment {
-    private int id;
+    private Integer id;
     private Post post;
     private User author;
+    private Comment parentComment;
     private String text;
-    private int votes;
-    private Date creationDate;
+    private Integer votes;
+    private Integer vote;
+    private Instant creationDate;
+
+
+    public Integer getVote() {
+        return vote;
+    }
+
+    public void setVote(Integer vote) {
+        this.vote = vote;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Comment getParentComment() {
+        return parentComment;
+    }
+
+    public void setParentComment(Comment parentComment) {
+        this.parentComment = parentComment;
+    }
+
+    public void setVotes(Integer votes) {
+        this.votes = votes;
+    }
 
     public int getVotes() {
         return votes;
@@ -50,11 +81,11 @@ public class Comment {
         this.text = text;
     }
 
-    public Date getCreationDate() {
+    public Instant getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(Date creationDate) {
+    public void setCreationDate(Instant creationDate) {
         this.creationDate = creationDate;
     }
 }

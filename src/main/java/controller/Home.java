@@ -3,7 +3,6 @@ package controller;
 //import model.Post;
 //import model.PostDAO;
 
-import dummymodel.HomeDAO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +15,7 @@ import java.util.List;
 public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HomeDAO service = new HomeDAO();
+        //HomeDAO service = new HomeDAO();
         int id = 0;
 //        try {
 //            id = Integer.parseInt(req.getParameter("p"));
