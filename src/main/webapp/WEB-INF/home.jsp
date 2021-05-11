@@ -7,7 +7,6 @@
     </jsp:include>
 </head>
 <body>
-    <div id = "test">
         <jsp:include page="components/navbar.jsp">
             <jsp:param name="isLogged" value="true" />
             <jsp:param name="currentSection" value="Home" />
@@ -15,13 +14,31 @@
             <jsp:param name="userKarma" value="4316" />
         </jsp:include>
 
-        <div id="container">
-<%--            <jsp:include page="components/leftsidebar.jsp"/>--%>
-            <jsp:include page="components/filter.jsp"/>
-            <jsp:include page="components/postcontainer.jsp"/>
-        </div>
-    </div>
+        <div id="body-container">
+            <div id="left-container">
+                <jsp:include page="components/filter.jsp"/>
+                <div id="post-container">
+                    <jsp:include page="components/post.jsp">
+                        <jsp:param name="title" value="Doge best doggo" />
+                        <jsp:param name="author" value="Testus" />
+                        <jsp:param name="section" value="best" />
+                        <jsp:param name="comments" value="69" />
+                        <jsp:param name="voteState" value="0" />
+                        <jsp:param name="votes" value="22" />
+                        <jsp:param name="type" value="img" />
+                    </jsp:include>
+                    <jsp:include page="components/post.jsp"/>
+                    <jsp:include page="components/post.jsp"/>
+                    <jsp:include page="components/post.jsp"/>
+                    <jsp:include page="components/post.jsp"/>
+                </div>
+            </div>
 
+            <div id="right-container">
+                <jsp:include page="components/post.jsp"/>
+                <jsp:include page="components/post.jsp"/>
+            </div>
+        </div>
 <%--    <jsp:include page="components/footer.jsp"/>--%>
 </body>
 </html>

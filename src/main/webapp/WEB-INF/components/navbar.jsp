@@ -5,19 +5,38 @@
     <div id="left">
         <span id="nav-logo" >
             <a href = "${context}/home" style="display:inline-flex">
-                <i class="fas fa-share-alt-square" style = "color: #0079D3;"></i>
+                <i class="fas fa-share-alt-square" style = "color: #ff4500; font-size: 25px;"></i>
                 <h3>Shareboard</h3>
             </a>
         </span>
-        <span id="nav-crt-sctn" style="display:inline-flex" onclick="openSectionDrodown()">
-            <i class="fas fa-map-marker-alt"></i>
-            <c:out value="${param.currentSection}" />
-            <i class="fas fa-sort-down"></i>
+        <span id="nav-crt-sctn" onclick="openSectionDropown()" class="interactable">
+            <i class="fas fa-map-marker-alt" style = "color:#0079D3"></i>
+            <span>
+                <span>${param.currentSection}</span>
+                <i class="fas fa-sort-down" ></i>
+            </span>
+            <div id="myDropdown" class="dropdown-content greyContainer">
+                <a href="#home">Home</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+                  <a href="#contact">Contact</a>
+                  <a href="#contact">Contact</a>
+                  <a href="#contact">Contact</a>  <a href="#contact">Contact</a>
+                  <a href="#contact">Contact</a>
+                  <a href="#contact">Contact</a>
+                  <a href="#contact">Contact</a>
+                  <a href="#contact">Contact</a>
+                 <a href="#contact">Contact</a>
+                 <a href="#contact">Contact</a>
+                 <a href="#contact">Contact</a>
+                 <a href="#contact">Contact</a>
+
+            </div>
         </span>
 
         <div id="nav-search" >
             <form action="/search">
-                 <i class="fas fa-search test"></i>
+                 <i id = "search-icon"class="fas fa-search"></i>
                 <input type="text" placeholder="Search" name="search">
             </form>
         </div>
@@ -25,17 +44,22 @@
     <div id="nav-profile">
         <c:choose>
             <c:when test="${param.isLogged eq 'true'}">
-                <a id = "profile-container" href = "${pageContext.request.contextPath}/profile/?id=${requestScope.user_id}">
-                    <i class="fas fa-user-circle"></i>
-                    <c:out value="${param.userName}" />
-                    <i class="far fa-arrow-alt-circle-up" style="color: orangered"></i>
-                    <c:out value="${param.userKarma}" />
+                <a href = "/create"style="margin-right: 20px;"><i class="fas fa-edit"></i></a>
+                <a id = "profile-container" href = "${pageContext.request.contextPath}/profile/?id=${requestScope.user_id}"  >
+                    <i id = "nav-profile-photo" class="fas fa-user-circle"></i>
+                    <div id="nav-profile-data" >
+                        <p style="display: block; margin-bottom:0px; ">${param.userName}</p>
+                        <div style="display: block; font-size: 12px; margin-top:0px;">
+                            <i class="far fa-arrow-alt-circle-up" style="color: orangered; display: inline; margin-top:0px;"></i>
+                            <p style="display: inline-block; font-size: 11px; margin-top:0px;">${param.userKarma} Karma</p>
+                        </div>
+                    </div>
                 </a>
             </c:when>
             <c:otherwise>
                 <div id = "button-container">
-                    <button type="submit" class = "darkGreyButton">Log In</button>
-                    <button type="submit" class = "lightGreyButton">Sign Up</button>
+                    <button type="submit" class = "roundButton darkGreyButton">Log In</button>
+                    <button type="submit" class = "roundButton lightGreyButton">Sign Up</button>
                 </div>
             </c:otherwise>
         </c:choose>

@@ -1,1 +1,0 @@
-<div id="post-container" class="greyContainer">BEL POST</div>
