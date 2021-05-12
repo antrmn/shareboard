@@ -1,56 +1,38 @@
 package comment;
 
 
+import persistence.AbstractMapper;
 import post.Post;
-import post.PostMapper;
-import user.UserMapper;
+import user.User;
 
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 
-public class CommentMapper {
+public class CommentMapper extends AbstractMapper<Comment> {
+    static Map<String, SQL_TriConsumer<Comment, String>> map = new HashMap<>(){{
+        map.put("id",                (c,s,rs) -> c.setId(rs.getInt(s)));
+        map.put("content",           (c,s,rs) -> c.setText(rs.getString(s)));
+        map.put("creation_date",     (c,s,rs) -> c.setCreationDate(rs.getTimestamp(s).toInstant()));
+        map.put("parent_comment_id", (c,s,rs) -> c.getParentComment().setId(rs.getInt(s)));
+        map.put("votes",             (c,s,rs) -> c.setVotes(rs.getInt(s)));
+        map.put("vote",              (c,s,rs) -> c.setVote(rs.getInt(s)));
+        map.put("author_id",         (c,s,rs) -> c.getAuthor().setId(rs.getInt(s)));
+        map.put("author_username",   (c,s,rs) -> c.getAuthor().setUsername(rs.getString(s)));
+        map.put("post_id",           (c,s,rs) -> c.getPost().setId(rs.getInt(s)));
+        map.put("post_title",        (c,s,rs) -> c.getPost().setTitle(rs.getString(s)));
+    }};
 
-    @FunctionalInterface
-    private interface SQL_Consumer<T>{
-        void accept(T t) throws SQLException;
+    public CommentMapper() {
+        super(map);
     }
 
-    private Comment c;
-    private ResultSet rs;
-
-    private final Map<String, SQL_Consumer<String>> map = Map.of(
-            "comment_id",                x -> c.setId(rs.getInt(x)),
-            "comment_content",           x -> c.setText(rs.getString(x)),
-            "comment_creation_date",     x -> c.setCreationDate(rs.getTimestamp(x).toInstant()),
-            "parent_comment_id",         x -> c.getParentComment().setId(rs.getInt(x)),
-            "comment_votes",             x -> c.setVotes(rs.getInt(x)),
-            "comment_vote",              x -> c.setVote(rs.getInt(x))
-    );
-
-    private CommentMapper(Comment c, ResultSet rs){
-        this.c = c;
-        this.rs = rs;
-    }
-
-    public static Comment toBean(ResultSet rs) throws SQLException{
-        CommentMapper cm = new CommentMapper(new Comment(), rs);
-        ResultSetMetaData rsmd = rs.getMetaData();
-        cm.c.setParentComment(new Comment());
-
-        for(int i=1; i<=rsmd.getColumnCount(); i++){
-            String column = rsmd.getColumnLabel(i);
-            SQL_Consumer<String> setter = cm.map.get(column);
-            if(setter != null){
-                setter.accept(column);
-            }
-        }
-
-        cm.c.setAuthor(UserMapper.toBean(rs));
-        cm.c.setPost(PostMapper.toBean(rs));
-
-        return cm.c;
+    @Override
+    protected Comment instantiate() {
+        Comment c = new Comment();
+        c.setParentComment(new Comment());
+        c.setPost(new Post());
+        c.setAuthor(new User());
+        return c;
     }
 }

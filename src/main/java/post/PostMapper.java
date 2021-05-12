@@ -1,41 +1,37 @@
 package post;
 
 import persistence.AbstractMapper;
-import section.SectionMapper;
-import user.UserMapper;
+import section.Section;
+import user.User;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.time.Instant;
-import java.util.Map;
+import java.util.HashMap;
 
 public class PostMapper extends AbstractMapper<Post> {
+    static HashMap<String, SQL_TriConsumer<Post, String>> map = new HashMap<>(){{
+             put("id",             (p,s,rs) -> p.setId(rs.getInt(s)));
+             put("title",          (p,s,rs) -> p.setTitle(rs.getString(s)));
+             put("content",        (p,s,rs) -> p.setContent(rs.getString(s)));
+             put("type",           (p,s,rs) -> p.setType(Post.Type.valueOf(rs.getString(s))));
+             put("creation_date",  (p,s,rs) -> p.setCreationDate(rs.getTimestamp(s).toInstant()));
+             put("votes",          (p,s,rs) -> p.setVotes(rs.getInt(s)));
+             put("n_comments",     (p,s,rs) -> p.setnComments(rs.getInt(s)));
+             put("vote",           (p,s,rs) -> p.setVote(rs.getInt(s)));
+             put("author_id",      (p,s,rs) -> p.getAuthor().setId(rs.getInt(s)));
+             put("author_username",(p,s,rs) -> p.getAuthor().setUsername(rs.getString(s)));
+             put("is_admin",       (p,s,rs) -> p.getAuthor().setAdmin(rs.getBoolean(s)));
+             put("section_id",     (p,s,rs) -> p.getSection().setId(rs.getInt(s)));
+             put("section_name",   (p,s,rs) -> p.getSection().setName(rs.getString(s)));
+    }};
 
-    public PostMapper() {
-        super(Map.of(
-                "post_id",             (p,o) -> p.setId((Integer)   o),
-                "post_title",          (p,o) -> p.setTitle((String) o),
-                "post_content",        (p,o) -> p.setContent((String) o),
-                "post_type",           (p,o) -> p.setType(Post.Type.valueOf((String) o)),
-                "post_creation_date",  (p,o) -> p.setCreationDate((Instant) o),
-                "post_votes",          (p,o) -> p.setVotes((Integer) o),
-                "post_n_comments",     (p,o) -> p.setnComments((Integer) o),
-                "post_vote",           (p,o) -> p.setVote((Integer) o)
-        ));
+    public PostMapper(){
+        super(map);
     }
 
     @Override
     protected Post instantiate() {
-        return new Post();
-    }
-
-    @Override
-    public Post toBean(ResultSet rs) throws SQLException {
-        Post p = super.toBean(rs);
-        UserMapper um = new UserMapper();
-        p.setAuthor(um.toBean(rs));
-        SectionMapper sm = new SectionMapper();
-        p.setSection(sm.toBean(rs));
+        Post p = new Post();
+        p.setAuthor(new User());
+        p.setSection(new Section());
         return p;
     }
 }

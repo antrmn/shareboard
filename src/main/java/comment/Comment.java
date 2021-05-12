@@ -1,10 +1,9 @@
 package comment;
 
-import user.User;
 import post.Post;
+import user.User;
 
 import java.time.Instant;
-import java.util.Date;
 
 public class Comment {
     private Integer id;
@@ -25,10 +24,6 @@ public class Comment {
         this.vote = vote;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public Comment getParentComment() {
         return parentComment;
     }
@@ -41,19 +36,15 @@ public class Comment {
         this.votes = votes;
     }
 
-    public int getVotes() {
+    public Integer getVotes() {
         return votes;
     }
 
-    public void setVotes(int votes) {
-        this.votes = votes;
-    }
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

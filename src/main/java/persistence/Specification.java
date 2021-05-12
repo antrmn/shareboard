@@ -3,40 +3,49 @@ package persistence;
 import util.Pair;
 
 import java.util.ArrayList;
-import java.util.StringJoiner;
 
-public abstract class Specification {
-    public StringJoiner joins = new StringJoiner("\n");
-    public StringJoiner wheres = new StringJoiner(" AND ", " WHERE ", "").setEmptyValue("");
-    public ArrayList<Pair<Object, Integer>> params = new ArrayList<>();
-    public String sortBy;
-    public String sortOrder = "ASC";
-    public int limit = 50;
-    public int offset = 0;
 
-    protected abstract Specification byId(int id);
+public class Specification{
 
-    protected Specification(String defaultSortBy) {
-        this.sortBy = defaultSortBy;
-    }
+    private final String wheres;
+    private final String joins;
+    private final String orderBy;
+    private final ArrayList<Pair<Object, Integer>> params;
+    private final int limit;
+    private final int offset;
 
-    public Specification ascendedOrder(){
-        sortOrder = "ASC";
-        return this;
-    }
-
-    public Specification descenderOrder(){
-        sortOrder = "DESC";
-        return this;
-    }
-
-    public Specification setLimit(int limit){
+    public Specification(String wheres, String joins, String orderBy,
+                         ArrayList<Pair<Object, Integer>> params,
+                         int limit, int offset) {
+        this.wheres = wheres;
+        this.joins = joins;
+        this.orderBy = orderBy;
+        this.params = params;
         this.limit = limit;
-        return this;
+        this.offset = offset;
     }
 
-    public Specification setOffset(int offset){
-        this.offset = offset;
-        return this;
+    public String getWheres() {
+        return wheres;
+    }
+
+    public String getJoins() {
+        return joins;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public ArrayList<Pair<Object, Integer>> getParams() {
+        return params;
+    }
+
+    public int getLimit() {
+        return limit;
+    }
+
+    public int getOffset() {
+        return offset;
     }
 }

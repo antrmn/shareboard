@@ -1,50 +1,25 @@
 package section;
 
 
-import post.Post;
+import persistence.AbstractMapper;
 
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.util.Map;
-import java.util.function.BiConsumer;
+import java.util.HashMap;
 
 
-public class SectionMapper {
+public class SectionMapper extends AbstractMapper<Section> {
+    static HashMap<String, SQL_TriConsumer<Section, String>> map = new HashMap<>(){{
+        put("id",                (p,s,rs) -> p.setId(rs.getInt(s)));
+        put("description",       (p,s,rs) -> p.setDescription(rs.getString(s)));
+        put("name",              (p,s,rs) -> p.setName(rs.getString(s)));
+        put("picture",           (p,s,rs) -> p.setPicture(rs.getString(s)));
+    }};
 
-    @FunctionalInterface
-    private interface SQL_Consumer<T>{
-        public void accept(T t) throws SQLException;
+    public SectionMapper() {
+        super(map);
     }
 
-    private Section s;
-    private ResultSet rs;
-
-    private final Map<String, SQL_Consumer<String>> map = Map.of(
-            "section_id",                x -> s.setId(rs.getInt(x)),
-            "section_description",       x -> s.setDescription(rs.getString(x)),
-            "section_name",              x -> s.setName(rs.getString(x)),
-            "section_picture",           x -> s.setPicture(rs.getString(x))
-    );
-
-    private SectionMapper(Section s, ResultSet rs){
-        this.s = s;
-        this.rs = rs;
-    }
-
-    public static Section toBean(ResultSet rs) throws SQLException{
-        SectionMapper sm = new SectionMapper(new Section(), rs);
-        ResultSetMetaData rsmd = rs.getMetaData();
-        Section s = new Section();
-
-        for(int i=1; i<=rsmd.getColumnCount(); i++){
-            String column = rsmd.getColumnName(i);
-            SQL_Consumer<String> setter = sm.map.get(column);
-            if(setter != null){
-                setter.accept(column);
-            }
-        }
-
-        return s;
+    @Override
+    protected Section instantiate() {
+        return new Section();
     }
 }

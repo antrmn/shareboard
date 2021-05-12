@@ -3,18 +3,23 @@ package persistence;
 import util.Pair;
 import util.SetNull;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringJoiner;
 
-public abstract class GenericDAO<T, S extends Specification, M extends AbstractMapper<T>> {
+public abstract class GenericDAO<T, M extends AbstractMapper<T>> {
 
     protected Connection con;
 
-    private List<String> readableColumnsList;
-    private List<String> updatableColumnsList;
-    private String view;
-    private String table;
-    private M mapper;
+    private final List<String> readableColumnsList;
+    private final List<String> updatableColumnsList;
+    private final String view;
+    private final String table;
+    private final M mapper;
 
     protected GenericDAO(Connection con, List<String> readableColumnsList, List<String> updatableColumnsList, String view, String table, M mapper){
         this.con = con;
@@ -28,24 +33,25 @@ public abstract class GenericDAO<T, S extends Specification, M extends AbstractM
     protected abstract String fillUpdateStatement(T bean, List<Pair<Object, Integer>> params);
     protected abstract void fillInsertStatement(T bean, List<Pair<Object, Integer>> params);
 
-    public List<T> fetch(S specification) throws SQLException {
-        String query = "SELECT %s FROM %s %s %s ORDER BY %s %s LIMIT ? OFFSET ?";
-        String.format(query, String.join(",",readableColumnsList),
+    public List<T> fetch(Specification specification) throws SQLException {
+        String query = "SELECT %s FROM %s AS %s %s %s %s LIMIT ? OFFSET ?";
+        query = String.format(query, String.join(",",readableColumnsList),
                              view,
-                             specification.joins,
-                             specification.wheres,
-                             specification.sortBy,
-                             specification.sortOrder);
+                             table,
+                             specification.getJoins(),
+                             specification.getWheres(),
+                             specification.getOrderBy()
+        );
 
-        List<Pair<Object,Integer>> params = specification.params;
+
+        List<Pair<Object,Integer>> params = specification.getParams();
         PreparedStatement ps = con.prepareStatement(query);
         int i=1;
         for (Pair<Object, Integer> param : params){
             ps.setObject(i++, param.getLeft(), param.getRight());
         }
-
-        ps.setInt(i++, specification.limit);
-        ps.setInt(i++, specification.offset);
+        ps.setInt(i++, specification.getLimit());
+        ps.setInt(i, specification.getOffset());
 
         ResultSet rs = ps.executeQuery();
         ArrayList<T> beans = new ArrayList<>();
@@ -54,7 +60,7 @@ public abstract class GenericDAO<T, S extends Specification, M extends AbstractM
         while(rs.next()){
             beans.add(mapper.toBean(rs));
         }
-
+        rs.close();
         return beans;
     }
 
@@ -64,7 +70,7 @@ public abstract class GenericDAO<T, S extends Specification, M extends AbstractM
         ArrayList<Pair<Object, Integer>> params = new ArrayList<>();
         String valuesToSet = fillUpdateStatement(bean, params);
 
-        String.format(statement, table, valuesToSet);
+        statement = String.format(statement, table, valuesToSet);
 
         if(valuesToSet.isBlank() || params.isEmpty()){
             throw new RuntimeException("Empty SET clause");
@@ -121,7 +127,7 @@ public abstract class GenericDAO<T, S extends Specification, M extends AbstractM
         String statement = "DELETE FROM %s WHERE id IN (%s)";
 
         StringJoiner sj = new StringJoiner(",");
-        for (int id : ids){
+        for (int ignored : ids){
             sj.add("?");
         }
 
