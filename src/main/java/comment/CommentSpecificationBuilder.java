@@ -36,7 +36,12 @@ public class CommentSpecificationBuilder extends Specification.Builder<CommentSp
     public Specification build() {
         joinsJoiner.add(userJoin);
         joinsJoiner.add(postJoin);
-        joinsJoiner.add(loggedUserId <= 0 ? notLoggedUserJoin : loggedUserJoin);
+        if (loggedUserId > 0) {
+            params.add(new Pair<>(loggedUserId, Types.INTEGER));
+            joinsJoiner.add(loggedUserJoin);
+        } else {
+            joinsJoiner.add(notLoggedUserJoin);
+        }
         joins = joinsJoiner.toString();
         wheres = wheresJoiner.toString();
         return super.build();
