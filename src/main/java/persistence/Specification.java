@@ -6,11 +6,12 @@ import java.util.ArrayList;
 
 
 /**
- * Un'istanza di Specification fornisce le specifiche per formattare un SELECT statement.
+ * Fornisce le specifiche per formattare un SELECT statement.
  * Per istanziare un oggetto di questo tipo, occorre usare la classe {@link #Specification(Builder)}
  */
 public class Specification{
     /**
+     * La classe per istanziare oggetti di tipo Specification
      * @param <T> Il nome della classe che estende {@link Builder}
      */
     public static abstract class Builder <T extends Builder<T>> {

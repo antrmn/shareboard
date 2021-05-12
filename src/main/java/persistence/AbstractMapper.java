@@ -33,7 +33,7 @@ public abstract class AbstractMapper<T> {
 
 
     /**
-     * @return Il bean appena istanziato (Se sono presenti campi che hanno altri bean necessari al mapping è necessario
+     * @return Il bean appena istanziato (Se sono presenti campi che hanno altri bean necessari al mapping &egrave; necessario
      * istanziare anche quelli
      */
     protected abstract T instantiate();

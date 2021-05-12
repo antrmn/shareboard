@@ -45,18 +45,18 @@ public abstract class GenericDAO<T, M extends AbstractMapper<T>> {
     }
 
     /**
-     * Questo metodo prende un Bean in input e, in base ai campi settati, esegue due azioni
+     * <p>Questo metodo prende un Bean in input e, in base ai campi settati, esegue due azioni</p>
      *
-     * <p><ul>
+     * <ul>
      *     <li> Genera la parte di query che si pone dopo il SET di un UPDATE statement.
-     *     (**Esempio**: se il campo Titolo del bean è settato, il metodo aggiungerà "Titolo=?" nello stringa in uscita</li>
+     *     (**Esempio**: se il campo Titolo del bean &egrave; settato, il metodo aggiunger&agrave; "Titolo=?" nello stringa in uscita</li>
      *     <li> Inserisce i campi editabili e diversi da null in nella lista specificata in input </li>
-     * </ul></p>
+     * </ul>
      *
      * <b>NOTA:</b> l'ultimo parametro di params deve essere l'id del Bean da modificare
      *
      * @param bean Il Bean in input
-     * @param params La lista (composte da coppie Valore-Tipo) che sarà riempita con i parametri da inserire nel PreparedStatement. L'ultimo elemento
+     * @param params La lista (composte da coppie Valore-Tipo) che sar&agrave; riempita con i parametri da inserire nel PreparedStatement. L'ultimo elemento
      *               deve essere l'id del record da modificare
      * @return La parte di UPDATE statement che va subito dopo il SET clause
      */
@@ -73,7 +73,7 @@ public abstract class GenericDAO<T, M extends AbstractMapper<T>> {
 
 
     /**
-     * @param specification L'oggetto Specification che conterrà i parametri per la SELECT e le specifiche per
+     * @param specification L'oggetto Specification che conterr&agrave; i parametri per la SELECT e le specifiche per
      *                      formattare lo statement
      * @return Una lista di Bean
      * @throws SQLException In caso di errore SQL
