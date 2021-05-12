@@ -47,6 +47,7 @@ public class PostDAO extends GenericDAO<Post, PostMapper> {
             params.add(new Pair<>(post.getAuthor().getId(), Types.VARCHAR));
             valuesToSet.add("author_id=?");
         }
+        params.add(new Pair<>(post.getId(), Types.INTEGER));
         return valuesToSet.toString();
     }
 

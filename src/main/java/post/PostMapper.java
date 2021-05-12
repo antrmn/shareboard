@@ -7,7 +7,7 @@ import user.User;
 import java.util.HashMap;
 
 public class PostMapper extends AbstractMapper<Post> {
-    static HashMap<String, SQL_TriConsumer<Post, String>> map = new HashMap<>(){{
+    static HashMap<String, SQL_TriConsumer<Post>> map = new HashMap<>(){{
              put("id",             (p,s,rs) -> p.setId(rs.getInt(s)));
              put("title",          (p,s,rs) -> p.setTitle(rs.getString(s)));
              put("content",        (p,s,rs) -> p.setContent(rs.getString(s)));

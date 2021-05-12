@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class UserMapper extends AbstractMapper<User> {
 
-    static Map<String, SQL_TriConsumer<User, String>> map = new HashMap<>(){{
+    static Map<String, SQL_TriConsumer<User>> map = new HashMap<>(){{
         put("id",                (u,s,rs) -> u.setId(rs.getInt(s)));
         put("username",          (u,s,rs) -> u.setUsername(rs.getString(s)));
         put("creation_date",     (u,s,rs) -> u.setCreationDate(rs.getTimestamp(s).toInstant()));

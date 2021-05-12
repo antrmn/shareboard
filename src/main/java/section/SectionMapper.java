@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 
 public class SectionMapper extends AbstractMapper<Section> {
-    static HashMap<String, SQL_TriConsumer<Section, String>> map = new HashMap<>(){{
+    static HashMap<String, SQL_TriConsumer<Section>> map = new HashMap<>(){{
         put("id",                (p,s,rs) -> p.setId(rs.getInt(s)));
         put("description",       (p,s,rs) -> p.setDescription(rs.getString(s)));
         put("name",              (p,s,rs) -> p.setName(rs.getString(s)));
