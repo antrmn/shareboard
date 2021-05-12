@@ -10,7 +10,7 @@ body{
     background-color: var(--background-main-color);
     font-family: Verdana;
     color: white;
-    height:3000px;
+    /*height:3000px;*/
 }
 
 a{
@@ -73,6 +73,29 @@ footer {
     display:inline-flex;
     justify-content: space-between;
     flex-flow: row;
+}
+
+.pagination {
+    display: inline-block;
+    margin-top:20px;
+}
+
+.pagination a {
+    color: white;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination a.active {
+    background-color: var(--shareboard-border-color1);
+    color: white;
+    border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+    border-radius: 5px;
 }
 
 /*NAVBAR START*/
@@ -381,6 +404,7 @@ profile-container:hover{
 }
 
 #post-comment-container{
+    width:120px !important;
     display: block;
     font-size: 12px;
     font-weight: 400;
@@ -447,6 +471,9 @@ profile-container:hover{
         display:none;
     }
 
+    /*#right-container{*/
+    /*    display:none;*/
+    /*}*/
     /*#post-media-container{*/
     /*    order:3;*/
     /*}*/

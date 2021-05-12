@@ -32,13 +32,13 @@
             </c:choose>
         </span>
         <span >
-            <h3 style = "display: block; margin-top: 5px; margin-bottom: 1px; margin-right:2px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor</h3>
+            <h3 style = "display: block; margin-top: 5px; margin-bottom: 1px; margin-right:2px;">${param.title}</h3>
             <div id="post-meta-container">
-                <a href="/section" style = "font-size: 12px;font-weight: 400;line-height: 16px">s/test</a>
-                <a href="/user" style = "font-size: 12px;font-weight: 400;line-height: 16px">Posted by: testus</a>
-                <a href="/post" id = "post-comment-container" style = "display: block; font-size: 12px;font-weight: 400;line-height: 16px; width: 100px; margin-bottom: 5px;">
+                <a href="/section" style = "font-size: 12px;font-weight: 400;line-height: 16px">s/${param.section}</a>
+                <a href="/user" style = "font-size: 12px;font-weight: 400;line-height: 16px">Posted by: ${param.author}</a>
+                <a href="/post" id = "post-comment-container" style = "display: block; font-size: 12px;font-weight: 400;line-height: 16px; width: 120px; margin-bottom: 5px;">
                     <i class="fas fa-comment-dots"></i>
-                    69 comments
+                    ${param.comments} comments
                 </a>
             </div>
         </span>

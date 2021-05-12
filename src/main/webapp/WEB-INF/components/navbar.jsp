@@ -9,7 +9,7 @@
                 <h3>Shareboard</h3>
             </a>
         </span>
-        <span id="nav-crt-sctn" onclick="openSectionDropdown(true)" class="interactable">
+        <span id="nav-crt-sctn" onclick="toggleDropdown(true, 'myDropdown')" class="interactable">
             <i class="fas fa-map-marker-alt" style = "color:#0079D3"></i>
             <span>
                 <span>${param.currentSection}</span>
@@ -21,20 +21,10 @@
                 <a href="#home">Popular</a>
                 <a href="#about">About</a>
                 <div style = "padding: 12px 16px; color: #77797a; font-size: 10px; font-weight: 500; line-height: 16px;text-transform: uppercase; ">Sections</div>
-                <a href="#contact" style="display: inline; padding:8px 24px;">Contact</a>
-                <i class="far fa-star" style="margin-left: 8px;"></i>
-                <a href="#contact">Contact</a>
-                <a href="#contact">Contact</a>
-                <a href="#contact">Contact</a>
-                <a href="#contact">Contact</a>
-                <a href="#contact">Contact</a>
-                <a href="#contact">Contact</a>
-                <a href="#contact">Contact</a>
-                <a href="#contact">Contact</a>
-                <a href="#contact">Contact</a>
-                <a href="#contact">Contact</a>
-                <a href="#contact">Contact</a>
-                <a href="#contact">Contact</a>
+                <c:forEach var = "i" begin = "1" end = "100">
+                    <a href="#contact" style="display: inline; padding:8px 24px;">Contact</a>
+                    <i class="far fa-star" style="margin-left: 20px;"></i>
+                </c:forEach>
             </div>
         </span>
 
@@ -49,7 +39,7 @@
         <c:choose>
             <c:when test="${param.isLogged eq 'true'}">
                 <a href = "/create"style="margin-right: 20px;"><i class="fas fa-edit"></i></a>
-                <span id = "profile-container" class = "interactable" href = "${pageContext.request.contextPath}/profile/?id=${requestScope.user_id}" onclick="openProfileDropdown(true)" >
+                <span id = "profile-container" class = "interactable" href = "${pageContext.request.contextPath}/profile/?id=${requestScope.user_id}" onclick="toggleDropdown(true, 'profile-drowdown')" >
                     <i id = "nav-profile-photo" class="fas fa-user-circle"></i>
                     <div id="nav-profile-data" >
                         <p style="display: block; margin-bottom:0px; ">${param.userName}</p>
@@ -63,6 +53,12 @@
                         <a href="/profile">
                             <i class="fas fa-address-card"></i>
                             Profile
+                        </a>
+
+<%--                        if is admin--%>
+                        <a href="/profile">
+                            <i class="fas fa-user-shield"></i>
+                            Create Section
                         </a>
                         <a href="/logout">
                             <i class="fas fa-sign-out-alt"></i>
