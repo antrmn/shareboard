@@ -5,10 +5,9 @@ import util.Pair;
 
 import java.sql.Types;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.StringJoiner;
 
-public class CommentSpecificationBuilder {
+public class CommentSpecificationBuilder extends Specification.Builder<CommentSpecificationBuilder>{
     //Join sempre aggiunte
     private final String userJoin = " JOIN v_user AS user ON comment.author_id=user.id ";
     private final String postJoin = " JOIN post ON post.id = comment.post_id";
@@ -25,25 +24,22 @@ public class CommentSpecificationBuilder {
             " AS vc1 " +
             "ON vc1.comment_id = comment.id";
 
-    //Common
-    private ArrayList<Pair<Object, Integer>> params = new ArrayList<>();
-    private boolean ascending = true;
-    private String orderBy = "creation_date";
-    private int limit = 50;
-    private int offset = 0;
-
     //StringJoiners per formare la stringa
     StringJoiner joinsJoiner = new StringJoiner("\n");
     StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ");
+
+    @Override
+    protected CommentSpecificationBuilder getThisBuilder() {
+        return this;
+    }
 
     public Specification build() {
         joinsJoiner.add(userJoin);
         joinsJoiner.add(postJoin);
         joinsJoiner.add(loggedUserId <= 0 ? notLoggedUserJoin : loggedUserJoin);
-        orderBy = orderBy + " " + (ascending ? "ASC" : "DESC");
-        return new Specification(wheresJoiner.toString(),
-                joinsJoiner.toString(),
-                orderBy, params, limit, offset);
+        joins = joinsJoiner.toString();
+        wheres = wheresJoiner.toString();
+        return super.build();
     }
 
     public CommentSpecificationBuilder loggedUser(Integer id){
@@ -101,26 +97,6 @@ public class CommentSpecificationBuilder {
 
     public CommentSpecificationBuilder sortByVotes(){
         orderBy = "votes";
-        return this;
-    }
-
-    public CommentSpecificationBuilder ascendedOrder(){
-        ascending = true;
-        return this;
-    }
-
-    public CommentSpecificationBuilder descenderOrder(){
-        ascending = false;
-        return this;
-    }
-
-    public CommentSpecificationBuilder setLimit(int limit){
-        this.limit = limit;
-        return this;
-    }
-
-    public CommentSpecificationBuilder setOffset(int offset){
-        this.offset = offset;
         return this;
     }
 }

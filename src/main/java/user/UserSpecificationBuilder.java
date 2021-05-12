@@ -5,26 +5,23 @@ import util.Pair;
 
 import java.sql.Types;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.StringJoiner;
 
-public class UserSpecificationBuilder {
-    //Common
-    private ArrayList<Pair<Object, Integer>> params = new ArrayList<>();
-    private boolean ascending = true;
-    private String orderBy = "username";
-    private int limit = 50;
-    private int offset = 0;
+public class UserSpecificationBuilder extends Specification.Builder<UserSpecificationBuilder>{
 
     //StringJoiners per formare la stringa
     StringJoiner joinsJoiner = new StringJoiner("\n");
     StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ");
 
+    @Override
+    protected UserSpecificationBuilder getThisBuilder() {
+        return this;
+    }
+
     public Specification build() {
-        orderBy = orderBy + " " + (ascending ? "ASC" : "DESC");
-        return new Specification(wheresJoiner.toString(),
-                                 joinsJoiner.toString(),
-                                 orderBy, params, limit, offset);
+        joins = joinsJoiner.toString();
+        wheres = wheresJoiner.toString();
+        return super.build();
     }
 
     public UserSpecificationBuilder doesFollowSection(int id){
@@ -65,26 +62,6 @@ public class UserSpecificationBuilder {
 
     public UserSpecificationBuilder sortByName(){
         orderBy = "username";
-        return this;
-    }
-
-    public UserSpecificationBuilder ascendedOrder(){
-        ascending = true;
-        return this;
-    }
-
-    public UserSpecificationBuilder descenderOrder(){
-        ascending = false;
-        return this;
-    }
-
-    public UserSpecificationBuilder setLimit(int limit){
-        this.limit = limit;
-        return this;
-    }
-
-    public UserSpecificationBuilder setOffset(int offset){
-        this.offset = offset;
         return this;
     }
 }

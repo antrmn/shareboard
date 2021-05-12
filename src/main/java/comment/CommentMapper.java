@@ -10,7 +10,7 @@ import java.util.Map;
 
 
 public class CommentMapper extends AbstractMapper<Comment> {
-    static Map<String, SQL_TriConsumer<Comment, String>> map = new HashMap<>(){{
+    static Map<String, SQL_TriConsumer<Comment>> map = new HashMap<>(){{
         map.put("id",                (c,s,rs) -> c.setId(rs.getInt(s)));
         map.put("content",           (c,s,rs) -> c.setText(rs.getString(s)));
         map.put("creation_date",     (c,s,rs) -> c.setCreationDate(rs.getTimestamp(s).toInstant()));

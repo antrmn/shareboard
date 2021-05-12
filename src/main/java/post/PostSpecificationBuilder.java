@@ -5,10 +5,9 @@ import util.Pair;
 
 import java.sql.Types;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.StringJoiner;
 
-public class PostSpecificationBuilder {
+public class PostSpecificationBuilder extends Specification.Builder<PostSpecificationBuilder>{
     //Join sempre aggiunte
     private final String userJoin = " JOIN v_user AS user ON post.author_id=user.id ";
     private final String sectionJoin = " JOIN section ON post.section_id = section.id";
@@ -25,25 +24,22 @@ public class PostSpecificationBuilder {
             " AS v1 " +
             "ON v1.post_id = post.id";
 
-    //Common
-    private final ArrayList<Pair<Object, Integer>> params = new ArrayList<>();
-    private boolean ascending = true;
-    private String orderBy = "creation_date";
-    private int limit = 50;
-    private int offset = 0;
-
     //StringJoiners per formare la stringa
     StringJoiner joinsJoiner = new StringJoiner("\n");
     StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ").setEmptyValue(" ");
+
+    @Override
+    protected PostSpecificationBuilder getThisBuilder() {
+        return this;
+    }
 
     public Specification build() {
         joinsJoiner.add(userJoin);
         joinsJoiner.add(sectionJoin);
         joinsJoiner.add(loggedUserId <= 0 ? notLoggedUserJoin : loggedUserJoin);
-        orderBy = " ORDER BY " + orderBy + " " + (ascending ? "ASC" : "DESC");
-        return new Specification(wheresJoiner.toString(),
-                                 joinsJoiner.toString(),
-                                 orderBy, params, limit, offset);
+        joins = joinsJoiner.toString();
+        wheres = wheresJoiner.toString();
+        return super.build();
     }
 
     public PostSpecificationBuilder loggedUser(Integer id){
@@ -136,23 +132,5 @@ public class PostSpecificationBuilder {
         return this;
     }
 
-    public PostSpecificationBuilder ascendedOrder(){
-        ascending = true;
-        return this;
-    }
 
-    public PostSpecificationBuilder descenderOrder(){
-        ascending = false;
-        return this;
-    }
-
-    public PostSpecificationBuilder setLimit(int limit){
-        this.limit = limit;
-        return this;
-    }
-
-    public PostSpecificationBuilder setOffset(int offset){
-        this.offset = offset;
-        return this;
-    }
 }
