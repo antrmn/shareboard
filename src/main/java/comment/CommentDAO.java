@@ -40,6 +40,7 @@ public class CommentDAO extends GenericDAO<Comment, CommentMapper> {
             params.add(new Pair<>(comment.getParentComment().getId(), Types.VARCHAR));
             valuesToSet.add("parent_comment_id=?");
         }
+        params.add(new Pair<>(comment.getId(), Types.INTEGER));
         return valuesToSet.toString();
     }
 

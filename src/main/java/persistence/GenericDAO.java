@@ -22,7 +22,7 @@ public abstract class GenericDAO<T, M extends AbstractMapper<T>> {
     protected Connection con;
 
     private final List<String> readableColumnsList;
-    private final List<String> updatableColumnsList;
+    private final List<String> insertableColumnsList;
     private final String view;
     private final String table;
     private final M mapper;
@@ -30,15 +30,15 @@ public abstract class GenericDAO<T, M extends AbstractMapper<T>> {
     /**
      * @param con Un'istanza di Connection.
      * @param readableColumnsList La lista di colonne (e di alias) che saranno restituite dalla SELECT
-     * @param updatableColumnsList La lista di colonne che saranno specificate nella INSERT
+     * @param insertableColumnsList La lista di colonne che saranno specificate nella INSERT
      * @param view La vista su cui opererà la SELECT. Può essere uguale a {@link #table}.
      * @param table Una tabella NON DI SOLA LETTURA su cui opereranno la SELECT, la INSERT e la DELETE
      * @param mapper Un'istanza del Mapper per questo Bean.
      */
-    protected GenericDAO(Connection con, List<String> readableColumnsList, List<String> updatableColumnsList, String view, String table, M mapper){
+    protected GenericDAO(Connection con, List<String> readableColumnsList, List<String> insertableColumnsList, String view, String table, M mapper){
         this.con = con;
         this.readableColumnsList = readableColumnsList;
-        this.updatableColumnsList = updatableColumnsList;
+        this.insertableColumnsList = insertableColumnsList;
         this.view = view;
         this.table = table;
         this.mapper = mapper;
@@ -64,7 +64,7 @@ public abstract class GenericDAO<T, M extends AbstractMapper<T>> {
 
     /**
      * Questo metodo prende un Bean in input e in base ai campi editabili riempie la lista di parametri specificata in input.
-     * L'ordine dei parametri deve corrispondere alle colonne settate in {@link #updatableColumnsList}
+     * L'ordine dei parametri deve corrispondere alle colonne settate in {@link #insertableColumnsList}
      *
      * @param bean Il bean da inserire
      * @param params La lista dei parametri come coppie (Valore, Tipo valore)
@@ -158,7 +158,7 @@ public abstract class GenericDAO<T, M extends AbstractMapper<T>> {
         String statement = "INSERT INTO %s (%s) VALUES %s";
 
         StringJoiner _questionMarks = new StringJoiner(",","(",")");
-        for(int i=0; i<updatableColumnsList.size(); i++)
+        for(int i = 0; i< insertableColumnsList.size(); i++)
             _questionMarks.add("?");
         String questionMarks = _questionMarks.toString();
 
@@ -174,7 +174,7 @@ public abstract class GenericDAO<T, M extends AbstractMapper<T>> {
         }
 
         statement = String.format(statement, table,
-                                             String.join(",",updatableColumnsList),
+                                             String.join(",", insertableColumnsList),
                                              values);
         PreparedStatement ps = con.prepareStatement(statement);
 

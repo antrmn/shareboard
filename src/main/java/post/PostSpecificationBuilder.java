@@ -36,7 +36,12 @@ public class PostSpecificationBuilder extends Specification.Builder<PostSpecific
     public Specification build() {
         joinsJoiner.add(userJoin);
         joinsJoiner.add(sectionJoin);
-        joinsJoiner.add(loggedUserId <= 0 ? notLoggedUserJoin : loggedUserJoin);
+        if (loggedUserId > 0) {
+            params.add(new Pair<>(loggedUserId, Types.INTEGER));
+            joinsJoiner.add(loggedUserJoin);
+        } else {
+            joinsJoiner.add(notLoggedUserJoin);
+        }
         joins = joinsJoiner.toString();
         wheres = wheresJoiner.toString();
         return super.build();

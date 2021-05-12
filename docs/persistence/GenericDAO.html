@@ -186,7 +186,7 @@ extends java.lang.Object</pre>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>private java.util.List&lt;java.lang.String&gt;</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#updatableColumnsList">updatableColumnsList</a></span></code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#insertableColumnsList">insertableColumnsList</a></span></code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -216,7 +216,7 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code>protected </code></td>
 <th class="colConstructorName" scope="row"><code><span class="memberNameLink"><a href="#%3Cinit%3E(java.sql.Connection,java.util.List,java.util.List,java.lang.String,java.lang.String,M)">GenericDAO</a></span>&#8203;(java.sql.Connection&nbsp;con,
           java.util.List&lt;java.lang.String&gt;&nbsp;readableColumnsList,
-          java.util.List&lt;java.lang.String&gt;&nbsp;updatableColumnsList,
+          java.util.List&lt;java.lang.String&gt;&nbsp;insertableColumnsList,
           java.lang.String&nbsp;view,
           java.lang.String&nbsp;table,
           <a href="GenericDAO.html" title="type parameter in GenericDAO">M</a>&nbsp;mapper)</code></th>
@@ -338,13 +338,13 @@ extends java.lang.Object</pre>
 <pre>private final&nbsp;java.util.List&lt;java.lang.String&gt; readableColumnsList</pre>
 </li>
 </ul>
-<a id="updatableColumnsList">
+<a id="insertableColumnsList">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>updatableColumnsList</h4>
-<pre>private final&nbsp;java.util.List&lt;java.lang.String&gt; updatableColumnsList</pre>
+<h4>insertableColumnsList</h4>
+<pre>private final&nbsp;java.util.List&lt;java.lang.String&gt; insertableColumnsList</pre>
 </li>
 </ul>
 <a id="view">
@@ -394,7 +394,7 @@ extends java.lang.Object</pre>
 <h4>GenericDAO</h4>
 <pre>protected&nbsp;GenericDAO&#8203;(java.sql.Connection&nbsp;con,
                      java.util.List&lt;java.lang.String&gt;&nbsp;readableColumnsList,
-                     java.util.List&lt;java.lang.String&gt;&nbsp;updatableColumnsList,
+                     java.util.List&lt;java.lang.String&gt;&nbsp;insertableColumnsList,
                      java.lang.String&nbsp;view,
                      java.lang.String&nbsp;table,
                      <a href="GenericDAO.html" title="type parameter in GenericDAO">M</a>&nbsp;mapper)</pre>
@@ -402,7 +402,7 @@ extends java.lang.Object</pre>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>con</code> - Un'istanza di Connection.</dd>
 <dd><code>readableColumnsList</code> - La lista di colonne (e di alias) che saranno restituite dalla SELECT</dd>
-<dd><code>updatableColumnsList</code> - La lista di colonne che saranno specificate nella INSERT</dd>
+<dd><code>insertableColumnsList</code> - La lista di colonne che saranno specificate nella INSERT</dd>
 <dd><code>view</code> - La vista su cui opererà la SELECT. Può essere uguale a <a href="#table"><code>table</code></a>.</dd>
 <dd><code>table</code> - Una tabella NON DI SOLA LETTURA su cui opereranno la SELECT, la INSERT e la DELETE</dd>
 <dd><code>mapper</code> - Un'istanza del Mapper per questo Bean.</dd>
@@ -459,7 +459,7 @@ extends java.lang.Object</pre>
 <pre class="methodSignature">protected abstract&nbsp;void&nbsp;fillInsertStatement&#8203;(<a href="GenericDAO.html" title="type parameter in GenericDAO">T</a>&nbsp;bean,
                                             java.util.List&lt;<a href="../util/Pair.html" title="class in util">Pair</a>&lt;java.lang.Object,&#8203;java.lang.Integer&gt;&gt;&nbsp;params)</pre>
 <div class="block">Questo metodo prende un Bean in input e in base ai campi editabili riempie la lista di parametri specificata in input.
- L'ordine dei parametri deve corrispondere alle colonne settate in <a href="#updatableColumnsList"><code>updatableColumnsList</code></a></div>
+ L'ordine dei parametri deve corrispondere alle colonne settate in <a href="#insertableColumnsList"><code>insertableColumnsList</code></a></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>bean</code> - Il bean da inserire</dd>

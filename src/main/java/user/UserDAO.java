@@ -50,7 +50,7 @@ public class UserDAO extends GenericDAO<User, UserMapper> {
         if(valuesToSet.length()==0){
             throw new RuntimeException("Empty SET clause");
         }
-
+        params.add(new Pair<>(user.getId(), Types.INTEGER));
         return valuesToSet.toString();
     }
 

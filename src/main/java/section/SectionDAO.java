@@ -38,7 +38,7 @@ public class SectionDAO extends GenericDAO<Section, SectionMapper> {
             params.add(new Pair<>(section.getPicture(), Types.VARCHAR));
             valuesToSet.add("picture=?");
         }
-
+        params.add(new Pair<>(section.getId(), Types.INTEGER));
         return valuesToSet.toString();
     }
 
