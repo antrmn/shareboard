@@ -9,9 +9,8 @@ import java.util.StringJoiner;
 
 public class UserSpecificationBuilder extends Specification.Builder<UserSpecificationBuilder>{
 
-    //StringJoiners per formare la stringa
-    StringJoiner joinsJoiner = new StringJoiner("\n");
-    StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ");
+    private StringJoiner joinsJoiner = new StringJoiner("\n");
+    private StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ");
 
     @Override
     protected UserSpecificationBuilder getThisBuilder() {
