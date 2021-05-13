@@ -3,6 +3,7 @@ package comment;
 import persistence.Specification;
 import util.Pair;
 
+import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.Instant;
 import java.util.StringJoiner;
@@ -78,14 +79,14 @@ public class CommentSpecificationBuilder extends Specification.Builder<CommentSp
     }
 
     public CommentSpecificationBuilder isOlderThan(Instant date){
-        wheresJoiner.add("comment_creation_date >= ?");
-        params.add(new Pair<>(date, Types.TIMESTAMP));
+        wheresJoiner.add("comment_creation_date <= ?");
+        params.add(new Pair<>(Timestamp.from(date), Types.TIMESTAMP));
         return this;
     }
 
     public CommentSpecificationBuilder isNewerThan(Instant date){
-        wheresJoiner.add("comment_creation_date <= ?");
-        params.add(new Pair<>(date, Types.TIMESTAMP));
+        wheresJoiner.add("comment_creation_date >= ?");
+        params.add(new Pair<>(Timestamp.from(date), Types.TIMESTAMP));
         return this;
     }
 

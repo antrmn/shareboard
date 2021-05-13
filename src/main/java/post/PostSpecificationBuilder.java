@@ -3,6 +3,7 @@ package post;
 import persistence.Specification;
 import util.Pair;
 
+import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.Instant;
 import java.util.StringJoiner;
@@ -104,14 +105,14 @@ public class PostSpecificationBuilder extends Specification.Builder<PostSpecific
     }
 
     public PostSpecificationBuilder isOlderThan(Instant date){
-        wheresJoiner.add(" post.creation_date >= ? ");
-        params.add(new Pair<>(date, Types.TIMESTAMP));
+        wheresJoiner.add(" post.creation_date <= ? ");
+        params.add(new Pair<>(Timestamp.from(date), Types.TIMESTAMP));
         return this;
     }
 
     public PostSpecificationBuilder isNewerThan(Instant date){
-        wheresJoiner.add(" post.creation_date <= ? ");
-        params.add(new Pair<>(date, Types.TIMESTAMP));
+        wheresJoiner.add(" post.creation_date >= ? ");
+        params.add(new Pair<>(Timestamp.from(date), Types.TIMESTAMP));
         return this;
     }
 
@@ -122,7 +123,7 @@ public class PostSpecificationBuilder extends Specification.Builder<PostSpecific
     }
 
     public PostSpecificationBuilder byId(int id){
-        wheresJoiner.add(" id=? ");
+        wheresJoiner.add(" post.id=? ");
         params.add(new Pair<>(id, Types.INTEGER));
         return this;
     }

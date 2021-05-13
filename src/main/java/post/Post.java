@@ -1,8 +1,8 @@
 package post;
 
 import comment.Comment;
-import user.User;
 import section.Section;
+import user.User;
 
 import java.time.Instant;
 import java.util.List;
@@ -23,6 +23,9 @@ public class Post {
     private Section section;
     private List<Comment> comments;
 
+    public String getStringCreationDate() {
+        return creationDate.toString();
+    }
 
     public Integer getVote() {
         return vote;

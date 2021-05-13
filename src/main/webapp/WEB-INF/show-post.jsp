@@ -10,7 +10,7 @@
         <small>${post.author.username}         ${post.section.name} <br></small>
         <strong>${post.title}<br></strong>
         ${post.content}<br>
-        <small>${post.voti} voti, ${post.n_comments} commenti</small>
+        <small>${post.voti} voti, ${post.n_comments} commenti, Voto inserito: ${post.vote}</small>
     </div>
     <br>
 

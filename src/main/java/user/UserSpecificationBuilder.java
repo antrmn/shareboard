@@ -3,6 +3,7 @@ package user;
 import persistence.Specification;
 import util.Pair;
 
+import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.Instant;
 import java.util.StringJoiner;
@@ -31,14 +32,14 @@ public class UserSpecificationBuilder extends Specification.Builder<UserSpecific
     }
 
     public UserSpecificationBuilder isOlderThan(Instant date){
-        wheresJoiner.add("creation_date >= ?");
-        params.add(new Pair<>(date, Types.TIMESTAMP));
+        wheresJoiner.add("creation_date <= ?");
+        params.add(new Pair<>(Timestamp.from(date), Types.TIMESTAMP));
         return this;
     }
 
     public UserSpecificationBuilder isNewerThan(Instant date){
-        wheresJoiner.add("creation_date <= ?");
-        params.add(new Pair<>(date, Types.TIMESTAMP));
+        wheresJoiner.add("creation_date >= ?");
+        params.add(new Pair<>(Timestamp.from(date), Types.TIMESTAMP));
         return this;
     }
 
