@@ -106,7 +106,7 @@ public class PostDAO {
             params.add(new Pair<>(id, Types.INTEGER));
             whereJoiner.add(" id=? ");
         }
-        params.add(new Pair<>(ids.size(), Types.INTEGER)); //Il LIMIT sarà pari ai parametri inseriti per evitare imprevisti
+        params.add(new Pair<>(ids.size(), Types.INTEGER)); //Il LIMIT sara' pari ai parametri inseriti per evitare imprevisti
 
         statement = String.format(statement, whereJoiner.toString());
         PreparedStatement ps = con.prepareStatement(statement);
