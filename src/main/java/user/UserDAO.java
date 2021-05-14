@@ -1,31 +1,43 @@
 package user;
 
-import persistence.GenericDAO;
+import persistence.Specification;
+import persistence.StatementSetters;
 import util.Pair;
 
-import java.sql.Connection;
-import java.sql.Types;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-public class UserDAO extends GenericDAO<User, UserMapper> {
-
+public class UserDAO{
+    private static final UserMapper um = new UserMapper();
+    private final Connection con;
 
     public UserDAO(Connection con) {
-        super(con,
-                List.of("user.id", "user.username", "user.email", "user.description", "user.picture",
-                        "user.creation_date", "user.is_admin"),
-                List.of("username", "email", "description", "picture"),
-                "v_user",
-                "user",
-                new UserMapper()
-        );
+        this.con = con;
     }
 
-    @Override
-    protected String fillUpdateStatement(User user, List<Pair<Object, Integer>> params) {
-        StringJoiner valuesToSet = new StringJoiner(",");
+    public List<User> fetch(Specification specification) throws SQLException {
+        String query = "SELECT %s FROM v_user AS user %s %s %s LIMIT ? OFFSET ?";
+        query = String.format(query, specification.getColumns(), specification.getJoins(),
+                specification.getWheres(),  specification.getOrderBy());
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet rs = StatementSetters.setParameters(ps, specification.getParams())
+                .executeQuery();
+        List<User> users = new ArrayList<>();
+        while(rs.next()){
+            users.add(um.toBean(rs));
+        }
+        ps.close();
+        rs.close();
+        return users;
+    }
 
+    public int update(User user) throws SQLException {
+        String statement = "UPDATE user SET %s WHERE id=? LIMIT 1";
+
+        StringJoiner valuesToSet = new StringJoiner(",");
+        List<Pair<Object, Integer>> params = new ArrayList<>();
         if(user.getUsername() != null){
             params.add(new Pair<>(user.getUsername(), Types.VARCHAR));
             valuesToSet.add("username=?");
@@ -46,20 +58,61 @@ public class UserDAO extends GenericDAO<User, UserMapper> {
             params.add(new Pair<>(user.getPicture(), Types.VARCHAR));
             valuesToSet.add("password=?");
         }
-
-        if(valuesToSet.length()==0){
-            throw new RuntimeException("Empty SET clause");
-        }
         params.add(new Pair<>(user.getId(), Types.INTEGER));
-        return valuesToSet.toString();
+
+        statement = String.format(statement, valuesToSet.toString());
+        PreparedStatement ps = con.prepareStatement(statement);
+        int rowsUpdated = StatementSetters.setParameters(ps, params).executeUpdate();
+        ps.close();
+        return rowsUpdated;
     }
 
-    @Override
-    protected void fillInsertStatement(User user, List<Pair<Object, Integer>> params) {
-        params.add(new Pair<>(user.getUsername(), Types.VARCHAR));
-        params.add(new Pair<>(user.getPassword(), Types.VARCHAR));
-        params.add(new Pair<>(user.getEmail(), Types.VARCHAR));
-        params.add(new Pair<>(user.getDescription(), Types.VARCHAR));
-        params.add(new Pair<>(user.getPicture(), Types.VARCHAR));
+    public List<Integer> insert(List<User> users) throws SQLException {
+        String statement = "INSERT INTO user (%s) VALUES %s";
+        String columns = "username, password, email, description, picture";
+        String questionMarks = "(?,?,?,?,?)";
+
+        List<Pair<Object, Integer>> params = new ArrayList<>();
+        StringJoiner questionMarksJoiner = new StringJoiner(",");
+        for(User user : users) {
+            params.add(new Pair<>(user.getUsername(), Types.VARCHAR));
+            params.add(new Pair<>(user.getPassword(), Types.VARCHAR));
+            params.add(new Pair<>(user.getEmail(), Types.VARCHAR));
+            params.add(new Pair<>(user.getDescription(), Types.VARCHAR));
+            params.add(new Pair<>(user.getPicture(), Types.VARCHAR));
+            questionMarksJoiner.add(questionMarks);
+        }
+
+        statement = String.format(statement, columns, questionMarksJoiner.toString());
+        PreparedStatement ps = con.prepareStatement(statement, Statement.RETURN_GENERATED_KEYS);
+        StatementSetters.setParameters(ps, params).executeUpdate();
+        ResultSet rs = ps.getGeneratedKeys();
+        List<Integer> ids = new ArrayList<>();
+        while(rs.next()){
+            ids.add(rs.getInt(1));
+        }
+        ps.close();
+        rs.close();
+        return ids;
     }
+
+    public int delete(List<Integer> ids) throws SQLException {
+        String statement = "DELETE FROM user WHERE %s LIMIT ?";
+
+        StringJoiner whereJoiner = new StringJoiner(" OR ");
+        List<Pair<Object, Integer>> params = new ArrayList<>();
+        for (Integer id : ids) {
+            params.add(new Pair<>(id, Types.INTEGER));
+            whereJoiner.add(" id=? ");
+        }
+        params.add(new Pair<>(ids.size(), Types.INTEGER)); //Il LIMIT sarà pari ai parametri inseriti per evitare imprevisti
+
+        statement = String.format(statement, whereJoiner.toString());
+        PreparedStatement ps = con.prepareStatement(statement);
+        StatementSetters.setParameters(ps,params);
+        int rowsDeleted = ps.executeUpdate();
+        ps.close();
+        return rowsDeleted;
+    }
+
 }

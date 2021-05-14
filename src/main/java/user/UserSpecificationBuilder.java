@@ -6,12 +6,20 @@ import util.Pair;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.Instant;
+import java.util.List;
 import java.util.StringJoiner;
 
 public class UserSpecificationBuilder extends Specification.Builder<UserSpecificationBuilder>{
+    List<String> columnsList = List.of("user.id", "user.username", "user.email", "user.description", "user.picture",
+            "user.creation_date", "user.is_admin");
 
-    private StringJoiner joinsJoiner = new StringJoiner("\n");
-    private StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ");
+    private final StringJoiner joinsJoiner = new StringJoiner("\n");
+    private final StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ");
+
+    public UserSpecificationBuilder() {
+        super("v_user");
+        columns = String.join(", ", columnsList);
+    }
 
     @Override
     protected UserSpecificationBuilder getThisBuilder() {

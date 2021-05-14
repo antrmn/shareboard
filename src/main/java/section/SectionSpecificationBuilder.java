@@ -4,13 +4,18 @@ import persistence.Specification;
 import util.Pair;
 
 import java.sql.Types;
+import java.util.List;
 import java.util.StringJoiner;
 
 public class SectionSpecificationBuilder extends Specification.Builder<SectionSpecificationBuilder>{
+    List<String> columnsList = List.of("section.id","section.description","section.name","section.picture");
 
-    //StringJoiners per formare la stringa
     StringJoiner joinsJoiner = new StringJoiner("\n");
     StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ");
+
+    protected SectionSpecificationBuilder(String table) {
+        super("section");
+    }
 
     @Override
     protected SectionSpecificationBuilder getThisBuilder() {
@@ -20,6 +25,7 @@ public class SectionSpecificationBuilder extends Specification.Builder<SectionSp
     public Specification build() {
         joins = joinsJoiner.toString();
         wheres = wheresJoiner.toString();
+        columns = String.join(", ", columnsList);
         return super.build();
     }
 
@@ -30,7 +36,7 @@ public class SectionSpecificationBuilder extends Specification.Builder<SectionSp
         return this;
     }
 
-    public SectionSpecificationBuilder doesTitleContains(String title){
+    public SectionSpecificationBuilder doesTitleContain(String title){
         wheresJoiner.add("section.name LIKE ? ");
         params.add(new Pair<>("%"+title+"%", Types.VARCHAR));
         return this;

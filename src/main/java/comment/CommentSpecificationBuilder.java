@@ -9,25 +9,18 @@ import java.time.Instant;
 import java.util.StringJoiner;
 
 public class CommentSpecificationBuilder extends Specification.Builder<CommentSpecificationBuilder>{
-    //Join sempre aggiunte
-    private final String userJoin = " JOIN v_user AS user ON comment.author_id=user.id ";
-    private final String postJoin = " JOIN post ON post.id = comment.post_id";
-
-    //Utente loggato?
     private int loggedUserId = 0;
-    private final String notLoggedUserJoin = "CROSS JOIN (SELECT 0 AS vote) AS vc1";
-    private final String loggedUserJoin = "LEFT JOIN (SELECT" +
-            " comment_id, vote, user_id" +
-            " FROM comment_vote " +
-            " JOIN user " +
-            " ON user_id=user.id " +
-            " WHERE user_id=?)" +
-            " AS vc1 " +
-            "ON vc1.comment_id = comment.id";
 
-    //StringJoiners per formare la stringa
     StringJoiner joinsJoiner = new StringJoiner("\n");
     StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ");
+
+    protected CommentSpecificationBuilder(String table) {
+        super("v_comment");
+        String userJoin = " JOIN v_user AS user ON comment.author_id=user.id ";
+        String postJoin = " JOIN post ON post.id = comment.post_id";
+        joinsJoiner.add(postJoin);
+        joinsJoiner.add(userJoin);
+    }
 
     @Override
     protected CommentSpecificationBuilder getThisBuilder() {
@@ -35,14 +28,22 @@ public class CommentSpecificationBuilder extends Specification.Builder<CommentSp
     }
 
     public Specification build() {
-        joinsJoiner.add(userJoin);
-        joinsJoiner.add(postJoin);
         if (loggedUserId > 0) {
             params.add(new Pair<>(loggedUserId, Types.INTEGER));
+            String loggedUserJoin = "LEFT JOIN (SELECT" +
+                    " comment_id, vote, user_id" +
+                    " FROM comment_vote " +
+                    " JOIN user " +
+                    " ON user_id=user.id " +
+                    " WHERE user_id=?)" +
+                    " AS vc1 " +
+                    "ON vc1.comment_id = comment.id";
             joinsJoiner.add(loggedUserJoin);
         } else {
+            String notLoggedUserJoin = "CROSS JOIN (SELECT 0 AS vote) AS vc1";
             joinsJoiner.add(notLoggedUserJoin);
         }
+
         joins = joinsJoiner.toString();
         wheres = wheresJoiner.toString();
         return super.build();

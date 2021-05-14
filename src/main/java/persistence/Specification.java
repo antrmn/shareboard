@@ -2,6 +2,7 @@ package persistence;
 
 import util.Pair;
 
+import java.sql.Types;
 import java.util.ArrayList;
 
 
@@ -15,6 +16,8 @@ public class Specification{
      * @param <T> Il nome della classe che estende {@link Builder}
      */
     public static abstract class Builder <T extends Builder<T>> {
+        protected String table;
+        protected String columns;
         protected String wheres;
         protected String joins;
         protected final ArrayList<Pair<Object, Integer>> params = new ArrayList<>();
@@ -23,6 +26,10 @@ public class Specification{
         protected int limit = 50;
         protected int offset = 0;
 
+        protected Builder(String table) {
+            this.table = table;
+        }
+
         /**
          * Esegue "return this".
          * @return this.
@@ -30,11 +37,11 @@ public class Specification{
         protected abstract T getThisBuilder();
 
         /**
-         * Istanzia un oggetto di tipo {@link Specification}
+         * Istanzia un oggetto di tipo {@link Specification} con le specifiche dettate al Builder.
          * @return Un'istanza di Specification
          */
         protected Specification build(){
-            return new Specification(this);
+            return new Specification(getThisBuilder());
         }
 
         public T ascendingOrder() {
@@ -58,23 +65,25 @@ public class Specification{
         }
     }
 
+    private final String table;
+    private final String columns;
     private final String wheres;
     private final String joins;
     private final String orderBy;
     private final ArrayList<Pair<Object, Integer>> params;
-    private final int limit;
-    private final int offset;
 
     private Specification(Builder<? extends Builder<?>> builder) {
+        table = builder.table;
+        columns = builder.columns;
         wheres = builder.wheres;
         joins = builder.joins;
         params = builder.params;
-        limit = builder.limit;
-        offset = builder.offset;
         if(builder.orderBy != null && !builder.orderBy.isBlank())
             orderBy = " ORDER BY " + builder.orderBy + " " + (builder.ascending ? "ASC":"DESC");
         else
             orderBy = "";
+        params.add(new Pair<>(builder.limit, Types.INTEGER));
+        params.add(new Pair<>(builder.offset,Types.INTEGER));
     }
 
     public String getWheres() {
@@ -93,11 +102,11 @@ public class Specification{
         return params;
     }
 
-    public int getLimit() {
-        return limit;
+    public String getTable() {
+        return table;
     }
 
-    public int getOffset() {
-        return offset;
+    public String getColumns() {
+        return columns;
     }
 }

@@ -1,31 +1,44 @@
 package section;
 
-import persistence.GenericDAO;
+import persistence.Specification;
+import persistence.StatementSetters;
 import util.Pair;
 
-import java.sql.Connection;
-import java.sql.Types;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
-public class SectionDAO extends GenericDAO<Section, SectionMapper> {
+public class SectionDAO {
 
-    private Connection con;
+    private static final SectionMapper sm = new SectionMapper();
+    private final Connection con;
 
     public SectionDAO(Connection con) {
-        super(con,
-                List.of("section.id","section.description","section.name","section.picture"),
-                List.of("description","name","picture"),
-                "section",
-                "section",
-                new SectionMapper());
+        this.con = con;
     }
 
+    public List<Section> fetch(Specification specification) throws SQLException {
+        String query = "SELECT %s FROM section %s %s %s LIMIT ? OFFSET ?";
+        query = String.format(query, specification.getColumns(), specification.getJoins(),
+                specification.getWheres(),  specification.getOrderBy());
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet rs = StatementSetters.setParameters(ps, specification.getParams())
+                .executeQuery();
+        List<Section> sections = new ArrayList<>();
+        while(rs.next()){
+            sections.add(sm.toBean(rs));
+        }
+        ps.close();
+        rs.close();
+        return sections;
+    }
 
-    @Override
-    protected String fillUpdateStatement(Section section, List<Pair<Object, Integer>> params) {
+    public int update(Section section) throws SQLException {
+        String statement = "UPDATE section SET %s WHERE id=? LIMIT 1";
+
         StringJoiner valuesToSet = new StringJoiner(",");
-
+        List<Pair<Object, Integer>> params = new ArrayList<>();
         if(section.getName() != null){
             params.add(new Pair<>(section.getName(), Types.VARCHAR));
             valuesToSet.add("name=?");
@@ -39,13 +52,58 @@ public class SectionDAO extends GenericDAO<Section, SectionMapper> {
             valuesToSet.add("picture=?");
         }
         params.add(new Pair<>(section.getId(), Types.INTEGER));
-        return valuesToSet.toString();
+
+        statement = String.format(statement, valuesToSet.toString());
+        PreparedStatement ps = con.prepareStatement(statement);
+        int rowsUpdated = StatementSetters.setParameters(ps, params).executeUpdate();
+        ps.close();
+        return rowsUpdated;
     }
 
-    @Override
-    protected void fillInsertStatement(Section section, List<Pair<Object, Integer>> params) {
-        params.add(new Pair<>(section.getName(), Types.VARCHAR));
-        params.add(new Pair<>(section.getDescription(), Types.VARCHAR));
-        params.add(new Pair<>(section.getPicture(), Types.VARCHAR));
+    public List<Integer> insert(List<Section> sections) throws SQLException {
+        String statement = "INSERT INTO section (%s) VALUES %s";
+        String columns = "name, description, picture";
+        String questionMarks = "(?,?,?)";
+
+        List<Pair<Object, Integer>> params = new ArrayList<>();
+        StringJoiner questionMarksJoiner = new StringJoiner(",");
+        for(Section section : sections) {
+            params.add(new Pair<>(section.getName(), Types.VARCHAR));
+            params.add(new Pair<>(section.getDescription(), Types.VARCHAR));
+            params.add(new Pair<>(section.getPicture(), Types.VARCHAR));
+            questionMarksJoiner.add(questionMarks);
+        }
+
+        statement = String.format(statement, columns, questionMarksJoiner.toString());
+        PreparedStatement ps = con.prepareStatement(statement, Statement.RETURN_GENERATED_KEYS);
+        StatementSetters.setParameters(ps, params).executeUpdate();
+        ResultSet rs = ps.getGeneratedKeys();
+        List<Integer> ids = new ArrayList<>();
+        while(rs.next()){
+            ids.add(rs.getInt(1));
+        }
+        ps.close();
+        rs.close();
+        return ids;
     }
+
+    public int delete(List<Integer> ids) throws SQLException {
+        String statement = "DELETE FROM section WHERE %s LIMIT ?";
+
+        StringJoiner whereJoiner = new StringJoiner(" OR ");
+        List<Pair<Object, Integer>> params = new ArrayList<>();
+        for (Integer id : ids) {
+            params.add(new Pair<>(id, Types.INTEGER));
+            whereJoiner.add(" id=? ");
+        }
+        params.add(new Pair<>(ids.size(), Types.INTEGER)); //Il LIMIT sarà pari ai parametri inseriti per evitare imprevisti
+
+        statement = String.format(statement, whereJoiner.toString());
+        PreparedStatement ps = con.prepareStatement(statement);
+        StatementSetters.setParameters(ps,params);
+        int rowsDeleted = ps.executeUpdate();
+        ps.close();
+        return rowsDeleted;
+    }
+
 }

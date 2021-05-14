@@ -6,28 +6,26 @@ import util.Pair;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.Instant;
+import java.util.List;
 import java.util.StringJoiner;
 
 public class PostSpecificationBuilder extends Specification.Builder<PostSpecificationBuilder>{
-    //Join sempre aggiunte
-    private final String userJoin = " JOIN v_user AS user ON post.author_id=user.id ";
-    private final String sectionJoin = " JOIN section ON post.section_id = section.id";
-
-    //Utente loggato?
     private int loggedUserId = 0;
-    private final String notLoggedUserJoin = "CROSS JOIN (SELECT 0 AS vote) AS v1";
-    private final String loggedUserJoin = "LEFT JOIN (SELECT" +
-            " post_id, vote, user_id" +
-            " FROM post_vote " +
-            " JOIN user " +
-            " ON user_id=user.id " +
-            " WHERE user_id=?)" +
-            " AS v1 " +
-            "ON v1.post_id = post.id";
+    private List<String> columnsList = List.of("post.id", "post.title", "post.content", "post.type", "post.creation_date",
+            "user.id AS author_id", "user.username AS author_username", "is_admin", "section.id AS section_id",
+            "section.name AS section_name", "post.votes", "post.n_comments", "v1.vote");
 
-    //StringJoiners per formare la stringa
-    StringJoiner joinsJoiner = new StringJoiner("\n");
-    StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ").setEmptyValue(" ");
+    private StringJoiner joinsJoiner = new StringJoiner("\n");
+    private StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ").setEmptyValue(" ");
+
+    public PostSpecificationBuilder() {
+        super("v_post");
+        columns = String.join(", ", columnsList);
+        String userJoin = " JOIN v_user AS user ON post.author_id=user.id ";
+        joinsJoiner.add(userJoin);
+        String sectionJoin = " JOIN section ON post.section_id = section.id";
+        joinsJoiner.add(sectionJoin);
+    }
 
     @Override
     protected PostSpecificationBuilder getThisBuilder() {
@@ -35,12 +33,19 @@ public class PostSpecificationBuilder extends Specification.Builder<PostSpecific
     }
 
     public Specification build() {
-        joinsJoiner.add(userJoin);
-        joinsJoiner.add(sectionJoin);
         if (loggedUserId > 0) {
             params.add(new Pair<>(loggedUserId, Types.INTEGER));
+            String loggedUserJoin = "LEFT JOIN (SELECT" +
+                    " post_id, vote, user_id" +
+                    " FROM post_vote " +
+                    " JOIN user " +
+                    " ON user_id=user.id " +
+                    " WHERE user_id=?)" +
+                    " AS v1 " +
+                    "ON v1.post_id = post.id";
             joinsJoiner.add(loggedUserJoin);
         } else {
+            String notLoggedUserJoin = "CROSS JOIN (SELECT 0 AS vote) AS v1";
             joinsJoiner.add(notLoggedUserJoin);
         }
         joins = joinsJoiner.toString();
@@ -55,7 +60,7 @@ public class PostSpecificationBuilder extends Specification.Builder<PostSpecific
 
     public PostSpecificationBuilder isVotedBy(int id){
         joinsJoiner.add(" JOIN (post_vote as pv) ON pv.post_id=post.id ");
-        wheresJoiner.add(" user_id=? ");
+        wheresJoiner.add(" pv.user_id=? ");
         params.add(new Pair<>(id, java.sql.Types.INTEGER));
         return this;
     }

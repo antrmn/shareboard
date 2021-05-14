@@ -12,7 +12,7 @@
             <small>${post.author.username}         ${post.section.name}  ${post.stringCreationDate}<br></small>
             <a href="${context}/post?p=${post.id}"><strong>${post.title}<br></strong></a>
                 ${post.content}<br>
-            <small>${post.votes} voti, ${post.nComments} commenti</small>
+            <small>${post.votes} voti, ${post.nComments} commenti, Voto: ${post.vote}</small>
         </div>
         <br>
     </c:forEach>
