@@ -2,30 +2,45 @@ package user;
 
 
 import persistence.AbstractMapper;
+import persistence.SQL_TriConsumer;
 
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
-public class UserMapper extends AbstractMapper<User> {
+public class UserMapper implements AbstractMapper<User> {
 
-    static Map<String, SQL_TriConsumer<User>> map = new HashMap<>(){{
-        put("id",                (u,s,rs) -> u.setId(rs.getInt(s)));
-        put("username",          (u,s,rs) -> u.setUsername(rs.getString(s)));
-        put("creation_date",     (u,s,rs) -> u.setCreationDate(rs.getTimestamp(s).toInstant()));
-        put("password",          (u,s,rs) -> u.setPassword(rs.getString(s)));
-        put("description",       (u,s,rs) -> u.setDescription(rs.getString(s)));
-        put("picture",           (u,s,rs) -> u.setPicture(rs.getString(s)));
-        put("email",             (u,s,rs) -> u.setEmail(rs.getString(s)));
-        put("is_admin",          (u,s,rs) -> u.setAdmin(rs.getBoolean(s)));
+    static Map<String, SQL_TriConsumer<User>> map = new HashMap<>() {{
+        put("id", (u, s, rs) -> u.setId(rs.getInt(s)));
+        put("username", (u, s, rs) -> u.setUsername(rs.getString(s)));
+        put("creation_date", (u, s, rs) -> u.setCreationDate(rs.getTimestamp(s).toInstant()));
+        put("password", (u, s, rs) -> u.setPassword(rs.getString(s)));
+        put("description", (u, s, rs) -> u.setDescription(rs.getString(s)));
+        put("picture", (u, s, rs) -> u.setPicture(rs.getString(s)));
+        put("email", (u, s, rs) -> u.setEmail(rs.getString(s)));
+        put("is_admin", (u, s, rs) -> u.setAdmin(rs.getBoolean(s)));
     }};
 
-    public UserMapper() {
-        super(map);
-    }
+    public List<User> toBeans(ResultSet rs) throws SQLException {
+        ResultSetMetaData rsmd = rs.getMetaData();
+        List<User> beans = new ArrayList<>();
 
-    @Override
-    protected User instantiate() {
-        return new User();
+        while (rs.next()) {
+            User bean = new User();
+            for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+                String column = rsmd.getColumnLabel(i);
+                SQL_TriConsumer<User> setter = map.get(column);
+                if (setter != null) {
+                    setter.accept(bean, column, rs);
+                }
+            }
+            beans.add(bean);
+        }
+        return beans;
     }
 }

@@ -25,10 +25,7 @@ public class PostDAO {
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = StatementSetters.setParameters(ps, specification.getParams())
                                     .executeQuery();
-        List<Post> posts = new ArrayList<>();
-        while(rs.next()){
-            posts.add(pm.toBean(rs));
-        }
+        List<Post> posts = pm.toBeans(rs);
         ps.close();
         rs.close();
         return posts;

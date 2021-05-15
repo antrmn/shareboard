@@ -25,10 +25,7 @@ public class SectionDAO {
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = StatementSetters.setParameters(ps, specification.getParams())
                 .executeQuery();
-        List<Section> sections = new ArrayList<>();
-        while(rs.next()){
-            sections.add(sm.toBean(rs));
-        }
+        List<Section> sections = sm.toBeans(rs);
         ps.close();
         rs.close();
         return sections;

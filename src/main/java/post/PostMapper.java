@@ -1,12 +1,16 @@
 package post;
 
 import persistence.AbstractMapper;
-import section.Section;
-import user.User;
+import persistence.SQL_TriConsumer;
 
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-public class PostMapper extends AbstractMapper<Post> {
+public class PostMapper implements AbstractMapper<Post> {
     static HashMap<String, SQL_TriConsumer<Post>> map = new HashMap<>(){{
              put("id",             (p,s,rs) -> p.setId(rs.getInt(s)));
              put("title",          (p,s,rs) -> p.setTitle(rs.getString(s)));
@@ -23,15 +27,21 @@ public class PostMapper extends AbstractMapper<Post> {
              put("section_name",   (p,s,rs) -> p.getSection().setName(rs.getString(s)));
     }};
 
-    public PostMapper(){
-        super(map);
-    }
+    public List<Post> toBeans(ResultSet rs) throws SQLException {
+        ResultSetMetaData rsmd = rs.getMetaData();
+        List<Post> beans = new ArrayList<>();
 
-    @Override
-    protected Post instantiate() {
-        Post p = new Post();
-        p.setAuthor(new User());
-        p.setSection(new Section());
-        return p;
+        while (rs.next()) {
+            Post bean = new Post();
+            for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+                String column = rsmd.getColumnLabel(i);
+                SQL_TriConsumer<Post> setter = map.get(column);
+                if (setter != null) {
+                    setter.accept(bean, column, rs);
+                }
+            }
+            beans.add(bean);
+        }
+        return beans;
     }
 }

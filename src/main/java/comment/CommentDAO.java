@@ -23,10 +23,7 @@ public class CommentDAO {
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = StatementSetters.setParameters(ps, specification.getParams())
                 .executeQuery();
-        List<Comment> comments = new ArrayList<>();
-        while(rs.next()){
-            comments.add(cm.toBean(rs));
-        }
+        List<Comment> comments = cm.toBeans(rs);
         ps.close();
         rs.close();
         return comments;
@@ -162,15 +159,9 @@ public class CommentDAO {
         StatementSetters.setParameters(ps, params);
         ResultSet rs = ps.executeQuery();
 
-        HashMap<Integer, ArrayList<Comment>> commentsMap = new HashMap<>();
-        while(rs.next()){
-            Comment comment = cm.toBean(rs);
-            int parentCommentId = comment.getParentComment().getId(); //Ricorda: JDBC restituisce 0 se una colonna di tipo INTEGER ha valore NULL.
-            if(!commentsMap.containsKey(parentCommentId)){
-                commentsMap.put(parentCommentId, new ArrayList<>());
-            }
-            commentsMap.get(parentCommentId).add(comment);
-        }
+        HashMap<Integer, ArrayList<Comment>> commentsMap = cm.toBeansHierarchy(rs);
+        ps.close();
+        rs.close();
         return commentsMap;
     }
 }

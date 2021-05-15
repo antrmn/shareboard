@@ -24,10 +24,7 @@ public class UserDAO{
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = StatementSetters.setParameters(ps, specification.getParams())
                 .executeQuery();
-        List<User> users = new ArrayList<>();
-        while(rs.next()){
-            users.add(um.toBean(rs));
-        }
+        List<User> users = um.toBeans(rs);
         ps.close();
         rs.close();
         return users;
