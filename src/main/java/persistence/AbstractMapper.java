@@ -7,5 +7,5 @@ import java.util.List;
 
 
 public interface AbstractMapper<T> {
-    public List<T> toBeans(ResultSet rs) throws SQLException;
+    List<T> toBeans(ResultSet rs) throws SQLException;
 }

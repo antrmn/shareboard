@@ -2,16 +2,31 @@ package post;
 
 import persistence.AbstractMapper;
 import persistence.SQL_TriConsumer;
+import section.Section;
+import user.User;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 public class PostMapper implements AbstractMapper<Post> {
-    static HashMap<String, SQL_TriConsumer<Post>> map = new HashMap<>(){{
+
+    static LinkedHashMap<String, SQL_TriConsumer<User>> mapAuthor = new LinkedHashMap<>(){{
+        put("author_id",      (u,s,rs) -> u.setId(rs.getInt(s)));
+        put("author_username",(u,s,rs) -> u.setUsername(rs.getString(s)));
+        put("is_admin",       (u,s,rs) -> u.setAdmin(rs.getBoolean(s)));
+    }};
+
+    static LinkedHashMap<String, SQL_TriConsumer<Section>> mapSection = new LinkedHashMap<>(){{
+        put("section_id",     (sec,s,rs) -> sec.setId(rs.getInt(s)));
+        put("section_name",   (sec,s,rs) -> sec.setName(rs.getString(s)));
+    }};
+
+    static LinkedHashMap<String, SQL_TriConsumer<Post>> mapPost = new LinkedHashMap<>(){{
              put("id",             (p,s,rs) -> p.setId(rs.getInt(s)));
              put("title",          (p,s,rs) -> p.setTitle(rs.getString(s)));
              put("content",        (p,s,rs) -> p.setContent(rs.getString(s)));
@@ -20,27 +35,58 @@ public class PostMapper implements AbstractMapper<Post> {
              put("votes",          (p,s,rs) -> p.setVotes(rs.getInt(s)));
              put("n_comments",     (p,s,rs) -> p.setnComments(rs.getInt(s)));
              put("vote",           (p,s,rs) -> p.setVote(rs.getInt(s)));
-             put("author_id",      (p,s,rs) -> p.getAuthor().setId(rs.getInt(s)));
-             put("author_username",(p,s,rs) -> p.getAuthor().setUsername(rs.getString(s)));
-             put("is_admin",       (p,s,rs) -> p.getAuthor().setAdmin(rs.getBoolean(s)));
-             put("section_id",     (p,s,rs) -> p.getSection().setId(rs.getInt(s)));
-             put("section_name",   (p,s,rs) -> p.getSection().setName(rs.getString(s)));
     }};
 
     public List<Post> toBeans(ResultSet rs) throws SQLException {
         ResultSetMetaData rsmd = rs.getMetaData();
-        List<Post> beans = new ArrayList<>();
 
+        ArrayList<String> columns = new ArrayList<>();
+        for (int i = 1; i <= rsmd.getColumnCount(); i++){
+            columns.add(rsmd.getColumnLabel(i));
+        }
+
+        List<Post> beans = new ArrayList<>();
+        HashMap<Integer, User> authors = new HashMap<>();
+        HashMap<Integer, Section> sections = new HashMap<>();
         while (rs.next()) {
-            Post bean = new Post();
-            for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                String column = rsmd.getColumnLabel(i);
-                SQL_TriConsumer<Post> setter = map.get(column);
-                if (setter != null) {
-                    setter.accept(bean, column, rs);
+            Post post = new Post();
+
+            User author = null;
+            if (columns.contains("author_id")) {
+                author = authors.get(rs.getInt("author_id"));
+                if (author == null) {
+                    author = new User();
+                    for (String column : columns) {
+                        SQL_TriConsumer<User> consumer = mapAuthor.get(column);
+                        if(consumer != null)
+                            consumer.accept(author, column, rs);
+                    }
+                    authors.put(author.getId(), author);
                 }
             }
-            beans.add(bean);
+            post.setAuthor(author);
+
+            Section section = null;
+            if (columns.contains("section_id")) {
+                section = sections.get(rs.getInt("section_id"));
+                if (section == null) {
+                    section = new Section();
+                    for (String column : columns) {
+                        SQL_TriConsumer<Section> consumer = mapSection.get(column);
+                        if(consumer != null)
+                            consumer.accept(section, column, rs);
+                    }
+                    sections.put(section.getId(), section);
+                }
+            }
+            post.setSection(section);
+
+            for (String column : columns) {
+                SQL_TriConsumer<Post> consumer = mapPost.get(column);
+                if(consumer != null)
+                    consumer.accept(post, column, rs);
+            }
+            beans.add(post);
         }
         return beans;
     }

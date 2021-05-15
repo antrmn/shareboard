@@ -22,16 +22,19 @@ public class SectionMapper implements AbstractMapper<Section> {
 
     public List<Section> toBeans(ResultSet rs) throws SQLException {
         ResultSetMetaData rsmd = rs.getMetaData();
-        List<Section> beans = new ArrayList<>();
 
+        ArrayList<String> columns = new ArrayList<>();
+        for (int i = 1; i <= rsmd.getColumnCount(); i++){
+            columns.add(rsmd.getColumnLabel(i));
+        }
+
+        List<Section> beans = new ArrayList<>();
         while (rs.next()) {
             Section bean = new Section();
-            for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                String column = rsmd.getColumnLabel(i);
-                SQL_TriConsumer<Section> setter = map.get(column);
-                if (setter != null) {
-                    setter.accept(bean, column, rs);
-                }
+            for (String column : columns) {
+                SQL_TriConsumer<Section> consumer = map.get(column);
+                if(consumer != null)
+                    consumer.accept(bean, column, rs);
             }
             beans.add(bean);
         }

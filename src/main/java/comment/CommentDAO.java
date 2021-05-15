@@ -132,7 +132,7 @@ public class CommentDAO {
         if(isCommentId)
             params.add(new Pair<>(id, Types.INTEGER));
         if(maxDepth >= 0)
-            params.add(new Pair<>(maxDepth, Types.INTEGER));
+            params.add(new Pair<>(maxDepth-1, Types.INTEGER));
         if(!isCommentId)
             params.add(new Pair<>(id, Types.INTEGER));
 
@@ -141,8 +141,8 @@ public class CommentDAO {
                         " %s "+
                         "SELECT 1 AS depth, %s FROM v_comment %s %s "+
                         "UNION ALL "+
-                        "SELECT depth+1 AS depth, %s FROM v_comment AS com %s %s " +
-                        "JOIN Recurse_Comments AS r ON com.parent_comment_id = r.comment_id ) " +
+                        "SELECT depth+1 AS depth, %s FROM v_comment AS com %s " +
+                        "JOIN Recurse_Comments AS r ON com.parent_comment_id = r.comment_id  %s ) " +
                         "SELECT * FROM Recurse_Comments %s";
 
         query = String.format(query,
@@ -152,7 +152,7 @@ public class CommentDAO {
                 isCommentId ? "WHERE id = ?" : "WHERE parent_comment_id IS NULL",
                 String.join(",", columnsRecurse),
                 recursiveStepJoin,
-                maxDepth >= 0 ? "WHERE depth <= ?-1" : " ",
+                maxDepth >= 0 ? "WHERE depth <= ?" : " ",
                 isCommentId ? "" : "WHERE post_id = ?");
 
         PreparedStatement ps = con.prepareStatement(query);

@@ -28,16 +28,19 @@ public class UserMapper implements AbstractMapper<User> {
 
     public List<User> toBeans(ResultSet rs) throws SQLException {
         ResultSetMetaData rsmd = rs.getMetaData();
-        List<User> beans = new ArrayList<>();
 
+        ArrayList<String> columns = new ArrayList<>();
+        for (int i = 1; i <= rsmd.getColumnCount(); i++){
+            columns.add(rsmd.getColumnLabel(i));
+        }
+
+        List<User> beans = new ArrayList<>();
         while (rs.next()) {
             User bean = new User();
-            for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                String column = rsmd.getColumnLabel(i);
-                SQL_TriConsumer<User> setter = map.get(column);
-                if (setter != null) {
-                    setter.accept(bean, column, rs);
-                }
+            for (String column : columns) {
+                SQL_TriConsumer<User> consumer = map.get(column);
+                if(consumer != null)
+                    consumer.accept(bean, column, rs);
             }
             beans.add(bean);
         }
