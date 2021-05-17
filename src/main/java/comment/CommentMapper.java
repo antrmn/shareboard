@@ -168,13 +168,14 @@ public class CommentMapper implements AbstractMapper<Comment> {
                                             c.setParentComment(nullComment);
                                             stack.add(c);
                                          });
+
             while(!stack.isEmpty()) {
-                Comment tmp = stack.pop();
-                List <Comment> tmpList = comments.get(tmp.getId());
-                if(tmpList!= null)
-                    tmpList.forEach(c -> {
+                Comment parent = stack.pop();
+                List <Comment> parentsOf = comments.get(parent.getId());
+                if(parentsOf != null)
+                    parentsOf.forEach(c -> {
                                             stack.add(c);
-                                            c.setParentComment(c);
+                                            c.setParentComment(parent);
                                          });
             }
         }
