@@ -120,7 +120,7 @@ public class CommentDAO {
      * @param id L'id del commento/post da dove far partire la ricerca
      * @param isCommentId True se l'id corrisponde all'id di un commento, false se corrisponde all'id di un post
      * @param maxDepth Massimo livello di ricorsione raggiungibile nella ricerca
-     * @param loggedUserId L'id dell'utente loggato per mostrare i valori della colonna "voti". Specificare un valore <=0 se l'utente non è loggato.
+     * @param loggedUserId L'id dell'utente loggato per mostrare i valori della colonna "voti". Specificare un valore &lt;=0 se l'utente non è loggato.
      * @return Una mappa che ha come chiave un id e come valore una lista di commenti che rispondo direttamente al commento con tale id.
      *         I commenti al "root level" (ossia quelli che non rispondono a nessun commento) sono mappati a indice 0.
      * @throws SQLException In caso di errore SQL
