@@ -5,7 +5,10 @@ import persistence.StatementSetters;
 import util.Pair;
 
 import java.sql.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.StringJoiner;
 
 public class CommentDAO {
     private static final CommentMapper cm = new CommentMapper();
@@ -21,7 +24,7 @@ public class CommentDAO {
                 specification.getWheres(),  specification.getOrderBy());
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = StatementSetters.setParameters(ps, specification.getParams())
-                .executeQuery();
+                                       .executeQuery();
         List<Comment> comments = cm.toBeans(rs);
         ps.close();
         rs.close();
@@ -105,6 +108,23 @@ public class CommentDAO {
         return rowsDeleted;
     }
 
+    /**
+     * <p>Restituisce i commenti specificati seguendo una struttura gerarchica.</p><br>
+     * <p>Se l'id specificato corrisponde all'id di un post, verranno restituiti tutti i commenti di quel post.<br>
+     *     Se invece l'id specificato corrisponde a un commento, verranno restituiti tutti i commenti
+     *     a partire da quello specificato (incluso)</p><br>
+     * <p>Se viene invocata la {@link Comment#getParentComment()} ai root comment verrà restituito un dummy comment con id 0. <br>
+     * Se vengono mostrati i commenti a partire da un dato commento (quindi, con isCommentId settato a true)
+     * il commento di partenza restituirà null al metodo {@link Comment#getParentComment()}</p><br>
+     *
+     * @param id L'id del commento/post da dove far partire la ricerca
+     * @param isCommentId True se l'id corrisponde all'id di un commento, false se corrisponde all'id di un post
+     * @param maxDepth Massimo livello di ricorsione raggiungibile nella ricerca
+     * @param loggedUserId L'id dell'utente loggato per mostrare i valori della colonna "voti". Specificare un valore <=0 se l'utente non è loggato.
+     * @return Una mappa che ha come chiave un id e come valore una lista di commenti che rispondo direttamente al commento con tale id.
+     *         I commenti al "root level" (ossia quelli che non rispondono a nessun commento) sono mappati a indice 0.
+     * @throws SQLException In caso di errore SQL
+     */
     public Map<Integer, ArrayList<Comment>> fetchHierarchy(int id, boolean isCommentId, int maxDepth, int loggedUserId) throws SQLException {
         String query = " WITH RECURSIVE Recurse_Comments AS ( \n" +
                             " %s \n" + //Se l'utente è loggato: CTE per vedere i voti. Altrimenti: stringa vuota
@@ -124,6 +144,7 @@ public class CommentDAO {
             voteCTE = "";
         }
 
+        //La view utilizzata per questa query non è v_comment ma v_comment_complete per evitare di aggiungere troppe join
         String baseCase = "SELECT %s FROM v_comment_complete AS vcc %s %s";
         {
             String columns = "0 AS depth, vcc.*, cte.vote ";
@@ -187,7 +208,7 @@ public class CommentDAO {
         StatementSetters.setParameters(ps, params);
         ResultSet rs = ps.executeQuery();
 
-        HashMap<Integer, ArrayList<Comment>> commentsMap = cm.toBeansHierarchy(rs);
+        Map<Integer, ArrayList<Comment>> commentsMap = cm.toBeansHierarchy(rs);
         ps.close();
         rs.close();
         return commentsMap;
