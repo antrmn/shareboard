@@ -105,7 +105,7 @@ public class CommentMapper implements AbstractMapper<Comment> {
         return beans;
     }
 
-    public HashMap<Integer, ArrayList<Comment>> toBeansHierarchy(ResultSet rs) throws SQLException {
+    public Map<Integer, ArrayList<Comment>> toBeansHierarchy(ResultSet rs) throws SQLException {
         ResultSetMetaData rsmd = rs.getMetaData();
 
         ArrayList<String> columns = new ArrayList<>();
@@ -161,14 +161,16 @@ public class CommentMapper implements AbstractMapper<Comment> {
             }
             comments.get(parentCommentId).add(comment);
 
+
             Comment nullComment = new Comment();
             nullComment.setId(0);
             Stack<Comment> stack = new Stack<>();
-            comments.get(0).forEach(c -> {
-                                            c.setParentComment(nullComment);
-                                            stack.add(c);
-                                         });
-
+            List<Comment> rootComments = comments.get(0);
+            if(rootComments != null)
+                rootComments.forEach(c -> {
+                                                c.setParentComment(nullComment);
+                                                stack.add(c);
+                                            });
             while(!stack.isEmpty()) {
                 Comment parent = stack.pop();
                 List <Comment> parentsOf = comments.get(parent.getId());
