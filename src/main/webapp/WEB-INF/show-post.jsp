@@ -1,16 +1,16 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core'%>
-<jsp:useBean id="post" scope="request" type="model.Post"/>
+<jsp:useBean id="post" scope="request" type="post.Post"/>
 <!DOCTYPE html>
 <html>
-<head><title>${post.title}</title>
+<head><name>${post.name}</name>
 </head>
 <body>
 <div>
     <div style="border: 1px solid black">
-        <small>${post.author.username}         ${post.category.name} <br></small>
+        <small>${post.author.username}         ${post.section.name} <br></small>
         <strong>${post.title}<br></strong>
-        ${post.text}<br>
-        <small>${post.voti} voti, ${post.n_comments} commenti</small>
+        ${post.content}<br>
+        <small>${post.voti} voti, ${post.n_comments} commenti, Voto inserito: ${post.vote}</small>
     </div>
     <br>
 
