@@ -3,12 +3,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <jsp:include page="components/head.jsp">
+    <jsp:include page="partials/head.jsp">
         <jsp:param name="currentPage" value="Home" />
     </jsp:include>
 </head>
 <body>
-        <jsp:include page="components/navbar.jsp">
+        <jsp:include page="partials/navbar.jsp">
             <jsp:param name="isLogged" value="true" />
             <jsp:param name="currentSection" value="Home" />
             <jsp:param name="userName" value="Testus" />
@@ -17,9 +17,9 @@
 
         <div id="body-container">
             <div id="left-container">
-                <jsp:include page="components/filter.jsp"/>
+                <jsp:include page="partials/filter.jsp"/>
                 <div id="post-container">
-                    <jsp:include page="components/post.jsp">
+                    <jsp:include page="partials/post.jsp">
                         <jsp:param name="title" value="Doge best doggo" />
                         <jsp:param name="author" value="Testus" />
                         <jsp:param name="section" value="best" />
@@ -29,7 +29,7 @@
                         <jsp:param name="type" value="img" />
                     </jsp:include>
                     <c:forEach var = "i" begin = "1" end = "100">
-                        <jsp:include page="components/post.jsp">
+                        <jsp:include page="partials/post.jsp">
                             <jsp:param name="title" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor" />
                             <jsp:param name="author" value="Testus" />
                             <jsp:param name="section" value="best" />
@@ -41,7 +41,7 @@
                     </c:forEach>
                 </div>
 
-                <jsp:include page="components/pagination.jsp">
+                <jsp:include page="partials/pagination.jsp">
                     <jsp:param name="current" value="1" />
                     <jsp:param name="start" value="1" />
                     <jsp:param name="end" value="6" />
@@ -49,34 +49,37 @@
             </div>
 
             <div id="right-container">
-                <div class="greyContainer" style = "margin-bottom: 20px">
-                    <p>
-                        ShareBoard intende diventare un social media atto a promuovere lo scambio di idee e di informazioni tra persone che condividono gli stessi interessi. ShareBoard funge da “aggregatore di contenuti” mantenuto da utenti che collaborano condividendo post o interagendo con essi. L’obiettivo è quello di offrire un punto di riferimento per chiunque volesse condividere il proprio lavoro, una propria idea in rete o anche per interagire e stare in contatto con utenti con un certo interesse in comune.
-                    </p>
+                <div class="greyContainer">
+                    <div class="card-image" style = "background-image: url('${pageContext.request.contextPath}/images/bg-planet2.png'); height: 34px;
+                            background-position-y: center;
+                            background-position-x: center;"></div>
+                    <h4>Welcome back Testus!</h4>
                 </div>
-                <div class="greyContainer" style = "margin-bottom: 20px">
-                    <h4>Top Sections</h4>
+                <div class="greyContainer">
+                    <div class="card-image" style = "background-image: url('${pageContext.request.contextPath}/images/banner-background.png');height: 80px;">
+                        <h2 class="card-img-text">Top Sections</h2>
+                    </div>
                     <c:forEach var = "i" begin = "1" end = "5">
-                        <div id = "top-sections-container" style = "display:flex; flex-direction: row; justify-content: center; align-content: center">
-                            <i class="fas fa-globe-europe"></i>
+                        <div id = "top-sections-container" style = "display:flex; flex-direction: row; justify-content: space-between; align-content: center">
+                            <i class="fas fa-globe-europe" style = "color:#0079D3; font-size: 25px"></i>
                             <p>TEXT</p>
                             <button type="submit" class = "roundButton lightGreyButton">Join</button>
                         </div>
                     </c:forEach>
                 </div>
-                <div class="greyContainer" style = "margin-bottom: 20px">
-                    <h4>Trending Sections</h4>
+                <div class="greyContainer">
+                    <div class="card-image" style = "background-image: url('${pageContext.request.contextPath}/images/bg-orange.png');">
+                        <h2 class="card-img-text">Trending Sections</h2>
+                    </div>
                     <c:forEach var = "i" begin = "1" end = "5">
-                        <div id = "trending-sections-container" style = "display:flex; flex-direction: row; justify-content: center; align-content: center">
-                            <i class="fas fa-globe-europe"></i>
-                            <p>TEXT</p>
-                            <button type="submit" class = "roundButton lightGreyButton">Join</button>
+                        <div id = "trending-sections-container" style = "display:flex; flex-direction: row; align-content: center; justify-content: space-between">
+                            <span>
+                                <i class="fas fa-caret-up" style = "display:inline; color:green;"></i>
+                                <p style = "display:inline;">TEXT</p>
+                            </span>
                         </div>
                     </c:forEach>
                 </div>
-<%--                <div class="greyContainer" onclick=""  >--%>
-<%--                    Sponsored Section--%>
-<%--                </div>--%>
                 <div class="greyContainer">
                     ShareBoard intende diventare un social media atto a promuovere lo scambio di idee e di informazioni tra persone che condividono gli stessi interessi. ShareBoard funge da “aggregatore di contenuti” mantenuto da utenti che collaborano condividendo post o interagendo con essi. L’obiettivo è quello di offrire un punto di riferimento per chiunque volesse condividere il proprio lavoro, una propria idea in rete o anche per interagire e stare in contatto con utenti con un certo interesse in comune
                     <br> <br>
