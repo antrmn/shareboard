@@ -1,8 +1,5 @@
 package controller;
 
-import model.Post;
-import model.PostDAO;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
