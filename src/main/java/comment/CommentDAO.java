@@ -138,6 +138,7 @@ public class CommentDAO {
 
         String voteCTE;
         if(loggedUserId > 0) {
+            //restituisce una tabella con i voti dell'utente specificato
             voteCTE = " WITH votes_from_user_cte AS (SELECT comment_id, vote, user_id FROM comment_vote JOIN user ON user_id=user.id WHERE user_id=?) ";
             params.add(new Pair<>(loggedUserId, Types.INTEGER));
         } else {
