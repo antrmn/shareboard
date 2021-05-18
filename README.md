@@ -2,6 +2,7 @@
 
 ShareBoard intende diventare un social media atto a promuovere lo scambio di idee e di informazioni tra persone che condividono gli stessi interessi. ShareBoard funge da &quot;aggregatore di contenuti&quot; mantenuto da utenti che collaborano condividendo post o interagendo con essi. L&#39;obiettivo è quello di offrire un punto di riferimento per chiunque volesse condividere il proprio lavoro, una propria idea in rete o anche per interagire e stare in contatto con utenti con un certo interesse in comune.
 
+[JavaDocs](https://ra-c.github.io/shareboard/)
 
 ## Funzionalità del sito
 
@@ -76,16 +77,16 @@ Ogni post ha come autore un **utente registrato**. Un utente registrato ha i seg
 
 ## DB Schema
 
-![](docs/assets/db_schema.jpg)
+![](assets/db_schema.jpg)
 
 ## Sitemap
 
-![](docs/assets/sitemap.png)
+![](assets/sitemap.png)
 
 ## Layout
 ### Home Page
 
-![](docs/assets/layout/homepage.png)
+![](assets/layout/homepage.png)
 
 La _top level navigation_ è consentita dalla navbar fissata in alto.
 
@@ -94,12 +95,12 @@ La sezione centrale costituisce la sezione principale e mostra i post delle sezi
 Il menù laterale fornisce informazioni riguardanti l&#39;intero sito. Lo scopo del menù laterale è diverso per quanto riguarda le singole sezioni, dove sono invece mostrate informazioni riguardanti la sezione stessa.
 
 ### Sezione
-![](docs/assets/layout/section.png)
+![](assets/layout/section.png)
 
 ### Post
 
-![](docs/assets/layout/post.png)
+![](assets/layout/post.png)
 
 ### Color palette
 
-![](docs/assets/color_palette.png)
+![](assets/color_palette.png)
