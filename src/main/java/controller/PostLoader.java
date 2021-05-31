@@ -16,20 +16,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Enumeration;
 import java.util.List;
 
 @WebServlet("/loadPosts")
 public class PostLoader extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException { System.out.print("TEST");
-        System.out.print( req.getParameterNames());
-
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        System.out.println("loadPosts");
         PostSpecificationBuilder psb = new PostSpecificationBuilder();
         psb.isInSectionByName(req.getParameter("section"));
         Specification s = psb.build();
@@ -37,11 +34,9 @@ public class PostLoader extends HttpServlet {
             PostDAO service = new PostDAO(con);
             List<Post> posts = service.fetch(s);
             Gson gson = new Gson();
-            System.out.print(req.getParameter("section"));
-            System.out.print(gson.toJson(posts));
+            System.out.println(req.getParameter("section"));
+            System.out.println(gson.toJson(posts));
             resp.getWriter().write(gson.toJson(posts));
-//            req.setAttribute("posts", posts);
-//            req.getRequestDispatcher("/WEB-INF/show-all.jsp").forward(req, resp);
         } catch(SQLException | NamingException  e){
             e.printStackTrace();
         }

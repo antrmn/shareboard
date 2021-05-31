@@ -25,12 +25,12 @@ public class Section extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String path = (req.getPathInfo() != null) ? req.getPathInfo() : "/";
-        System.out.print(path);
+        System.out.println(path);
 
         switch (path){
             case"/":
                 //redirect home
-                resp.sendRedirect("/home");
+                resp.sendRedirect("./home");
                break;
             default:
                 SectionSpecificationBuilder spb = new SectionSpecificationBuilder();
@@ -41,15 +41,16 @@ public class Section extends HttpServlet {
                     List<section.Section> sections = service.fetch(s);
                     if(sections.isEmpty()){
                         //redirect home
-                        resp.sendRedirect("/home");
+                        resp.sendRedirect("./home");
                     } else{
                         section.Section section = sections.get(0);
-                        System.out.print(section.getName());
+                        System.out.println(section.getName());
                         req.setAttribute("section", section);
                         req.getRequestDispatcher("/WEB-INF/views/section.jsp").forward(req,resp);
                     }
                 } catch(SQLException | NamingException e){
                     e.printStackTrace();
+                    break;
                 }
                 break;
         }

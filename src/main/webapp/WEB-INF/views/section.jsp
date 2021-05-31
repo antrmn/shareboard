@@ -5,6 +5,7 @@
 <head>
   <jsp:include page="partials/head.jsp">
     <jsp:param name="currentPage" value="${section.name}" />
+    <jsp:param name="scripts" value="post" />
   </jsp:include>
 </head>
 <body>
