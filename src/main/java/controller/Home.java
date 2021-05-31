@@ -13,22 +13,14 @@ import java.util.List;
 public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //HomeDAO service = new HomeDAO();
-        int id = 0;
-//        try {
-//            id = Integer.parseInt(req.getParameter("p"));
-//        } catch(NullPointerException | NumberFormatException e){
-//            throw new RuntimeException();
-//        }
 
-//        Post post = service.doRetrieve(id);
-//        req.setAttribute("post", post);
-        req.getRequestDispatcher("/WEB-INF/home.jsp").forward(req,resp);
+
+        req.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doGet(req,resp);
+       // doGet(req,resp);
     }
 }
 

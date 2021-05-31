@@ -59,17 +59,17 @@
                     </div>
                     <i class="fas fa-sort-down" style="display: inline-block;"></i>
                     <div id="profile-dropdown" class="dropdown-content greyContainer">
-                        <a href="/profile">
+                        <a href="${context}/profile">
                             <i class="fas fa-address-card"></i>
                             Profile
                         </a>
 
 <%--                     if is admin check--%>
-                        <a href="/profile">
+                        <a href="${context}/admin">
                             <i class="fas fa-user-shield"></i>
-                            Create Section
+                            Pannello Admin
                         </a>
-                        <a href="/logout">
+                        <a href="${context}/logout">
                             <i class="fas fa-sign-out-alt"></i>
                             Log Out
                         </a>

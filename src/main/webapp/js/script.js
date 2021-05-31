@@ -34,6 +34,8 @@ function toggleDropdown(state, id){
     // }
 }
 
+function doUpvote(){console.log('test')}
+
 function toggleFavorite(e){
     //se la sezione è nei preferiti
     if(e.classList.contains("fas")){

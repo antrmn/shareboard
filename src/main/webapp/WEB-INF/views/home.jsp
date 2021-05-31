@@ -5,6 +5,7 @@
 <head>
     <jsp:include page="partials/head.jsp">
         <jsp:param name="currentPage" value="Home" />
+        <jsp:param name="scripts" value="post" />
     </jsp:include>
 </head>
 <body>
@@ -19,33 +20,33 @@
             <div id="left-container">
                 <jsp:include page="partials/filter.jsp"/>
                 <div id="post-container">
-                    <jsp:include page="partials/post.jsp">
-                        <jsp:param name="title" value="Doge best doggo" />
-                        <jsp:param name="author" value="Testus" />
-                        <jsp:param name="section" value="best" />
-                        <jsp:param name="comments" value="69" />
-                        <jsp:param name="voteState" value="0" />
-                        <jsp:param name="votes" value="22" />
-                        <jsp:param name="type" value="img" />
-                    </jsp:include>
-                    <c:forEach var = "i" begin = "1" end = "100">
-                        <jsp:include page="partials/post.jsp">
-                            <jsp:param name="title" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor" />
-                            <jsp:param name="author" value="Testus" />
-                            <jsp:param name="section" value="best" />
-                            <jsp:param name="comments" value="${i}" />
-                            <jsp:param name="voteState" value="0" />
-                            <jsp:param name="votes" value="${i}" />
-                            <jsp:param name="type" value="text" />
-                        </jsp:include>
-                    </c:forEach>
+<%--                    <jsp:include page="partials/post.jsp">--%>
+<%--                        <jsp:param name="title" value="Doge best doggo" />--%>
+<%--                        <jsp:param name="author" value="Testus" />--%>
+<%--                        <jsp:param name="section" value="best" />--%>
+<%--                        <jsp:param name="comments" value="69" />--%>
+<%--                        <jsp:param name="voteState" value="0" />--%>
+<%--                        <jsp:param name="votes" value="22" />--%>
+<%--                        <jsp:param name="type" value="img" />--%>
+<%--                    </jsp:include>--%>
+<%--                    <c:forEach var = "i" begin = "1" end = "100">--%>
+<%--                        <jsp:include page="partials/post.jsp">--%>
+<%--                            <jsp:param name="title" value="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor" />--%>
+<%--                            <jsp:param name="author" value="Testus" />--%>
+<%--                            <jsp:param name="section" value="best" />--%>
+<%--                            <jsp:param name="comments" value="${i}" />--%>
+<%--                            <jsp:param name="voteState" value="0" />--%>
+<%--                            <jsp:param name="votes" value="${i}" />--%>
+<%--                            <jsp:param name="type" value="text" />--%>
+<%--                        </jsp:include>--%>
+<%--                    </c:forEach>--%>
                 </div>
 
-                <jsp:include page="partials/pagination.jsp">
-                    <jsp:param name="current" value="1" />
-                    <jsp:param name="start" value="1" />
-                    <jsp:param name="end" value="6" />
-                </jsp:include>
+<%--                <jsp:include page="partials/pagination.jsp">--%>
+<%--                    <jsp:param name="current" value="1" />--%>
+<%--                    <jsp:param name="start" value="1" />--%>
+<%--                    <jsp:param name="end" value="6" />--%>
+<%--                </jsp:include>--%>
             </div>
 
             <div id="right-container">

@@ -4,19 +4,30 @@ import org.apache.tomcat.jdbc.pool.DataSource;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
 
 import javax.naming.NamingException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.TimeZone;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class ConPool {
 	private static DataSource dataSource;
-	public static Connection getConnection() throws SQLException, NamingException {
+	public static Connection getConnection() throws SQLException, NamingException, IOException {
+
+//		Gson gson = new Gson();
+
+		// 1. JSON file to Java object
+//		Object object = gson.fromJson(new FileReader(System.getProperty("user.dir") + "/config.json"), Object.class);
+//		System.out.println(object);
 		if (dataSource == null) {
 			PoolProperties p = new PoolProperties();
 			p.setUrl("jdbc:mysql://localhost:3306/shareboard?serverTimezone=" + TimeZone.getDefault().getID());
 			p.setDriverClassName("com.mysql.cj.jdbc.Driver");
 			p.setUsername("root");
-			p.setPassword("1234");
+			p.setPassword("ufo123");
 			p.setMaxActive(100);
 			p.setInitialSize(10);
 			p.setMinIdle(10);

@@ -78,6 +78,12 @@ public class PostSpecificationBuilder extends Specification.Builder<PostSpecific
         return this;
     }
 
+    public PostSpecificationBuilder isInSectionByName(String name){
+        wheresJoiner.add(" section.name = ? ");
+        params.add(new Pair<>(name, java.sql.Types.VARCHAR));
+        return this;
+    }
+
     public PostSpecificationBuilder isAuthor(int id){
         wheresJoiner.add(" author_id = ? ");
         params.add(new Pair<>(id, java.sql.Types.INTEGER));

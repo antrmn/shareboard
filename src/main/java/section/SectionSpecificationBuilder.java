@@ -13,7 +13,8 @@ public class SectionSpecificationBuilder extends Specification.Builder<SectionSp
     StringJoiner joinsJoiner = new StringJoiner("\n");
     StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ");
 
-    protected SectionSpecificationBuilder(String table) {
+//    String table
+    public SectionSpecificationBuilder() {
         super("section");
     }
 
@@ -45,6 +46,12 @@ public class SectionSpecificationBuilder extends Specification.Builder<SectionSp
     public SectionSpecificationBuilder byId(int id){
         wheresJoiner.add("id=?");
         params.add(new Pair<>(id, Types.INTEGER));
+        return this;
+    }
+
+    public SectionSpecificationBuilder byName(String name){
+        wheresJoiner.add("name=?");
+        params.add(new Pair<>(name, Types.VARCHAR));
         return this;
     }
 
