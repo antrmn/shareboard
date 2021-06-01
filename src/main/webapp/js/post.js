@@ -30,9 +30,9 @@ function createPost(data){
         <span >
             <h3 style = "display: block; margin-top: 5px; margin-bottom: 1px; margin-right:2px;">${data.title}</h3>
             <div id="post-meta-container">
-                <a href="./s/${data.section.name}" style = "font-size: 12px;font-weight: 400;line-height: 16px">s/${data.section.name}</a>
-                <a href="./user/${data.author.username}" style = "font-size: 12px;font-weight: 400;line-height: 16px">Posted by: ${data.author.username}</a>
-                <a href="./s/${data.section.name}/${data.id}" id = "post-comment-container" style = "display: block; font-size: 12px;font-weight: 400;line-height: 16px; width: 120px; margin-bottom: 5px;">
+                <a href="s/${data.section.name}" style = "font-size: 12px;font-weight: 400;line-height: 16px">s/${data.section.name}</a>
+                <a href="shareboard/user/${data.author.username}" style = "font-size: 12px;font-weight: 400;line-height: 16px">Posted by: ${data.author.username}</a>
+                <a href="s/${data.section.name}/${data.id}" id = "post-comment-container" style = "display: block; font-size: 12px;font-weight: 400;line-height: 16px; width: 120px; margin-bottom: 5px;">
                     <i class="fas fa-comment-dots"></i>
                     ${data.nComments} comments
                 </a>
@@ -52,12 +52,12 @@ function loadPosts(section){
             offset: offset
         },
         function(data, status){
-            console.log(status);
-            console.log(data);
-            let test = JSON.parse(data);
-            console.log(test);
+            // console.log(status);
+            // console.log(data);
+            let posts = JSON.parse(data);
+            // console.log(posts);
 
-            for(let post of test){
+            for(let post of posts){
                 console.log(post);
                 $('#post-container').append(createPost(post));
             }

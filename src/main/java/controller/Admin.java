@@ -60,6 +60,7 @@ public class Admin extends HttpServlet {
 
                 } catch(SQLException | NamingException  e){
                     e.printStackTrace();
+                    req.getRequestDispatcher("/WEB-INF/views/create-section.jsp").forward(req, resp);
                 }
                 break;
         }

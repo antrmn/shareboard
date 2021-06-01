@@ -16,14 +16,14 @@
     <meta name="theme-color" content="#000000">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-2/css/all.min.css"
           integrity="sha256-46r060N2LrChLLb5zowXQ72/iKKNiw/lAmygmHExk/o=" crossorigin="anonymous" />
-<%--    <link rel="stylesheet" href="${context}/css/normalize.css" type="text/css">--%>
+    <link rel="stylesheet" href="${context}/css/normalize.css" type="text/css">
     <link rel="stylesheet" href="${context}/css/style.css" type="text/css">
-<%--    Load Styles--%>
-<%--    <c:if test="${not empty param.styles}">--%>
-<%--        <c:forTokens items="${param.styles}" delims="," var="style">--%>
-<%--            <link rel="stylesheet" href="${context}/css/${style}.css" type="text/css">--%>
-<%--        </c:forTokens>--%>
-<%--    </c:if>--%>
+    Load Styles
+    <c:if test="${not empty param.styles}">
+        <c:forTokens items="${param.styles}" delims="," var="style">
+            <link rel="stylesheet" href="${context}/css/${style}.css" type="text/css">
+        </c:forTokens>
+    </c:if>
 
 <%--    Load Scripts--%>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>

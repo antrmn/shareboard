@@ -17,7 +17,7 @@
     </jsp:include>
 
     <div style = "display: flex; margin-top:300px; justify-content: center; align-items:center;">
-        <div class="greyContainer" style = "display: flex;">
+        <div class="greyContainer" style = "display: flex;flex-direction: column">
             <a href="${context}/admin/create-section">Crea Sezione</a>
             <a>Gestione Utenti</a>
         </div>

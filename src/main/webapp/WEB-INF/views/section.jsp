@@ -5,6 +5,7 @@
 <head>
   <jsp:include page="partials/head.jsp">
     <jsp:param name="currentPage" value="${section.name}" />
+    <jsp:param name="styles" value="section" />
     <jsp:param name="scripts" value="post" />
   </jsp:include>
 </head>
@@ -16,25 +17,37 @@
   <jsp:param name="userKarma" value="4316" />
 </jsp:include>
 
+<div class = "grid-y-nw" style = "height:324px; left:0; right:0; position:relative; top:30px;">
+  <div id = "header-image" style ='background: url("https://styles.redditmedia.com/t5_2zf9m/styles/bannerBackgroundImage_h8gepdvfwqb61.png?width=4000&s=ff692337d4b54b575ec3b23d32037b63d919f096") no-repeat scroll center center / cover;'>
+    <a href="${pageContext.request.contextPath}"></a>
+  </div>
+  <div id="header-container" class = "grid-x-nw" >
+    <span> <img id = "header-icon" src="${pageContext.request.contextPath}/images/default-logo.png"></span>
+    <span class = "grid-y">
+      <h2>${section.name}</h2>
+      <h4>s/${section.name}</h4>
+    </span>
+    <span>
+      <button class = "darkGreyButton roundButton">Joined</button>
+    </span>
+  </div>
+</div>
+
 <div id="body-container">
   <div id="left-container">
     <jsp:include page="partials/filter.jsp"/>
-    <div id="post-container">
-
-    </div>
+    <div id="post-container"></div>
   </div>
 
   <div id="right-container">
-    <div class="greyContainer">
-      ${section.name}
-      ${section.description}
+    <div class="greyContainer grid-y-nw  align-center">
+      <h3>About Community</h3>
+      <h5> ${section.description}</h5>
+      <h5> ${section.nFollowers} membri</h5>
+      <a class = "lightGreyButton roundButton">Invia Contenuto</a>
     </div>
-
-    <div class="greyContainer">
-      ShareBoard intende diventare un social media atto a promuovere lo scambio di idee e di informazioni tra persone che condividono gli stessi interessi. ShareBoard funge da “aggregatore di contenuti” mantenuto da utenti che collaborano condividendo post o interagendo con essi. L’obiettivo è quello di offrire un punto di riferimento per chiunque volesse condividere il proprio lavoro, una propria idea in rete o anche per interagire e stare in contatto con utenti con un certo interesse in comune
-      <br> <br>
-      Shareboard Inc © 2021. All rights reserved
-    </div>
+    <jsp:include page="partials/rules.jsp"/>
+    <jsp:include page="partials/footer.jsp"/>
   </div>
 </div>
 </body>

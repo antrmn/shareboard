@@ -34,8 +34,8 @@ public class PostLoader extends HttpServlet {
             PostDAO service = new PostDAO(con);
             List<Post> posts = service.fetch(s);
             Gson gson = new Gson();
-            System.out.println(req.getParameter("section"));
-            System.out.println(gson.toJson(posts));
+//            System.out.println(req.getParameter("section"));
+//            System.out.println(gson.toJson(posts));
             resp.getWriter().write(gson.toJson(posts));
         } catch(SQLException | NamingException  e){
             e.printStackTrace();
