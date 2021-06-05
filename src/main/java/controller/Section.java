@@ -1,10 +1,7 @@
 package controller;
 
-
 import persistence.ConPool;
 import persistence.Specification;
-import post.Post;
-import post.PostDAO;
 import section.SectionDAO;
 import section.SectionSpecificationBuilder;
 
@@ -32,6 +29,9 @@ public class Section extends HttpServlet {
                 //redirect home
                 resp.sendRedirect("./home");
                break;
+            case"/comments":
+                req.getRequestDispatcher("/WEB-INF/views/section/post.jsp").forward(req,resp);
+                break;
             default:
                 SectionSpecificationBuilder spb = new SectionSpecificationBuilder();
                 spb.byName("test");
@@ -46,7 +46,7 @@ public class Section extends HttpServlet {
                         section.Section section = sections.get(0);
                         System.out.println(section.getName());
                         req.setAttribute("section", section);
-                        req.getRequestDispatcher("/WEB-INF/views/section.jsp").forward(req,resp);
+                        req.getRequestDispatcher("/WEB-INF/views/section/section.jsp").forward(req,resp);
                     }
                 } catch(SQLException | NamingException e){
                     e.printStackTrace();
@@ -58,7 +58,6 @@ public class Section extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // doGet(req,resp);
     }
 }
 

@@ -24,7 +24,7 @@ function createPost(data){
         if(data.type === "TEXT"){
             post += `<i class="fas fa-comment post-generic-holder" ></i>`;
         } else{
-            post += ` <img class=" post-generic-holder post-image-holder" src=${data.content}>`;
+            post += `<img class=" post-generic-holder post-image-holder" src=${data.content}>`;
         }
         post += `</span>
         <span >
@@ -46,9 +46,10 @@ function createPost(data){
 
 
 function loadPosts(section){
+    // let section = window.location.pathname
     $.post(window.location.origin+"/shareboard/loadPosts",
         {
-            section: "Desc",
+            section: window.location.pathname,
             offset: offset
         },
         function(data, status){
@@ -56,12 +57,24 @@ function loadPosts(section){
             // console.log(data);
             let posts = JSON.parse(data);
             // console.log(posts);
-
+            let stuff = '';
             for(let post of posts){
                 console.log(post);
-                $('#post-container').append(createPost(post));
+                stuff += createPost(post);
+                //$('#post-container').append(createPost(post));
             }
+            $('#post-container').append(stuff);
             offset += 50;
         });
+
+    // $.post(window.location.origin+"/shareboard/loadPosts",
+    //     {
+    //         section: window.location.pathname,
+    //         offset: offset
+    //     },
+    //     function(data, status){
+    //         $('#post-container').html(data);
+    //     });
+
 
 }

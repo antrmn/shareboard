@@ -88,7 +88,7 @@ public class ShowAllPosts extends HttpServlet {
             List<Post> posts = service.fetch(s);
 
             req.setAttribute("posts", posts);
-            req.getRequestDispatcher("/WEB-INF/show-all.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/test/show-all.jsp").forward(req, resp);
         } catch(SQLException | NamingException e){
             e.printStackTrace();
         }

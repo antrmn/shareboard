@@ -4,13 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <jsp:include page="partials/head.jsp">
+    <jsp:include page="../partials/head.jsp">
         <jsp:param name="currentPage" value="Admin" />
     </jsp:include>
 </head>
 <body>
 
-    <jsp:include page="partials/navbar.jsp">
+    <jsp:include page="../partials/navbar.jsp">
         <jsp:param name="isLogged" value="true" />
         <jsp:param name="currentSection" value="Admin" />
         <jsp:param name="userName" value="Testus" />

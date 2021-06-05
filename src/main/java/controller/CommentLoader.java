@@ -18,8 +18,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/loadPosts")
-public class PostLoader extends HttpServlet {
+@WebServlet("/loadComments")
+public class CommentLoader extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     }
@@ -45,9 +45,6 @@ public class PostLoader extends HttpServlet {
 //            System.out.println(req.getParameter("section"));
 //            System.out.println(gson.toJson(posts));
             resp.getWriter().write(gson.toJson(posts));
-//            req.setAttribute("posts", posts);
-//            System.out.println("HERE");
-//            req.getRequestDispatcher("/WEB-INF/views/test.jsp").forward(req, resp);
         } catch(SQLException | NamingException  e){
             e.printStackTrace();
         }

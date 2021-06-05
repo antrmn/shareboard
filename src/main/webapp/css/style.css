@@ -114,6 +114,15 @@ footer {
 }
 
 /*GENERIC STYLES*/
+
+.white-text{
+    color: rgb(215, 218, 220);
+}
+
+.grey-text{
+    color: rgb(129, 131, 132);
+}
+
 .greyContainer{
     background-color: var(--shareboard-container-1);
     border-color: var(--shareboard-border-color1);
@@ -301,7 +310,8 @@ navbar *{
     display: inline-flex;
     margin-left: 25px;
     align-items: center;
-    flex:75%;
+    flex-grow:1;
+    /*flex:75%;*/
 }
 
 #logo-current{
@@ -406,13 +416,13 @@ navbar *{
     display:flex;
     justify-content:center;
     flex-direction: column;
-    flex:85%;
+    flex-grow:1;
     margin-left: 25px;
     margin-right: 25px;
 }
 
 #right-container{
-    flex:15%;
+    flex-basis: 310px;
     margin-right: 25px;
 }
 
