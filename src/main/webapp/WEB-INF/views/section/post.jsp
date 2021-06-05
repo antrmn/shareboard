@@ -40,10 +40,10 @@
                           <i class="fas fa-chevron-down voteIcon downvoteIcon"></i>
                       </button>
                   </div>
-                  <div class = "grid-y-nw" style="flex-grow:1; align-items: start; border-bottom: solid 1px; border-radius:1px; border-color: gray; margin-right: 40px;">
+                  <div class = "grid-y-nw" style="flex-grow:1; align-items: start; margin-right: 40px;">
                       <div style = "flex-basis: 100%">
-                          <span class = white-text>s/test</span>
-                          <span class = grey-text>posted by somedude</span>
+                          <a class = white-text>s/test</a>
+                          <a class = grey-text>posted by somedude</a>
                       </div>
                       <div class = white-text>Best Title</div>
 
@@ -57,14 +57,15 @@
                           ${post.nComments} 10 comments
                       </div>
 
-                      <form style = "width:100%;">
-                          <textarea rows="5" style = "resize: vertical; width:100%; border-radius: 4px; background-color: var(--shareboard-container-2); border-color: var(--shareboard-container-1); border: solid 1px;"></textarea>
+                      <form  method = "POST" action= "./add-comment" style = "width:100%; border-bottom: solid 1px; border-radius:1px; border-color: gray;">
+                          <textarea rows="5" style = "color: #fff; resize: vertical; width:100%; border-radius: 4px; background-color: var(--shareboard-container-2); border-color: var(--shareboard-container-1); border: solid 1px;"></textarea>
                           <br>
                           <button class = roundButton>Invia</button>
                       </form>
-                  </div>
-                  <div id = "comments-container" style = "margin:8px;">
-
+                      <div class ="grid-x-nw" style = "width: 100%">
+                          <div id = "comments-container" style = "margin:8px; width: 100%">
+                          </div>
+                      </div>
                   </div>
               </div>
           </div>
