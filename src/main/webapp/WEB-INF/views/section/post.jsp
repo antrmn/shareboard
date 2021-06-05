@@ -40,22 +40,31 @@
                           <i class="fas fa-chevron-down voteIcon downvoteIcon"></i>
                       </button>
                   </div>
-                  <div class = "grid-y-nw" style="flex-grow:1; align-items: start; border-bottom-style: solid; border-radius:1px; border-color: white; margin-right: 40px;">
-                      <div style = "flex-basis: 100%">s/test posted by somedude</div>
-                      <div>Best Title</div>
+                  <div class = "grid-y-nw" style="flex-grow:1; align-items: start; border-bottom: solid 1px; border-radius:1px; border-color: gray; margin-right: 40px;">
+                      <div style = "flex-basis: 100%">
+                          <span class = white-text>s/test</span>
+                          <span class = grey-text>posted by somedude</span>
+                      </div>
+                      <div class = white-text>Best Title</div>
 
                       <div>
-                          Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                          <p class = white-text style = "border: solid 1px gray; border-radius: 4px; padding: 7px;">
+                              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                          </p>
                       </div>
-                      <div style = "margin:8px;">
+                      <div class = "grey-text" >
                           <i class="fas fa-comment-dots"></i>
-                          ${post.nComments} comments
+                          ${post.nComments} 10 comments
                       </div>
 
-                      <div id = "comments-container" style = "margin:8px;">
-                          <textarea cols="30" rows="10"></textarea>
+                      <form style = "width:100%;">
+                          <textarea rows="5" style = "resize: vertical; width:100%; border-radius: 4px; background-color: var(--shareboard-container-2); border-color: var(--shareboard-container-1); border: solid 1px;"></textarea>
+                          <br>
                           <button class = roundButton>Invia</button>
-                      </div>
+                      </form>
+                  </div>
+                  <div id = "comments-container" style = "margin:8px;">
+
                   </div>
               </div>
           </div>
