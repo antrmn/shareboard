@@ -5,5 +5,5 @@
   <h3>About Community</h3>
   <h5> ${params.description}</h5>
   <h5> ${params.nFollowers} membri</h5>
-  <a class = "lightGreyButton roundButton">Invia Contenuto</a>
+  <a class = "lightGreyButton roundButton" href = "${params.link}">Invia Contenuto</a>
 </div>

@@ -20,23 +20,26 @@ function createPost(data){
                 <i class="fas fa-chevron-down voteIcon downvoteIcon"></i>
             </button>
         </span>
-        <span id = "post-media-container">`;
+        <span id = "post-media-container"> 
+           <a href = "https://google.com">`;
         if(data.type === "TEXT"){
             post += `<i class="fas fa-comment post-generic-holder" ></i>`;
         } else{
             post += `<img class=" post-generic-holder post-image-holder" src=${data.content}>`;
         }
-        post += `</span>
+        post += `</a></span>
         <span >
-            <h3 style = "display: block; margin-top: 5px; margin-bottom: 1px; margin-right:2px;">${data.title}</h3>
-            <div id="post-meta-container">
-                <a href="s/${data.section.name}" style = "font-size: 12px;font-weight: 400;line-height: 16px">s/${data.section.name}</a>
-                <a href="shareboard/user/${data.author.username}" style = "font-size: 12px;font-weight: 400;line-height: 16px">Posted by: ${data.author.username}</a>
-                <a href="s/${data.section.name}/${data.id}" id = "post-comment-container" style = "display: block; font-size: 12px;font-weight: 400;line-height: 16px; width: 120px; margin-bottom: 5px;">
-                    <i class="fas fa-comment-dots"></i>
-                    ${data.nComments} comments
-                </a>
-            </div>
+            <a href = "https://google.com">
+                <h3 style = "display: block; margin-top: 5px; margin-bottom: 1px; margin-right:2px;">${data.title}</h3>
+                <div id="post-meta-container">
+                    <a href="s/${data.section.name}" style = "font-size: 12px;font-weight: 400;line-height: 16px">s/${data.section.name}</a>
+                    <a href="shareboard/user/${data.author.username}" style = "font-size: 12px;font-weight: 400;line-height: 16px">Posted by: ${data.author.username}</a>
+                    <a href="s/${data.section.name}/${data.id}" id = "post-comment-container" style = "display: block; font-size: 12px;font-weight: 400;line-height: 16px; width: 120px; margin-bottom: 5px;">
+                        <i class="fas fa-comment-dots"></i>
+                        ${data.nComments} comments
+                    </a>
+                </div>
+            </a>
         </span>
         </div>`
 

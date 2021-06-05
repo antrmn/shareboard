@@ -4,8 +4,15 @@ $( document ).ready(function() {
 });
 
 function createComment(author, votes, content, id, isEven, isSpecial){
+
+    let color = "#242323"
+
+    if (isEven){
+        var style = getComputedStyle(document.body);
+        color = style.getPropertyValue('--shareboard-container-1');
+    }
     let comment = `
-              <div id = "${id}" class = "grid-x-nw" style = "width: 100%; align-items: start; margin-top:10px; background-color: #242323; border-radius: 4px; border: solid 1px #313132; ">
+              <div id = "${id}" class = "grid-x-nw" style = "width: 100%; align-items: start; margin-top:10px; background-color: ${color}; border-radius: 4px; border: solid 1px #313132; ">
                   <div id = vote-container style = "width: 40px; ">
                       <button onclick="doUpvote();" class="voteButton interactable" >
                           <i class="fas fa-chevron-up voteIcon upvoteIcon" ></i>
@@ -52,8 +59,9 @@ function loadComments(){
     if (emptyResponse){
         $("#comments-container").append(createEmpty());
     } else{
-        $("#comments-container").append(createComment("test", 10, "BLABlach", "nigga"));
-        $(createComment("test", 10, "BLABlach", "nigga2")).insertAfter("#comments-container #reply-button")
+        $("#comments-container").append(createComment("test", 10, "BLABlach", "com1", false));
+        $(createComment("test", 10, "BLABlach", "com2", true)).insertAfter("#comments-container #com1 #reply-button")
+        $(createComment("GoodGuy", 100, "testest", "com3", false)).insertAfter("#comments-container #com2 #reply-button")
     }
 }
 

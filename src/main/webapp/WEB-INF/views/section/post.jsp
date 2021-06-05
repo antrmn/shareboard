@@ -71,6 +71,11 @@
           </div>
       </div>
       <div id="right-container">
+          <jsp:include page="../partials/section-info.jsp">
+              <jsp:param name="description" value="${section.name}" />
+              <jsp:param name="nFollowers" value="${section.nFollowers}" />
+              <jsp:param name="link" value="test" />
+          </jsp:include>
           <jsp:include page="../partials/rules.jsp"/>
           <jsp:include page="../partials/footer.jsp"/>
       </div>
