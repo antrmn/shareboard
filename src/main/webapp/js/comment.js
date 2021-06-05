@@ -4,11 +4,10 @@ $( document ).ready(function() {
 });
 
 function createComment(author, votes, content, id, isEven, isSpecial){
-
-    let color = "#242323"
+    let style = getComputedStyle(document.body);
+    let color = "#242323" //make this a css var
 
     if (isEven){
-        var style = getComputedStyle(document.body);
         color = style.getPropertyValue('--shareboard-container-1');
     }
     let comment = `
@@ -24,7 +23,7 @@ function createComment(author, votes, content, id, isEven, isSpecial){
                           <i class="fas fa-chevron-down voteIcon downvoteIcon"></i>
                       </button>
                   </div>
-                  <div class = "grid-y-nw" style="flex-grow:1; align-items: start; margin-right: 40px;">
+                  <div class = "grid-y-nw" style="flex-grow:1; align-items: start;padding-bottom: 10px; padding-right: 10px;">
                       <div style = "flex-basis: 100%">
                           <a class = grey-text>posted by ${author}</a>
                       </div>

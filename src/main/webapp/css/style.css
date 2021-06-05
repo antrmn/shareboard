@@ -423,6 +423,7 @@ navbar *{
 
 #right-container{
     flex-basis: 310px;
+    flex-shrink: 0;
     margin-right: 25px;
 }
 
@@ -511,11 +512,16 @@ navbar *{
 
 #post-container *{
     align-items: center;
+    word-break: break-all;
 }
 
 #post-container:first-child{
     border-top-left-radius: 5px !important;
     border-top-right-radius: 5px !important;
+}
+
+.break-word{
+    word-break: break-all;
 }
 
 #post-meta-container{
