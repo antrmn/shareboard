@@ -49,15 +49,46 @@ function createEmpty(){
     return el;
 }
 
-let emptyResponse = false;
-function loadComments(){
-    if (emptyResponse){
-        $("#comments-container").append(createEmpty());
-    } else{
-        $("#comments-container").append(createComment("test", 10, "BLABlach", "com1", false));
-        $(createComment("test", 10, "BLABlach", "com2", true)).insertAfter("#comments-container #com1 #reply-button")
-        $(createComment("GoodGuy", 100, "testest", "com3", false)).insertAfter("#comments-container #com2 #reply-button")
+function addChilds(comments, key, depth){
+    if (comments[key]){
+        let backup = depth
+        for(let comment of comments[key]){
+            depth++;
+            console.log(depth + " " + comment.text);
+            console.log(depth%2===0);
+            $(createComment(comment.author.username, comment.vote, comment.text, comment.id, depth%2===0)).insertAfter(`#${key} #reply-button`)
+            addChilds(comments, comment.id, depth);
+        }
     }
+    console.log("END:" + depth)
+    depth=-2;
+}
+
+function loadComments(){
+
+    $.post(window.location.origin+"/shareboard/loadComments",
+        {
+            postId: getUrlParameter('post')
+        },
+        function(data, status){
+            // console.log(status);
+            // console.log(data);
+
+            if (data == null){
+                $("#comments-container").append(createEmpty());
+            }
+            let comments = JSON.parse(data);
+            console.log(comments);
+            let i = 1;
+
+            let baseId = 0;
+            if (comments[baseId]){
+                for(let comment of comments[baseId]){
+                    $("#comments-container").append(createComment(comment.author.username, comment.vote, comment.text, comment.id, false));
+                    addChilds(comments, comment.id, 1);
+                }
+            }
+        });
 }
 
 function addComment(parent, content){

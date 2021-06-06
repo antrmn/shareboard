@@ -1,6 +1,9 @@
 package controller;
 
 import com.google.gson.Gson;
+import comment.Comment;
+import comment.CommentDAO;
+import comment.CommentSpecificationBuilder;
 import persistence.ConPool;
 import persistence.Specification;
 import post.Post;
@@ -16,7 +19,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet("/loadComments")
 public class CommentLoader extends HttpServlet {
@@ -26,22 +31,14 @@ public class CommentLoader extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        //se in home carica tutto
-        //se in sezione carica in base ad essa
-        //order by
-        //limit e offset
-        System.out.println(req.getParameter("post"));
-        PostSpecificationBuilder psb = new PostSpecificationBuilder();
-        psb.byId(1);
-        Specification s = psb.build();
+        int postId = Integer.parseInt(req.getParameter("postId"));
         try (Connection con = ConPool.getConnection()){
-            PostDAO service = new PostDAO(con);
-            List<Post> posts = service.fetch(s);
+            CommentDAO service = new CommentDAO(con);
+            Map<Integer, ArrayList<Comment>> comments = service.fetchHierarchy(postId, false, 10, 0);
             Gson gson = new Gson();
 //            System.out.println(req.getParameter("section"));
-//            System.out.println(gson.toJson(posts));
-            resp.getWriter().write(gson.toJson(posts));
+            //System.out.println(gson.toJson(comments));
+            resp.getWriter().write(gson.toJson(comments));
         } catch(SQLException | NamingException  e){
             e.printStackTrace();
         }

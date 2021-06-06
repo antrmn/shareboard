@@ -14,7 +14,7 @@ public class CommentSpecificationBuilder extends Specification.Builder<CommentSp
     StringJoiner joinsJoiner = new StringJoiner("\n");
     StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ");
 
-    protected CommentSpecificationBuilder(String table) {
+    public CommentSpecificationBuilder() {
         super("v_comment");
         String userJoin = " JOIN v_user AS user ON comment.author_id=user.id ";
         String postJoin = " JOIN post ON post.id = comment.post_id";
