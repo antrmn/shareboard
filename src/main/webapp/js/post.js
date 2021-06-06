@@ -9,7 +9,7 @@ $( document ).ready(function() {
 function createPost(data){
 
     let post = `<div class="post greyContainer interactable">
-        <span id = vote-container>
+        <span class = "vote-container">
             <button onclick="doUpvote();" class="voteButton interactable" >
                  <i class="fas fa-chevron-up voteIcon upvoteIcon" ></i>
             </button>

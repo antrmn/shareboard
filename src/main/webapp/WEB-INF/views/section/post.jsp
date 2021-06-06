@@ -5,7 +5,7 @@
 <html>
 <jsp:include page="../partials/head.jsp">
   <jsp:param name="currentPage" value="${post.title}" />
-  <jsp:param name="styles" value="section" />
+  <jsp:param name="styles" value="section,comment" />
   <jsp:param name="scripts" value="comment" />
 </jsp:include>
 <body>
@@ -21,7 +21,7 @@
       <div id = left-container class = "greyContainer">
           <div id = "post-data" style = "flex-grow: 1">
               <div class = "grid-x-nw" style = "align-items: start; margin-top:10px;">
-                  <div id = vote-container style = "width: 40px; ">
+                  <div class = "vote-container">
                       <button onclick="doUpvote();" class="voteButton interactable" >
                           <i class="fas fa-chevron-up voteIcon upvoteIcon" ></i>
                       </button>

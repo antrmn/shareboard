@@ -1,7 +1,9 @@
+<%--DEPRECATO--%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <div class="post greyContainer interactable">
-        <span id = vote-container>
+        <span class = "vote-container">
             <button onclick="doUpvote();" class="voteButton interactable" >
                  <i class="fas fa-chevron-up voteIcon upvoteIcon" ></i>
             </button>
@@ -42,5 +44,6 @@
                 </a>
             </div>
         </span>
-<%--    </a>--%>
 </div>
+
+<%--DEPRECATO--%>

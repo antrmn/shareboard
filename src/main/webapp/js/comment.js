@@ -12,7 +12,7 @@ function createComment(author, votes, content, id, isEven, isSpecial){
     }
     let comment = `
               <div id = "${id}" class = "grid-x-nw" style = "width: 100%; align-items: start; margin-top:10px; background-color: ${color}; border-radius: 4px; border: solid 1px #313132; ">
-                  <div id = vote-container style = "width: 40px; ">
+                  <div class = "vote-container">
                       <button onclick="doUpvote();" class="voteButton interactable" >
                           <i class="fas fa-chevron-up voteIcon upvoteIcon" ></i>
                       </button>
@@ -32,9 +32,9 @@ function createComment(author, votes, content, id, isEven, isSpecial){
                             ${content}
                           </p>
                       </div>
-                      <div id = "reply-button" class = "grey-text" >
+                      <div id = "reply-button" class = "grey-text" onclick="toggleTextArea(this)">
                           <i class="fas fa-comment-dots"></i>
-                          <span onclick="toggleTextArea()">Reply</span>
+                          <span>Reply</span>
                       </div>
                   </div>
               </div>
@@ -64,6 +64,23 @@ function loadComments(){
     }
 }
 
-function toggleTextArea(){
-    console.log("sup");
+function addComment(parent, content){
+
+}
+
+function toggleTextArea(el){
+    let test = `<div id = "comment-form" style = "width: 100%;">
+                    <textarea rows="5" style = "color: #fff; resize: vertical; width:100%; border-radius: 4px; background-color: var(--shareboard-container-2); border-color: var(--shareboard-container-1); border: solid 1px;"></textarea>
+                    <br>
+                    <button class = roundButton>Invia</button>
+                </div>`;
+
+    if($(el).hasClass('has-form')){
+        // $(el).parent().remove('#comment-form')
+        $(el).parent().find('#comment-form').remove();
+    }else{
+        $(test).insertAfter(el);
+    }
+
+    $(el).toggleClass('has-form');
 }

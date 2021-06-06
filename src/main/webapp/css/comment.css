@@ -1,3 +1,6 @@
 #reply-button:hover{
     background-color: #676869;
+    border-radius: 4px;
 }
+
+.has-form{}
