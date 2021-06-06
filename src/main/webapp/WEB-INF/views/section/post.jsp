@@ -1,6 +1,5 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <jsp:include page="../partials/head.jsp">
@@ -19,13 +18,13 @@
 <div id="body-container" class = "justify-center align-center">
   <div id="post-container" class = "grid-x-nw" style = "flex-basis: 1280px;">
       <div id = left-container class = "greyContainer">
-          <div id = "post-data" style = "flex-grow: 1">
+          <div id = "post-data" style = "flex-grow: 1; width: 100%;">
               <div class = "grid-x-nw" style = "align-items: start; margin-top:10px;">
                   <div class = "vote-container">
                           <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick="toggleVote(this, 'upvote', 'post')"></i>
                           <c:choose>
-                              <c:when test="${post.votes > 0}">
-                                  <c:set var="vote" value="${post.votes}" />
+                              <c:when test="${post.vote ne 0}">
+                                  <c:set var="vote" value="${post.vote}" />
                               </c:when>
                               <c:otherwise>
                                   <c:set var="vote" value="Vote" />
@@ -36,19 +35,19 @@
                   </div>
                   <div class = "grid-y-nw" style="flex-grow:1; align-items: start; margin-right: 40px;">
                       <div style = "flex-basis: 100%">
-                          <a class = white-text>s/test</a>
-                          <a class = grey-text>posted by somedude</a>
+                          <a class = white-text>s/${post.section.name}</a>
+                          <a class = grey-text>posted by ${post.author.username}</a>
                       </div>
-                      <div class = white-text>Best Title</div>
+                      <div class = white-text>${post.title}</div>
 
                       <div>
                           <p class = white-text style = "border: solid 1px gray; border-radius: 4px; padding: 7px; word-break: break-word;">
-                              Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum
+                              ${post.content}
                           </p>
                       </div>
                       <div class = "grey-text" >
                           <i class="fas fa-comment-dots"></i>
-                          ${post.nComments} 10 comments
+                          ${post.nComments}
                       </div>
 
                       <form  method = "POST" action= "./add-comment" style = "width:100%; border-bottom: solid 1px; border-radius:1px; border-color: gray;">
@@ -66,7 +65,7 @@
       </div>
       <div id="right-container">
           <jsp:include page="../partials/section-info.jsp">
-              <jsp:param name="description" value="${section.name}" />
+              <jsp:param name="description" value="${section.description}" />
               <jsp:param name="nFollowers" value="${section.nFollowers}" />
               <jsp:param name="link" value="test" />
           </jsp:include>

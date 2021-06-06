@@ -31,12 +31,20 @@ public class PostLoader extends HttpServlet {
         //se in sezione carica in base ad essa
         //order by
         //limit e offset
-        String path = (req.getPathInfo() != null) ? req.getPathInfo() : "/";
-        System.out.println(path);
+//        String path = (req.getPathInfo() != null) ? req.getPathInfo() : "/";
+//        System.out.println(path);
+//        System.out.println(req.getParameter("section"));
+//        System.out.println("loadPosts");
         System.out.println(req.getParameter("section"));
-        System.out.println("loadPosts");
+        String section = req.getParameter("section");
+//        String order = req.getParameter("order");
+//        String offset = req.getParameter("offset");
         PostSpecificationBuilder psb = new PostSpecificationBuilder();
-        psb.isInSectionByName("Desc");
+        if(section.equalsIgnoreCase("Home")){
+            psb.selectAll();
+        } else{
+            psb.isInSectionByName(section);
+        }
         Specification s = psb.build();
         try (Connection con = ConPool.getConnection()){
             PostDAO service = new PostDAO(con);

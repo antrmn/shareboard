@@ -84,6 +84,12 @@ public class PostSpecificationBuilder extends Specification.Builder<PostSpecific
         return this;
     }
 
+    public PostSpecificationBuilder selectAll(){
+        wheresJoiner.add("1");
+       // params.add(new Pair<>(name, java.sql.Types.VARCHAR));
+        return this;
+    }
+
     public PostSpecificationBuilder isAuthor(int id){
         wheresJoiner.add(" author_id = ? ");
         params.add(new Pair<>(id, java.sql.Types.INTEGER));

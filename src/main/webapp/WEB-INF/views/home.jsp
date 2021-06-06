@@ -5,7 +5,7 @@
 <head>
     <jsp:include page="partials/head.jsp">
         <jsp:param name="currentPage" value="Home" />
-        <jsp:param name="scripts" value="post" />
+        <jsp:param name="scripts" value="home,post" />
     </jsp:include>
 </head>
 <body>
