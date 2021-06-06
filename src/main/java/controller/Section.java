@@ -46,7 +46,6 @@ public class Section extends HttpServlet {
                         resp.sendRedirect("./home");
                     } else{
                         section.Section section = sections.get(0);
-//                        System.out.println(section.getName());
                         req.setAttribute("section", section);
                         if(postId != null){
                             PostSpecificationBuilder psb = new PostSpecificationBuilder();
@@ -58,6 +57,7 @@ public class Section extends HttpServlet {
                                 System.out.println(posts.get(0).getAuthor().getUsername());
                                 System.out.println(posts.get(0).getSection().getName());
                                 System.out.println(posts.get(0).getSection().getId());
+                                System.out.println(posts.get(0).getVote());
                                 req.setAttribute("post", posts.get(0));
                                 req.getRequestDispatcher("/WEB-INF/views/section/post.jsp").forward(req,resp);
                             } else{

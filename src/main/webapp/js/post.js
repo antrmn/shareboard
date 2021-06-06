@@ -28,7 +28,7 @@ function createPost(data){
             <i class="fas fa-chevron-down voteIcon downvoteIcon interactable" onclick = "toggleVote(this, 'downvote', 'post')"></i>
         </span>
         <span id = "post-media-container"> 
-           <a href = ${sectionLink}>`;
+           <a href = ${postLink}>`;
         if(data.type === "TEXT"){
             post += `<i class="fas fa-comment post-generic-holder" ></i>`;
         } else{
@@ -36,11 +36,11 @@ function createPost(data){
         }
         post += `</a></span>
         <span >
-            <a href = ${sectionLink}>
+            <a href = ${postLink}>
                 <h3 style = "display: block; margin-top: 5px; margin-bottom: 1px; margin-right:2px;">${data.title}</h3>
                 <div id="post-meta-container">
                     <a href=${sectionLink} style = "font-size: 12px;font-weight: 400;line-height: 16px">s/${data.section.name}</a>
-                    <a href="shareboard/user?user=${data.author.username}" style = "font-size: 12px;font-weight: 400;line-height: 16px">Posted by: ${data.author.username}</a>
+                    <a href="user?id=${data.author.username}" style = "font-size: 12px;font-weight: 400;line-height: 16px">Posted by: ${data.author.username}</a>
                     <a href=${postLink} id = "post-comment-container" style = "display: block; font-size: 12px;font-weight: 400;line-height: 16px; width: 120px; margin-bottom: 5px;">
                         <i class="fas fa-comment-dots"></i>
                         ${data.nComments} comments

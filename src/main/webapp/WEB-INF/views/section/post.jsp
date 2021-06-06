@@ -23,7 +23,7 @@
                   <div class = "vote-container">
                           <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick="toggleVote(this, 'upvote', 'post')"></i>
                           <c:choose>
-                              <c:when test="${post.vote ne 0}">
+                              <c:when test="${post.vote != 0}">
                                   <c:set var="vote" value="${post.vote}" />
                               </c:when>
                               <c:otherwise>
@@ -35,10 +35,13 @@
                   </div>
                   <div class = "grid-y-nw" style="flex-grow:1; align-items: start; margin-right: 40px;">
                       <div style = "flex-basis: 100%">
-                          <a class = white-text>s/${post.section.name}</a>
-                          <a class = grey-text>posted by ${post.author.username}</a>
+                          <a href="/shareboard/s?section=${post.section.name}" class = white-text>s/${post.section.name}</a>
+                          <a href="/shareboard/user?id=${post.author.id}" class = grey-text>posted by ${post.author.username}</a>
                       </div>
-                      <div class = white-text>${post.title}</div>
+                      <div class = white-text>
+                          ${post.title}
+                          <c:out value = "${post.title}"/>
+                      </div>
 
                       <div>
                           <p class = white-text style = "border: solid 1px gray; border-radius: 4px; padding: 7px; word-break: break-word;">

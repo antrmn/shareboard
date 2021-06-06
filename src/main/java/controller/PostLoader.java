@@ -31,18 +31,12 @@ public class PostLoader extends HttpServlet {
         //se in sezione carica in base ad essa
         //order by
         //limit e offset
-//        String path = (req.getPathInfo() != null) ? req.getPathInfo() : "/";
-//        System.out.println(path);
-//        System.out.println(req.getParameter("section"));
-//        System.out.println("loadPosts");
         System.out.println(req.getParameter("section"));
         String section = req.getParameter("section");
 //        String order = req.getParameter("order");
 //        String offset = req.getParameter("offset");
         PostSpecificationBuilder psb = new PostSpecificationBuilder();
-        if(section.equalsIgnoreCase("Home")){
-            psb.selectAll();
-        } else{
+        if(!section.equalsIgnoreCase("Home")){
             psb.isInSectionByName(section);
         }
         Specification s = psb.build();
@@ -53,9 +47,6 @@ public class PostLoader extends HttpServlet {
 //            System.out.println(req.getParameter("section"));
 //            System.out.println(gson.toJson(posts));
             resp.getWriter().write(gson.toJson(posts));
-//            req.setAttribute("posts", posts);
-//            System.out.println("HERE");
-//            req.getRequestDispatcher("/WEB-INF/views/test.jsp").forward(req, resp);
         } catch(SQLException | NamingException  e){
             e.printStackTrace();
         }

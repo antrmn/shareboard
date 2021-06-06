@@ -31,12 +31,9 @@ public class CommentLoader extends HttpServlet {
         //se in sezione carica in base ad essa
         //order by
         //limit e offset
-        String path = (req.getPathInfo() != null) ? req.getPathInfo() : "/";
-        System.out.println(path);
-        System.out.println(req.getParameter("section"));
-        System.out.println("loadPosts");
+        System.out.println(req.getParameter("post"));
         PostSpecificationBuilder psb = new PostSpecificationBuilder();
-        psb.isInSectionByName("Desc");
+        psb.byId(1);
         Specification s = psb.build();
         try (Connection con = ConPool.getConnection()){
             PostDAO service = new PostDAO(con);
