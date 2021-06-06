@@ -13,15 +13,11 @@ function createComment(author, votes, content, id, isEven, isSpecial){
     let comment = `
               <div id = "${id}" class = "grid-x-nw" style = "width: 100%; align-items: start; margin-top:10px; background-color: ${color}; border-radius: 4px; border: solid 1px #313132; ">
                   <div class = "vote-container">
-                      <button onclick="doUpvote();" class="voteButton interactable" >
-                          <i class="fas fa-chevron-up voteIcon upvoteIcon" ></i>
-                      </button>
-                      <div style="text-align: center">
-                          <div style="font-size: 12px;font-weight: 700; line-height: 16px;">${votes}</div>
-                      </div>
-                      <button class="voteButton interactable" onclick="doDownvote();">
-                          <i class="fas fa-chevron-down voteIcon downvoteIcon"></i>
-                      </button>
+                    <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick = "toggleVote(this, 'upvote', 'comment')"></i>
+                    <div class = "vote-count" style="word-break: initial; text-align: center; font-size: 12px;font-weight: 700; line-height: 16px;">
+                        ${votes}
+                    </div>
+                    <i class="fas fa-chevron-down voteIcon downvoteIcon interactable" onclick = "toggleVote(this, 'downvote', 'comment')"></i>
                   </div>
                   <div class = "grid-y-nw" style="flex-grow:1; align-items: start;padding-bottom: 10px; padding-right: 10px;">
                       <div style = "flex-basis: 100%">

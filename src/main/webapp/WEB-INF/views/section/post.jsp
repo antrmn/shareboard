@@ -22,10 +22,7 @@
           <div id = "post-data" style = "flex-grow: 1">
               <div class = "grid-x-nw" style = "align-items: start; margin-top:10px;">
                   <div class = "vote-container">
-                      <button onclick="doUpvote();" class="voteButton interactable" >
-                          <i class="fas fa-chevron-up voteIcon upvoteIcon" ></i>
-                      </button>
-                      <div style="text-align: center">
+                          <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick="toggleVote(this, 'upvote', 'post')"></i>
                           <c:choose>
                               <c:when test="${post.votes > 0}">
                                   <c:set var="vote" value="${post.votes}" />
@@ -34,11 +31,8 @@
                                   <c:set var="vote" value="Vote" />
                               </c:otherwise>
                           </c:choose>
-                          <div style="font-size: 12px;font-weight: 700; line-height: 16px;">${vote}</div>
-                      </div>
-                      <button class="voteButton interactable" onclick="doDownvote();">
-                          <i class="fas fa-chevron-down voteIcon downvoteIcon"></i>
-                      </button>
+                          <div class = "vote-count" style="word-break: initial; text-align: center; font-size: 12px;font-weight: 700; line-height: 16px;">${vote}</div>
+                          <i class="fas fa-chevron-down voteIcon downvoteIcon interactable" onclick="toggleVote(this, 'downvote', 'post')"></i>
                   </div>
                   <div class = "grid-y-nw" style="flex-grow:1; align-items: start; margin-right: 40px;">
                       <div style = "flex-basis: 100%">

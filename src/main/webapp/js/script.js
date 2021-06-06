@@ -13,25 +13,8 @@ window.onclick = function(event) {
 }
 
 function toggleDropdown(state, id){
-
-    console.log(id)
     console.log(document.getElementById(id).classList.contains("show"))
     document.getElementById(id).classList.toggle("show");
-    // if(document.getElementById(e.id).classList.contains("show") && state == false){
-    //     console.log("NOPE3");
-    //     document.getElementById(e.id).classList.toggle("show");
-    //     let dropdowns = document.getElementsByClassName("dropdown-content");
-    //     for (let i = 0; i < dropdowns.length; i++) {
-    //         let openDropdown = dropdowns[i];
-    //         if (openDropdown.classList.contains('show')) {
-    //             openDropdown.classList.remove('show');
-    //         }
-    //     }
-    // }
-
-    // if(state){
-    //     document.getElementById(id).classList.toggle("show");
-    // }
 }
 
 function doUpvote(){console.log('test')}
@@ -47,6 +30,54 @@ function toggleFavorite(e){
         e.classList.add("fas");
         e.style.color = "blue";
     }
+
+    //send ajax request
+}
+
+function toggleVote(el, elementType, actiontype){
+    let currentVotes = $(el).parent().find(".vote-count").text();
+    let modifier = 0;
+
+    if(currentVotes === "Vote")
+        currentVotes = 0;
+    currentVotes = parseInt(currentVotes);
+    console.log(currentVotes);
+
+    if(elementType === "upvote"){
+        let upvoteElement = el;
+        let downvoteElement = $(el).parent().find(".downvoteIcon")
+
+        if($(downvoteElement).hasClass('downvote-icon-active')){
+            $(downvoteElement).toggleClass('downvote-icon-active')
+            modifier = 2;
+        } else{
+            if($(upvoteElement).hasClass('upvote-icon-active')){
+                modifier = -1;
+            } else {
+                modifier = 1;
+            }
+        }
+        $(upvoteElement).toggleClass('upvote-icon-active')
+    } else if (elementType === "downvote"){
+        let upvoteElement = $(el).parent().find(".upvoteIcon");
+        let downvoteElement = el;
+
+        if($(upvoteElement).hasClass('upvote-icon-active')){
+            $(upvoteElement).toggleClass('upvote-icon-active')
+            modifier = -2;
+        } else{
+            if($(downvoteElement).hasClass('downvote-icon-active')){
+                modifier = 1;
+            } else {
+                modifier = -1;
+            }
+        }
+        $(downvoteElement).toggleClass('downvote-icon-active')
+    } else {
+        console.log("ALERT ERROR IN TOGGLEVOTE")
+    }
+
+    $(el).parent().find(".vote-count").text(currentVotes + modifier);
 
     //send ajax request
 }

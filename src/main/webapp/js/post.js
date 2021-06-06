@@ -10,15 +10,9 @@ function createPost(data){
 
     let post = `<div class="post greyContainer interactable">
         <span class = "vote-container">
-            <button onclick="doUpvote();" class="voteButton interactable" >
-                 <i class="fas fa-chevron-up voteIcon upvoteIcon" ></i>
-            </button>
-            <div style="text-align: center">
-                <div style="font-size: 12px;font-weight: 700; line-height: 16px;">${data.votes}</div>
-            </div>
-            <button class="voteButton interactable" onclick="doDownvote();">
-                <i class="fas fa-chevron-down voteIcon downvoteIcon"></i>
-            </button>
+            <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick = "toggleVote(this, 'upvote', 'post')"></i>
+            <div class = "vote-count" style="word-break: initial; text-align: center; font-size: 12px;font-weight: 700; line-height: 16px;">${data.votes}</div>
+            <i class="fas fa-chevron-down voteIcon downvoteIcon interactable" onclick = "toggleVote(this, 'downvote', 'post')"></i>
         </span>
         <span id = "post-media-container"> 
            <a href = "https://google.com">`;

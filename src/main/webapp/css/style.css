@@ -455,6 +455,7 @@ navbar *{
 
 .vote-container{
     width: 40px;
+    flex-shrink: 0;
     display: flex;
     align-content: center;
     justify-content: center;
@@ -476,6 +477,14 @@ navbar *{
 .voteIcon:hover{
     background-color: #676869;
     border-radius: 3px;
+}
+
+.upvote-icon-active{
+    color: var(--shareboard-upvote);
+}
+
+.downvote-icon-active{
+    color: var(--shareboard-downvote);
 }
 
 .upvoteIcon:hover{
