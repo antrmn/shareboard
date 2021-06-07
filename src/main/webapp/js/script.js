@@ -83,7 +83,7 @@ function toggleVote(el, elementType, actiontype){
 }
 
 let getUrlParameter = function getUrlParameter(sParam) {
-    var sPageURL = window.location.search.substring(1),
+    let sPageURL = window.location.search.substring(1),
         sURLVariables = sPageURL.split('&'),
         sParameterName,
         i;

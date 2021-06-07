@@ -38,7 +38,12 @@ public class CommentLoader extends HttpServlet {
             Gson gson = new Gson();
 //            System.out.println(req.getParameter("section"));
             //System.out.println(gson.toJson(comments));
-            resp.getWriter().write(gson.toJson(comments));
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            ArrayList<String> test = new ArrayList<>();
+            test.add(gson.toJson(comments));
+            resp.getWriter().print(gson.toJson(test));
+            resp.getWriter().flush();
         } catch(SQLException | NamingException  e){
             e.printStackTrace();
         }

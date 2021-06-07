@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import persistence.ConPool;
 import persistence.Specification;
 import post.Post;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/loadPosts")
@@ -44,9 +46,13 @@ public class PostLoader extends HttpServlet {
             PostDAO service = new PostDAO(con);
             List<Post> posts = service.fetch(s);
             Gson gson = new Gson();
-//            System.out.println(req.getParameter("section"));
 //            System.out.println(gson.toJson(posts));
-            resp.getWriter().write(gson.toJson(posts));
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            ArrayList<String> test = new ArrayList<>();
+            test.add(gson.toJson(posts));
+            resp.getWriter().print(gson.toJson(test));
+            resp.getWriter().flush();
         } catch(SQLException | NamingException  e){
             e.printStackTrace();
         }

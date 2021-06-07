@@ -1,5 +1,5 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <jsp:include page="../partials/head.jsp">
@@ -40,7 +40,6 @@
                       </div>
                       <div class = white-text>
                           ${post.title}
-                          <c:out value = "${post.title}"/>
                       </div>
 
                       <div>
