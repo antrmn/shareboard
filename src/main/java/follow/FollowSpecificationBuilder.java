@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class FollowSpecificationBuilder extends Specification.Builder<FollowSpecificationBuilder>{
-    private List<String> columnsList = List.of("section.id", "user.id");
+    private List<String> columnsList = List.of("post_id", "user_id");
 
     private StringJoiner joinsJoiner = new StringJoiner("\n");
     private StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ").setEmptyValue(" ");
@@ -29,8 +29,10 @@ public class FollowSpecificationBuilder extends Specification.Builder<FollowSpec
     }
 
     public Specification build() {
-
-
+        if(joinSectionNeeded)
+            joinsJoiner.add(" JOIN section ON section.id=follow.section_id");
+        if(joinUserNeeded)
+            joinsJoiner.add(" JOIN user ON user.id=follow.user_id");
 
         joins = joinsJoiner.toString();
         wheres = wheresJoiner.toString();
@@ -51,7 +53,7 @@ public class FollowSpecificationBuilder extends Specification.Builder<FollowSpec
 
     public FollowSpecificationBuilder byUserName(String name){
         joinUserNeeded = true;
-        wheresJoiner.add(" user.username LIKE ? ");
+        wheresJoiner.add(" username LIKE ? ");
         params.add(new Pair<>("%"+name+"%", Types.VARCHAR));
         return this;
     }
@@ -65,13 +67,13 @@ public class FollowSpecificationBuilder extends Specification.Builder<FollowSpec
 
     public FollowSpecificationBuilder showSectionNames(){
         joinSectionNeeded = true;
-        columnsList.add("section.name");
+        columnsList.add("section.name AS section_name");
         return this;
     }
 
     public FollowSpecificationBuilder showUserNames(){
         joinUserNeeded = true;
-        columnsList.add("user.name");
+        columnsList.add("user.name AS username");
         return this;
     }
 }

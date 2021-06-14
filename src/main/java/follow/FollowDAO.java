@@ -51,7 +51,7 @@ public class FollowDAO {
         return rowsUpdated;
     }
 
-    public List<Integer> insert(List<Follow> follows) throws SQLException {
+    public int insert(List<Follow> follows) throws SQLException {
         String statement = "INSERT INTO follow (%s) VALUES %s";
         String columns = "user_id, section_id";
         String questionMarks = "(?,?)";
@@ -66,19 +66,14 @@ public class FollowDAO {
 
         statement = String.format(statement, columns, questionMarksJoiner.toString());
         PreparedStatement ps = con.prepareStatement(statement, Statement.RETURN_GENERATED_KEYS);
-        StatementSetters.setParameters(ps, params).executeUpdate();
-        ResultSet rs = ps.getGeneratedKeys();
-        List<Integer> ids = new ArrayList<>();
-        while(rs.next()){
-            ids.add(rs.getInt(1));
-        }
+        int insertedRows = StatementSetters.setParameters(ps, params).executeUpdate();
+
         ps.close();
-        rs.close();
-        return ids;
+        return insertedRows;
     }
 
     public int delete(List<Pair<User, Section>> pks) throws SQLException {
-        String statement = "DELETE FROM post WHERE %s LIMIT ?";
+        String statement = "DELETE FROM follow WHERE %s LIMIT ?";
 
         StringJoiner whereJoiner = new StringJoiner(" OR ");
         List<Pair<Object, Integer>> params = new ArrayList<>();

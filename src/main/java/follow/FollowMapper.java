@@ -16,8 +16,8 @@ import java.util.List;
 public class FollowMapper implements AbstractMapper<Follow> {
 
     static LinkedHashMap<String, SQL_TriConsumer<User>> mapUser = new LinkedHashMap<>(){{
-        put("author_id",      (u,s,rs) -> u.setId(rs.getInt(s)));
-        put("author_username",(u,s,rs) -> u.setUsername(rs.getString(s)));
+        put("user_id",      (u,s,rs) -> u.setId(rs.getInt(s)));
+        put("username",     (u,s,rs) -> u.setUsername(rs.getString(s)));
     }};
 
     static LinkedHashMap<String, SQL_TriConsumer<Section>> mapSection = new LinkedHashMap<>(){{
@@ -40,8 +40,8 @@ public class FollowMapper implements AbstractMapper<Follow> {
             Follow follow = new Follow();
 
             User user = null;
-            if (columns.contains("author_id")) {
-                user = users.get(rs.getInt("author_id"));
+            if (columns.contains("user_id")) {
+                user = users.get(rs.getInt("user_id"));
                 if (user == null) {
                     user = new User();
                     for (String column : columns) {
