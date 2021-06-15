@@ -72,4 +72,10 @@ public class UserSpecificationBuilder extends Specification.Builder<UserSpecific
         orderBy = "username";
         return this;
     }
+
+    public UserSpecificationBuilder getPassword(){
+        columnsList.add("password");
+        columnsList.add("salt");
+        return this;
+    }
 }

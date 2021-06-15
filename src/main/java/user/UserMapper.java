@@ -16,14 +16,15 @@ import java.util.Map;
 public class UserMapper implements AbstractMapper<User> {
 
     static Map<String, SQL_TriConsumer<User>> map = new HashMap<>() {{
-        put("id", (u, s, rs) -> u.setId(rs.getInt(s)));
-        put("username", (u, s, rs) -> u.setUsername(rs.getString(s)));
-        put("creation_date", (u, s, rs) -> u.setCreationDate(rs.getTimestamp(s).toInstant()));
-        put("password", (u, s, rs) -> u.setPassword(rs.getString(s)));
-        put("description", (u, s, rs) -> u.setDescription(rs.getString(s)));
-        put("picture", (u, s, rs) -> u.setPicture(rs.getString(s)));
-        put("email", (u, s, rs) -> u.setEmail(rs.getString(s)));
-        put("is_admin", (u, s, rs) -> u.setAdmin(rs.getBoolean(s)));
+        put("id",               (u, s, rs) -> u.setId(rs.getInt(s)));
+        put("username",         (u, s, rs) -> u.setUsername(rs.getString(s)));
+        put("creation_date",    (u, s, rs) -> u.setCreationDate(rs.getTimestamp(s).toInstant()));
+        put("password",         (u, s, rs) -> u.getPassword().setPassword(rs.getBytes(s)));
+        put("salt",             (u, s, rs) -> u.getPassword().setSalt(rs.getBytes(s)));
+        put("description",      (u, s, rs) -> u.setDescription(rs.getString(s)));
+        put("picture",          (u, s, rs) -> u.setPicture(rs.getString(s)));
+        put("email",            (u, s, rs) -> u.setEmail(rs.getString(s)));
+        put("is_admin",         (u, s, rs) -> u.setAdmin(rs.getBoolean(s)));
     }};
 
     public List<User> toBeans(ResultSet rs) throws SQLException {
@@ -37,6 +38,11 @@ public class UserMapper implements AbstractMapper<User> {
         List<User> beans = new ArrayList<>();
         while (rs.next()) {
             User bean = new User();
+
+            if(columns.contains("salt") || columns.contains("password")){
+                bean.setPassword(new HashedPassword());
+            }
+
             for (String column : columns) {
                 SQL_TriConsumer<User> consumer = map.get(column);
                 if(consumer != null)

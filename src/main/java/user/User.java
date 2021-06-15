@@ -5,7 +5,7 @@ import java.time.Instant;
 public class User {
     private Integer id;
     private String username;
-    private String password;
+    private HashedPassword password;
     private String description;
     private String email;
     private String picture;
@@ -52,11 +52,11 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
+    public HashedPassword getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+    public void setPassword(HashedPassword password) {
         this.password = password;
     }
 

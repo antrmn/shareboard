@@ -52,8 +52,10 @@ public class UserDAO{
             valuesToSet.add("picture=?");
         }
         if(user.getPassword() != null){
-            params.add(new Pair<>(user.getPicture(), Types.VARCHAR));
+            params.add(new Pair<>(user.getPassword().getPassword(), Types.BINARY));
             valuesToSet.add("password=?");
+            params.add(new Pair<>(user.getPassword().getSalt(), Types.BINARY));
+            valuesToSet.add("salt=?");
         }
         params.add(new Pair<>(user.getId(), Types.INTEGER));
 
@@ -66,14 +68,15 @@ public class UserDAO{
 
     public List<Integer> insert(List<User> users) throws SQLException {
         String statement = "INSERT INTO user (%s) VALUES %s";
-        String columns = "username, password, email, description, picture";
+        String columns = "username, password, salt, email, description, picture";
         String questionMarks = "(?,?,?,?,?)";
 
         List<Pair<Object, Integer>> params = new ArrayList<>();
         StringJoiner questionMarksJoiner = new StringJoiner(",");
         for(User user : users) {
             params.add(new Pair<>(user.getUsername(), Types.VARCHAR));
-            params.add(new Pair<>(user.getPassword(), Types.VARCHAR));
+            params.add(new Pair<>(user.getPassword().getPassword(), Types.BINARY));
+            params.add(new Pair<>(user.getPassword().getSalt(), Types.BINARY));
             params.add(new Pair<>(user.getEmail(), Types.VARCHAR));
             params.add(new Pair<>(user.getDescription(), Types.VARCHAR));
             params.add(new Pair<>(user.getPicture(), Types.VARCHAR));

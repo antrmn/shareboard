@@ -264,11 +264,12 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
                         `id` int NOT NULL AUTO_INCREMENT,
                         `username` varchar(30) NOT NULL,
-                        `password` varchar(255) NOT NULL,
+                        `password` binary(16) NOT NULL,
                         `email` varchar(255) NOT NULL,
                         `description` varchar(255) DEFAULT NULL,
                         `picture` varchar(4096) DEFAULT NULL,
                         `creation_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                        `salt` binary(16) NOT NULL,
                         PRIMARY KEY (`id`),
                         UNIQUE KEY `username` (`username`),
                         UNIQUE KEY `email` (`email`),
@@ -282,7 +283,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Utente1','password1','utente1@email.it',NULL,NULL,'2021-03-30 12:41:26'),(2,'Utente2','password2','utente2@email.it',NULL,NULL,'2021-03-30 12:41:26'),(3,'Utente3','password3','utente3@email.it',NULL,NULL,'2021-03-30 12:41:26'),(4,'Utente4','password4','utente4@email.it',NULL,NULL,'2021-03-30 12:41:26'),(5,'Utente5','password5','utente5@email.it',NULL,NULL,'2021-03-30 12:41:26');
+INSERT INTO `user` VALUES (1,'Utente1',_binary 'z�쀆nJ\�XJ8�u��','utente1@email.it',NULL,NULL,'2021-03-30 12:41:26',_binary '|�O\�T�q�Utu�� 7�'),(2,'Utente2',_binary 'z�쀆nJ\�XJ8�u��','utente2@email.it',NULL,NULL,'2021-03-30 12:41:26',_binary '|�O\�T�q�Utu�� 7�'),(3,'Utente3',_binary 'z�쀆nJ\�XJ8�u��','utente3@email.it',NULL,NULL,'2021-03-30 12:41:26',_binary '|�O\�T�q�Utu�� 7�'),(4,'Utente4',_binary 'z�쀆nJ\�XJ8�u��','utente4@email.it',NULL,NULL,'2021-03-30 12:41:26',_binary '|�O\�T�q�Utu�� 7�'),(5,'Utente5',_binary 'z�쀆nJ\�XJ8�u��','utente5@email.it',NULL,NULL,'2021-03-30 12:41:26',_binary '|�O\�T�q�Utu�� 7�');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -357,6 +358,7 @@ SET @saved_cs_client     = @@character_set_client;
                                      1 AS `id`,
                                      1 AS `username`,
                                      1 AS `password`,
+                                     1 AS `salt`,
                                      1 AS `email`,
                                      1 AS `description`,
                                      1 AS `picture`,
@@ -431,7 +433,7 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
     /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-    /*!50001 VIEW `v_user` AS select `user`.`id` AS `id`,`user`.`username` AS `username`,`user`.`password` AS `password`,`user`.`email` AS `email`,`user`.`description` AS `description`,`user`.`picture` AS `picture`,`user`.`creation_date` AS `creation_date`,(`a`.`user_id` is not null) AS `is_admin` from (`user` left join `admin` `a` on((`a`.`user_id` = `user`.`id`))) */;
+    /*!50001 VIEW `v_user` AS select `user`.`id` AS `id`,`user`.`username` AS `username`,`user`.`password` AS `password`,`user`.`salt` AS `salt`,`user`.`email` AS `email`,`user`.`description` AS `description`,`user`.`picture` AS `picture`,`user`.`creation_date` AS `creation_date`,(`a`.`user_id` is not null) AS `is_admin` from (`user` left join `admin` `a` on((`a`.`user_id` = `user`.`id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -445,4 +447,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-15 18:50:25
+-- Dump completed on 2021-06-15 23:07:19
