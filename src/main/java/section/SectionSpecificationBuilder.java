@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class SectionSpecificationBuilder extends Specification.Builder<SectionSpecificationBuilder>{
-    List<String> columnsList = List.of("section.id","section.description","section.name","section.picture");
+    List<String> columnsList = List.of("section.id","section.description","section.name","section.picture","section.banner");
 
     StringJoiner joinsJoiner = new StringJoiner("\n");
     StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ");

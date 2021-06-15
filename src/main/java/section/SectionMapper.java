@@ -18,6 +18,7 @@ public class SectionMapper implements AbstractMapper<Section> {
         put("description",       (p,s,rs) -> p.setDescription(rs.getString(s)));
         put("name",              (p,s,rs) -> p.setName(rs.getString(s)));
         put("picture",           (p,s,rs) -> p.setPicture(rs.getString(s)));
+        put("banner",            (p,s,rs) -> p.setBanner(rs.getString(s)));
     }};
 
     public List<Section> toBeans(ResultSet rs) throws SQLException {

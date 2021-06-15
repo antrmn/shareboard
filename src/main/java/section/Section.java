@@ -11,6 +11,7 @@ public class Section {
     private String name;
     private String description;
     private String picture;
+    private String banner;
     private Integer nFollowers;
     private Boolean isFollowed;
 
@@ -80,6 +81,12 @@ public class Section {
         this.posts = posts;
     }
 
+    public String getBanner() {
+        return banner;
+    }
     private List<Post> posts;
+    public void setBanner(String banner) {
+        this.banner = banner;
+    }
 
 }

@@ -48,6 +48,11 @@ public class SectionDAO {
             params.add(new Pair<>(section.getPicture(), Types.VARCHAR));
             valuesToSet.add("picture=?");
         }
+
+        if(section.getBanner() != null){
+            params.add(new Pair<>(section.getBanner(), Types.VARCHAR));
+            valuesToSet.add("banner=?");
+        }
         params.add(new Pair<>(section.getId(), Types.INTEGER));
 
         statement = String.format(statement, valuesToSet.toString());
@@ -59,8 +64,8 @@ public class SectionDAO {
 
     public List<Integer> insert(List<Section> sections) throws SQLException {
         String statement = "INSERT INTO section (%s) VALUES %s";
-        String columns = "name, description, picture";
-        String questionMarks = "(?,?,?)";
+        String columns = "name, description, picture, banner";
+        String questionMarks = "(?,?,?,?)";
 
         List<Pair<Object, Integer>> params = new ArrayList<>();
         StringJoiner questionMarksJoiner = new StringJoiner(",");
@@ -68,6 +73,7 @@ public class SectionDAO {
             params.add(new Pair<>(section.getName(), Types.VARCHAR));
             params.add(new Pair<>(section.getDescription(), Types.VARCHAR));
             params.add(new Pair<>(section.getPicture(), Types.VARCHAR));
+            params.add(new Pair<>(section.getBanner(), Types.VARCHAR));
             questionMarksJoiner.add(questionMarks);
         }
 
