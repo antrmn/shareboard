@@ -25,6 +25,10 @@ public class FollowMapper implements AbstractMapper<Follow> {
         put("section_name",   (sec,s,rs) -> sec.setName(rs.getString(s)));
     }};
 
+    static LinkedHashMap<String, SQL_TriConsumer<Follow>> mapFollow = new LinkedHashMap<>(){{
+        put("follow_date", (fol,s,rs) -> fol.setFollowDate(rs.getTimestamp(s) == null ? null : rs.getTimestamp(s).toInstant()));
+    }};
+
     public List<Follow> toBeans(ResultSet rs) throws SQLException {
         ResultSetMetaData rsmd = rs.getMetaData();
 
@@ -68,6 +72,12 @@ public class FollowMapper implements AbstractMapper<Follow> {
                 }
             }
             follow.setSection(section);
+
+            for (String column : columns) {
+                SQL_TriConsumer<Follow> consumer = mapFollow.get(column);
+                if(consumer != null)
+                    consumer.accept(follow, column, rs);
+            }
 
             beans.add(follow);
         }

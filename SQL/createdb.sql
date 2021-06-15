@@ -147,6 +147,7 @@ DROP TABLE IF EXISTS `follow`;
 CREATE TABLE `follow` (
                           `user_id` int NOT NULL,
                           `section_id` int NOT NULL,
+                          `follow_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
                           PRIMARY KEY (`user_id`,`section_id`),
                           KEY `section_id` (`section_id`),
                           CONSTRAINT `fk_follow_section_section_id` FOREIGN KEY (`section_id`) REFERENCES `section` (`id`) ON DELETE CASCADE,
@@ -160,7 +161,7 @@ CREATE TABLE `follow` (
 
 LOCK TABLES `follow` WRITE;
 /*!40000 ALTER TABLE `follow` DISABLE KEYS */;
-INSERT INTO `follow` VALUES (1,1),(1,2),(3,2);
+INSERT INTO `follow` VALUES (1,1,'2021-06-15 16:49:13'),(1,2,'2021-06-15 16:49:13'),(3,2,'2021-06-15 16:49:13');
 /*!40000 ALTER TABLE `follow` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -444,4 +445,4 @@ SET character_set_client = @saved_cs_client;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-06-15 18:33:40
+-- Dump completed on 2021-06-15 18:50:25

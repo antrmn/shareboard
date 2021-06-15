@@ -11,6 +11,15 @@ public class Follow {
 
     private User user;
     private Section section;
+    private Instant followDate;
+
+    public Instant getFollowDate() {
+        return followDate;
+    }
+
+    public void setFollowDate(Instant followDate) {
+        this.followDate = followDate;
+    }
 
     public User getUser() {
         return user;

@@ -33,13 +33,14 @@ public class FollowDAO {
         return follows;
     }
 
-    //Questo metodo NON FA NIENTE! La tablla follow non presenta colonne che non sono primary key (per ora).
+    /* Questo metodo NON FA NIENTE! La tabella follow per ora non presenta colonne editabili, ma il metodo resta "aperto"
+        per eventuali cambiamenti. */
     public int update(Follow follow) throws SQLException {
         String statement = "UPDATE follow SET %s WHERE section_id=? AND user_id=? LIMIT 1";
 
         StringJoiner valuesToSet = new StringJoiner(",");
         List<Pair<Object, Integer>> params = new ArrayList<>();
-        //Inserisci parametri da settare (se ci sono)
+        //Inserisci qui i parametri da settare (se ci sono)
 
         params.add(new Pair<>(follow.getSection() == null ? null : follow.getSection().getId(), Types.INTEGER));
         params.add(new Pair<>(follow.getUser() == null ? null : follow.getUser().getId(), Types.INTEGER));
