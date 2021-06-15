@@ -14,8 +14,8 @@ public class Section {
     private String banner;
     private Integer nFollowers;
     private Boolean isFollowed;
-
     private Collection<User> followers;
+    private List<Post> posts;
 
     public Integer getId() {
         return id;
@@ -84,7 +84,7 @@ public class Section {
     public String getBanner() {
         return banner;
     }
-    private List<Post> posts;
+
     public void setBanner(String banner) {
         this.banner = banner;
     }
