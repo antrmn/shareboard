@@ -115,4 +115,23 @@ public class UserDAO{
         return rowsDeleted;
     }
 
+    public int delete(int id) throws SQLException {
+        return delete(List.of(id));
+    }
+
+    public User get(int id, boolean getPassword) throws SQLException{
+        UserSpecificationBuilder usb = new UserSpecificationBuilder().byId(id);
+        if(getPassword)
+            usb.getPassword();
+        return fetch(usb.build()).get(0);
+    }
+
+    public User get(String username) throws SQLException{
+        UserSpecificationBuilder usb = new UserSpecificationBuilder().byUsernameExact(username);
+        return fetch(usb.build()).get(0);
+    }
+
+    public int insert(User user) throws SQLException {
+        return insert(List.of(user)).size();
+    }
 }

@@ -1,8 +1,8 @@
 package commentvote;
 
+import comment.Comment;
 import persistence.Specification;
 import persistence.StatementSetters;
-import comment.Comment;
 import user.User;
 import util.Pair;
 
@@ -95,4 +95,17 @@ public class CommentVoteDAO {
         return rowsDeleted;
     }
 
+    public int delete(Pair<User, Comment> pk) throws SQLException {
+        return delete(List.of(pk));
+    }
+
+    public CommentVote get(Pair<User,Comment> pk) throws SQLException{
+        CommentVoteSpecificationBuilder cvsb = new CommentVoteSpecificationBuilder().byUserId(pk.getLeft().getId())
+                                                                                    .byCommentId(pk.getRight().getId());
+        return fetch(cvsb.build()).get(0);
+    }
+
+    public int insert(CommentVote commentVote) throws SQLException {
+        return insert(List.of(commentVote));
+    }
 }

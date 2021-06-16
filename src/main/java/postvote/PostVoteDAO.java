@@ -3,7 +3,6 @@ package postvote;
 import persistence.Specification;
 import persistence.StatementSetters;
 import post.Post;
-import section.Section;
 import user.User;
 import util.Pair;
 
@@ -96,4 +95,17 @@ public class PostVoteDAO {
         return rowsDeleted;
     }
 
+    public int delete(Pair<User,Post> pk) throws SQLException {
+        return delete(List.of(pk));
+    }
+
+    public PostVote get(Pair<User,Post> pk) throws SQLException{
+        PostVoteSpecificationBuilder pvsb = new PostVoteSpecificationBuilder().byUserId(pk.getLeft().getId())
+                                                                              .byPostId(pk.getRight().getId());
+        return fetch(pvsb.build()).get(0);
+    }
+
+    public int insert(PostVote postVote) throws SQLException {
+        return insert(List.of(postVote));
+    }
 }

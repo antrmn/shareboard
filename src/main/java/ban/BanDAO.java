@@ -2,8 +2,6 @@ package ban;
 
 import persistence.Specification;
 import persistence.StatementSetters;
-import post.Post;
-import user.User;
 import util.Pair;
 
 import java.sql.*;
@@ -122,4 +120,16 @@ public class BanDAO {
         return rowsDeleted;
     }
 
+    public int delete(int id) throws SQLException {
+        return delete(List.of(id));
+    }
+
+    public Ban get(int id) throws SQLException{
+        BanSpecificationBuilder bsb = new BanSpecificationBuilder().byId(id);
+        return fetch(bsb.build()).get(0);
+    }
+
+    public int insert(Ban ban) throws SQLException {
+        return insert(List.of(ban)).size();
+    }
 }

@@ -109,4 +109,17 @@ public class SectionDAO {
         return rowsDeleted;
     }
 
+    public int delete(int id) throws SQLException {
+        return delete(List.of(id));
+    }
+
+    public Section get(int id) throws SQLException{
+        SectionSpecificationBuilder ssb = new SectionSpecificationBuilder().byId(id);
+        return fetch(ssb.build()).get(0);
+    }
+
+    public int insert(Section section) throws SQLException {
+        return insert(List.of(section)).size();
+    }
+
 }

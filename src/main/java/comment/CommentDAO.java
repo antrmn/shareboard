@@ -214,4 +214,17 @@ public class CommentDAO {
         rs.close();
         return commentsMap;
     }
+
+    public int delete(int id) throws SQLException {
+        return delete(List.of(id));
+    }
+
+    public Comment get(int id) throws SQLException{
+        CommentSpecificationBuilder csb = new CommentSpecificationBuilder().byId(id);
+        return fetch(csb.build()).get(0);
+    }
+
+    public int insert(Comment comment) throws SQLException {
+        return insert(List.of(comment)).size();
+    }
 }

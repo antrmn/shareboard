@@ -49,6 +49,12 @@ public class BanSpecificationBuilder extends Specification.Builder<BanSpecificat
         return this;
     }
 
+    public BanSpecificationBuilder byId(int id){
+        wheresJoiner.add(" id=? ");
+        params.add(new Pair<>(id, Types.INTEGER));
+        return this;
+    }
+
     public BanSpecificationBuilder bySectionId(int id){
         wheresJoiner.add(" section_id=? ");
         params.add(new Pair<>(id, Types.INTEGER));

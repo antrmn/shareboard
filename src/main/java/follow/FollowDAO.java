@@ -93,4 +93,17 @@ public class FollowDAO {
         return rowsDeleted;
     }
 
+    public int delete(Pair<User, Section> pk) throws SQLException {
+        return delete(List.of(pk));
+    }
+
+    public Follow get(Pair<User,Section> pk) throws SQLException{
+        FollowSpecificationBuilder fsb = new FollowSpecificationBuilder().byUserId(pk.getLeft().getId())
+                                                                         .bySectionId(pk.getRight().getId());
+        return fetch(fsb.build()).get(0);
+    }
+
+    public int insert(Follow follow) throws SQLException {
+        return insert(List.of(follow));
+    }
 }
