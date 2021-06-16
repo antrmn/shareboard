@@ -1,5 +1,7 @@
 package controller;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,10 +13,12 @@ import java.util.List;
 
 @WebServlet("/home")
 public class Home extends HttpServlet {
+
+    private static Logger logger = LogManager.getLogger(Home.class);
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-
+        logger.info("yooo");
         req.getRequestDispatcher("/WEB-INF/views/home.jsp").forward(req,resp);
     }
 
