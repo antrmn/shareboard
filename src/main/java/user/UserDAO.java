@@ -65,11 +65,11 @@ public class UserDAO{
         ps.close();
         return rowsUpdated;
     }
-
+    
     public List<Integer> insert(List<User> users) throws SQLException {
         String statement = "INSERT INTO user (%s) VALUES %s";
         String columns = "username, password, salt, email, description, picture";
-        String questionMarks = "(?,?,?,?,?)";
+        String questionMarks = "(?,?,?,?,?,?)";
 
         List<Pair<Object, Integer>> params = new ArrayList<>();
         StringJoiner questionMarksJoiner = new StringJoiner(",");

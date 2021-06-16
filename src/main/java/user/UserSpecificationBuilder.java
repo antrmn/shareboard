@@ -8,6 +8,8 @@ import java.sql.Types;
 import java.time.Instant;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class UserSpecificationBuilder extends Specification.Builder<UserSpecificationBuilder>{
     List<String> columnsList = List.of("user.id", "user.username", "user.email", "user.description", "user.picture",
@@ -63,6 +65,12 @@ public class UserSpecificationBuilder extends Specification.Builder<UserSpecific
         return this;
     }
 
+    public UserSpecificationBuilder byUsernameExact(String username){
+        wheresJoiner.add("username = ?");
+        params.add(new Pair<>(username, Types.VARCHAR));
+        return this;
+    }
+
     public UserSpecificationBuilder sortByTime(){
         orderBy = "creation_date";
         return this;
@@ -74,8 +82,10 @@ public class UserSpecificationBuilder extends Specification.Builder<UserSpecific
     }
 
     public UserSpecificationBuilder getPassword(){
-        columnsList.add("password");
-        columnsList.add("salt");
+        /* columnsList è una lista immutabile ma ho urgenza di aggiungere queste 2 stringhe quindi eccomi pronto a creare una nuova
+        lista immutabile sulla base della vecchia. Might fix later */
+        List<String> _list = Stream.concat(columnsList.stream(), List.of("user.password", "user.salt").stream()).collect(Collectors.toList());
+        columns = String.join(",", _list);
         return this;
     }
 }
