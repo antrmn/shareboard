@@ -1,5 +1,8 @@
 package persistence;
 
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import util.Pair;
 
 import java.sql.PreparedStatement;
@@ -7,6 +10,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public final class StatementSetters {
+    private static Logger logger = LogManager.getLogger(StatementSetters.class);
+
     /**
      * Costante per definire SQL_NULL
      */
@@ -32,6 +37,7 @@ public final class StatementSetters {
                 ps.setObject(i++, param.getLeft(), param.getRight());
             }
         }
+        logger.debug("Prepared an SQL statement: " + ps.toString().replace(";", ";\n"));
         return ps;
     }
 
