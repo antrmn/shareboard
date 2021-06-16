@@ -3,7 +3,7 @@
 
     <Properties>
         <Property name="logdir">C:/shareboard_tmp/log</Property>
-        <Property name="layout">%d [%t] %-5p %c- %m%n</Property>
+        <Property name="layout">%d %-5p  [%c{1}]: %m%n</Property>
     </Properties>
 
     <Appenders>
@@ -25,6 +25,10 @@
 
         <Logger name="controller.Home"
                 level="info" additivity="false">
+            <AppenderRef ref="LOCALHOST" />
+        </Logger>
+        <Logger name="persistence.StatementSetters"
+                level="debug" additivity="false">
             <AppenderRef ref="LOCALHOST" />
         </Logger>
 

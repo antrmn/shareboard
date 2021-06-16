@@ -8,6 +8,7 @@ import util.Pair;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class StatementSetters {
     private static Logger logger = LogManager.getLogger(StatementSetters.class);
@@ -30,6 +31,9 @@ public final class StatementSetters {
      */
     public static PreparedStatement setParameters(PreparedStatement ps, List<Pair<Object, Integer>> params) throws SQLException {
         int i=1;
+        String paramsString = params.stream().map(x -> String.format("(%s,%s)", x.getLeft(), x.getRight()))
+                                             .collect(Collectors.joining(","));
+        logger.debug("Preparing an SQL statement with these parameters: " + paramsString);
         for (Pair<Object, Integer> param : params) {
             if(param.getLeft() == NULL){
                 ps.setNull(i++, param.getRight());
