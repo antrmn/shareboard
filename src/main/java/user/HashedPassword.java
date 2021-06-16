@@ -44,6 +44,10 @@ public class HashedPassword {
         return null;
     }
 
+    public boolean check(String password){
+        return this.equals(hash(password, this.salt));
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
