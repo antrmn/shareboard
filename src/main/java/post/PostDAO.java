@@ -67,7 +67,7 @@ public class PostDAO {
 
     public List<Integer> insert(List<Post> posts) throws SQLException {
         String statement = "INSERT INTO post (%s) VALUES %s";
-        String columns = "title, content, type, section_id, author_id";
+        String columns = "title, content, type, author_id, section_id";
         String questionMarks = "(?,?,?,?,?)";
 
         List<Pair<Object, Integer>> params = new ArrayList<>();

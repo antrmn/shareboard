@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 public final class StatementSetters {
     private static Logger logger = LogManager.getLogger(StatementSetters.class);
 
+    //QUESTO NON FUNZIONA. Appena posso lo rimuovo.
     /**
      * Costante per definire SQL_NULL
      */
