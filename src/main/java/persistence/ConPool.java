@@ -15,7 +15,7 @@ import com.google.gson.GsonBuilder;
 
 public class ConPool {
 	private static DataSource dataSource;
-	public static Connection getConnection() throws SQLException, NamingException, IOException {
+	public static Connection getConnection() throws SQLException, IOException {
 
 //		Gson gson = new Gson();
 
