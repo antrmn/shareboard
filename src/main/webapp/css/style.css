@@ -562,9 +562,9 @@ navbar *{
 
 
 
-/*REGISTER STYLE*/
+/*REGISTER AND LOGIN STYLE*/
 
-#register-form input{
+#register-form input, #login-form input{
     border-radius:30px;
     background-color: #c3c3c3;
 }
