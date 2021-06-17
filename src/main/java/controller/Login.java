@@ -30,8 +30,11 @@ public class Login extends HttpServlet {
             UserDAO service = new UserDAO(con);
             User user = service.get(username, true);
             if (user != null) {
-                System.out.println(user.getPassword().check(password));
-                //TODO: errore "password non valida"
+                boolean success = user.getPassword().check(password);
+                System.out.println(success);
+                if(success){
+                    req.getSession(true).setAttribute("loggedUserId", user.getId());
+                }
             } else {
                 // TODO: errore "non esiste"
             }
