@@ -126,7 +126,8 @@ public class BanDAO {
 
     public Ban get(int id) throws SQLException{
         BanSpecificationBuilder bsb = new BanSpecificationBuilder().byId(id);
-        return fetch(bsb.build()).get(0);
+        List<Ban> singleton = fetch(bsb.build());
+        return singleton.isEmpty() ? null : singleton.get(0);
     }
 
     public int insert(Ban ban) throws SQLException {

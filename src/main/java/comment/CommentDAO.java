@@ -221,7 +221,8 @@ public class CommentDAO {
 
     public Comment get(int id) throws SQLException{
         CommentSpecificationBuilder csb = new CommentSpecificationBuilder().byId(id);
-        return fetch(csb.build()).get(0);
+        List<Comment> singleton = fetch(csb.build());
+        return singleton.isEmpty() ? null : singleton.get(0);
     }
 
     public int insert(Comment comment) throws SQLException {

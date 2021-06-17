@@ -100,7 +100,8 @@ public class FollowDAO {
     public Follow get(Pair<User,Section> pk) throws SQLException{
         FollowSpecificationBuilder fsb = new FollowSpecificationBuilder().byUserId(pk.getLeft().getId())
                                                                          .bySectionId(pk.getRight().getId());
-        return fetch(fsb.build()).get(0);
+        List<Follow> singleton = fetch(fsb.build());
+        return singleton.isEmpty() ? null : singleton.get(0);
     }
 
     public int insert(Follow follow) throws SQLException {

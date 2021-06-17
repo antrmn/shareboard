@@ -8,7 +8,6 @@ import post.PostSpecificationBuilder;
 import section.SectionDAO;
 import section.SectionSpecificationBuilder;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -66,7 +65,7 @@ public class Section extends HttpServlet {
                         }
                         req.getRequestDispatcher("/WEB-INF/views/section/section.jsp").forward(req,resp);
                     }
-                } catch(SQLException | NamingException e){
+                } catch(SQLException  e){
                     e.printStackTrace();
                     break;
                 }

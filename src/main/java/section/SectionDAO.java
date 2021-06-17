@@ -115,7 +115,8 @@ public class SectionDAO {
 
     public Section get(int id) throws SQLException{
         SectionSpecificationBuilder ssb = new SectionSpecificationBuilder().byId(id);
-        return fetch(ssb.build()).get(0);
+        List<Section> singleton = fetch(ssb.build());
+        return singleton.isEmpty() ? null : singleton.get(0);
     }
 
     public int insert(Section section) throws SQLException {

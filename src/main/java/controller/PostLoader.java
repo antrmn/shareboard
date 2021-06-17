@@ -1,14 +1,12 @@
 package controller;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
 import persistence.ConPool;
 import persistence.Specification;
 import post.Post;
 import post.PostDAO;
 import post.PostSpecificationBuilder;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,7 +51,7 @@ public class PostLoader extends HttpServlet {
             test.add(gson.toJson(posts));
             resp.getWriter().print(gson.toJson(test));
             resp.getWriter().flush();
-        } catch(SQLException | NamingException  e){
+        } catch(SQLException e){
             e.printStackTrace();
         }
     }

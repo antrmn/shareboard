@@ -101,8 +101,9 @@ public class PostVoteDAO {
 
     public PostVote get(Pair<User,Post> pk) throws SQLException{
         PostVoteSpecificationBuilder pvsb = new PostVoteSpecificationBuilder().byUserId(pk.getLeft().getId())
-                                                                              .byPostId(pk.getRight().getId());
-        return fetch(pvsb.build()).get(0);
+                                                    .byPostId(pk.getRight().getId());
+        List<PostVote> singleton = fetch(pvsb.build());
+        return singleton.isEmpty() ? null : singleton.get(0);
     }
 
     public int insert(PostVote postVote) throws SQLException {

@@ -119,7 +119,8 @@ public class PostDAO {
 
     public Post get(int id) throws SQLException{
         PostSpecificationBuilder psb = new PostSpecificationBuilder().byId(id);
-        return fetch(psb.build()).get(0);
+        List<Post> singleton = fetch(psb.build());
+        return singleton.isEmpty() ? null : singleton.get(0);
     }
 
     public int insert(Post post) throws SQLException {

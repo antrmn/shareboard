@@ -102,7 +102,8 @@ public class CommentVoteDAO {
     public CommentVote get(Pair<User,Comment> pk) throws SQLException{
         CommentVoteSpecificationBuilder cvsb = new CommentVoteSpecificationBuilder().byUserId(pk.getLeft().getId())
                                                                                     .byCommentId(pk.getRight().getId());
-        return fetch(cvsb.build()).get(0);
+        List<CommentVote> singleton = fetch(cvsb.build());
+        return singleton.isEmpty() ? null : singleton.get(0);
     }
 
     public int insert(CommentVote commentVote) throws SQLException {

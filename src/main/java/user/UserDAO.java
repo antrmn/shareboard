@@ -123,12 +123,17 @@ public class UserDAO{
         UserSpecificationBuilder usb = new UserSpecificationBuilder().byId(id);
         if(getPassword)
             usb.getPassword();
-        return fetch(usb.build()).get(0);
+        List<User> singleton = fetch(usb.build());
+        return singleton.isEmpty() ? null : singleton.get(0);
+        //TODO: propaga in altri DAO
     }
 
-    public User get(String username) throws SQLException{
+    public User get(String username, boolean getPassword) throws SQLException{
         UserSpecificationBuilder usb = new UserSpecificationBuilder().byUsernameExact(username);
-        return fetch(usb.build()).get(0);
+        if(getPassword)
+            usb.getPassword();
+        List<User> singleton = fetch(usb.build());
+        return singleton.isEmpty() ? null : singleton.get(0);
     }
 
     public int insert(User user) throws SQLException {

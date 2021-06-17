@@ -6,7 +6,6 @@ import post.Post;
 import post.PostDAO;
 import post.PostSpecificationBuilder;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -89,7 +88,7 @@ public class ShowAllPosts extends HttpServlet {
 
             req.setAttribute("posts", posts);
             req.getRequestDispatcher("/WEB-INF/views/test/show-all.jsp").forward(req, resp);
-        } catch(SQLException | NamingException e){
+        } catch(SQLException e){
             e.printStackTrace();
         }
     }

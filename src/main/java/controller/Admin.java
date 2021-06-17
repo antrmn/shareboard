@@ -2,12 +2,9 @@ package controller;
 
 
 import persistence.ConPool;
-import post.Post;
-import post.PostDAO;
 import section.Section;
 import section.SectionDAO;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -58,7 +55,7 @@ public class Admin extends HttpServlet {
                     service.insert(sections);
                     req.getRequestDispatcher("/WEB-INF/views/crm/create-section.jsp").forward(req, resp);
 
-                } catch(SQLException | NamingException  e){
+                } catch(SQLException  e){
                     e.printStackTrace();
                     req.getRequestDispatcher("/WEB-INF/views/crm/create-section.jsp").forward(req, resp);
                 }

@@ -3,14 +3,8 @@ package controller;
 import com.google.gson.Gson;
 import comment.Comment;
 import comment.CommentDAO;
-import comment.CommentSpecificationBuilder;
 import persistence.ConPool;
-import persistence.Specification;
-import post.Post;
-import post.PostDAO;
-import post.PostSpecificationBuilder;
 
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +14,6 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet("/loadComments")
@@ -44,7 +37,7 @@ public class CommentLoader extends HttpServlet {
             test.add(gson.toJson(comments));
             resp.getWriter().print(gson.toJson(test));
             resp.getWriter().flush();
-        } catch(SQLException | NamingException  e){
+        } catch(SQLException   e){
             e.printStackTrace();
         }
     }
