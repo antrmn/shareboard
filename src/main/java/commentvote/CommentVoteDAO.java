@@ -54,7 +54,7 @@ public class CommentVoteDAO {
     }
 
     public int insert(List<CommentVote> commentVotes) throws SQLException {
-        String statement = "INSERT INTO comment_vote (%s) VALUES %s";
+        String statement = "INSERT INTO comment_vote (%s) VALUES %s AS new ON DUPLICATE KEY UPDATE vote = new.vote ";
         String columns = "user_id, comment_id, vote";
         String questionMarks = "(?,?,?)";
 

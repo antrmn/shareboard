@@ -53,7 +53,7 @@ public class FollowDAO {
     }
 
     public int insert(List<Follow> follows) throws SQLException {
-        String statement = "INSERT INTO follow (%s) VALUES %s";
+        String statement = "INSERT INTO follow (%s) VALUES %s ON DUPLICATE KEY UPDATE user_id=user_id";
         String columns = "user_id, section_id";
         String questionMarks = "(?,?)";
 
