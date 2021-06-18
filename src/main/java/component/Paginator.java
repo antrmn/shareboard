@@ -1,6 +1,4 @@
-package Components;
-
-import java.util.List;
+package component;
 
 public class Paginator {
 

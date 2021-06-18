@@ -1,4 +1,4 @@
-package Components;
+package component;
 
 import java.util.List;
 
