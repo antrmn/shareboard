@@ -136,7 +136,9 @@ public class UserDAO{
         return singleton.isEmpty() ? null : singleton.get(0);
     }
 
-    public int insert(User user) throws SQLException {
-        return insert(List.of(user)).size();
+    //TODO: propaga a tutti
+    public Integer insert(User user) throws SQLException {
+        List<Integer> single = insert(List.of(user));
+        return single.isEmpty() ? null : single.get(0);
     }
 }
