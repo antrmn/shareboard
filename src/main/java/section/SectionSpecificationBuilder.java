@@ -11,7 +11,7 @@ public class SectionSpecificationBuilder extends Specification.Builder<SectionSp
     List<String> columnsList = List.of("section.id","section.description","section.name","section.picture","section.banner");
 
     StringJoiner joinsJoiner = new StringJoiner("\n");
-    StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ");
+    StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ").setEmptyValue("");
 
 //    String table
     public SectionSpecificationBuilder() {

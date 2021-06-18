@@ -20,6 +20,11 @@
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter-mapping>
+        <filter-name>userAuthorizer</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    <filter-mapping>
         <filter-name>redirectLoggedUser</filter-name>
         <url-pattern>/login</url-pattern>
         <url-pattern>/register</url-pattern>

@@ -1,6 +1,6 @@
 package controller;
 
-import Components.Alert;
+import component.Alert;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
