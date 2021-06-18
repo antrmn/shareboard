@@ -8,12 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(filterName = "userAuthorizer")
-public class UserAuthorizer  extends HttpFilter {
+@WebFilter(filterName = "redirectLoggedUser")
+public class RedirectLoggedUser extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        if(req.getAttribute("loggedUser") == null){
-            res.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Login richiesto.");
+        if(req.getAttribute("loggedUser") != null){
+            res.sendRedirect(req.getContextPath());
+            return;
         }
         chain.doFilter(req, res);
     }

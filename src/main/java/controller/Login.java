@@ -34,6 +34,7 @@ public class Login extends HttpServlet {
                 System.out.println(success);
                 if(success){
                     req.getSession(true).setAttribute("loggedUserId", user.getId());
+                    resp.sendRedirect(req.getContextPath());
                 }
             } else {
                 // TODO: errore "non esiste"
