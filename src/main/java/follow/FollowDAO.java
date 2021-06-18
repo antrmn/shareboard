@@ -34,7 +34,7 @@ public class FollowDAO {
     }
 
     /* Questo metodo NON FA NIENTE! La tabella follow per ora non presenta colonne editabili, ma il metodo resta "aperto"
-        per eventuali cambiamenti. */
+        per eventuali modifiche. */
     public int update(Follow follow) throws SQLException {
         String statement = "UPDATE follow SET %s WHERE section_id=? AND user_id=? LIMIT 1";
 
@@ -53,7 +53,7 @@ public class FollowDAO {
     }
 
     public int insert(List<Follow> follows) throws SQLException {
-        String statement = "INSERT INTO follow (%s) VALUES %s ON DUPLICATE KEY UPDATE user_id=user_id";
+        String statement = "INSERT INTO follow (%s) VALUES %s ON DUPLICATE KEY UPDATE follow_date=follow_date";
         String columns = "user_id, section_id";
         String questionMarks = "(?,?)";
 
@@ -66,7 +66,7 @@ public class FollowDAO {
         }
 
         statement = String.format(statement, columns, questionMarksJoiner.toString());
-        PreparedStatement ps = con.prepareStatement(statement, Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement ps = con.prepareStatement(statement);
         int insertedRows = StatementSetters.setParameters(ps, params).executeUpdate();
 
         ps.close();
