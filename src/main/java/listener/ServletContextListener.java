@@ -25,7 +25,7 @@ public class ServletContextListener implements javax.servlet.ServletContextListe
             sce.getServletContext().setAttribute("sections", sections);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            throw new RuntimeException("Non è stato possibile caricare le sezioni nel servletContext");
+            throw new RuntimeException("Impossibile caricare le sezioni nel servletContext");
         }
     }
 }

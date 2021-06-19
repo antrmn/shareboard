@@ -10,7 +10,7 @@ public class RequestValidator {
 
     private final List<String> errors;
     private final HttpServletRequest request;
-    private static final Pattern INT_PATTERN = Pattern.compile("^\\d+$");
+    private static final Pattern INT_PATTERN = Pattern.compile("^\\d+$"); //non contempla overflow?
     private static final Pattern DOUBLE_PATTERN = Pattern.compile("^(-)?(0|[1-9]\\d+)\\.\\d+$");
 
     public RequestValidator(HttpServletRequest request){

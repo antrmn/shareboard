@@ -21,7 +21,7 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>userAuthorizer</filter-name>
-        <url-pattern>/*</url-pattern>
+        <url-pattern>/boh</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter-mapping>

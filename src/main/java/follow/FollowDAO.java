@@ -8,8 +8,10 @@ import util.Pair;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.StringJoiner;
+import java.util.stream.Collectors;
 
 
 public class FollowDAO {
@@ -106,5 +108,19 @@ public class FollowDAO {
 
     public int insert(Follow follow) throws SQLException {
         return insert(List.of(follow));
+    }
+
+    public int insert (Collection<Integer> sectionIds, int userId) throws SQLException {
+        List<Follow> followList = sectionIds.stream().map(x -> {
+            Follow follow = new Follow();
+            Section section = new Section();
+            section.setId(x);
+            follow.setSection(section);
+            User user = new User();
+            user.setId(userId);
+            follow.setUser(user);
+            return follow;
+        }).collect(Collectors.toList());
+        return insert(followList);
     }
 }
