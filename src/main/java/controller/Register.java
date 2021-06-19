@@ -42,8 +42,10 @@ public class Register extends HttpServlet {
             HttpSession session = req.getSession(true);
             session.setAttribute("loggedUserId", id);
             Set<Integer> follows = (Set<Integer>) session.getAttribute("follows");
-            FollowDAO followService = new FollowDAO(con);
-            followService.insert(follows, user.getId());
+            if(!follows.isEmpty()) {
+                FollowDAO followService = new FollowDAO(con);
+                followService.insert(follows, user.getId());
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

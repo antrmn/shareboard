@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <c:set var="context" value="${pageContext.request.contextPath}" />
+<c:set var="loggedUser" value="${requestScope.loggedUser}" />
 <navbar>
     <div id="left">
         <span id="nav-logo" >
@@ -25,7 +26,7 @@
                     <div style="margin-bottom:15px;">
                         <a href="#contact" style="display: inline; margin-bottom:10px;">Section</a>
                         <c:choose>
-                            <c:when test="${param.isLogged eq 'true'}">
+                            <c:when test="${not empty loggedUser}">
                                 <i class="fas fa-star" style="float:right; margin-right: 10px; color:blue" onclick="toggleFavorite(this)"></i>
                             </c:when>
                             <c:otherwise>
@@ -46,15 +47,14 @@
     </div>
     <div id="nav-profile">
         <c:choose>
-            <c:when test="${param.isLogged eq 'true'}">
+            <c:when test="${not empty loggedUser}">
                 <a href = "/create"style="margin-right: 20px;"><i class="fas fa-edit"></i></a>
-                <span id = "profile-container" class = "interactable" href = "${pageContext.request.contextPath}/profile/?id=${requestScope.user_id}" onclick="toggleDropdown(true, 'profile-dropdown')" >
+                <span id = "profile-container" class = "interactable" href = "${context}/profile/?id=${loggedUser.id}" onclick="toggleDropdown(true, 'profile-dropdown')" >
                     <i id = "nav-profile-photo" class="fas fa-user-circle"></i>
                     <div id="nav-profile-data" >
-                        <p style="display: block; margin-bottom:0px; ">${param.userName}</p>
+                        <p style="display: block; margin-bottom:0px; ">${loggedUser.username}</p>
                         <div style="display: block; font-size: 12px; margin-top:0px;">
                             <i class="far fa-arrow-alt-circle-up" style="color: orangered; display: inline; margin-top:0px;"></i>
-                            <p style="display: inline-block; font-size: 11px; margin-top:0px;">${param.userKarma} Karma</p>
                         </div>
                     </div>
                     <i class="fas fa-sort-down" style="display: inline-block;"></i>
@@ -64,11 +64,13 @@
                             Profile
                         </a>
 
-<%--                     if is admin check--%>
+                    <c:if test="${loggedUser.admin.booleanValue() == true}">
                         <a href="${context}/admin">
                             <i class="fas fa-user-shield"></i>
                             Pannello Admin
                         </a>
+                    </c:if>
+
                         <a href="${context}/logout">
                             <i class="fas fa-sign-out-alt"></i>
                             Log Out
