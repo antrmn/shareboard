@@ -99,6 +99,14 @@ public class FollowDAO {
         return delete(List.of(pk));
     }
 
+    public int delete (int userId, int sectionId) throws SQLException {
+        User u = new User();
+        u.setId(userId);
+        Section s = new Section();
+        s.setId(sectionId);
+        return delete(List.of(new Pair<>(u,s)));
+    }
+
     public Follow get(Pair<User,Section> pk) throws SQLException{
         FollowSpecificationBuilder fsb = new FollowSpecificationBuilder().byUserId(pk.getLeft().getId())
                                                                          .bySectionId(pk.getRight().getId());
