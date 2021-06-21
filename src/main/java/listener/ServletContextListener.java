@@ -1,9 +1,9 @@
 package listener;
 
-import persistence.ConPool;
-import section.Section;
-import section.SectionDAO;
-import section.SectionSpecificationBuilder;
+import model.persistence.ConPool;
+import model.section.Section;
+import model.section.SectionDAO;
+import model.section.SectionSpecificationBuilder;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.annotation.WebListener;

@@ -1,6 +1,9 @@
-comment
-persistence
-post
-section
-user
+model.ban
+model.comment
+model.follow
+model.persistence
+model.post
+model.postvote
+model.section
+model.user
 util

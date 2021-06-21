@@ -1,12 +1,12 @@
 package controller;
 
-import persistence.ConPool;
-import persistence.Specification;
-import post.Post;
-import post.PostDAO;
-import post.PostSpecificationBuilder;
-import section.SectionDAO;
-import section.SectionSpecificationBuilder;
+import model.persistence.ConPool;
+import model.persistence.Specification;
+import model.post.Post;
+import model.post.PostDAO;
+import model.post.PostSpecificationBuilder;
+import model.section.SectionDAO;
+import model.section.SectionSpecificationBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -39,12 +39,12 @@ public class Section extends HttpServlet {
                 Specification s = spb.build();
                 try (Connection con = ConPool.getConnection()){
                     SectionDAO service = new SectionDAO(con);
-                    List<section.Section> sections = service.fetch(s);
+                    List<model.section.Section> sections = service.fetch(s);
                     if(sections.isEmpty()){
                         //redirect home
                         resp.sendRedirect("./home");
                     } else{
-                        section.Section section = sections.get(0);
+                        model.section.Section section = sections.get(0);
                         req.setAttribute("section", section);
                         if(postId != null){
                             PostSpecificationBuilder psb = new PostSpecificationBuilder();

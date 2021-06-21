@@ -1,9 +1,9 @@
 package controller;
 
 import com.google.gson.Gson;
-import comment.Comment;
-import comment.CommentDAO;
-import persistence.ConPool;
+import model.comment.Comment;
+import model.comment.CommentDAO;
+import model.persistence.ConPool;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,10 +1,10 @@
 package controller;
 
-import follow.FollowDAO;
-import persistence.ConPool;
-import user.HashedPassword;
-import user.User;
-import user.UserDAO;
+import model.follow.FollowDAO;
+import model.persistence.ConPool;
+import model.user.HashedPassword;
+import model.user.User;
+import model.user.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

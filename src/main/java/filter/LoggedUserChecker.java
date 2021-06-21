@@ -1,8 +1,8 @@
 package filter;
 
-import persistence.ConPool;
-import user.User;
-import user.UserDAO;
+import model.persistence.ConPool;
+import model.user.User;
+import model.user.UserDAO;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

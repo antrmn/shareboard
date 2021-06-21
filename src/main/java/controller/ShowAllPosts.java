@@ -1,10 +1,10 @@
 package controller;
 
-import persistence.ConPool;
-import persistence.Specification;
-import post.Post;
-import post.PostDAO;
-import post.PostSpecificationBuilder;
+import model.persistence.ConPool;
+import model.persistence.Specification;
+import model.post.Post;
+import model.post.PostDAO;
+import model.post.PostSpecificationBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

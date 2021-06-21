@@ -1,9 +1,9 @@
 package controller;
 
 
-import persistence.ConPool;
-import section.Section;
-import section.SectionDAO;
+import model.persistence.ConPool;
+import model.section.Section;
+import model.section.SectionDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

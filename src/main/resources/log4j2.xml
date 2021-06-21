@@ -27,7 +27,7 @@
                 level="info" additivity="false">
             <AppenderRef ref="LOCALHOST" />
         </Logger>
-        <Logger name="persistence.StatementSetters"
+        <Logger name="model.persistence.StatementSetters"
                 level="debug" additivity="false">
             <AppenderRef ref="LOCALHOST" />
         </Logger>

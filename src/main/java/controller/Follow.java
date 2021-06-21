@@ -1,9 +1,9 @@
 package controller;
 
-import follow.FollowDAO;
-import persistence.ConPool;
-import section.Section;
-import user.User;
+import model.follow.FollowDAO;
+import model.persistence.ConPool;
+import model.section.Section;
+import model.user.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
