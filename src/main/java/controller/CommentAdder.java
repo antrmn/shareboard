@@ -33,7 +33,7 @@ public class CommentAdder extends HttpServlet {
         try (Connection con = ConPool.getConnection()){
             Comment c = new Comment();
             Comment parent = new Comment();
-            if (parentId == 0){
+            if (parentId > 0){
                 parent.setId(parentId);
             }
             User u = new User();
@@ -46,6 +46,7 @@ public class CommentAdder extends HttpServlet {
             parentPost.setId(postId);
             c.setPost(parentPost);
             List<Comment> comments = new ArrayList<>();
+            comments.add(c);
             CommentDAO service = new CommentDAO(con);
             service.insert(comments);
             resp.sendRedirect("./post?id=" + postId);
