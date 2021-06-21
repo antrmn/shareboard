@@ -10,7 +10,7 @@ let order;
 function initParams(_section, _order){
     section = _section;
     order= _order;
-    console.log( "ready!" );
+    console.log( "postjs ready!" );
     console.log( section );
     offset = 0;
     loadPosts();
@@ -22,6 +22,7 @@ function createPost(data){
     let sectionLink = `${window.location.origin}/shareboard/s?section=${data.section.name}`;
     let postLink = `${window.location.origin}/shareboard/post?id=${data.id}`;
     let post = `<div class="post greyContainer interactable">
+        <input type = "hidden" name = "postId" value = ${data.id}>
         <span class = "vote-container">
             <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick = "toggleVote(this, 'upvote', 'post')"></i>
             <div class = "vote-count" style="word-break: initial; text-align: center; font-size: 12px;font-weight: 700; line-height: 16px;">${data.votes}</div>

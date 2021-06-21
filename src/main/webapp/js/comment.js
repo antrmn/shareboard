@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-    console.log( "ready!" );
+    console.log( "commentjs ready!" );
     loadComments();
 });
 
@@ -12,6 +12,7 @@ function createComment(author, votes, content, id, isEven, isSpecial){
     }
     let comment = `
               <div id = "${id}" class = "grid-x-nw" style = "width: 100%; align-items: start; margin-top:10px; background-color: ${color}; border-radius: 4px; border: solid 1px #313132; ">
+              <input type = "hidden" name = "commentId" value = ${id}>
                   <div class = "vote-container">
                     <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick = "toggleVote(this, 'upvote', 'comment')"></i>
                     <div class = "vote-count" style="word-break: initial; text-align: center; font-size: 12px;font-weight: 700; line-height: 16px;">
@@ -53,15 +54,15 @@ function addChilds(comments, key, depth){
     if (comments[key]){
         let backup = depth
         for(let comment of comments[key]){
-            depth++;
+            // depth++;
             console.log(depth + " " + comment.text);
             console.log(depth%2===0);
             $(createComment(comment.author.username, comment.vote, comment.text, comment.id, depth%2===0)).insertAfter(`#${key} #reply-button`)
-            addChilds(comments, comment.id, depth);
+            addChilds(comments, comment.id, depth++);
         }
     }
     console.log("END:" + depth)
-    depth=-2;
+    depth--;
 }
 
 function loadComments(){
@@ -91,23 +92,33 @@ function loadComments(){
         });
 }
 
-function addComment(parent, content){
-
-}
-
 function toggleTextArea(el){
-    let test = `<div id = "comment-form" style = "width: 100%;">
-                    <textarea rows="5" style = "color: #fff; resize: vertical; width:100%; border-radius: 4px; background-color: var(--shareboard-container-2); border-color: var(--shareboard-container-1); border: solid 1px;"></textarea>
+    let form = `<form class = "comment-form" method = "POST" action= "./add-comment">
+                    <input type = "hidden" name = "commentId" value = ${$(el).parent().find('input').val()}>
+                    <input type = "hidden" name = "postId" value = ${getPostId()}>
+                    <textarea name = "text" rows="5"></textarea>
                     <br>
                     <button class = roundButton>Invia</button>
-                </div>`;
+                </form>`;
 
     if($(el).hasClass('has-form')){
-        // $(el).parent().remove('#comment-form')
-        $(el).parent().find('#comment-form').remove();
+        $(el).parent().find('.comment-form').remove();
     }else{
-        $(test).insertAfter(el);
+        $(form).insertAfter(el);
     }
 
     $(el).toggleClass('has-form');
+}
+
+function validateCommentForm(el){
+    console.log($(el).find("textarea").val().length)
+    if ($(el).find("textarea").val().length == 0 || $(el).children("textarea").val().length > 1000){
+        return false;
+    }
+
+    return true;
+}
+
+function getPostId(){
+    return $("#post-data").find('input').val();
 }

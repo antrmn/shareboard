@@ -115,6 +115,23 @@ footer {
 
 /*GENERIC STYLES*/
 
+.comment-form {
+    width:100%;
+    border-bottom: solid 1px;
+    border-radius:1px;
+    border-color: gray;
+}
+
+.comment-form textarea {
+    color: #fff;
+    resize: vertical;
+    width:100%;
+    border-radius: 4px;
+    background-color: var(--shareboard-container-2);
+    border-color: var(--shareboard-container-1);
+    border: solid 1px;
+}
+
 .white-text{
     color: rgb(215, 218, 220);
 }

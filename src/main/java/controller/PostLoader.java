@@ -50,7 +50,7 @@ public class PostLoader extends HttpServlet {
                 PostDAO service = new PostDAO(con);
                 List<Post> posts = service.fetch(s);
                 Gson gson = new Gson();
-            System.out.println(gson.toJson(posts));
+                System.out.println(gson.toJson(posts));
                 ArrayList<String> test = new ArrayList<>();
                 test.add(gson.toJson(posts));
                 ServletResponse _resp = acontext.getResponse();
