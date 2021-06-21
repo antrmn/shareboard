@@ -34,7 +34,7 @@ function toggleFavorite(e){
     //send ajax request
 }
 
-function toggleVote(el, elementType, actiontype){
+function toggleVote(el, actiontype, elementType){
     let currentVotes = $(el).parent().find(".vote-count").text();
     let modifier = 0;
 
@@ -43,7 +43,7 @@ function toggleVote(el, elementType, actiontype){
     currentVotes = parseInt(currentVotes);
     console.log(currentVotes);
 
-    if(elementType === "upvote"){
+    if(actiontype === "upvote"){
         let upvoteElement = el;
         let downvoteElement = $(el).parent().find(".downvoteIcon")
 
@@ -58,7 +58,7 @@ function toggleVote(el, elementType, actiontype){
             }
         }
         $(upvoteElement).toggleClass('upvote-icon-active')
-    } else if (elementType === "downvote"){
+    } else if (actiontype === "downvote"){
         let upvoteElement = $(el).parent().find(".upvoteIcon");
         let downvoteElement = el;
 
@@ -79,7 +79,20 @@ function toggleVote(el, elementType, actiontype){
 
     $(el).parent().find(".vote-count").text(currentVotes + modifier);
 
-    //send ajax request
+    let url;
+    if (elementType === "post" ){
+        url = "vote-post";
+    } else if (elementType === "comment"){
+        url = "vote-comment";
+    }
+
+    $.post(url,
+        {
+            // id = 1,
+            // action = actiontype
+        },
+        function(data, status){
+        });
 }
 
 let getUrlParameter = function getUrlParameter(sParam) {

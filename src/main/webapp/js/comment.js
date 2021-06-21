@@ -68,7 +68,7 @@ function loadComments(){
 
     $.post(window.location.origin+"/shareboard/loadComments",
         {
-            postId: getUrlParameter('post')
+            postId: getUrlParameter('id')
         },
         function(data, status){
             // console.log(status);

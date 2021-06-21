@@ -20,7 +20,7 @@ function createPost(data){
 
     console.log(data.section.name)
     let sectionLink = `${window.location.origin}/shareboard/s?section=${data.section.name}`;
-    let postLink = sectionLink + `&post=${data.id}`;
+    let postLink = `${window.location.origin}/shareboard/post?id=${data.id}`;
     let post = `<div class="post greyContainer interactable">
         <span class = "vote-container">
             <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick = "toggleVote(this, 'upvote', 'post')"></i>
