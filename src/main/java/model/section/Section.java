@@ -7,6 +7,9 @@ import java.util.Collection;
 import java.util.List;
 
 public class Section {
+    private static final int MAX_NAME_LENGTH = 50;
+    private static final int MAX_DESCRIPTION_LENGTH = 255;
+
     private Integer id;
     private String name;
     private String description;

@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -17,7 +18,13 @@
     <img src="images/bg-planet.png">
     <div style="display: flex; justify-content: center; align-items:center; flex-direction: column; padding:100px 200px 100px 200px;">
       <h2>Login</h2>
-
+      <ul>
+        <c:if test = "${not empty requestScope.exception}">
+          <c:forEach items="${requestScope.exception.errors}" var="error">
+            <li>${error}</li>
+          </c:forEach>
+        </c:if>
+      </ul>
       <form id = "login-form" action="${pageContext.request.contextPath}/login" method="post" style="display: flex; justify-content: center; align-items:center; flex-direction: column;">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username">
