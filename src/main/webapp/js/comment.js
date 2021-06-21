@@ -12,7 +12,6 @@ function createComment(author, votes, content, id, isEven, isSpecial){
     }
     let comment = `
               <div id = "${id}" class = "grid-x-nw" style = "width: 100%; align-items: start; margin-top:10px; background-color: ${color}; border-radius: 4px; border: solid 1px #313132; ">
-              <input type = "hidden" name = "commentId" value = ${id}>
                   <div class = "vote-container">
                     <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick = "toggleVote(this, 'upvote', 'comment')"></i>
                     <div class = "vote-count" style="word-break: initial; text-align: center; font-size: 12px;font-weight: 700; line-height: 16px;">
@@ -30,6 +29,7 @@ function createComment(author, votes, content, id, isEven, isSpecial){
                           </p>
                       </div>
                       <div id = "reply-button" class = "grey-text" onclick="toggleTextArea(this)">
+                          <input type = "hidden" name = "commentId" value = ${id}>
                           <i class="fas fa-comment-dots"></i>
                           <span>Reply</span>
                       </div>
@@ -93,9 +93,9 @@ function loadComments(){
 }
 
 function toggleTextArea(el){
-    let form = `<form class = "comment-form" method = "POST" action= "./add-comment">
-                    <input type = "hidden" name = "commentId" value = ${$(el).parent().find('input').val()}>
-                    <input type = "hidden" name = "postId" value = ${getPostId()}>
+    let form = `<form class = "comment-form" method = "POST" action= "./new-comment">
+                    <input type = "hidden" name = "id" value = ${getPostId()}>
+                    <input type = "hidden" name = "parent" value = ${$(el).find('input').val()}>
                     <textarea name = "text" rows="5"></textarea>
                     <br>
                     <button class = roundButton>Invia</button>
