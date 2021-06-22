@@ -1,9 +1,9 @@
 package controller;
 
-import persistence.ConPool;
-import persistence.Specification;
-import post.PostDAO;
-import post.PostSpecificationBuilder;
+import model.persistence.ConPool;
+import model.persistence.Specification;
+import model.post.PostDAO;
+import model.post.PostSpecificationBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +26,7 @@ public class Post extends HttpServlet {
                 psb.byId(Integer.parseInt(postId));
                 Specification s2 = psb.build();
                 PostDAO service2 = new PostDAO(con);
-                List<post.Post> posts = service2.fetch(s2);
+                List<model.post.Post> posts = service2.fetch(s2);
                 if(posts.get(0)!= null){
 //                    System.out.println(posts.get(0).getAuthor().getUsername());
 //                    System.out.println(posts.get(0).getSection().getName());

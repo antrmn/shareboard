@@ -1,9 +1,9 @@
 package controller;
 
-import comment.Comment;
-import comment.CommentDAO;
-import persistence.ConPool;
-import user.User;
+import model.comment.Comment;
+import model.comment.CommentDAO;
+import model.persistence.ConPool;
+import model.user.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,7 +42,7 @@ public class CommentAdder extends HttpServlet {
             c.setAuthor(u);
             c.setText(text);
             c.setParentComment(parent);
-            post.Post parentPost = new post.Post();
+            model.post.Post parentPost = new model.post.Post();
             parentPost.setId(postId);
             c.setPost(parentPost);
             List<Comment> comments = new ArrayList<>();
