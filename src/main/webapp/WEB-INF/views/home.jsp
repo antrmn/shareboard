@@ -27,7 +27,14 @@
                     <div class="card-image" style = "background-image: url('${pageContext.request.contextPath}/images/bg-planet2.png'); height: 34px;
                             background-position-y: center;
                             background-position-x: center;"></div>
-                    <h4>Welcome back Testus!</h4>
+                    <c:choose>
+                        <c:when test="${empty requestScope.loggedUser}">
+                            <h4>Welcome on Shareboard!</h4>
+                        </c:when>
+                        <c:otherwise>
+                            <h4>Welcome back ${requestScope.loggedUser.username}</h4>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
                 <div class="greyContainer">
                     <div class="card-image" style = "background-image: url('${pageContext.request.contextPath}/images/banner-background.png');height: 80px;">

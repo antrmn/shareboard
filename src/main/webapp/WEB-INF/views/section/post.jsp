@@ -19,6 +19,7 @@
   <div id="post-container" class = "grid-x-nw" style = "flex-basis: 1280px;">
       <div id = left-container class = "greyContainer">
           <div id = "post-data" style = "flex-grow: 1; width: 100%;">
+              <input type = "hidden" name = "postId" value = ${post.id}>
               <div class = "grid-x-nw" style = "align-items: start; margin-top:10px;">
                   <div class = "vote-container">
                           <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick="toggleVote(this, 'upvote', 'post')"></i>
@@ -51,12 +52,9 @@
                           <i class="fas fa-comment-dots"></i>
                           ${post.nComments}
                       </div>
-
-                      <form  method = "POST" action= "./add-comment" style = "width:100%; border-bottom: solid 1px; border-radius:1px; border-color: gray;">
-                          <textarea rows="5" style = "color: #fff; resize: vertical; width:100%; border-radius: 4px; background-color: var(--shareboard-container-2); border-color: var(--shareboard-container-1); border: solid 1px;"></textarea>
-                          <br>
-                          <button class = roundButton>Invia</button>
-                      </form>
+                        <jsp:include page="../partials/comment-form.jsp">
+                            <jsp:param name="id" value="${post.id}"/>
+                        </jsp:include>
                       <div class ="grid-x-nw" style = "width: 100%">
                           <div id = "comments-container" style = "margin:8px; width: 100%">
                           </div>
