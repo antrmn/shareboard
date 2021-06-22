@@ -28,7 +28,7 @@ public class Login extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        if(req.getAttribute("exception") != null) {
+        if(req.getAttribute("errors") != null) {
             doGet(req, resp);
             return;
         }
@@ -43,8 +43,10 @@ public class Login extends HttpServlet {
         if(password == null || password.isBlank())
             errors.add("Specificare la password");
 
-        if(!errors.isEmpty())
-            throw new BadRequestException("Login fallito", errors, "/login");
+        if(!errors.isEmpty()) {
+            ErrorForwarder.sendError(req, resp, errors, 400, "/login");
+            return;
+        }
 
         try (Connection con = ConPool.getConnection()) {
             UserDAO service = new UserDAO(con);
@@ -62,7 +64,9 @@ public class Login extends HttpServlet {
 
                 resp.sendRedirect(req.getContextPath());
             } else {
-                throw new BadRequestException("Login fallito", List.of("Credenziali non valide"), "/login");
+                ErrorForwarder.sendError(req, resp, List.of("Credenziali non valide"), 400,
+                                                                                    "/login");
+                return;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -19,15 +20,15 @@
     <div style="display: flex; justify-content: center; align-items:center; flex-direction: column; padding:100px 200px 100px 200px;">
       <h2>Login</h2>
       <ul>
-        <c:if test = "${not empty requestScope.exception}">
-          <c:forEach items="${requestScope.exception.errors}" var="error">
+        <c:if test = "${not empty requestScope.errors}">
+          <c:forEach items="${requestScope.errors}" var="error">
             <li>${error}</li>
           </c:forEach>
         </c:if>
       </ul>
       <form id = "login-form" action="${pageContext.request.contextPath}/login" method="post" style="display: flex; justify-content: center; align-items:center; flex-direction: column;">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username">
+        <input type="text" id="username" name="username" value="${fn:trim(param.username)}">
         <label for="pass">Password:</label>
         <input type="password" id="pass" name="pass">
         <input type="submit" value="Log In" class="roundButton">
