@@ -124,7 +124,8 @@ public class PostDAO {
     }
 
     public int insert(Post post) throws SQLException {
-        return insert(List.of(post)).size();
+        List<Integer> single = insert(List.of(post));
+        return single.isEmpty() ? null : single.get(0);
     }
 
 }

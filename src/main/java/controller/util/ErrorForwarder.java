@@ -13,4 +13,9 @@ public final class ErrorForwarder {
         req.setAttribute("errors", messages);
         req.getRequestDispatcher(location).forward(req, res);
     }
+
+    public static void sendError(HttpServletRequest req, HttpServletResponse res, List<String> messages,
+                                 int statusCode) throws ServletException, IOException {
+        res.sendError(statusCode, String.join("; ", messages));
+    }
 }

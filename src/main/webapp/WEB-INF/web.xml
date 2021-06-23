@@ -31,6 +31,7 @@
         <filter-name>redirectLoggedUser</filter-name>
         <url-pattern>/login</url-pattern>
         <url-pattern>/register</url-pattern>
+        <url-pattern>/newpost</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter-mapping>
