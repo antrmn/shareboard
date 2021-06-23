@@ -5,7 +5,6 @@ import model.persistence.ConPool;
 import model.user.HashedPassword;
 import model.user.User;
 import model.user.UserDAO;
-import model.user.UserSpecificationBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -82,8 +81,7 @@ public class Register extends HttpServlet {
 
             if(service.get(username, false) != null)
                 errors.add("Username già usato");
-            if(!service.fetch(new UserSpecificationBuilder().byEmail(email).build())
-                       .isEmpty())
+            if(service.getByEmail(email) != null)
                 errors.add("L'email appartiene già a un altro utente");
 
             if(!errors.isEmpty()){

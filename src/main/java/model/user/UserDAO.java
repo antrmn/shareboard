@@ -136,6 +136,12 @@ public class UserDAO{
         return singleton.isEmpty() ? null : singleton.get(0);
     }
 
+    public User getByEmail(String email) throws SQLException{
+        UserSpecificationBuilder usb = new UserSpecificationBuilder().byEmail(email);
+        List<User> singleton = fetch(usb.build());
+        return singleton.isEmpty() ? null : singleton.get(0);
+    }
+
     //TODO: propaga a tutti
     public Integer insert(User user) throws SQLException {
         List<Integer> single = insert(List.of(user));
