@@ -23,11 +23,13 @@ import java.util.concurrent.ConcurrentMap;
 public class Follow extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         ConcurrentMap<Integer, Section> sections =
                 (ConcurrentMap<Integer,Section>) getServletContext().getAttribute("sections");
 
         String section = req.getParameter("section");
-        if (section == null || InputValidator.assertInt(section)) {
+
+        if (section == null || !InputValidator.assertInt(section)) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }

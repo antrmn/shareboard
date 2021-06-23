@@ -19,19 +19,36 @@ function toggleDropdown(state, id){
 
 function doUpvote(){console.log('test')}
 
-function toggleFavorite(e){
+function toggleFollowStar(e){
+    let addFollow = false;
     //se la sezione è nei preferiti
     if(e.classList.contains("fas")){
         e.classList.remove("fas");
         e.classList.add("far");
-        e.style.color = "white";
+        e.classList.remove("favorite-star");
     }else{
         e.classList.remove("far");
         e.classList.add("fas");
-        e.style.color = "blue";
+        e.classList.add("favorite-star");
+        addFollow = true
     }
 
+    let id = $(e).parent().find("input").val();
+    console.log(id);
     //send ajax request
+    toggleFollow(id, addFollow)
+}
+
+function toggleFollow(id, addFollow){
+    let url = window.location.origin+"/shareboard/unfollow";
+    if(addFollow){
+        url = window.location.origin+"/shareboard/follow"
+    }
+
+    $.post(url,
+        {
+            section: id,
+        });
 }
 
 function toggleVote(el, actiontype, elementType){
@@ -79,19 +96,16 @@ function toggleVote(el, actiontype, elementType){
 
     $(el).parent().find(".vote-count").text(currentVotes + modifier);
 
-    let url;
-    if (elementType === "post" ){
-        url = "vote-post";
-    } else if (elementType === "comment"){
-        url = "vote-comment";
-    }
+    let serverAction = 1;
 
-    $.post(url,
+    if (actiontype === "downvote")
+        serverAction = -1;
+
+    $.post(window.location.origin+"/shareboard/handlevote",
         {
-            // id = 1,
-            // action = actiontype
-        },
-        function(data, status){
+            id: $(el).find("input").val(),
+            action: serverAction,
+            type: elementType
         });
 }
 

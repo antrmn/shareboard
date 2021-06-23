@@ -22,7 +22,7 @@ public class LoggedUserChecker extends HttpFilter {
         HttpSession session = req.getSession(false);
         if(session == null || session.getAttribute("loggedUserId") == null) {
             chain.doFilter(req, res);
-            System.out.println("sono un test e vado rimosso");
+            //System.out.println("sono un test e vado rimosso");
             return;
         }
 
