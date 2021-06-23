@@ -38,7 +38,10 @@ public class Login extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("pass");
 
-        if(username == null || username.isBlank())
+        username = (username == null ? null : username.trim());
+        password = (password == null ? null : password.substring(0, Math.min(password.length(), 255))); //tronca password con >255 caratteri
+
+        if(username == null || username.isEmpty())
             errors.add("Specificare il nome utente");
         if(password == null || password.isEmpty())
             errors.add("Specificare la password");

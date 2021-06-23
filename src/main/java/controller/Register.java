@@ -41,19 +41,30 @@ public class Register extends HttpServlet {
         String pass = req.getParameter("pass");
         String pass2 = req.getParameter("pass2");
 
-        if(username == null || username.isBlank())
+        email = (email == null ? null : email.trim());
+        username = (username == null ? null : username.trim());
+
+        if(username == null || username.isEmpty())
             errors.add("Specificare il nome utente");
-        if(email == null || email.isBlank())
+        else if (!InputValidator.assertMatch(username, InputValidator.USERNAME_PATTERN))
+            errors.add("Username non valido");
+        else if (!(username.length() >= 3 && username.length() <= 30))
+            errors.add("L'username deve essere di lunghezza compresa tra i 3 e i 30 caratteri");
+
+
+        if(email == null || email.isEmpty())
             errors.add("Specificare l'email");
-        if(pass == null || pass.isEmpty()) {
+        else if (!InputValidator.assertEmail(email) || email.length() > 255)
+            errors.add("Email non valida");
+
+        if(pass == null || pass.isEmpty())
             errors.add("Specificare la password");
-        } else if (!(pass.length()>=3 && pass.length()<=255)) {
-            errors.add("La password immessa non rispetta i requisiti");
-        } else if (pass2 == null || pass2.isEmpty()) {
+        else if (!(pass.length()>=3 && pass.length()<=255))
+            errors.add("La password deve essere di lunghezza compresa tra i 3 e i 255 caratteri");
+        else if (pass2 == null || pass2.isEmpty())
             errors.add("Occorre confermare la password");
-        } else if (!pass.equals(pass2)) {
+        else if (!pass.equals(pass2))
             errors.add("Le password non coincidono");
-        }
 
         if(!errors.isEmpty()){
             ErrorForwarder.sendError(req, resp, errors, 400, "/register");
@@ -83,6 +94,7 @@ public class Register extends HttpServlet {
             id = service.insert(user);
             HttpSession session = req.getSession(true);
             session.setAttribute("loggedUserId", id);
+
             Set<Integer> follows = (Set<Integer>) session.getAttribute("follows");
             if(!follows.isEmpty()) {
                 FollowDAO followService = new FollowDAO(con);

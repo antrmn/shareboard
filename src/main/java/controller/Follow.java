@@ -25,8 +25,8 @@ public class Follow extends HttpServlet {
         ConcurrentMap<Integer, Section> sections =
                 (ConcurrentMap<Integer,Section>) getServletContext().getAttribute("sections");
 
-        RequestValidator rv = new RequestValidator(req);
-        if (!rv.assertInt("section", "messaggio")) {
+        String section = req.getParameter("section");
+        if (section == null || InputValidator.assertInt(section)) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
