@@ -23,7 +23,8 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>userAuthorizer</filter-name>
-        <url-pattern>/boog</url-pattern>
+        <url-pattern>/vote</url-pattern>
+        <url-pattern>/unvote</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter-mapping>
