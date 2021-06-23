@@ -18,19 +18,28 @@
             </span>
             <div id="section-dropdown" class="dropdown-content greyContainer">
                 <div style = "padding: 12px 16px; color: #77797a; font-size: 10px; font-weight: 500; line-height: 16px;text-transform: uppercase; ">Home Feeds</div>
-                <a href="#home">Home</a>
-                <a href="#home">Popular</a>
-                <a href="#about">About</a>
+                <a href="${context}/home">Home</a>
+                <a href="${context}/home?order=popular">Popular</a>
+                <a href="${context}/home?order=new">New</a>
                 <div style = "padding: 12px 16px; color: #77797a; font-size: 10px; font-weight: 500; line-height: 16px;text-transform: uppercase; ">Sections</div>
-                <c:forEach var = "i" begin = "1" end = "100">
+
+                <c:forEach items="${applicationScope.sections}" var="section">
                     <div style="margin-bottom:15px;">
-                        <a href="#contact" style="display: inline; margin-bottom:10px;">Section</a>
+                        <a href="./s?id=${section.value.id}" style="display: inline; margin-bottom:10px;">${section.value.name}</a>
+                        <input type = "hidden" name = "sectionId" value = "${section.value.id}">
+                        <c:set var="contains" value="false" />
+                        <c:forEach var="item" items="${sessionScope.follows}">
+                            <c:if test="${item eq section.value.id}">
+
+                                <c:set var="contains" value="true" />
+                            </c:if>
+                        </c:forEach>
                         <c:choose>
-                            <c:when test="${not empty loggedUser}">
-                                <i class="fas fa-star" style="float:right; margin-right: 10px; color:blue" onclick="toggleFavorite(this)"></i>
+                            <c:when test="${contains eq true}">
+                                <i class="fas fa-star star favorite-star" onclick="toggleFollowStar(this)"></i>
                             </c:when>
                             <c:otherwise>
-                                <i class="far fa-star" style="float:right; margin-right: 10px;" onclick="toggleFavorite(this)"></i>
+                                <i class="far fa-star star" onclick="toggleFollowStar(this)"></i>
                             </c:otherwise>
                         </c:choose>
                     </div>

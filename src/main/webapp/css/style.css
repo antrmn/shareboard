@@ -252,6 +252,15 @@ navbar *{
     align-items: center;
 }
 
+.star {
+    float:right;
+    margin-right: 10px
+}
+
+.favorite-star {
+    color: #0079d3;
+}
+
 .dropdown {
     position: relative;
     display: inline-block;

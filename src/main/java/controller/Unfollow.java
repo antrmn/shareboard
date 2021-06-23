@@ -26,7 +26,7 @@ public class Unfollow extends HttpServlet {
                 (ConcurrentMap<Integer,Section>) getServletContext().getAttribute("sections");
 
         String section = req.getParameter("section");
-        if (section == null || InputValidator.assertInt(section)) {
+        if (section == null || !InputValidator.assertInt(section)) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
         }
