@@ -13,6 +13,7 @@ function createComment(author, votes, content, id, isEven, isSpecial){
     let comment = `
               <div id = "${id}" class = "grid-x-nw" style = "width: 100%; align-items: start; margin-top:10px; background-color: ${color}; border-radius: 4px; border: solid 1px #313132; ">
                   <div class = "vote-container">
+                    <input type = "hidden" name = "id" value = ${id}>
                     <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick = "toggleVote(this, 'upvote', 'comment')"></i>
                     <div class = "vote-count" style="word-break: initial; text-align: center; font-size: 12px;font-weight: 700; line-height: 16px;">
                         ${votes}
@@ -93,7 +94,7 @@ function loadComments(){
 }
 
 function toggleTextArea(el){
-    let form = `<form class = "comment-form" method = "POST" action= "./new-comment">
+    let form = `<form class = "comment-form" method = "POST" action= "./newcomment">
                     <input type = "hidden" name = "id" value = ${getPostId()}>
                     <input type = "hidden" name = "parent" value = ${$(el).find('input').val()}>
                     <textarea name = "text" rows="5"></textarea>
