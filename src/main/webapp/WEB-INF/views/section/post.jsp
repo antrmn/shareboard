@@ -19,9 +19,9 @@
   <div id="post-container" class = "grid-x-nw" style = "flex-basis: 1280px;">
       <div id = left-container class = "greyContainer">
           <div id = "post-data" style = "flex-grow: 1; width: 100%;">
-              <input type = "hidden" name = "postId" value = ${post.id}>
               <div class = "grid-x-nw" style = "align-items: start; margin-top:10px;">
                   <div class = "vote-container">
+                          <input type = "hidden" name = "id" value = ${post.id}>
                           <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick="toggleVote(this, 'upvote', 'post')"></i>
                           <c:choose>
                               <c:when test="${post.vote != 0}">
