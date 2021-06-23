@@ -35,7 +35,7 @@ public class NewPostServlet extends HttpServlet {
         System.out.println(filePart.getSubmittedFileName() + " ricevuto.");
 
         /* I file vengono caricati qui */
-        String uploadRoot = System.getenv("CATALINA_HOME") + File.separator + "uploads" + File.separator;
+        String uploadRoot = FileServlet.BASE_PATH;
         System.out.println("Upload Root: " + uploadRoot);
 
         /* Inizializzo stream da filePart */

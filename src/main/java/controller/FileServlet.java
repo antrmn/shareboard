@@ -1,10 +1,12 @@
 package controller;
 
-import java.io.Closeable;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.io.RandomAccessFile;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -12,14 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-@WebServlet(name = "FileServlet", urlPatterns = "/covers/*")
+@WebServlet(name = "FileServlet", urlPatterns = "/pics/*", loadOnStartup = 0)
 public class FileServlet extends HttpServlet {
 
     // Constants ----------------------------------------------------------------------------------
@@ -27,10 +22,7 @@ public class FileServlet extends HttpServlet {
     private static final int DEFAULT_BUFFER_SIZE = 10240; // ..bytes = 10KB.
     private static final long DEFAULT_EXPIRE_TIME = 604800000L; // ..ms = 1 week.
     private static final String MULTIPART_BOUNDARY = "MULTIPART_BYTERANGES";
-
-    // Properties ---------------------------------------------------------------------------------
-
-    private String basePath;
+    public static final String BASE_PATH = System.getenv("CATALINA_HOME") + File.separator + "uploads";
 
     // Actions ------------------------------------------------------------------------------------
 
@@ -42,23 +34,17 @@ public class FileServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
 
-        this.basePath = System.getenv("CATALINA_HOME") + File.separator + "uploads";
-
         // Validate base path.
-        if (this.basePath == null) {
-            throw new ServletException("FileServlet init param 'basePath' is required.");
-        } else {
-            File path = new File(this.basePath);
-            if (!path.exists()) {
-                throw new ServletException("FileServlet init param 'basePath' value '"
-                        + this.basePath + "' does actually not exist in file system.");
-            } else if (!path.isDirectory()) {
-                throw new ServletException("FileServlet init param 'basePath' value '"
-                        + this.basePath + "' is actually not a directory in file system.");
-            } else if (!path.canRead()) {
-                throw new ServletException("FileServlet init param 'basePath' value '"
-                        + this.basePath + "' is actually not readable in file system.");
-            }
+        File path = new File(BASE_PATH);
+        if (!path.exists()) {
+            throw new ServletException("FileServlet init param 'basePath' value '"
+                    + BASE_PATH + "' does actually not exist in file system.");
+        } else if (!path.isDirectory()) {
+            throw new ServletException("FileServlet init param 'basePath' value '"
+                    + BASE_PATH + "' is actually not a directory in file system.");
+        } else if (!path.canRead()) {
+            throw new ServletException("FileServlet init param 'basePath' value '"
+                    + BASE_PATH + "' is actually not readable in file system.");
         }
     }
 
@@ -111,7 +97,7 @@ public class FileServlet extends HttpServlet {
         }
 
         // URL-decode the file name (might contain spaces and on) and prepare file object.
-        File file = new File(basePath, URLDecoder.decode(requestedFile, StandardCharsets.UTF_8));
+        File file = new File(BASE_PATH, URLDecoder.decode(requestedFile, StandardCharsets.UTF_8));
 
         // Check if file actually exists in filesystem.
         if (!file.exists()) {
