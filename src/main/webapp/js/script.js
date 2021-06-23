@@ -1,23 +1,31 @@
 window.onclick = function(event) {
     // console.log(event.target)
 
-    // if (!$(event.target).has("#myDropdown").length) {
+    //console.log($(event.target).parents().has("#section-dropdown"))
+    // console.log($(event.target).parents("#section-dropdown"))
+    // if (!$(event.target).is("#section-dropdown") && $(event.target).parents("#section-dropdown").length === 0) {
     //     console.log("NOPE");
-    //     toggleDropdown(false, "myDropdown")
+    //     toggleDropdown("close", "section-dropdown")
     // }
     //
-    // if (!$(event.target).has("#profile-drowdown").length){
+    // if (!$(event.target).is("#profile-dropdown") && $(event.target).parents("#profile-drowdown").length === 0){
     //     console.log("NOPE2");
-    //     toggleDropdown(false, "profile-drowdown")
+    //     toggleDropdown("close", "profile-drowdown")
     // }
 }
 
-function toggleDropdown(state, id){
-    console.log(document.getElementById(id).classList.contains("show"))
-    document.getElementById(id).classList.toggle("show");
+function toggleDropdown(action, id){
+    // console.log(document.getElementById(id).classList.contains("show"))
+    if (action === "close"){
+        document.getElementById(id).classList.remove("show");
+    } else if(action === "toggle"){
+        document.getElementById(id).classList.toggle("show");
+    }
 }
 
-function doUpvote(){console.log('test')}
+$('.fa-star').on('click', function(e) {
+    e.stopPropagation();
+});
 
 function toggleFollowStar(e){
     let addFollow = false;

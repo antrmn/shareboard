@@ -10,7 +10,7 @@
   </jsp:include>
 </head>
 <body>
-<jsp:include page="../partials/navbar.jsp">
+<jsp:include page="/navbar">
   <jsp:param name="isLogged" value="true" />
   <jsp:param name="currentSection" value="${section.name}" />
   <jsp:param name="userName" value="Testus" />

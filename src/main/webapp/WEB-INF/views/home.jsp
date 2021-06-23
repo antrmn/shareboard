@@ -10,8 +10,7 @@
     </jsp:include>
 </head>
 <body>
-        <jsp:include page="partials/navbar.jsp">
-            <jsp:param name="isLogged" value="true" />
+        <jsp:include page="/navbar">
             <jsp:param name="currentSection" value="Home" />
             <jsp:param name="userName" value="${empty requestScope.loggedUser ? 'unlogged' : requestScope.loggedUser.username}" />
             <jsp:param name="userKarma" value="4316" />

@@ -10,7 +10,7 @@
                 <h3>Shareboard</h3>
             </a>
         </span>
-        <span id="nav-crt-sctn" class="interactable" onclick="toggleDropdown(true, 'section-dropdown')">
+        <span id="nav-crt-sctn" class="interactable" onclick="toggleDropdown('toggle', 'section-dropdown')">
             <i class="fas fa-map-marker-alt" style = "color:#0079D3"></i>
             <span>
                 <span>${param.currentSection}</span>
@@ -28,7 +28,7 @@
                         <a href="./s?id=${section.value.id}" style="display: inline; margin-bottom:10px;">${section.value.name}</a>
                         <input type = "hidden" name = "sectionId" value = "${section.value.id}">
                         <c:set var="contains" value="false" />
-                        <c:forEach var="item" items="${sessionScope.follows}">
+                        <c:forEach var="item" items="${follows}">
                             <c:if test="${item eq section.value.id}">
 
                                 <c:set var="contains" value="true" />
@@ -58,7 +58,7 @@
         <c:choose>
             <c:when test="${not empty loggedUser}">
                 <a href = "/create"style="margin-right: 20px;"><i class="fas fa-edit"></i></a>
-                <span id = "profile-container" class = "interactable" href = "${context}/profile/?id=${loggedUser.id}" onclick="toggleDropdown(true, 'profile-dropdown')" >
+                <span id = "profile-container" class = "interactable" href = "${context}/profile/?id=${loggedUser.id}" onclick="toggleDropdown('toggle', 'profile-dropdown')" >
                     <i id = "nav-profile-photo" class="fas fa-user-circle"></i>
                     <div id="nav-profile-data" >
                         <p style="display: block; margin-bottom:0px; ">${loggedUser.username}</p>
