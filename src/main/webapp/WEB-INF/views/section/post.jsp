@@ -8,7 +8,7 @@
   <jsp:param name="scripts" value="comment" />
 </jsp:include>
 <body>
-<jsp:include page="../partials/navbar.jsp">
+<jsp:include page="/navbar">
   <jsp:param name="isLogged" value="true" />
   <jsp:param name="currentSection" value="${post.section.name}" />
   <jsp:param name="userName" value="Testus" />
@@ -22,17 +22,31 @@
               <div class = "grid-x-nw" style = "align-items: start; margin-top:10px;">
                   <div class = "vote-container">
                           <input type = "hidden" name = "id" value = ${post.id}>
-                          <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick="toggleVote(this, 'upvote', 'post')"></i>
                           <c:choose>
-                              <c:when test="${post.vote != 0}">
-                                  <c:set var="vote" value="${post.vote}" />
+                              <c:when test="${post.vote == 1}">
+                                  <i class="fas fa-chevron-up voteIcon upvoteIcon interactable upvote-icon-active" onclick="toggleVote(this, 'upvote', 'post')"></i>
+                              </c:when>
+                              <c:otherwise>
+                                  <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick="toggleVote(this, 'upvote', 'post')"></i>
+                              </c:otherwise>
+                          </c:choose>
+                          <c:choose>
+                              <c:when test="${post.votes != 0}">
+                                  <c:set var="vote" value="${post.votes}" />
                               </c:when>
                               <c:otherwise>
                                   <c:set var="vote" value="Vote" />
                               </c:otherwise>
                           </c:choose>
-                          <div class = "vote-count" style="word-break: initial; text-align: center; font-size: 12px;font-weight: 700; line-height: 16px;">${vote}</div>
-                          <i class="fas fa-chevron-down voteIcon downvoteIcon interactable" onclick="toggleVote(this, 'downvote', 'post')"></i>
+                            <div class = "vote-count" style="word-break: initial; text-align: center; font-size: 12px;font-weight: 700; line-height: 16px;">${vote}</div>
+                          <c:choose>
+                              <c:when test="${post.vote == -1}">
+                                  <i class="fas fa-chevron-down voteIcon downvoteIcon interactable downvote-icon-active" onclick="toggleVote(this, 'downvote', 'post')"></i>
+                              </c:when>
+                              <c:otherwise>
+                                  <i class="fas fa-chevron-down voteIcon downvoteIcon interactable" onclick="toggleVote(this, 'downvote', 'post')"></i>
+                              </c:otherwise>
+                          </c:choose>
                   </div>
                   <div class = "grid-y-nw" style="flex-grow:1; align-items: start; margin-right: 40px;">
                       <div style = "flex-basis: 100%">

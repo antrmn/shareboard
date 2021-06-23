@@ -10,7 +10,7 @@
                 <h3>Shareboard</h3>
             </a>
         </span>
-        <span id="nav-crt-sctn" class="interactable" onclick="toggleDropdown(true, 'section-dropdown')">
+        <span id="nav-crt-sctn" class="interactable" onclick="toggleDropdown('toggle', 'section-dropdown')">
             <i class="fas fa-map-marker-alt" style = "color:#0079D3"></i>
             <span>
                 <span>${param.currentSection}</span>
@@ -18,32 +18,33 @@
             </span>
             <div id="section-dropdown" class="dropdown-content greyContainer">
                 <div style = "padding: 12px 16px; color: #77797a; font-size: 10px; font-weight: 500; line-height: 16px;text-transform: uppercase; ">Home Feeds</div>
-                <a href="${context}/home">Home</a>
-                <a href="${context}/home?order=popular">Popular</a>
-                <a href="${context}/home?order=new">New</a>
+                    <a class = "section-element" href="${context}/home">Home</a>
+                    <a class = "section-element" href="${context}/home?order=popular">Popular</a>
+                    <a class = "section-element" href="${context}/home?order=new">New</a>
                 <div style = "padding: 12px 16px; color: #77797a; font-size: 10px; font-weight: 500; line-height: 16px;text-transform: uppercase; ">Sections</div>
 
-                <c:forEach items="${applicationScope.sections}" var="section">
-                    <div style="margin-bottom:15px;">
-                        <a href="./s?id=${section.value.id}" style="display: inline; margin-bottom:10px;">${section.value.name}</a>
-                        <input type = "hidden" name = "sectionId" value = "${section.value.id}">
-                        <c:set var="contains" value="false" />
-                        <c:forEach var="item" items="${sessionScope.follows}">
-                            <c:if test="${item eq section.value.id}">
-
-                                <c:set var="contains" value="true" />
-                            </c:if>
-                        </c:forEach>
-                        <c:choose>
-                            <c:when test="${contains eq true}">
-                                <i class="fas fa-star star favorite-star" onclick="toggleFollowStar(this)"></i>
-                            </c:when>
-                            <c:otherwise>
-                                <i class="far fa-star star" onclick="toggleFollowStar(this)"></i>
-                            </c:otherwise>
-                        </c:choose>
-                    </div>
-                </c:forEach>
+                <div id = "section-container">
+                    <c:forEach items="${applicationScope.sections}" var="section">
+                        <div class = "section-element" style=" padding: 12px 0px 12px 0px;">
+                            <a href="./s?id=${section.value.id}" style="display: inline;">${section.value.name}</a>
+                            <input type = "hidden" name = "sectionId" value = "${section.value.id}">
+                            <c:set var="contains" value="false" />
+                            <c:forEach var="item" items="${follows}">
+                                <c:if test="${item eq section.value.id}">
+                                    <c:set var="contains" value="true" />
+                                </c:if>
+                            </c:forEach>
+                            <c:choose>
+                                <c:when test="${contains eq true}">
+                                    <i class="fas fa-star star favorite-star" onclick="toggleFollowStar(this)"></i>
+                                </c:when>
+                                <c:otherwise>
+                                    <i class="far fa-star star" onclick="toggleFollowStar(this)"></i>
+                                </c:otherwise>
+                            </c:choose>
+                        </div>
+                    </c:forEach>
+                </div>
             </div>
         </span>
 
@@ -58,7 +59,7 @@
         <c:choose>
             <c:when test="${not empty loggedUser}">
                 <a href = "/create"style="margin-right: 20px;"><i class="fas fa-edit"></i></a>
-                <span id = "profile-container" class = "interactable" href = "${context}/profile/?id=${loggedUser.id}" onclick="toggleDropdown(true, 'profile-dropdown')" >
+                <span id = "profile-container" class = "interactable" href = "${context}/profile/?id=${loggedUser.id}" onclick="toggleDropdown('toggle', 'profile-dropdown')" >
                     <i id = "nav-profile-photo" class="fas fa-user-circle"></i>
                     <div id="nav-profile-data" >
                         <p style="display: block; margin-bottom:0px; ">${loggedUser.username}</p>

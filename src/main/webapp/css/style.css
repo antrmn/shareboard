@@ -286,13 +286,18 @@ navbar *{
     display: block;
 }
 
-.dropdown-content a:hover {
+/*.dropdown-content a:hover {*/
+/*    background-color: #868789;*/
+/*}*/
+
+/*#section-dropdown div:hover{*/
+/*    background-color: #2e5fc6;*/
+/*}*/
+
+.section-element:hover {
     background-color: #868789;
 }
 
-#section-dropdown div:hover{
-    background-color: #2e5fc6;
-}
 
 .dropdown a:hover {background-color: #ddd;}
 

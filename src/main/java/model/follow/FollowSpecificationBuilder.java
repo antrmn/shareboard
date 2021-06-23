@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.StringJoiner;
 
 public class FollowSpecificationBuilder extends Specification.Builder<FollowSpecificationBuilder>{
-    private List<String> columnsList = List.of("post_id", "user_id", "follow_date");
+    private List<String> columnsList = List.of("section_id", "user_id", "follow_date");
 
     private StringJoiner joinsJoiner = new StringJoiner("\n");
     private StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ").setEmptyValue(" ");
@@ -34,6 +34,7 @@ public class FollowSpecificationBuilder extends Specification.Builder<FollowSpec
 
         joins = joinsJoiner.toString();
         wheres = wheresJoiner.toString();
+        columns = String.join(", ", columnsList);
         return super.build();
     }
 

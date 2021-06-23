@@ -1,23 +1,31 @@
 window.onclick = function(event) {
     // console.log(event.target)
 
-    // if (!$(event.target).has("#myDropdown").length) {
+    //console.log($(event.target).parents().has("#section-dropdown"))
+    // console.log($(event.target).parents("#section-dropdown"))
+    // if (!$(event.target).is("#section-dropdown") && $(event.target).parents("#section-dropdown").length === 0) {
     //     console.log("NOPE");
-    //     toggleDropdown(false, "myDropdown")
+    //     toggleDropdown("close", "section-dropdown")
     // }
     //
-    // if (!$(event.target).has("#profile-drowdown").length){
+    // if (!$(event.target).is("#profile-dropdown") && $(event.target).parents("#profile-drowdown").length === 0){
     //     console.log("NOPE2");
-    //     toggleDropdown(false, "profile-drowdown")
+    //     toggleDropdown("close", "profile-drowdown")
     // }
 }
 
-function toggleDropdown(state, id){
-    console.log(document.getElementById(id).classList.contains("show"))
-    document.getElementById(id).classList.toggle("show");
+function toggleDropdown(action, id){
+    // console.log(document.getElementById(id).classList.contains("show"))
+    if (action === "close"){
+        document.getElementById(id).classList.remove("show");
+    } else if(action === "toggle"){
+        document.getElementById(id).classList.toggle("show");
+    }
 }
 
-function doUpvote(){console.log('test')}
+$('.fa-star').on('click', function(e) {
+    e.stopPropagation();
+});
 
 function toggleFollowStar(e){
     let addFollow = false;
@@ -54,11 +62,11 @@ function toggleFollow(id, addFollow){
 function toggleVote(el, actiontype, elementType){
     let currentVotes = $(el).parent().find(".vote-count").text();
     let modifier = 0;
-
+    let isAddingVote = true
     if(currentVotes === "Vote")
         currentVotes = 0;
     currentVotes = parseInt(currentVotes);
-    console.log(currentVotes);
+    // console.log(currentVotes);
 
     if(actiontype === "upvote"){
         let upvoteElement = el;
@@ -69,6 +77,7 @@ function toggleVote(el, actiontype, elementType){
             modifier = 2;
         } else{
             if($(upvoteElement).hasClass('upvote-icon-active')){
+                isAddingVote = false;
                 modifier = -1;
             } else {
                 modifier = 1;
@@ -84,6 +93,7 @@ function toggleVote(el, actiontype, elementType){
             modifier = -2;
         } else{
             if($(downvoteElement).hasClass('downvote-icon-active')){
+                isAddingVote = false;
                 modifier = 1;
             } else {
                 modifier = -1;
@@ -95,18 +105,22 @@ function toggleVote(el, actiontype, elementType){
     }
 
     $(el).parent().find(".vote-count").text(currentVotes + modifier);
-
-    let serverAction = 1;
-
-    if (actiontype === "downvote")
-        serverAction = -1;
-
-    $.post(window.location.origin+"/shareboard/handlevote",
-        {
-            id: $(el).find("input").val(),
-            action: serverAction,
-            type: elementType
-        });
+    console.log($(el).siblings("input").val())
+    let _id = $(el).siblings("input").val();
+    if (isAddingVote){
+        $.post(window.location.origin+"/shareboard/vote",
+            {
+                id: _id,
+                vote: actiontype,
+                type: elementType
+            });
+    } else {
+        $.post(window.location.origin+"/shareboard/unvote",
+            {
+                id: _id,
+                type: elementType
+            });
+    }
 }
 
 let getUrlParameter = function getUrlParameter(sParam) {
