@@ -1,5 +1,7 @@
 package controller;
 
+import controller.util.ErrorForwarder;
+import controller.util.InputValidator;
 import model.follow.FollowDAO;
 import model.persistence.ConPool;
 import model.user.HashedPassword;

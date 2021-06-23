@@ -1,4 +1,4 @@
-package filter;
+package controller.filter;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -8,11 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebFilter(filterName = "redirectLoggedUser")
-public class RedirectLoggedUser extends HttpFilter {
+@WebFilter(filterName = "redirectGuest")
+public class RedirectGuest extends HttpFilter {
     @Override
     protected void doFilter(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
-        if(req.getAttribute("loggedUser") != null){
+        if(req.getAttribute("loggedUser") == null){
             res.sendRedirect(req.getContextPath());
             return;
         }

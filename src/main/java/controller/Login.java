@@ -1,6 +1,7 @@
 package controller;
 
 
+import controller.util.ErrorForwarder;
 import model.follow.FollowDAO;
 import model.persistence.ConPool;
 import model.user.User;

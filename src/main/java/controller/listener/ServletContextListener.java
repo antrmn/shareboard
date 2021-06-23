@@ -1,4 +1,4 @@
-package listener;
+package controller.listener;
 
 import model.persistence.ConPool;
 import model.section.Section;

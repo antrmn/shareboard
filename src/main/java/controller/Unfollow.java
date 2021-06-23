@@ -1,5 +1,6 @@
 package controller;
 
+import controller.util.InputValidator;
 import model.follow.FollowDAO;
 import model.persistence.ConPool;
 import model.section.Section;
