@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet("/new-comment")
+@WebServlet("/newcomment")
 public class CommentAdder extends HttpServlet {
 
     @Override
