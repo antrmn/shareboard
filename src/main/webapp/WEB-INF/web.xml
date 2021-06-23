@@ -25,6 +25,7 @@
         <filter-name>userAuthorizer</filter-name>
         <url-pattern>/vote</url-pattern>
         <url-pattern>/unvote</url-pattern>
+        <url-pattern>/newcomment</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter-mapping>

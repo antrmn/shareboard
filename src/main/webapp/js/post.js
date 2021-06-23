@@ -21,12 +21,21 @@ function createPost(data){
     console.log(data.section.name)
     let sectionLink = `${window.location.origin}/shareboard/s?section=${data.section.name}`;
     let postLink = `${window.location.origin}/shareboard/post?id=${data.id}`;
+
+    let upvoteClass = "";
+    if (data.vote === 1){
+        upvoteClass = "upvote-icon-active"
+    }
+    let downvoteClass = "";
+    if (data.vote === -1){
+        downvoteClass = "downvote-icon-active";
+    }
     let post = `<div class="post greyContainer interactable">
         <span class = "vote-container">
             <input type = "hidden" name = "id" value = ${data.id}>
-            <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick = "toggleVote(this, 'upvote', 'post')"></i>
+            <i class="fas fa-chevron-up voteIcon upvoteIcon interactable ${upvoteClass}" onclick = "toggleVote(this, 'upvote', 'post')"></i>
             <div class = "vote-count" style="word-break: initial; text-align: center; font-size: 12px;font-weight: 700; line-height: 16px;">${data.votes}</div>
-            <i class="fas fa-chevron-down voteIcon downvoteIcon interactable" onclick = "toggleVote(this, 'downvote', 'post')"></i>
+            <i class="fas fa-chevron-down voteIcon downvoteIcon interactable ${downvoteClass}" onclick = "toggleVote(this, 'downvote', 'post')"></i>
         </span>
         <span id = "post-media-container"> 
            <a href = ${postLink}>`;

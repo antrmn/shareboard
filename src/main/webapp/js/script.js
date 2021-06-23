@@ -62,11 +62,11 @@ function toggleFollow(id, addFollow){
 function toggleVote(el, actiontype, elementType){
     let currentVotes = $(el).parent().find(".vote-count").text();
     let modifier = 0;
-
+    let isAddingVote = true
     if(currentVotes === "Vote")
         currentVotes = 0;
     currentVotes = parseInt(currentVotes);
-    console.log(currentVotes);
+    // console.log(currentVotes);
 
     if(actiontype === "upvote"){
         let upvoteElement = el;
@@ -77,6 +77,7 @@ function toggleVote(el, actiontype, elementType){
             modifier = 2;
         } else{
             if($(upvoteElement).hasClass('upvote-icon-active')){
+                isAddingVote = false;
                 modifier = -1;
             } else {
                 modifier = 1;
@@ -92,6 +93,7 @@ function toggleVote(el, actiontype, elementType){
             modifier = -2;
         } else{
             if($(downvoteElement).hasClass('downvote-icon-active')){
+                isAddingVote = false;
                 modifier = 1;
             } else {
                 modifier = -1;
@@ -103,18 +105,22 @@ function toggleVote(el, actiontype, elementType){
     }
 
     $(el).parent().find(".vote-count").text(currentVotes + modifier);
-
-    let serverAction = 1;
-
-    if (actiontype === "downvote")
-        serverAction = -1;
-
-    $.post(window.location.origin+"/shareboard/handlevote",
-        {
-            id: $(el).find("input").val(),
-            action: serverAction,
-            type: elementType
-        });
+    console.log($(el).siblings("input").val())
+    let _id = $(el).siblings("input").val();
+    if (isAddingVote){
+        $.post(window.location.origin+"/shareboard/vote",
+            {
+                id: _id,
+                vote: actiontype,
+                type: elementType
+            });
+    } else {
+        $.post(window.location.origin+"/shareboard/unvote",
+            {
+                id: _id,
+                type: elementType
+            });
+    }
 }
 
 let getUrlParameter = function getUrlParameter(sParam) {
