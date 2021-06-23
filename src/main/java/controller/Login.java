@@ -40,7 +40,7 @@ public class Login extends HttpServlet {
 
         if(username == null || username.isBlank())
             errors.add("Specificare il nome utente");
-        if(password == null || password.isBlank())
+        if(password == null || password.isEmpty())
             errors.add("Specificare la password");
 
         if(!errors.isEmpty()) {

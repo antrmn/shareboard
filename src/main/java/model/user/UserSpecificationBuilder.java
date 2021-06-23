@@ -65,6 +65,12 @@ public class UserSpecificationBuilder extends Specification.Builder<UserSpecific
         return this;
     }
 
+    public UserSpecificationBuilder byEmail(String email){
+        wheresJoiner.add("email = ?");
+        params.add(new Pair<>(email, Types.VARCHAR));
+        return this;
+    }
+
     public UserSpecificationBuilder byUsernameExact(String username){
         wheresJoiner.add("username = ?");
         params.add(new Pair<>(username, Types.VARCHAR));

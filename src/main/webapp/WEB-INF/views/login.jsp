@@ -28,7 +28,7 @@
       </ul>
       <form id = "login-form" action="${pageContext.request.contextPath}/login" method="post" style="display: flex; justify-content: center; align-items:center; flex-direction: column;">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" value="${fn:trim(param.username)}">
+        <input type="text" id="username" name="username" value="${fn:trim(fn:escapeXml(param.username))}">
         <label for="pass">Password:</label>
         <input type="password" id="pass" name="pass">
         <input type="submit" value="Log In" class="roundButton">
