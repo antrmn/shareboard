@@ -1,8 +1,6 @@
 package controller;
 
 
-import controller.util.ErrorForwarder;
-import controller.util.InputValidator;
 import model.follow.Follow;
 import model.follow.FollowDAO;
 import model.follow.FollowSpecificationBuilder;
@@ -10,7 +8,6 @@ import model.persistence.ConPool;
 import model.persistence.Specification;
 import model.section.Section;
 import model.user.User;
-import model.user.UserDAO;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +18,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;

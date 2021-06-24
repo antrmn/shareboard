@@ -4,12 +4,14 @@ import com.google.gson.Gson;
 import model.comment.Comment;
 import model.comment.CommentDAO;
 import model.persistence.ConPool;
+import model.user.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -26,8 +28,12 @@ public class CommentLoader extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int postId = Integer.parseInt(req.getParameter("postId"));
         try (Connection con = ConPool.getConnection()){
+            int userId = 0;
+            HttpSession session = req.getSession(true);
+            if ((session != null && session.getAttribute("loggedUserId") != null))
+                userId = (Integer)session.getAttribute("loggedUserId");
             CommentDAO service = new CommentDAO(con);
-            Map<Integer, ArrayList<Comment>> comments = service.fetchHierarchy(postId, false, 10, 0);
+            Map<Integer, ArrayList<Comment>> comments = service.fetchHierarchy(postId, false, 10, userId);
             Gson gson = new Gson();
 //            System.out.println(req.getParameter("section"));
             //System.out.println(gson.toJson(comments));

@@ -6,12 +6,14 @@ import model.persistence.Specification;
 import model.post.Post;
 import model.post.PostDAO;
 import model.post.PostSpecificationBuilder;
+import model.user.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -37,7 +39,12 @@ public class PostLoader extends HttpServlet {
         String section = req.getParameter("section");
 //        String order = req.getParameter("order");
 //        String offset = req.getParameter("offset");
+
         PostSpecificationBuilder psb = new PostSpecificationBuilder();
+        HttpSession session = req.getSession(true);
+        if ((session != null && session.getAttribute("loggedUserId") != null))
+            psb.loggedUser((Integer) session.getAttribute("loggedUserId"));
+
         if(!section.equalsIgnoreCase("Home")){
             psb.isInSectionByName(section);
         }
