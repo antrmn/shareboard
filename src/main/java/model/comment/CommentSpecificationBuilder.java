@@ -6,16 +6,18 @@ import util.Pair;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.Instant;
+import java.util.List;
 import java.util.StringJoiner;
 
 public class CommentSpecificationBuilder extends Specification.Builder<CommentSpecificationBuilder>{
     private int loggedUserId = 0;
-
+    private List<String> columnsList = List.of("comment.id", "comment.author_id");
     StringJoiner joinsJoiner = new StringJoiner("\n");
     StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ");
 
     public CommentSpecificationBuilder() {
         super("v_comment");
+        columns = String.join(", ", columnsList);
         String userJoin = " JOIN v_user AS user ON comment.author_id=user.id ";
         String postJoin = " JOIN post ON post.id = comment.post_id";
         joinsJoiner.add(postJoin);
