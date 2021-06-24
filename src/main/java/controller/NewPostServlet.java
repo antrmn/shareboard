@@ -32,7 +32,9 @@ import java.util.UUID;
 public class NewPostServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
+        //super.doGet(req, resp);
+        String sectionId = req.getParameter("section");
+        req.getRequestDispatcher("/WEB-INF/views/section/create-post.jsp").forward(req, resp);
     }
 
     @Override

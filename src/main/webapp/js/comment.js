@@ -63,13 +63,13 @@ function addChilds(comments, key, depth){
     if (comments[key]){
         depth++;
         for(let comment of comments[key]){
-            console.log(key + "  " + depth + " " + comment.text);
-            console.log(depth%2===0);
+            // console.log(key + "  " + depth + " " + comment.text);
+            // console.log(depth%2===0);
             $(createComment(comment.author.username, comment.votes,comment.vote, comment.text, comment.id, depth%2===0)).insertAfter(`#${key} > .grid-y-nw > #reply-button`);
             addChilds(comments, comment.id, depth);
         }
     }
-    console.log("END:" + depth)
+    // console.log("END:" + depth)
     depth--;
 }
 

@@ -9,7 +9,7 @@
   </jsp:include>
 </head>
 <body>
-  <jsp:include page="partials/navbar.jsp">
+  <jsp:include page="/navbar">
     <jsp:param name="isLogged" value="false" />
     <jsp:param name="currentSection" value="Register" />
   </jsp:include>

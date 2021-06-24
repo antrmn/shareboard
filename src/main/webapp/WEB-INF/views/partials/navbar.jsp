@@ -26,7 +26,7 @@
                 <div id = "section-container">
                     <c:forEach items="${applicationScope.sections}" var="section">
                         <div class = "section-element" style=" padding: 12px 0px 12px 0px;">
-                            <a href="./s?id=${section.value.id}" style="display: inline;">${section.value.name}</a>
+                            <a href="${context}/s?section=${section.value.name}" style="display: inline;">${section.value.name}</a>
                             <input type = "hidden" name = "sectionId" value = "${section.value.id}">
                             <c:set var="contains" value="false" />
                             <c:forEach var="item" items="${follows}">
@@ -58,7 +58,7 @@
     <div id="nav-profile">
         <c:choose>
             <c:when test="${not empty loggedUser}">
-                <a href = "/create"style="margin-right: 20px;"><i class="fas fa-edit"></i></a>
+                <a href = "${context}/newpost"style="margin-right: 20px;"><i class="fas fa-edit"></i></a>
                 <span id = "profile-container" class = "interactable" href = "${context}/profile/?id=${loggedUser.id}" onclick="toggleDropdown('toggle', 'profile-dropdown')" >
                     <i id = "nav-profile-photo" class="fas fa-user-circle"></i>
                     <div id="nav-profile-data" >
