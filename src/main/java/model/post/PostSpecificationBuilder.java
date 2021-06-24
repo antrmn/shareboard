@@ -33,18 +33,7 @@ public class PostSpecificationBuilder extends Specification.Builder<PostSpecific
     }
 
     public Specification build() {
-        if (loggedUserId > 0) {
-            params.add(new Pair<>(loggedUserId, Types.INTEGER));
-            String loggedUserJoin = "LEFT JOIN (SELECT" +
-                    " post_id, vote, user_id" +
-                    " FROM post_vote " +
-                    " JOIN user " +
-                    " ON user_id=user.id " +
-                    " WHERE user_id=?)" +
-                    " AS v1 " +
-                    "ON v1.post_id = post.id";
-            joinsJoiner.add(loggedUserJoin);
-        } else {
+        if (loggedUserId <= 0) {
             String notLoggedUserJoin = "CROSS JOIN (SELECT 0 AS vote) AS v1";
             joinsJoiner.add(notLoggedUserJoin);
         }
@@ -55,6 +44,16 @@ public class PostSpecificationBuilder extends Specification.Builder<PostSpecific
 
     public PostSpecificationBuilder loggedUser(Integer id){
         loggedUserId = id;
+        params.add(new Pair<>(loggedUserId, Types.INTEGER));
+        String loggedUserJoin = "LEFT JOIN (SELECT" +
+                " post_id, vote, user_id" +
+                " FROM post_vote " +
+                " JOIN user " +
+                " ON user_id=user.id " +
+                " WHERE user_id=? )" +
+                " AS v1 " +
+                "ON v1.post_id = post.id";
+        joinsJoiner.add(loggedUserJoin);
         return this;
     }
 

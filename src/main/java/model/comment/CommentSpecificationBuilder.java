@@ -28,18 +28,7 @@ public class CommentSpecificationBuilder extends Specification.Builder<CommentSp
     }
 
     public Specification build() {
-        if (loggedUserId > 0) {
-            params.add(new Pair<>(loggedUserId, Types.INTEGER));
-            String loggedUserJoin = "LEFT JOIN (SELECT" +
-                    " comment_id, vote, user_id" +
-                    " FROM comment_vote " +
-                    " JOIN user " +
-                    " ON user_id=user.id " +
-                    " WHERE user_id=?)" +
-                    " AS vc1 " +
-                    "ON vc1.comment_id = comment.id";
-            joinsJoiner.add(loggedUserJoin);
-        } else {
+        if (loggedUserId <= 0) {
             String notLoggedUserJoin = "CROSS JOIN (SELECT 0 AS vote) AS vc1";
             joinsJoiner.add(notLoggedUserJoin);
         }
@@ -51,6 +40,16 @@ public class CommentSpecificationBuilder extends Specification.Builder<CommentSp
 
     public CommentSpecificationBuilder loggedUser(Integer id){
         loggedUserId = id;
+        params.add(new Pair<>(loggedUserId, Types.INTEGER));
+        String loggedUserJoin = "LEFT JOIN (SELECT" +
+                " comment_id, vote, user_id" +
+                " FROM comment_vote " +
+                " JOIN user " +
+                " ON user_id=user.id " +
+                " WHERE user_id=?)" +
+                " AS vc1 " +
+                "ON vc1.comment_id = comment.id";
+        joinsJoiner.add(loggedUserJoin);
         return this;
     }
 
