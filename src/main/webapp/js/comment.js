@@ -61,18 +61,18 @@ function createEmpty(){
 
 function addChilds(comments, key, depth){
     if (comments[key]){
-        let backup = depth
+        depth++;
         for(let comment of comments[key]){
-            // depth++;
-            console.log(depth + " " + comment.text);
+            console.log(key + "  " + depth + " " + comment.text);
             console.log(depth%2===0);
-            $(createComment(comment.author.username, comment.votes,comment.vote, comment.text, comment.id, depth%2===0)).insertAfter(`#${key} #reply-button`)
-            addChilds(comments, comment.id, depth++);
+            $(createComment(comment.author.username, comment.votes,comment.vote, comment.text, comment.id, depth%2===0)).insertAfter(`#${key} > .grid-y-nw > #reply-button`);
+            addChilds(comments, comment.id, depth);
         }
     }
     console.log("END:" + depth)
     depth--;
 }
+
 
 function loadComments(){
 
@@ -89,6 +89,7 @@ function loadComments(){
             }
             let comments = JSON.parse(data);
             console.log(comments);
+            console.log(comments[0]);
             let i = 1;
 
             let baseId = 0;
