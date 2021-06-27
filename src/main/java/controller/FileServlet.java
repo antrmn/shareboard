@@ -27,7 +27,7 @@ public class FileServlet extends HttpServlet {
     public static final String BASE_PATH = System.getenv("CATALINA_HOME") + File.separator + "uploads" + File.separator;
     public static final String FILE_PUBLIC_LOCATION = "/pics/";
     // Actions ------------------------------------------------------------------------------------
-
+  
     /**
      * Initialize the servlet.
      *
