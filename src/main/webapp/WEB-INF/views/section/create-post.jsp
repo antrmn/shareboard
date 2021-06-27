@@ -31,10 +31,10 @@
                         </button>
                     </div>
                     <div id="action-container" style = "margin:8px;">
-                        <form id = "create-post-form" class = "grid-y-nw align-center justify-center" action="${pageContext.request.contextPath}/newpost" method="post">
+                        <form id = "create-post-form" class = "grid-y-nw align-center justify-center" action="${pageContext.request.contextPath}/newpost" method="post" enctype="multipart/form-data">
                             <div style = "align-self: start">
                                 <label for="section-select" style = "display: inline">Choose a section:</label>
-                                <select name="sections" id="section-select">
+                                <select name="section" id="section-select">
                                     <c:forEach items="${applicationScope.sections}" var="section">
                                         <option value="${section.value.id}">${section.value.name}</option>
                                     </c:forEach>
@@ -45,7 +45,7 @@
                             <textarea id="text-field" class = "input-field" name = "content" rows="5" placeholder="Text" ></textarea>
 
                             <label for="img" hidden>Select image:</label>
-                            <input type="file" id="img" name="img" accept="image/*" hidden>
+                            <input type="file" id="img" name="picture" accept="image/*" hidden>
 
                             <input id = "post-type" type="hidden" name = "type" value = "text">
 

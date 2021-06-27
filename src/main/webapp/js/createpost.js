@@ -10,7 +10,7 @@ function togglePostType(e){
         console.log('test2')
         $(e).addClass("post-type-button-selected");
         $("#text-button").removeClass("post-type-button-selected");
-        $("#post-type").val("image");
+        $("#post-type").val("picture");
         $("#img").removeAttr("hidden");
         $("#text-field").attr("hidden", true);
     }
