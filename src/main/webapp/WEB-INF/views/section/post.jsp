@@ -58,9 +58,16 @@
                       </div>
 
                       <div>
-                          <p class = white-text style = "border: solid 1px gray; border-radius: 4px; padding: 7px; word-break: break-word;">
-                              ${post.content}
-                          </p>
+                          <c:choose>
+                              <c:when test="${post.type == 'IMG'}">
+                                 <img src= "${applicationScope.picsLocation}/${post.content}">
+                              </c:when>
+                              <c:when test="${post.type == 'TEXT'}">
+                                  <p class = white-text style = "border: solid 1px gray; border-radius: 4px; padding: 7px; word-break: break-word;">
+                                          ${post.content}
+                                  </p>
+                              </c:when>
+                          </c:choose>
                       </div>
                       <div class = "grey-text" >
                           <i class="fas fa-comment-dots"></i>
