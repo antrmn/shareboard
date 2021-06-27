@@ -2,15 +2,15 @@
 <Configuration status="info">
 
     <Properties>
-        <Property name="logdir">C:/shareboard_tmp/log</Property>
+        <Property name="logdir">${sys:catalina.home}/logs</Property>
         <Property name="layout">%d %-5p  [%c{1}]: %m%n</Property>
     </Properties>
 
     <Appenders>
 
         <RollingFile name="LOCALHOST"
-                     fileName="${logdir}/localhost.log"
-                     filePattern="${logdir}/localhost.%d{yyyy-MM-dd}-%i.log">
+                     fileName="${logdir}/shareboard/localhost.log"
+                     filePattern="${logdir}/shareboard/localhost.%d{yyyy-MM-dd}-%i.log">
             <PatternLayout pattern="${layout}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy />
@@ -24,11 +24,11 @@
     <Loggers>
 
         <Logger name="controller.Home"
-                level="info" additivity="false">
+                level="info" additivity="true">
             <AppenderRef ref="LOCALHOST" />
         </Logger>
         <Logger name="model.persistence.StatementSetters"
-                level="debug" additivity="false">
+                level="debug" additivity="true">
             <AppenderRef ref="LOCALHOST" />
         </Logger>
 

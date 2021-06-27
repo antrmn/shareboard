@@ -1,4 +1,4 @@
-package component;
+package controller.util;
 
 public class Paginator {
 
