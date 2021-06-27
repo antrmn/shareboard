@@ -11,7 +11,7 @@
     </jsp:include>
 </head>
 <body>
-<jsp:include page="/navbar">
+<jsp:include page="/WEB-INF/navbar">
     <jsp:param name="currentSection" value="Create Post" />
 </jsp:include>
 

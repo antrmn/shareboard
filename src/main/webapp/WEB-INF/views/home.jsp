@@ -10,7 +10,7 @@
     </jsp:include>
 </head>
 <body>
-        <jsp:include page="/navbar">
+        <jsp:include page="/WEB-INF/navbar">
             <jsp:param name="currentSection" value="Home" />
             <jsp:param name="userName" value="${empty requestScope.loggedUser ? 'unlogged' : requestScope.loggedUser.username}" />
             <jsp:param name="userKarma" value="4316" />

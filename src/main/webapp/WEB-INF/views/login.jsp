@@ -9,7 +9,7 @@
   </jsp:include>
 </head>
 <body>
-<jsp:include page="/navbar">
+<jsp:include page="/WEB-INF/navbar">
   <jsp:param name="isLogged" value="false" />
   <jsp:param name="currentSection" value="Login" />
 </jsp:include>

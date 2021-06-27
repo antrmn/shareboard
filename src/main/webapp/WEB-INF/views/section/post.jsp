@@ -8,7 +8,7 @@
   <jsp:param name="scripts" value="comment" />
 </jsp:include>
 <body>
-<jsp:include page="/navbar">
+<jsp:include page="/WEB-INF/navbar">
   <jsp:param name="isLogged" value="true" />
   <jsp:param name="currentSection" value="${post.section.name}" />
   <jsp:param name="userName" value="Testus" />
