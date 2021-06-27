@@ -5,47 +5,66 @@
 <html>
 <head>
     <jsp:include page="../partials/head.jsp">
-        <jsp:param name="currentPage" value="" />
+        <jsp:param name="currentPage" value="New Post" />
+        <jsp:param name="styles" value="createpost" />
+        <jsp:param name="scripts" value="createpost" />
     </jsp:include>
 </head>
 <body>
 <jsp:include page="/navbar">
-    <jsp:param name="isLogged" value="false" />
     <jsp:param name="currentSection" value="Create Post" />
 </jsp:include>
 
-<div style = "display: flex; margin-top:300px; justify-content: center; align-items:center;">
-    <div class="greyContainer" style = "display: flex;">
-        <img src="images/bg-planet.png">
-        <div style="display: flex; justify-content: center; align-items:center; flex-direction: column; padding:100px 200px 100px 200px;">
-            <h2>Create Post</h2>
-            <ul>
-                <c:if test = "${not empty requestScope.errors}">
-                    <c:forEach items="${requestScope.errors}" var="error">
-                        <li>${error}</li>
-                    </c:forEach>
-                </c:if>
-            </ul>
-            <form id = "create-post-form" action="${pageContext.request.contextPath}/newpost" method="post" style="display: flex; justify-content: center; align-items:center; flex-direction: column;">
-                <label for="section-select">Choose a section:</label>
+<div id="body-container" class = "justify-center align-center">
+        <div class = "grid-x-nw" style = "flex-basis: 1280px;">
+            <div id = left-container >
+                <h2 style = "border-bottom-style: solid; border-bottom-width: 1px; padding-bottom: 10px;">Create Post</h2>
+                <div id = "post-data" class = "greyContainer">
+                    <div class = "grid-x-nw" style = "flex-grow: 1">
+                        <button id = "text-button" class = "post-type-button post-type-button-left post-type-button-selected" onclick = "togglePostType(this)">
+                            <i class="fas fa-comment-alt" style = "display: inline"></i>
+                            <p style = "display: inline">Post</p>
+                        </button>
+                        <button id = "image-button" class = "post-type-button post-type-button-right" onclick = "togglePostType(this)">
+                            <i class="fas fa-image"  style = "display: inline"></i>
+                            <p style = "display: inline">Image</p>
+                        </button>
+                    </div>
+                    <div id="action-container" style = "margin:8px;">
+                        <form id = "create-post-form" class = "grid-y-nw align-center justify-center" action="${pageContext.request.contextPath}/newpost" method="post" enctype="multipart/form-data">
+                            <div style = "align-self: start">
+                                <label for="section-select" style = "display: inline">Choose a section:</label>
+                                <select name="section" id="section-select">
+                                    <c:forEach items="${applicationScope.sections}" var="section">
+                                        <option value="${section.value.id}">${section.value.name}</option>
+                                    </c:forEach>
+                                </select>
+                            </div>
 
-                <select name="sections" id="section-select">
-                    <c:forEach items="${applicationScope.sections}" var="section">
-                        <option value="${section.value.id}">${section.value.name}</option>
-                    </c:forEach>
-                </select>
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title">
-                <input type="radio" id="text-type" name="text" value="Text"
-                       checked>
-                <label for="img">img</label>
-                <input type="radio" id="img-type" name="img" value="Image">
-                <label for="text">text</label>
-                <label for="content">Text:</label>
-                <input type="text" id="content" name="content">
+                            <input type="text" id="title-field" class = "input-field" name="title" placeholder="Title">
+                            <textarea id="text-field" class = "input-field" name = "content" rows="5" placeholder="Text" ></textarea>
 
-                <input type="submit" value="Send" class="roundButton">
-            </form>
+                            <label for="img" hidden>Select image:</label>
+                            <input type="file" id="img" name="picture" accept="image/*" hidden>
+
+                            <input id = "post-type" type="hidden" name = "type" value = "text">
+
+                            <ul>
+                                <c:if test = "${not empty requestScope.errors}">
+                                    <c:forEach items="${requestScope.errors}" var="error">
+                                        <li>${error}</li>
+                                    </c:forEach>
+                                </c:if>
+                            </ul>
+
+                            <input type="submit" value="Post" class="roundButton">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div id="right-container" style = "margin-top:55px;">
+                <jsp:include page="../partials/rules.jsp"/>
+            </div>
         </div>
     </div>
 </div>

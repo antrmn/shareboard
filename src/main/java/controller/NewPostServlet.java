@@ -47,6 +47,8 @@ public class NewPostServlet extends HttpServlet {
         String content = req.getParameter("content");
         Part picture = req.getPart("picture");
 
+        System.out.println(sectionId);
+
         Map<Integer, Section> sections = (Map<Integer, Section>) getServletContext().getAttribute("sections");
         Section section = null;
         if(sectionId == null || !InputValidator.assertInt(sectionId))
