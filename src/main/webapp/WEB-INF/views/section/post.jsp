@@ -1,4 +1,5 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<%@ taglib prefix="sb" tagdir="/WEB-INF/tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -78,6 +79,11 @@
                         </jsp:include>
                       <div class ="grid-x-nw" style = "width: 100%">
                           <div id = "comments-container" style = "margin:8px; width: 100%">
+                              <sb:printComments comments="${requestScope.comments}" idParent="${0}">
+                                  <jsp:attribute name="commentFragment">
+                                        <%@ include file="/WEB-INF/views/partials/comment.jsp" %>
+                                  </jsp:attribute>
+                              </sb:printComments>
                           </div>
                       </div>
                   </div>

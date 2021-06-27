@@ -13,7 +13,7 @@ function initParams(_section, _order){
     console.log( "postjs ready!" );
     console.log( section );
     offset = 0;
-    loadPosts();
+   // loadPosts();
 }
 
 function createPost(data){

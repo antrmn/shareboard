@@ -1,6 +1,6 @@
 $( document ).ready(function() {
     console.log( "commentjs ready!" );
-    loadComments();
+    //loadComments();
 });
 
 function createComment(author, votes, vote, content, id, isEven, isSpecial){

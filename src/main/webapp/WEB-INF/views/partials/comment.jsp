@@ -1,11 +1,15 @@
+<%--@elvariable id="comment" type="model.comment.Comment"--%>
+<%-- Quello sopra è un commento di IntelliJ che permette di ignorare l'errore "cannot resolve variable" e
+     fornisce l'auto-complete anche se l'oggetto non è presente (Ancora) in nessuno scope --%>
+
 <div id = "${comment.id}" class = "grid-x-nw" style = "width: 100%; align-items: start; margin-top:10px; background-color: #242323; border-radius: 4px; border: solid 1px #313132; ">
     <div class = "vote-container">
         <input type = "hidden" name = "id" value = !ID>
-        <i class="fas fa-chevron-up voteIcon upvoteIcon interactable" onclick = "toggleVote(this, 'upvote', 'comment')"></i>
+        <i class="fas fa-chevron-up voteIcon upvoteIcon interactable ${comment.vote == 1 ? "upvote-icon-active" : ""}" onclick = "toggleVote(this, 'upvote', 'comment')"></i>
         <div class = "vote-count" style="word-break: initial; text-align: center; font-size: 12px;font-weight: 700; line-height: 16px;">
-            !VOTI
+            ${comment.votes}
         </div>
-        <i class="fas fa-chevron-down voteIcon downvoteIcon interactable" onclick = "toggleVote(this, 'downvote', 'comment')"></i>
+        <i class="fas fa-chevron-down voteIcon downvoteIcon interactable ${post.vote == 1 ? "downvote-icon-active" : ""}" onclick = "toggleVote(this, 'downvote', 'comment')"></i>
     </div>
     <div class = "grid-y-nw" style="flex-grow:1; align-items: start;padding-bottom: 10px; padding-right: 10px;">
         <div style = "flex-basis: 100%">

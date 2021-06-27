@@ -49,9 +49,9 @@
         </span>
 
         <div id="nav-search" >
-            <form action="/search">
+            <form action="${pageContext.request.contextPath}/search">
                  <i id = "search-icon"class="fas fa-search"></i>
-                <input type="text" placeholder="Search" name="search">
+                <input type="text" placeholder="Search" name="content">
             </form>
         </div>
     </div>

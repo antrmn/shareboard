@@ -2,7 +2,6 @@ package controller;
 
 import model.persistence.ConPool;
 import model.persistence.Specification;
-import model.post.Post;
 import model.post.PostDAO;
 import model.post.PostSpecificationBuilder;
 import model.section.SectionDAO;
@@ -29,6 +28,8 @@ public class Section extends HttpServlet {
         SectionSpecificationBuilder spb = new SectionSpecificationBuilder();
         spb.byName(sectionName);
         Specification s = spb.build();
+        PostSpecificationBuilder psb = new PostSpecificationBuilder();
+        psb.isInSectionByName(sectionName);
         try (Connection con = ConPool.getConnection()){
             SectionDAO service = new SectionDAO(con);
             List<model.section.Section> sections = service.fetch(s);
@@ -37,6 +38,8 @@ public class Section extends HttpServlet {
                 resp.sendRedirect("./home");
             } else{
                 model.section.Section section = sections.get(0);
+                PostDAO service2 = new PostDAO(con);
+                req.setAttribute("posts", service2.fetch(psb.build()));
                 req.setAttribute("section", section);
                 req.getRequestDispatcher("/WEB-INF/views/section/section.jsp").forward(req,resp);
             }

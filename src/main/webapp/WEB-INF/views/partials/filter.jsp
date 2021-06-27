@@ -4,7 +4,7 @@
   <a href="/popular"><i class="fas fa-certificate"></i>New</a>
   <i class="fas fa-ellipsis-h" id = "filter-icon" style = "float:right;" onclick="toggleDropdown('toggle', 'filter-dropdown')">
     <div id="filter-dropdown" class="dropdown-content greyContainer">
-      <a href="/">
+      <a href="${pageContext.request.contextPath}/">
         Set Default
       </a>
     </div>
