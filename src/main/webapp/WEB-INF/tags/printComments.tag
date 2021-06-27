@@ -7,16 +7,13 @@
 <%@ variable name-given="comment" variable-class="model.comment.Comment" scope="NESTED" %>
 <%@ variable name-given="childComments" variable-class="java.lang.String" scope="NESTED"%>
 
-
-<c:if test="${not empty comments[idParent]}">
-    <c:forEach items="${comments[idParent]}" var="comment">
-        <c:set var="childComments">
-            <sb:printComments comments="${comments}" idParent="${comment.id}">
-                <jsp:attribute name="commentFragment">
-                    <%@ include file="/WEB-INF/views/partials/comment.jsp" %>
-                </jsp:attribute>
-            </sb:printComments>
-        </c:set>
-        <jsp:invoke fragment="commentFragment"/>
-    </c:forEach>
-</c:if>
+<c:forEach items="${comments[idParent]}" var="comment">
+    <c:set var="childComments">
+        <sb:printComments comments="${comments}" idParent="${comment.id}">
+            <jsp:attribute name="commentFragment">
+                <%@ include file="/WEB-INF/views/partials/comment.jsp" %>
+            </jsp:attribute>
+        </sb:printComments>
+    </c:set>
+    <jsp:invoke fragment="commentFragment"/>
+</c:forEach>

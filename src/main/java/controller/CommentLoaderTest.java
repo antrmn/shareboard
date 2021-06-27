@@ -27,7 +27,7 @@ public class CommentLoaderTest extends HttpServlet {
         Map<Integer, ArrayList<Comment>> comments;
         try (Connection con = ConPool.getConnection()){
             CommentDAO service = new CommentDAO(con);
-            comments = service.fetchHierarchy(postId, false, 10, userId);
+            comments = service.fetchHierarchy(5, true, 10, userId);
         } catch(SQLException e){
             throw new ServletException(e);
         }

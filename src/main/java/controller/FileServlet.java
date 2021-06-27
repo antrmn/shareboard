@@ -14,7 +14,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.zip.GZIPOutputStream;
 
-@WebServlet(name = "FileServlet", urlPatterns = "/pics/*", loadOnStartup = 0)
+@WebServlet(name = "FileServlet",
+            urlPatterns = {FileServlet.FILE_PUBLIC_LOCATION + "*"},
+            loadOnStartup = 0)
 public class FileServlet extends HttpServlet {
 
     // Constants ----------------------------------------------------------------------------------
@@ -23,7 +25,7 @@ public class FileServlet extends HttpServlet {
     private static final long DEFAULT_EXPIRE_TIME = 604800000L; // ..ms = 1 week.
     private static final String MULTIPART_BOUNDARY = "MULTIPART_BYTERANGES";
     public static final String BASE_PATH = System.getenv("CATALINA_HOME") + File.separator + "uploads" + File.separator;
-
+    public static final String FILE_PUBLIC_LOCATION = "/pics/";
     // Actions ------------------------------------------------------------------------------------
 
     /**
@@ -33,6 +35,7 @@ public class FileServlet extends HttpServlet {
      */
     @Override
     public void init() throws ServletException {
+        getServletContext().setAttribute("picsLocation", getServletContext().getContextPath()+ FILE_PUBLIC_LOCATION);
 
         // Validate base path.
         File path = new File(BASE_PATH);
