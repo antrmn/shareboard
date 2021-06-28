@@ -30,7 +30,6 @@ public class Navbar extends HttpServlet {
         ConcurrentMap<Integer, model.section.Section> sections =
                 (ConcurrentMap<Integer, Section>) getServletContext().getAttribute("sections");
 
-
         HttpSession session = req.getSession(true);
         User user = (User) req.getAttribute("loggedUser");
         if(user == null){
@@ -58,5 +57,7 @@ public class Navbar extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {}
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
 }
