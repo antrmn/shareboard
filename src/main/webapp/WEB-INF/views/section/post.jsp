@@ -73,6 +73,9 @@
                       <div class = "grey-text" >
                           <i class="fas fa-comment-dots"></i>
                           ${post.nComments}
+                          <c:if test="${requestScope.loggedUser.id == post.author.id || requestScope.loggedUser.admin.booleanValue() == true}">
+                              <a href="${pageContext.request.contextPath}/editpost?id=${post.id}">Edit</a>
+                          </c:if>
                       </div>
                         <jsp:include page="../partials/comment-form.jsp">
                             <jsp:param name="id" value="${post.id}"/>

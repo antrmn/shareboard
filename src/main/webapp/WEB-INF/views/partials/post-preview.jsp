@@ -1,5 +1,6 @@
 <%@ page import="model.post.Post" %>
-<%@ page import="util.InstantFormatter" %><%--@elvariable id="post" type="model.post.Post"--%>
+<%@ page import="util.InstantFormatter" %>
+<%--@elvariable id="post" type="model.post.Post"--%>
 <%-- Quello sopra è un commento di IntelliJ che permette di ignorare l'errore "cannot resolve variable" e
      fornisce l'auto-complete anche se l'oggetto non è presente (Ancora) in nessuno scope --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
