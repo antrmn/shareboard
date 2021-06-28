@@ -11,7 +11,7 @@ import java.util.StringJoiner;
 
 public class CommentSpecificationBuilder extends Specification.Builder<CommentSpecificationBuilder>{
     private int loggedUserId = 0;
-    private List<String> columnsList = List.of("comment.id", "comment.author_id");
+    private List<String> columnsList = List.of("comment.id", "comment.author_id", "comment.content", "comment.post_id AS post_id");
     StringJoiner joinsJoiner = new StringJoiner("\n");
     StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ");
 
