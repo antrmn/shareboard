@@ -1,6 +1,7 @@
 package controller;
 
 import controller.util.ErrorForwarder;
+import controller.util.FileUtils;
 import controller.util.InputValidator;
 import model.persistence.ConPool;
 import model.post.Post;
@@ -19,26 +20,28 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @WebServlet("/newpost")
 @MultipartConfig
 public class NewPostServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //super.doGet(req, resp);
         String sectionId = req.getParameter("section");
         req.getRequestDispatcher("/WEB-INF/views/section/create-post.jsp").forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(req.getAttribute("errors") != null) {
+            doGet(req, resp);
+            return;
+        }
+
         List<String> errors = new ArrayList<>();
 
         String sectionId = req.getParameter("section");
@@ -83,7 +86,7 @@ public class NewPostServlet extends HttpServlet {
         }
 
         if(!errors.isEmpty()){
-            ErrorForwarder.sendError(req, resp, errors, 400);
+            ErrorForwarder.sendError(req, resp, errors, 400, "/newpost");
             return;
         }
 
@@ -96,37 +99,41 @@ public class NewPostServlet extends HttpServlet {
         if(post.getType() == Post.Type.TEXT){
             post.setContent(content);
         } else if (post.getType() == Post.Type.IMG) {
-            String oldFileName = Paths.get(picture.getSubmittedFileName()).getFileName().toString();
-            String[] oldFileNameSplit = oldFileName.split("\\.");
-            String oldFileNameExtension = oldFileNameSplit[oldFileNameSplit.length-1];
-            String newFileName = UUID.randomUUID().toString() + "." + oldFileNameExtension;
-            post.setContent(newFileName);
+            post.setContent(FileUtils.generateFileName(picture));
         }
 
-
-        /* Autocommit a false così un fail del filesystem impedisce l'inserimento nel db.
-           Doppio try-catch per poter chiamare setAutoCommit.
-         */
         int newPostId;
-        try(Connection con = ConPool.getConnection()){
-            con.setAutoCommit(false);
-            try(InputStream fileStream = picture.getInputStream()){
+        if(post.getType() == Post.Type.TEXT){
+            try(Connection con = ConPool.getConnection()){
                 PostDAO service = new PostDAO(con);
                 newPostId = service.insert(post);
-
-                String uploadRoot = FileServlet.BASE_PATH;
-                File file = new File(uploadRoot + post.getContent());
-                if(!file.getParentFile().exists())
-                    file.getParentFile().mkdir();
-                Files.copy(fileStream, file.toPath());
-            } catch(SQLException | IOException e){
-                con.rollback();
+            } catch (SQLException e) {
                 throw new ServletException(e);
-            } finally {
-                con.setAutoCommit(true);
             }
-        } catch (SQLException e2) {
-            throw new ServletException(e2);
+        } else {
+            /* Autocommit a false così un fail del filesystem impedisce l'inserimento nel db.
+               Doppio try-catch per poter chiamare setAutoCommit.
+            */
+            try(Connection con = ConPool.getConnection()){
+                con.setAutoCommit(false);
+                try(InputStream fileStream = picture.getInputStream()){
+                    PostDAO service = new PostDAO(con);
+                    newPostId = service.insert(post);
+
+                    String uploadRoot = FileServlet.BASE_PATH;
+                    File file = new File(uploadRoot + post.getContent());
+                    if(!file.getParentFile().exists())
+                        file.getParentFile().mkdir();
+                    Files.copy(fileStream, file.toPath());
+                } catch(SQLException | IOException e){
+                    con.rollback();
+                    throw new ServletException(e);
+                } finally {
+                    con.setAutoCommit(true);
+                }
+            } catch (SQLException e2) {
+                throw new ServletException(e2);
+            }
         }
 
         resp.sendRedirect(getServletContext().getContextPath() + "/post?id=" + newPostId);

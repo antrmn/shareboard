@@ -1,3 +1,12 @@
+$(() => {
+    if($("#text-button").hasClass("post-type-button-selected"))
+        togglePostType($("#text-button")[0]);
+    else if($("#image-button").hasClass("post-type-button-selected"))
+        togglePostType($("#image-button")[0]);
+    else
+        togglePostType($("#text-button")[0]);
+});
+
 function togglePostType(e){
     if($(e).is("#text-button")){
         $(e).addClass("post-type-button-selected");
