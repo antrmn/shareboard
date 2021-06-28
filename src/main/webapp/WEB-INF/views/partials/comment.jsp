@@ -16,15 +16,37 @@
             <a class = grey-text>posted by ${comment.author.username}</a>
         </div>
         <div>
-            <p class = white-text>
+            <p class = "white-text comment-text">
                 ${comment.text}
             </p>
         </div>
-        <div id = "reply-button" class = "grey-text" onclick="toggleTextArea(this)">
-            <input type = "hidden" name = "commentId" value = ${comment.id}>
-            <i class="fas fa-comment-dots"></i>
-            <span>Reply</span>
+        <div>
+            <c:if test="${not empty requestScope.loggedUser}">
+             <span id = "reply-button" class = "grey-text" onclick="toggleTextArea(this)">
+                <input type = "hidden" name = "commentId" value = ${comment.id}>
+                <i class="fas fa-comment-dots"></i>
+                <span>Reply</span>
+             </span>
+            </c:if>
+            <c:if test="${not empty requestScope.loggedUser
+                        and (comment.author.id == requestScope.loggedUser.id or requestScope.loggedUser.admin.equals(true))}">
+                <span id = "edit-button" class = "grey-text" onclick="toggleTextArea(this)">Edit</span>
+            </c:if>
         </div>
+        <form class = "comment-form reply-form" method = "POST" action= "${pageContext.request.contextPath}/newcomment" hidden>
+            <input type = "hidden" name = "id" value = ${comment.post.id}>
+            <input type = "hidden" name = "parent" value = ${comment.id}>
+            <textarea name = "text" rows="5" placeholder="Scrivi una risposta..."></textarea>
+            <br>
+            <button class = roundButton>Rispondi</button>
+        </form>
+        <form class = "comment-form edit-form" method = "POST" action= "${pageContext.request.contextPath}/editcomment" hidden>
+            <input type = "hidden" name = "id" value = ${comment.id}>
+            <textarea name = "text" rows="5">${comment.text}</textarea>
+            <br>
+            <button class = roundButton>Modifica</button>
+        </form>
+
         ${childComments}
     </div>
 </div>

@@ -1,4 +1,4 @@
-#reply-button:hover{
+#reply-button:hover,#edit-button:hover{
     background-color: #676869;
     border-radius: 4px;
 }

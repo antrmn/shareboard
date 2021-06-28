@@ -103,21 +103,18 @@ function loadComments(){
 }
 
 function toggleTextArea(el){
-    let form = `<form class = "comment-form" method = "POST" action= "./newcomment">
-                    <input type = "hidden" name = "id" value = ${getPostId()}>
-                    <input type = "hidden" name = "parent" value = ${$(el).find('input').val()}>
-                    <textarea name = "text" rows="5"></textarea>
-                    <br>
-                    <button class = roundButton>Invia</button>
-                </form>`;
+    let replyForm = $(el).parent().parent().find('.reply-form')[0];
+    let editForm = $(el).parent().parent().find('.edit-form')[0];
 
-    if($(el).hasClass('has-form')){
-        $(el).parent().find('.comment-form').remove();
-    }else{
-        $(form).insertAfter(el);
+    if($(el).attr("id") == "edit-button"){
+        $(replyForm).hide();
+        $(editForm).toggle();
     }
 
-    $(el).toggleClass('has-form');
+    if($(el).attr("id") == "reply-button"){
+        $(editForm).hide();
+        $(replyForm).toggle();
+    }
 }
 
 function validateCommentForm(el){
