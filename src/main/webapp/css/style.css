@@ -550,7 +550,7 @@ navbar *{
     /*box-sizing: border-box;*/
 }
 
-.post-generic-holder .post-image-holder:hover {
+.post-generic-holder.post-image-holder:hover {
     -webkit-transition: all 1s cubic-bezier(.94,-0.29,.02,1.02);
     -moz-transition: all 1s cubic-bezier(.94,-0.29,.02,1.02);
     transition: all 1s cubic-bezier(.94,-0.29,.02,1.02);
