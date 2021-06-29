@@ -75,6 +75,7 @@
                           ${post.nComments}
                           <c:if test="${requestScope.loggedUser.id == post.author.id || requestScope.loggedUser.admin.booleanValue() == true}">
                               <a href="${pageContext.request.contextPath}/editpost?id=${post.id}">Edit</a>
+                              <a href="${pageContext.request.contextPath}/deletepost?id=${post.id}" onclick="return confirm('Cancellare il post?')">Delete</a>
                           </c:if>
                       </div>
                         <jsp:include page="../partials/comment-form.jsp">

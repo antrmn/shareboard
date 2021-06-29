@@ -9,7 +9,7 @@
         <div class = "vote-count" style="word-break: initial; text-align: center; font-size: 12px;font-weight: 700; line-height: 16px;">
             ${comment.votes}
         </div>
-        <i class="fas fa-chevron-down voteIcon downvoteIcon interactable ${post.vote == 1 ? "downvote-icon-active" : ""}" onclick = "toggleVote(this, 'downvote', 'comment')"></i>
+        <i class="fas fa-chevron-down voteIcon downvoteIcon interactable ${comment.vote == -1 ? "downvote-icon-active" : ""}" onclick = "toggleVote(this, 'downvote', 'comment')"></i>
     </div>
     <div class = "grid-y-nw" style="flex-grow:1; align-items: start;padding-bottom: 10px; padding-right: 10px;">
         <div style = "flex-basis: 100%">
@@ -31,6 +31,7 @@
             <c:if test="${not empty requestScope.loggedUser
                         and (comment.author.id == requestScope.loggedUser.id or requestScope.loggedUser.admin.equals(true))}">
                 <span id = "edit-button" class = "grey-text" onclick="toggleTextArea(this)">Edit</span>
+                <span class="grey-text"><a href="${pageContext.request.contextPath}/deletecomment?id=${comment.id}" id="delete-button" onclick="return confirm('Cancellare il commento?')">Delete</a></span>
             </c:if>
         </div>
         <form class = "comment-form reply-form" method = "POST" action= "${pageContext.request.contextPath}/newcomment" hidden>
