@@ -21,7 +21,7 @@
                 <jsp:include page="partials/filter.jsp"/>
                 <div id="post-container">
                     <c:forEach items="${requestScope.posts}" var="post">
-                        <!-- Vuoi capire la differenza tra @include e jsp:include? Prova a sostituire. -->
+                        <%-- Vuoi capire la differenza tra @include e jsp:include? Prova a sostituire. --%>
                         <%@ include file="partials/post-preview.jsp" %>
                     </c:forEach>
                 </div>
