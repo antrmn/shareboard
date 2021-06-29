@@ -5,7 +5,7 @@
 <html>
 <jsp:include page="../partials/head.jsp">
   <jsp:param name="currentPage" value="${post.title}" />
-  <jsp:param name="styles" value="section,comment" />
+  <jsp:param name="styles" value="section,comment,post" />
   <jsp:param name="scripts" value="comment" />
 </jsp:include>
 <body>
@@ -61,7 +61,7 @@
                       <div>
                           <c:choose>
                               <c:when test="${post.type == 'IMG'}">
-                                 <img src= "${applicationScope.picsLocation}/${post.content}">
+                                 <img src= "${applicationScope.picsLocation}/${post.content}" class = "post-image">
                               </c:when>
                               <c:when test="${post.type == 'TEXT'}">
                                   <p class = white-text style = "border: solid 1px gray; border-radius: 4px; padding: 7px; word-break: break-word;">
