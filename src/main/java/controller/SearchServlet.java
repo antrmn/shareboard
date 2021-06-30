@@ -32,7 +32,7 @@ public class SearchServlet extends HttpServlet {
         String _postedAfter = req.getParameter("postedafter");
         String _postedBefore = req.getParameter("postedBefore");
 
-        User loggedUser = req.getAttribute("loggedUser") == null ? null : (User) req.getAttribute("loggedUser");
+        User loggedUser = (User) req.getAttribute("loggedUser");
 
         PostSpecificationBuilder psb = new PostSpecificationBuilder();
         if(content != null && !content.isBlank()) {
