@@ -23,8 +23,11 @@ public class Admin extends HttpServlet {
         String path = (req.getPathInfo() != null) ? req.getPathInfo() : "/";
         System.out.print(path);
         switch(path){
-            case "/create-section":
+            case "/newsection":
                 req.getRequestDispatcher("/WEB-INF/views/crm/create-section.jsp").forward(req,resp);
+                break;
+            case "/editsection":
+                req.getRequestDispatcher("/WEB-INF/views/crm/edit-section.jsp").forward(req,resp);
                 break;
             case "/user-panel":
                 //temp

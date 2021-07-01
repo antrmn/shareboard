@@ -6,20 +6,36 @@
 <head>
     <jsp:include page="../partials/head.jsp">
         <jsp:param name="currentPage" value="Admin" />
+        <jsp:param name="styles" value="admin" />
+        <jsp:param name="scripts" value="admin" />
     </jsp:include>
 </head>
 <body>
     <jsp:include page="/WEB-INF/navbar">
-        <jsp:param name="isLogged" value="true" />
         <jsp:param name="currentSection" value="Admin" />
-        <jsp:param name="userName" value="Testus" />
-        <jsp:param name="userKarma" value="4316" />
     </jsp:include>
 
-    <div style = "display: flex; margin-top:300px; justify-content: center; align-items:center;">
-        <div class="greyContainer" style = "display: flex;flex-direction: column">
-            <a href="${context}/admin/create-section">Crea Sezione</a>
-            <a>Gestione Utenti</a>
+    <jsp:include page="../partials/admin-sidebar.jsp">
+        <jsp:param name="currentSection" value="dashboard" />
+    </jsp:include>
+
+    <div class = "grid-x justify-center align-center" style = "margin-top:300px;">
+        <div class="greyContainer">
+            <div class="card-image" style = "background-image: url('${pageContext.request.contextPath}/images/bg-orange.png');">
+            </div>
+            <h1>Utenti Registrati</h1>
+        </div>
+
+        <div class="greyContainer">
+            <div class="card-image" style = "background-image: url('${pageContext.request.contextPath}/images/bg-orange.png');">
+            </div>
+            <h1>N. Sezioni</h1>
+        </div>
+
+        <div class="greyContainer">
+            <div class="card-image" style = "background-image: url('${pageContext.request.contextPath}/images/bg-orange.png');">
+            </div>
+            <h1>N. Posts</h1>
         </div>
     </div>
 </body>

@@ -1,44 +1,50 @@
-<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:set var="context" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
 <head>
     <jsp:include page="../partials/head.jsp">
-        <jsp:param name="currentPage" value="Admin" />
+        <jsp:param name="currentPage" value="Crea Sezione" />
+        <jsp:param name="styles" value="admin" />
+        <jsp:param name="scripts" value="admin" />
     </jsp:include>
 </head>
 <body>
-
     <jsp:include page="/WEB-INF/navbar">
-        <jsp:param name="isLogged" value="true" />
-        <jsp:param name="currentSection" value="Admin" />
-        <jsp:param name="userName" value="Testus" />
-        <jsp:param name="userKarma" value="4316" />
+        <jsp:param name="currentSection" value="Crea Sezione" />
     </jsp:include>
 
+    <jsp:include page="../partials/admin-sidebar.jsp">
+        <jsp:param name="currentSection" value="dashboard" />
+    </jsp:include>
+    <div class = "grid-y-nw align-center justify-center" style = "margin-top: 100px;">
+        <div id = "size-container">
+            <h2 style = "border-bottom-style: solid; border-bottom-width: 1px; padding-bottom: 10px;">Crea Sezione</h2>
+            <div id = "section-data" class = "greyContainer">
+                <div id="action-container" style = "margin:8px;">
+                    <form id = "create-post-form" class = "grid-y-nw align-center justify-center" action="${pageContext.request.contextPath}/admin/handlesection" method="post" enctype="multipart/form-data">
 
+                        <input type="text" id="title-field" class = "input-field" name="title" placeholder="Nome" value="${param.title}">
+                        <textarea id="text-field" class = "input-field" name = "content" rows="5" placeholder="Descrizione" >${param.content}</textarea>
 
-    <div style = "display: flex; margin-top:300px; justify-content: center; align-items:center;">
-        <div class="greyContainer" style = "display: flex;">
-            <img src="../images/bg-planet.png">
-            <div style="display: flex; justify-content: center; align-items:center; flex-direction: column; padding:100px 200px 100px 200px;">
-                <h2>Crea Sezione</h2>
+                        <label for="img" hidden>Select image:</label>
+                        <input type="file" id="img" name="picture" accept="image/*">
 
-                <form id = "section-form" action="${context}/admin/create-section" method="post" style="display: flex; justify-content: center; align-items:center; flex-direction: column;">
-                    <label for="fname">Nome:</label>
-                    <input type="text" id="sectionName" name="sectionName">
-                    <label for="fname">Descrizione:</label>
-                    <input type="text" id="sectionDescr" name="sectionDescr">
-                    <label for="lname">Icona:</label>
-                    <input type="file" id="sectionIcon" name="sectionIcon">
-                    <label for="lname">Banner:</label>
-                    <input type ="file" id="sectionBanner" name="sectionBanner">
-                    <button class = "roundButton darkGreyButton">Crea</button>
-                </form>
-            </div>
+                        <ul>
+                            <c:if test = "${not empty requestScope.errors}">
+                                <c:forEach items="${requestScope.errors}" var="error">
+                                    <li>${error}</li>
+                                </c:forEach>
+                            </c:if>
+                        </ul>
+
+                        <input type="submit" value="Crea" class="roundButton">
+                    </form>
+                </div>
         </div>
     </div>
-
+</div>
+</div>
 </body>
 </html>
