@@ -23,10 +23,10 @@
             <h2 style = "border-bottom-style: solid; border-bottom-width: 1px; padding-bottom: 10px;">Crea Sezione</h2>
             <div id = "section-data" class = "greyContainer">
                 <div id="action-container" style = "margin:8px;">
-                    <form id = "create-post-form" class = "grid-y-nw align-center justify-center" action="${pageContext.request.contextPath}/admin/handlesection" method="post" enctype="multipart/form-data">
+                    <form id = "create-post-form" class = "grid-y-nw align-center justify-center" action="${pageContext.request.contextPath}/admin/newsection" method="post" enctype="multipart/form-data">
 
-                        <input type="text" id="title-field" class = "input-field" name="title" placeholder="Nome" value="${param.title}">
-                        <textarea id="text-field" class = "input-field" name = "content" rows="5" placeholder="Descrizione" >${param.content}</textarea>
+                        <input type="text" id="title-field" class = "input-field" name="name" placeholder="Nome" value="${param.title}">
+                        <textarea id="text-field" class = "input-field" name = "description" rows="5" placeholder="Descrizione" >${param.content}</textarea>
 
                         <label for="img" hidden>Select image:</label>
                         <input type="file" id="img" name="picture" accept="image/*">
