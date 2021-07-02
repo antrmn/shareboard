@@ -147,4 +147,16 @@ public class UserDAO{
         List<Integer> single = insert(List.of(user));
         return single.isEmpty() ? null : single.get(0);
     }
+
+    public int count(Specification specification) throws SQLException {
+        String query = "SELECT COUNT(*) FROM v_user AS user %s %s %s LIMIT ? OFFSET ?";
+        query = String.format(query, specification.getJoins(), specification.getWheres());
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet rs = StatementSetters.setParameters(ps, specification.getParams())
+                .executeQuery();
+        int count = rs.getInt(1);
+        ps.close();
+        rs.close();
+        return count;
+    }
 }
