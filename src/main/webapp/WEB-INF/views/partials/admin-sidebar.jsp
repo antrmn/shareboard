@@ -17,7 +17,7 @@
         <i class="fas fa-align-justify"></i>
         Gestione Sezioni
     </a>
-    <a href="${context}/admin/showsusers">
+    <a href="${context}/admin/showusers">
         <i class="fas fa-users"></i>
         Gestione Utenti
     </a>

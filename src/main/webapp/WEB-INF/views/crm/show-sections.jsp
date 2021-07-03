@@ -32,10 +32,10 @@
           <td>${section.value.name}</td>
           <td>${section.value.nFollowers}</td>
           <td>
-            <a href = "${context}/admin/editsection">
+            <a href = "${context}/admin/editsection?sectionId=${section.value.id}">
               <i class="fas fa-edit"></i>
             </a>
-            <a href = "${context}/admin/deletesection">
+            <a href = "${context}/admin/deletesection?sectionId=${section.value.id}">
               <i class="fas fa-minus-circle"></i>
             </a>
           </td>

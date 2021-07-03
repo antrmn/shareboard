@@ -6,6 +6,7 @@ import model.persistence.ConPool;
 import model.section.Section;
 import model.section.SectionDAO;
 import model.section.SectionSpecificationBuilder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -21,15 +22,23 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentMap;
-import java.util.stream.Collectors;
 
-@WebServlet("/admin/newsection")
+@WebServlet("/admin/editsection")
 @MultipartConfig
-public class NewSectionServlet extends HttpServlet {
+public class EditSectionServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/crm/create-section.jsp").forward(req, resp);
+        int sectionId = Integer.parseInt(req.getParameter("sectionId"));
+        try(Connection con = ConPool.getConnection()){
+            SectionDAO service = new SectionDAO(con);
+            SectionSpecificationBuilder ssb = new SectionSpecificationBuilder();
+            ssb.byId(sectionId);
+            Section s = service.fetch(ssb.build()).get(0);
+            req.setAttribute("section", s);
+            req.getRequestDispatcher("/WEB-INF/views/crm/edit-section.jsp").forward(req, resp);
+        }catch(SQLException e) {
+            throw new ServletException(e);
+        }
     }
 
     @Override
@@ -41,18 +50,10 @@ public class NewSectionServlet extends HttpServlet {
         //authenticate
         List<String> errors = new ArrayList<>();
 
-        String name = req.getParameter("name");
+        int sectionId = Integer.parseInt(req.getParameter("sectionId"));
         String description = req.getParameter("description");
         Part picture = req.getPart("picture");
 
-        if(name == null || name.isBlank())
-            errors.add("Specificare un titolo");
-
-        ConcurrentMap<Integer, Section> sections = (ConcurrentMap<Integer, Section>) getServletContext().getAttribute("sections");
-        for(ConcurrentMap.Entry<Integer, Section> entry : sections.entrySet()){
-            if (entry.getValue().getName().equalsIgnoreCase(name))
-                errors.add("Sezione già esistente");
-        }
 
         if(picture!= null && picture.getSize() > 0){
             if (picture.getSize() > 5 * 1024 * 1024)
@@ -63,7 +64,7 @@ public class NewSectionServlet extends HttpServlet {
 
         }
         if(!errors.isEmpty()){
-            ErrorForwarder.sendError(req, resp, errors, 400, "/admin/newsection");
+            ErrorForwarder.sendError(req, resp, errors, 400, "/admin/editsection");
             return;
         }
 
@@ -73,7 +74,7 @@ public class NewSectionServlet extends HttpServlet {
                 SectionDAO service = new SectionDAO(con);
                 Section s = new Section();
                 s.setDescription(description);
-                s.setName(name);
+                s.setId();
                 if (picture!= null && picture.getSize() > 0){
                     s.setPicture(FileUtils.generateFileName(picture));
                     String uploadRoot = FileServlet.BASE_PATH;
@@ -82,10 +83,7 @@ public class NewSectionServlet extends HttpServlet {
                         file.getParentFile().mkdir();
                     Files.copy(fileStream, file.toPath());
                 }
-                service.insert(s);
-                List<Section> _sections = service.fetch(new SectionSpecificationBuilder().sortById().build());
-                sections = _sections.stream().collect(Collectors.toConcurrentMap(x -> x.getId(), x -> x));
-                getServletContext().setAttribute("sections", sections);
+                service.update(s);
             } catch(SQLException | IOException e){
                 con.rollback();
                 throw new ServletException(e);
