@@ -275,7 +275,7 @@ navbar *{
     top: 48px;
     max-height: 482px;
     overflow-x: hidden;
-    right:0;
+    overflow-y: scroll;
 }
 
 .dropdown-content a {
@@ -393,6 +393,10 @@ navbar *{
     display:inline-block;
     margin-bottom:0px;
     font-size: 30px;
+}
+
+#right-dropdown{
+    overflow-y: hidden;
     right:0;
 }
 
