@@ -269,15 +269,13 @@ navbar *{
 .dropdown-content {
     display: none;
     position: absolute;
-    /*background-color: #f1f1f1;*/
-    /*min-width: 160px;*/
     width: 270px;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     top: 48px;
     max-height: 482px;
     overflow-x: hidden;
-    overflow-y: scroll;
+    right:0;
 }
 
 .dropdown-content a {
@@ -383,10 +381,6 @@ navbar *{
     justify-content: center;
     padding-left: 36px;
     flex-shrink: 0;
-    /*border-left-width: 1px;*/
-    /*border-left-style: dashed;*/
-    /*border-left-color: #868789;*/
-    /*flex:30%;*/
 }
 
 #nav-profile-photo{
@@ -399,6 +393,7 @@ navbar *{
     display:inline-block;
     margin-bottom:0px;
     font-size: 30px;
+    right:0;
 }
 
 #nav-profile-data{

@@ -45,8 +45,8 @@ public class Post extends HttpServlet {
 //                    System.out.println(posts.get(0).getAuthor().getUsername());
 //                    System.out.println(posts.get(0).getSection().getName());
 //                    System.out.println(posts.get(0).getSection().getId());
-                    System.out.println("get vote "+posts.get(0).getVote());
-                    System.out.println("get votes "+posts.get(0).getVotes());
+//                    System.out.println("get vote "+posts.get(0).getVote());
+//                    System.out.println("get votes "+posts.get(0).getVotes());
                     req.setAttribute("post", posts.get(0));
                     Map<Integer, ArrayList<Comment>> comments;
                     CommentDAO service2 = new CommentDAO(con);

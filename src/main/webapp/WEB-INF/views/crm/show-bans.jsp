@@ -47,7 +47,7 @@
     <!-- Modal content -->
     <div class="modal-content">
       <div class="modal-header">
-        <span class="close">&times;</span>
+        <span class="close" onclick="closeModal();">&times;</span>
         <h2>Aggiungi Ban</h2>
       </div>
       <div class="modal-body">

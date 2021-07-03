@@ -55,6 +55,21 @@
     #size-container{width:80%;}
 }
 
+.dahsborad-card{
+    margin: 20px;
+    background-color: #171717;
+    width: 600px;
+    height: 200px;
+    display: flex;
+    align-content: start;
+    justify-content: center;
+    flex-direction: column;
+    border-left-style: solid;
+    border-left-color: #4295b5;
+    border-left-width: 8px;
+    border-radius: 4px;;
+}
+
 
 table {
     /*border-collapse: collapse;*/

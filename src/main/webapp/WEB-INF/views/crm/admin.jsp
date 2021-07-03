@@ -21,29 +21,26 @@
     </jsp:include>
 
     <div class = "grid-x justify-center align-center" style = "margin-top: 150px;">
-        <div class="greyContainer" style="margin:20px; background-color: #29b6f6; width: 600px; height:200px;">
-            <div style = "display:inline-block; padding-left: 30px;">
-                <h1>7</h1>
-                <h3>Utenti Registrati</h3>
-            </div>
-            <i class="fas fa-user-plus" style = "font-size: 80px; display:inline; color: #178dbf; float: right"></i>
-        </div>
-
-        <div class="greyContainer" style="margin:20px; background-color: #29b6f6; width: 600px; height:200px;">
-            <i class="fas fa-user-plus" style = "font-size: 80px; display:inline; padding-left: 1px;"></i>
+        <div class="dahsborad-card">
             <div style = "padding-left: 30px;">
-                <h1>7</h1>
-                <h3>Utenti Registrati</h3>
+                <div style = "display:inline-block;">
+                    <h1>7</h1>
+                    <h3>Utenti Registrati</h3>
+                </div>
+                <i class="fas fa-user-plus" style = "font-size: 80px; display:inline; color: #4295b5; float: right"></i>
             </div>
         </div>
 
-        <div class="greyContainer" style="margin:20px; background-color: #29b6f6; width: 600px; height:200px;">
-            <i class="fas fa-user-plus" style = "font-size: 80px; display:inline;"></i>
-            <div style = "display:inline; padding-left: 30px;">
-                <h1>7</h1>
-                <h3>Utenti Registrati</h3>
+        <div class="dahsborad-card">
+            <div style = "padding-left: 30px;">
+                <div style = "display:inline-block;">
+                    <h1>7</h1>
+                    <h3>Utenti Registrati</h3>
+                </div>
+                <i class="fas fa-user-plus" style = "font-size: 80px; display:inline; color: #4295b5; float: right"></i>
             </div>
         </div>
+
 
         <div id="chart_div"></div>
         <div id="curve_chart" style="width: 900px; height: 500px"></div>
