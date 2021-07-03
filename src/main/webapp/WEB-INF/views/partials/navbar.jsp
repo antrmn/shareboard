@@ -90,9 +90,24 @@
             </c:when>
             <c:otherwise>
                 <div id = "button-container">
-                    <a href= "${context}/login" class = "roundButton darkGreyButton">Log In</a>
-                    <a href= "${context}/register" class = "roundButton lightGreyButton">Sign Up</a>
+                    <a id = "login-button" href= "${context}/login" class = "roundButton darkGreyButton">Log In</a>
+                    <a id = "register-button" href= "${context}/register" class = "roundButton lightGreyButton">Sign Up</a>
                 </div>
+
+                <span id = "profile-container" class = "interactable hide" onclick="toggleDropdown('toggle', 'right-dropdown')" >
+                    <i class="fas fa-user-circle nav-right-dropdown"></i>
+                    <div id="right-dropdown" class="dropdown-content greyContainer">
+                        <a href="${context}/login">
+                            <i class="fas fa-address-card"></i>
+                            Login
+                        </a>
+
+                        <a href="${context}/register">
+                            <i class="fas fa-address-card"></i>
+                            Register
+                        </a>
+                    </div>
+                </span>
             </c:otherwise>
         </c:choose>
     </div>

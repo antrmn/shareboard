@@ -365,6 +365,7 @@ navbar *{
     border-width: 1px 1px;
     border-color: rgba(134, 135, 137, 0);
     display:inline-flex;
+    flex-shrink: 0;
 }
 
 #nav-crt-sctn:hover{
@@ -381,6 +382,7 @@ navbar *{
     align-items: center;
     justify-content: center;
     padding-left: 36px;
+    flex-shrink: 0;
     /*border-left-width: 1px;*/
     /*border-left-style: dashed;*/
     /*border-left-color: #868789;*/
@@ -388,6 +390,12 @@ navbar *{
 }
 
 #nav-profile-photo{
+    display:inline-block;
+    margin-bottom:0px;
+    font-size: 30px;
+}
+
+.nav-right-dropdown{
     display:inline-block;
     margin-bottom:0px;
     font-size: 30px;
@@ -619,10 +627,6 @@ navbar *{
         display:none;
     }
 
-    #nav-crt-sctn span{
-        display: none;
-    }
-
     #left{
         margin-left: 10px;
     }
@@ -649,6 +653,10 @@ navbar *{
         display:none;
     }
 
+    #nav-crt-sctn span{
+        display: none;
+    }
+
     #left{
         margin-left: 10px;
     }
@@ -661,9 +669,21 @@ navbar *{
         display:none;
     }
 
-    /*#right-container{*/
-    /*    display:none;*/
-    /*}*/
+    #login-button{
+        display: none;
+    }
+
+    #register-button{
+        display: none;
+    }
+
+    #profile-container{
+        display:inline-block !important;
+    }
+
+    #right-container{
+        display:none;
+    }
     /*#post-media-container{*/
     /*    order:3;*/
     /*}*/
