@@ -683,6 +683,7 @@ navbar *{
 
     #right-container{
         display:none;
+        margin:0px;
     }
     /*#post-media-container{*/
     /*    order:3;*/

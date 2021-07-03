@@ -22,6 +22,7 @@ public class BanSpecificationBuilder extends Specification.Builder<BanSpecificat
 
     public BanSpecificationBuilder() {
         super("ban");
+        columns = String.join(", ", columnsList);
         this.orderBy = "ban_id";
     }
 

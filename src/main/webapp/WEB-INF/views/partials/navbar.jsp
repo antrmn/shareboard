@@ -98,12 +98,12 @@
                     <i class="fas fa-user-circle nav-right-dropdown"></i>
                     <div id="right-dropdown" class="dropdown-content greyContainer">
                         <a href="${context}/login">
-                            <i class="fas fa-address-card"></i>
+                           <i class="fas fa-sign-in-alt"></i>
                             Login
                         </a>
 
                         <a href="${context}/register">
-                            <i class="fas fa-address-card"></i>
+                            <i class="fas fa-user-plus"></i>
                             Register
                         </a>
                     </div>

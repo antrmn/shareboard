@@ -23,6 +23,7 @@ public class BanDAO {
         query = String.format(query, specification.getColumns(), specification.getJoins(),
                                      specification.getWheres(),  specification.getOrderBy());
         PreparedStatement ps = con.prepareStatement(query);
+        System.out.println(StatementSetters.setParameters(ps, specification.getParams()));
         ResultSet rs = StatementSetters.setParameters(ps, specification.getParams())
                                     .executeQuery();
         List<Ban> bans = bm.toBeans(rs);

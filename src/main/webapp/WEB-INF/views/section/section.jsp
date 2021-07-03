@@ -48,7 +48,7 @@
     <jsp:include page="../partials/section-info.jsp">
       <jsp:param name="description" value="${section.name}" />
       <jsp:param name="nFollowers" value="${section.nFollowers}" />
-      <jsp:param name="link" value="test" />
+      <jsp:param name="link" value="${pageContext.request.contextPath}/newpost?sectionId=${section.id}" />
     </jsp:include>
     <jsp:include page="../partials/rules.jsp"/>
     <jsp:include page="../partials/footer.jsp"/>

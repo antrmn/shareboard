@@ -16,7 +16,7 @@ public class UserSpecificationBuilder extends Specification.Builder<UserSpecific
             "user.creation_date", "user.is_admin");
 
     private final StringJoiner joinsJoiner = new StringJoiner("\n");
-    private final StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ");
+    private final StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ").setEmptyValue("");
 
     public UserSpecificationBuilder() {
         super("v_user");

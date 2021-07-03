@@ -93,6 +93,6 @@ public class EditSectionServlet extends HttpServlet {
         } catch (SQLException e2) {
             throw new ServletException(e2);
         }
-        resp.sendRedirect(getServletContext().getContextPath()+"admin/showsections");
+        resp.sendRedirect(getServletContext().getContextPath()+"/admin/showsections");
     }
 }

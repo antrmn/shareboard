@@ -23,20 +23,28 @@
         <tr>
             <th>Id</th>
             <th>Nome</th>
+            <th>Admin</th>
             <th>Azioni</th>
         </tr>
         <c:forEach items="${requestScope.users}" var="user">
             <tr>
                 <td>${user.id}</td>
-                <td>${user.name}</td>
+                <td>${user.username}</td>
                 <td>
-                    <a href = "${context}/admin/toggleadmin?userId=${user.id}">
-                        <i class="fas fa-edit"></i>
+                    <c:choose>
+                        <c:when test="${user.admin}">
+                            <input type="checkbox" id="admin-checkbox" name="isAdmin" onchange="toggleAdminStatus(this);" checked>
+                        </c:when>
+                        <c:otherwise>
+                            <input type="checkbox" id="admin-checkbox" name="isAdmin" onchange="toggleAdminStatus(this);">
+                        </c:otherwise>
+                    </c:choose>
+                </td>
+                <td>
+                    <a href = "${context}/admin/showbans?userId=${user.id}">
+                        <i class="fas fa-gavel"></i>
                     </a>
-                    <a href = "${context}/admin/addban?userId=${user.id}">
-                        <i class="fas fa-ban"></i>
-                    </a>
-                    <a href = "${context}/admin/deletuser?userId=${user.id}">
+                    <a href = "${context}/admin/deleteuser?userId=${user.id}">
                         <i class="fas fa-minus-circle"></i>
                     </a>
                 </td>

@@ -6,6 +6,10 @@ function closeNav() {
     document.getElementById("mySidenav").style.width = "0";
 }
 
+function toggleAdminStatus(e){
+
+}
+
 // Load the Visualization API and the corechart package.
 google.charts.load('current', {'packages':['corechart']});
 
@@ -61,3 +65,24 @@ function drawChart() {
     chart.draw(data, options);
 }
 
+// Get the modal
+var modal = document.getElementById("myModal");
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
+
+function openModal(){
+    document.getElementById("myModal").style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == document.getElementById("myModal")) {
+        modal.style.display = "none";
+    }
+}

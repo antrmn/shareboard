@@ -10,10 +10,7 @@
 </jsp:include>
 <body>
 <jsp:include page="/WEB-INF/navbar">
-  <jsp:param name="isLogged" value="true" />
   <jsp:param name="currentSection" value="${post.section.name}" />
-  <jsp:param name="userName" value="Testus" />
-  <jsp:param name="userKarma" value="4316" />
 </jsp:include>
 
 <div id="body-container" class = "justify-center align-center">
@@ -98,7 +95,7 @@
           <jsp:include page="../partials/section-info.jsp">
               <jsp:param name="description" value="${section.description}" />
               <jsp:param name="nFollowers" value="${section.nFollowers}" />
-              <jsp:param name="link" value="test" />
+              <jsp:param name="link" value="${pageContext.request.contextPath}/newpost?sectionId=${section.id}" />
           </jsp:include>
           <jsp:include page="../partials/rules.jsp"/>
           <jsp:include page="../partials/footer.jsp"/>
