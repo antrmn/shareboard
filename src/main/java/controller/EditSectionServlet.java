@@ -74,7 +74,7 @@ public class EditSectionServlet extends HttpServlet {
                 SectionDAO service = new SectionDAO(con);
                 Section s = new Section();
                 s.setDescription(description);
-                s.setId();
+                s.setId(sectionId);
                 if (picture!= null && picture.getSize() > 0){
                     s.setPicture(FileUtils.generateFileName(picture));
                     String uploadRoot = FileServlet.BASE_PATH;
