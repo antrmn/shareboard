@@ -1,65 +1,94 @@
 package controller;
 
+import controller.util.ErrorForwarder;
+import controller.util.InputValidator;
 import model.comment.Comment;
 import model.comment.CommentDAO;
 import model.persistence.ConPool;
-import model.persistence.Specification;
 import model.post.PostDAO;
 import model.post.PostSpecificationBuilder;
+import model.user.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 @WebServlet("/post")
 public class Post extends HttpServlet {
     @Override
+    public void init() throws ServletException {
+        getServletContext().setAttribute("maxCommentDepth", 3);
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String postId = req.getParameter("id");
-        if(postId != null){
-            try (Connection con = ConPool.getConnection()){
-                PostSpecificationBuilder psb = new PostSpecificationBuilder();
-                HttpSession session = req.getSession(true);
-                int id = -1;
-                if ((session != null && session.getAttribute("loggedUserId") != null)) {
-                    id = (Integer) session.getAttribute("loggedUserId");
-                    System.out.println(id);
-                    psb.loggedUser(id);
-                }
+        String _postId = req.getParameter("id");
+        String _commentId = req.getParameter("comment");
 
-                psb.byId(Integer.parseInt(postId));
-                Specification s2 = psb.build();
-                PostDAO service = new PostDAO(con);
-                List<model.post.Post> posts = service.fetch(s2);
-
-                if(posts.get(0)!= null){
-//                    System.out.println(posts.get(0).getAuthor().getUsername());
-//                    System.out.println(posts.get(0).getSection().getName());
-//                    System.out.println(posts.get(0).getSection().getId());
-//                    System.out.println("get vote "+posts.get(0).getVote());
-//                    System.out.println("get votes "+posts.get(0).getVotes());
-                    req.setAttribute("post", posts.get(0));
-                    Map<Integer, ArrayList<Comment>> comments;
-                    CommentDAO service2 = new CommentDAO(con);
-                    comments = service2.fetchHierarchy(Integer.parseInt(postId), false, 10, id);
-                    req.setAttribute("comments", comments);
-                    req.getRequestDispatcher("/WEB-INF/views/section/post.jsp").forward(req,resp);
-                } else{
-                    resp.sendRedirect("./home");
-                }
-            } catch(SQLException  e){
-                e.printStackTrace();
-            }
+        if(_postId == null || !InputValidator.assertInt(_postId)){
+            ErrorForwarder.sendError(req, resp, "Specificare un post", 400);
+            return;
         }
+
+        User loggedUser = (User) req.getAttribute("loggedUser");
+        int postId = Integer.parseInt(_postId);
+        try(Connection con = ConPool.getConnection()){
+            PostDAO service = new PostDAO(con);
+            PostSpecificationBuilder psb = new PostSpecificationBuilder();
+            model.post.Post post = null;
+            if(loggedUser != null){
+                post = service.get(postId, loggedUser.getId());
+            } else {
+                post = service.get(postId);
+            }
+            if(post == null) {
+                ErrorForwarder.sendError(req, resp, "Il post specificato non esiste", 400);
+                return;
+            } else {
+                req.setAttribute("post", post);
+            }
+        } catch (SQLException throwables) {
+            throw new ServletException(throwables);
+        }
+
+
+        try(Connection con = ConPool.getConnection()){
+            CommentDAO service = new CommentDAO(con);
+
+            Comment comment = null;
+            if(_commentId != null && InputValidator.assertInt(_commentId)) {
+                int commentId = Integer.parseInt(_commentId);
+                comment = service.get(commentId);
+                if(comment != null && comment.getPost().getId() != postId)
+                    comment = null;
+            }
+
+            Map<Integer, ArrayList<Comment>> comments;
+            if(comment != null) {
+                comments = service.fetchHierarchy(comment.getId(), true,
+                        (Integer) getServletContext().getAttribute("maxCommentDepth"),
+                        loggedUser != null ? loggedUser.getId() : -1);
+                req.setAttribute("initialIndex", comment.getParentComment().getId());
+            } else {
+                comments = service.fetchHierarchy(postId, false,
+                        (Integer) getServletContext().getAttribute("maxCommentDepth"),
+                        loggedUser != null ? loggedUser.getId() : -1);
+                req.setAttribute("initialIndex", 0);
+            }
+
+            req.setAttribute("comments", comments);
+        } catch (SQLException throwables) {
+            throw new ServletException(throwables);
+        }
+
+        req.getRequestDispatcher("/WEB-INF/views/section/post.jsp").forward(req, resp);
     }
 
     @Override

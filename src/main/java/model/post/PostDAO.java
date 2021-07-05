@@ -123,6 +123,12 @@ public class PostDAO {
         return singleton.isEmpty() ? null : singleton.get(0);
     }
 
+    public Post get(int id, int loggedUserId) throws SQLException{
+        PostSpecificationBuilder psb = new PostSpecificationBuilder().byId(id).loggedUser(loggedUserId);
+        List<Post> singleton = fetch(psb.build());
+        return singleton.isEmpty() ? null : singleton.get(0);
+    }
+
     public int insert(Post post) throws SQLException {
         List<Integer> single = insert(List.of(post));
         return single.isEmpty() ? null : single.get(0);

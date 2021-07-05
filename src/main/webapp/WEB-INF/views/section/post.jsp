@@ -80,7 +80,10 @@
                         </jsp:include>
                       <div class ="grid-x-nw" style = "width: 100%">
                           <div id = "comments-container" style = "margin:8px; width: 100%">
-                              <sb:printComments comments="${requestScope.comments}" idParent="${0}">
+                              <c:if test="${not empty param.comment}">
+                                  <a href="${pageContext.request.contextPath}/post?id=${post.id}#comment-container" class="underline-some"><span class="to-underline">Torna ai commenti principali</span> <i class="fas fa-long-arrow-alt-up"></i></a>
+                              </c:if>
+                              <sb:printComments comments="${requestScope.comments}" idParent="${requestScope.initialIndex}" depth="${0}">
                                   <jsp:attribute name="commentFragment">
                                         <%@ include file="/WEB-INF/views/partials/comment.jsp" %>
                                   </jsp:attribute>

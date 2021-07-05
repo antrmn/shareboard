@@ -664,6 +664,14 @@ navbar *{
     margin-bottom: 20px !important;
 }
 
+.underline-some {
+    text-decoration: none;
+}
+
+.underline-some:hover .to-underline {
+    text-decoration: underline;
+}
+
 
 
 /*REGISTER AND LOGIN STYLE*/
