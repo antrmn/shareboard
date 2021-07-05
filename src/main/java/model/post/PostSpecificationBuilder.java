@@ -6,6 +6,7 @@ import util.Pair;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.Instant;
+import java.util.Collection;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -78,9 +79,29 @@ public class PostSpecificationBuilder extends Specification.Builder<PostSpecific
         return this;
     }
 
+    public PostSpecificationBuilder isInSection(Collection<Integer> ids){
+        StringJoiner sj = new StringJoiner(",", "(",")");
+        for(Integer id : ids){
+            sj.add("?");
+            params.add(new Pair<>(id, Types.INTEGER));
+        }
+        wheresJoiner.add(" section.id IN " + sj.toString());
+        return this;
+    }
+
     public PostSpecificationBuilder isInSectionByName(String name){
         wheresJoiner.add(" section.name = ? ");
         params.add(new Pair<>(name, java.sql.Types.VARCHAR));
+        return this;
+    }
+
+    public PostSpecificationBuilder isInSectionByName(Collection<String> names){
+        StringJoiner sj = new StringJoiner(",", "(",")");
+        for(String name : names){
+            sj.add("?");
+            params.add(new Pair<>(name, Types.VARCHAR));
+        }
+        wheresJoiner.add(" section.name IN " + sj.toString());
         return this;
     }
 
@@ -103,13 +124,13 @@ public class PostSpecificationBuilder extends Specification.Builder<PostSpecific
     }
 
     public PostSpecificationBuilder doesBodyContain(String content){
-        wheresJoiner.add(" post.content LIKE ? ");
+        wheresJoiner.add(" (post.content LIKE ? AND post.type = 'TEXT')");
         params.add(new Pair<>("%"+content+"%", java.sql.Types.VARCHAR));
         return this;
     }
 
     public PostSpecificationBuilder doesTitleOrBodyContains(String content){
-        wheresJoiner.add(" (post.title LIKE ? OR post.content LIKE ?) ");
+        wheresJoiner.add(" (post.title LIKE ? OR post.content LIKE ? AND post.type = 'TEXT') ");
         params.add(new Pair<>("%"+content+"%", java.sql.Types.VARCHAR));
         params.add(new Pair<>("%"+content+"%", java.sql.Types.VARCHAR));
         return this;
