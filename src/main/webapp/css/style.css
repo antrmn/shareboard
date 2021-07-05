@@ -232,6 +232,28 @@ footer {
     border-radius: 5px;
 }
 
+
+
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+}
+
+.spinner {
+    content: '';
+    box-sizing: border-box;
+    position: relative;
+    top: 20px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: 0px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border-top: 2px solid #a25b00;
+    border-right: 2px solid transparent;
+    animation: spinner .6s linear infinite;
+}
+
 /*NAVBAR START*/
 navbar{
     height: 48px;
@@ -477,11 +499,18 @@ navbar *{
 #filter *{
     padding: 12px 12px;
     margin: 5px 10px 5px 5px;
+
 }
 
-#filter a:hover, #filter i:hover{
+#filter > *:hover{
     margin-right: 10px;
-    background-color: #868789;
+    background-color: #86878955;
+    border-radius: 4px;
+}
+
+#filter a.selected{
+    margin-right: 10px;
+    background-color: #868789cc;
     border-radius: 4px;
 }
 
@@ -579,6 +608,28 @@ navbar *{
 #post-container:first-child{
     border-top-left-radius: 5px !important;
     border-top-right-radius: 5px !important;
+}
+
+#posts-delimiter{
+    height: 1px;
+    margin: 40px 60px 40px 60px;
+    background: rgba(189, 189, 189, 0.4);
+}
+
+#posts-delimiter.animated {
+    background: linear-gradient(to left, #f13800,#ff9d00);
+    background-size: 600% 100%;
+    animation: GradientMove 0.8s cubic-bezier(.45,.05,.55,.95) infinite;
+    animation-direction: alternate;
+}
+
+@keyframes GradientMove {
+    0% {
+        background-position: 0%;
+    }
+    100% {
+        background-position: 100%;
+    }
 }
 
 .break-word{

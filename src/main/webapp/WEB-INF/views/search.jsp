@@ -7,7 +7,7 @@
     <jsp:include page="partials/head.jsp">
         <jsp:param name="currentPage" value="${section.name}" />
         <jsp:param name="styles" value="section" />
-        <jsp:param name="scripts" value="section,post" />
+        <jsp:param name="scripts" value="section,post,search,postloader" />
     </jsp:include>
 </head>
 <body>
@@ -21,15 +21,13 @@
 <div id="body-container">
     <div id="left-container">
         <div id="post-container">
-            <c:forEach items="${requestScope.posts}" var="post">
-                <%@ include file="partials/post-preview.jsp" %>
-            </c:forEach>
+            <%-- vedi search.js --%>
         </div>
     </div>
     <div id = right-container >
         <div class = "greyContainer">
             <div id="action-container" style = "margin:8px;">
-                <form id = "search-form" class = "grid-y-nw align-center justify-center" action="${pageContext.request.contextPath}/search" method="get">
+                <form id = "search-form" class = "grid-y-nw align-center justify-center" action="javascript:void(0)">
                     <div style = "align-self: start">
                         <h5 style = "border-bottom: solid orange; border-bottom-width: 1px; padding-bottom: 10px;">
                             <label for="content-input" style = "display: inline">Contenuto</label>

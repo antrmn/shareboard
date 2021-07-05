@@ -6,7 +6,7 @@
   <jsp:include page="../partials/head.jsp">
     <jsp:param name="currentPage" value="${section.name}" />
     <jsp:param name="styles" value="section" />
-    <jsp:param name="scripts" value="section,post" />
+    <jsp:param name="scripts" value="section,post,postloader,filter" />
   </jsp:include>
 </head>
 <body>
@@ -35,13 +35,13 @@
 
 <div id="body-container">
   <div id="left-container">
-    <jsp:include page="../partials/filter.jsp"/>
-    <div id="post-container">
-      <c:forEach items="${requestScope.posts}" var="post">
-        <!-- Vuoi capire la differenza tra @include e jsp:include? Prova a sostituire. -->
-        <%@ include file="../partials/post-preview.jsp" %>
-      </c:forEach>
+    <jsp:include page="../partials/filter.jsp">
+      <jsp:param name="isHome" value="false"/>
+    </jsp:include>
+    <div id="post-container" section="${section.name}">
+        <%-- vedi section.js --%>
     </div>
+    <div id="posts-delimiter"></div>
   </div>
 
   <div id="right-container">

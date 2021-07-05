@@ -6,7 +6,7 @@
 <head>
     <jsp:include page="partials/head.jsp">
         <jsp:param name="currentPage" value="Home" />
-        <jsp:param name="scripts" value="home,post" />
+        <jsp:param name="scripts" value="home,post,postloader,filter" />
     </jsp:include>
 </head>
 <body>
@@ -18,10 +18,13 @@
 
         <div id="body-container">
             <div id="left-container">
-                <jsp:include page="partials/filter.jsp"/>
+                <jsp:include page="partials/filter.jsp">
+                    <jsp:param name="isHome" value="true"/>
+                </jsp:include>
                 <div id="post-container">
                     <%-- Vedi home.js --%>
                 </div>
+                <div id="posts-delimiter"></div>
             </div>
             <div id="right-container">
                 <div class="greyContainer">
