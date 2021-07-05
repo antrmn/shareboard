@@ -83,6 +83,10 @@ public class PostLoader extends HttpServlet {
                 psb.sortByVotes().ascendingOrder();
         }
 
+        if(loggedUser != null){
+            psb.loggedUser(loggedUser.getId());
+        }
+
         Paginator p = new Paginator(page, 10);
         psb.setLimit(p.getLimit());
         psb.setOffset(p.getOffset());

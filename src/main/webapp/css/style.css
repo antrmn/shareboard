@@ -572,6 +572,7 @@ navbar *{
 }
 
 .post-image-holder{
+    position:relative;
     padding:unset !important;
     height: 60px;
     width: 80px;
@@ -597,6 +598,7 @@ navbar *{
     transition: all 1s cubic-bezier(.94,-0.29,.02,1.02);
     transform: scale(3);
     transform-origin: bottom left;
+    z-index: 9999;
 }
 
 #post-container *{
