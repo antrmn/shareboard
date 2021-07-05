@@ -422,6 +422,11 @@ navbar *{
     right:0;
 }
 
+#profile-dropdown{
+    overflow-y: hidden;
+    right:0;
+}
+
 #nav-profile-data{
     display:inline-block;
 }

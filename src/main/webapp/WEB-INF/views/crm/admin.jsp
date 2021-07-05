@@ -21,7 +21,7 @@
     </jsp:include>
 
     <div class = "grid-x justify-center align-center" style = "margin-top: 150px;">
-        <div class="dahsborad-card">
+        <div class="dashboard-card">
             <div style = "padding-left: 30px;">
                 <div style = "display:inline-block;">
                     <h1>7</h1>
@@ -31,11 +31,11 @@
             </div>
         </div>
 
-        <div class="dahsborad-card">
+        <div class="dashboard-card">
             <div style = "padding-left: 30px;">
                 <div style = "display:inline-block;">
                     <h1>7</h1>
-                    <h3>Utenti Registrati</h3>
+                    <h3>Visite</h3>
                 </div>
                 <i class="fas fa-user-plus" style = "font-size: 80px; display:inline; color: #4295b5; float: right"></i>
             </div>
