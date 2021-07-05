@@ -51,7 +51,7 @@
                           <a href="/shareboard/s?section=${post.section.name}" class = white-text>s/${post.section.name}</a>
                           <a href="/shareboard/user?id=${post.author.id}" class = grey-text>posted by ${post.author.username}</a>
                       </div>
-                      <div class = white-text>
+                      <div class = "white-text ${empty post.content ? 'post-big-title' : ''}">
                           ${post.title}
                       </div>
 
@@ -60,7 +60,7 @@
                               <c:when test="${post.type == 'IMG'}">
                                  <img src= "${applicationScope.picsLocation}/${post.content}" class = "post-image">
                               </c:when>
-                              <c:when test="${post.type == 'TEXT'}">
+                              <c:when test="${post.type == 'TEXT' && not empty post.content}">
                                   <p class = white-text style = "border: solid 1px gray; border-radius: 4px; padding: 7px; word-break: break-word;">
                                           ${post.content}
                                   </p>

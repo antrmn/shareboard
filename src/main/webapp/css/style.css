@@ -140,6 +140,11 @@ footer {
     color: rgb(129, 131, 132);
 }
 
+.post-big-title{
+    font-size: 1.17em;
+    margin: .83em 0;
+}
+
 .greyContainer{
     background-color: var(--shareboard-container-1);
     border-color: var(--shareboard-border-color1);
