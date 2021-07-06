@@ -17,6 +17,10 @@
     </session-config>
 
     <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
         <filter-name>loggedUserChecker</filter-name>
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
