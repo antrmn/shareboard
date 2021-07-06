@@ -666,7 +666,12 @@ navbar *{
     text-decoration: underline;
 }
 
-
+#container-switcher{
+    display: none;
+    font-size:1.5em;
+    cursor:pointer;
+    margin-left: 7px;
+}
 
 /*REGISTER AND LOGIN STYLE*/
 
@@ -710,13 +715,29 @@ navbar *{
     }
 
     #right-container{
-        display:none;
         margin:0px;
     }
 
     #body-container{
         justify-content: center;
     }
+
+    #left-container.selected-container{
+        display:flex;
+    }
+
+    #right-container.selected-container{
+        display: initial;
+    }
+
+    #right-container:not(.selected-container), #left-container:not(.selected-container){
+        display: none;
+    }
+
+    #container-switcher{
+        display:initial;
+    }
+
 
     /*#post-media-container{*/
     /*    order:3;*/

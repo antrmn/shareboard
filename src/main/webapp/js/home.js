@@ -12,3 +12,4 @@ $("#filter").on("filterchanged", function (){
     postLoader.fetch();
     postLoader.start($("#posts-delimiter").get(0));
 })
+

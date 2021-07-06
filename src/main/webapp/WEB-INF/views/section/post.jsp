@@ -15,7 +15,7 @@
 
 <div id="body-container" class = "justify-center align-center">
   <div id="post-container" class = "grid-x-nw" style = "flex-basis: 1280px;">
-      <div id = left-container class = "greyContainer">
+      <div id = left-container class = "greyContainer selected-container">
           <div id = "post-data" style = "flex-grow: 1; width: 100%;">
               <div class = "grid-x-nw" style = "align-items: start; margin-top:10px;">
                   <div class = "vote-container">

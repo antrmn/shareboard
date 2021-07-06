@@ -4,6 +4,7 @@
 <c:set var="loggedUser" value="${requestScope.loggedUser}" />
 <navbar>
     <div id="left">
+
         <span id="nav-logo" >
             <a href = "${context}/home" style="display:inline-flex">
                 <i class="fas fa-share-alt-square" style = "color: #ff4500; font-size: 25px;"></i>
@@ -114,5 +115,6 @@
                 </span>
             </c:otherwise>
         </c:choose>
+        <div id="container-switcher">☰</div>
     </div>
 </navbar>

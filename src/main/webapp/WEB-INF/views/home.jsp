@@ -17,7 +17,7 @@
         </jsp:include>
 
         <div id="body-container">
-            <div id="left-container">
+            <div id="left-container" class="selected-container">
                 <jsp:include page="partials/filter.jsp">
                     <jsp:param name="isHome" value="true"/>
                 </jsp:include>

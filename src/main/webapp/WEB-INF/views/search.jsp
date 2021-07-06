@@ -19,7 +19,7 @@
 </jsp:include>
 
 <div id="body-container">
-    <div id="left-container">
+    <div id="left-container" class="selected-container">
         <div id="post-container">
             <%-- vedi search.js --%>
         </div>

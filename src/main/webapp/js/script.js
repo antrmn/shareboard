@@ -138,3 +138,25 @@ let getUrlParameter = function getUrlParameter(sParam) {
     }
     return false;
 };
+
+
+
+/* Responsive left/right container */
+
+$(() => {
+    let toggleView = ()=>{
+        if(!window.matchMedia('(max-width: 767px)').matches)
+            return;
+        $("#left-container").toggleClass("selected-container");
+        $("#right-container").toggleClass("selected-container");
+        let x = 200;
+        $(".selected-container").children().hide().each(function() {$(this).fadeIn(x); x+=200});
+    }
+
+    if ($("#left-container, #right-container").length<2){
+        $("#container-switcher").remove(); //Senza i due container il tasto è inutile e va rimosso
+    } else{
+        $("#container-switcher").click(toggleView);
+    }
+
+})

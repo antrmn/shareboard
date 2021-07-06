@@ -17,7 +17,7 @@
 
 <div id="body-container" class = "justify-center align-center">
         <div class = "grid-x-nw" style = "flex-basis: 1280px;">
-            <div id = left-container >
+            <div id = left-container class="selected-container">
                 <h2 style = "border-bottom-style: solid; border-bottom-width: 1px; padding-bottom: 10px;">Edit post</h2>
                 <div id = "post-data" class = "greyContainer">
                     <div class = "grid-x-nw" style = "flex-grow: 1">
