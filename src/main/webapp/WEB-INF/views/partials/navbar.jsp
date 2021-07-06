@@ -50,7 +50,7 @@
 
         <div id="nav-search" >
             <form action="${pageContext.request.contextPath}/search">
-                 <i id = "search-icon"class="fas fa-search"></i>
+                 <button type="submit" class="fabutton"><i id = "search-icon" class="fas fa-search"></i></button>
                 <input type="text" placeholder="Search" name="content">
             </form>
         </div>
@@ -69,7 +69,7 @@
                     </div>
                     <i class="fas fa-sort-down" style="display: inline-block;"></i>
                     <div id="profile-dropdown" class="dropdown-content greyContainer">
-                        <a href="${context}/profile">
+                        <a href="${context}/user?name=${loggedUser.username}">
                             <i class="fas fa-address-card"></i>
                             Profile
                         </a>

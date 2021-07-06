@@ -323,6 +323,12 @@ navbar *{
     background-color: #868789;
 }
 
+.fabutton{
+    background: none;
+    padding: 0px;
+    border: none;
+    color:white;
+}
 
 .dropdown a:hover {background-color: #ddd;}
 
@@ -434,28 +440,6 @@ navbar *{
 
 #nav-profile-data{
     display:inline-block;
-}
-
-@media screen and (max-width: 320px) {
-    #nav-profile-data{
-        display:none;
-    }
-
-    #left{
-        margin-left: 10px;
-    }
-
-    #nav-profile{
-        margin-right: 10px;
-    }
-
-    #nav-logo h3{
-        display:none;
-    }
-
-    #right-container{
-        display:none;
-    }
 }
 
 #profile-container{
@@ -630,6 +614,10 @@ navbar *{
     animation-direction: alternate;
 }
 
+.user-description{
+    margin: 0em 2em 1em 2em;
+}
+
 @keyframes GradientMove {
     0% {
         background-position: 0%;
@@ -687,37 +675,6 @@ navbar *{
 }
 
 /*MEDIA QUERIES*/
-@media screen and (max-width: 481px) {
-
-    #nav-logo{
-        margin-right: 25px;
-    }
-
-    #nav-profile-data{
-        display:none;
-    }
-
-    #left{
-        margin-left: 10px;
-    }
-
-    #nav-profile{
-        margin-right: 10px;
-    }
-
-    #nav-logo h3{
-        display:none;
-    }
-
-    #right-container{
-        display:none;
-    }
-
-    /*#post-media-container{*/
-    /*    order:3;*/
-    /*}*/
-}
-
 @media screen and (max-width: 769px) {
     #nav-profile-data{
         display:none;
@@ -755,11 +712,61 @@ navbar *{
         display:none;
         margin:0px;
     }
+
+    #body-container{
+        justify-content: center;
+    }
+
     /*#post-media-container{*/
     /*    order:3;*/
     /*}*/
 
-/*320px-480px: Mobile devices*/
-/*481px—768px: iPads, Tablets*/
-/*769px—In poi: Small screens, laptops, TV*/
+    /*320px-480px: Mobile devices*/
+    /*481px—768px: iPads, Tablets*/
+    /*769px—In poi: Small screens, laptops, TV*/
+}
+
+@media screen and (max-width: 481px) {
+
+    #nav-logo{
+        margin-right: 25px;
+    }
+
+    #nav-profile-data{
+        display:none;
+    }
+
+    #left{
+        margin-left: 10px;
+    }
+
+    #nav-profile{
+        margin-right: 10px;
+    }
+
+    #nav-logo h3{
+        display:none;
+    }
+
+    /*#post-media-container{*/
+    /*    order:3;*/
+    /*}*/
+}
+
+@media screen and (max-width: 320px) {
+    #nav-profile-data{
+        display:none;
+    }
+
+    #left{
+        margin-left: 10px;
+    }
+
+    #nav-profile{
+        margin-right: 10px;
+    }
+
+    #nav-logo h3{
+        display:none;
+    }
 }

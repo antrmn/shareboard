@@ -13,7 +13,7 @@
     </div>
     <div class = "grid-y-nw" style="flex-grow:1; align-items: start;padding-bottom: 10px; padding-right: 10px;">
         <div style = "flex-basis: 100%">
-            <a class = grey-text>posted by ${comment.author.username}</a>
+            <a class = grey-text href="${pageContext.request.contextPath}/user?name=${comment.author.username}">posted by ${comment.author.username}</a>
         </div>
         <div>
             <p class = "white-text comment-text">

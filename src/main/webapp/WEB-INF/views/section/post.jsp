@@ -49,7 +49,7 @@
                   <div class = "grid-y-nw" style="flex-grow:1; align-items: start; margin-right: 40px;">
                       <div style = "flex-basis: 100%">
                           <a href="/shareboard/s?section=${post.section.name}" class = white-text>s/${post.section.name}</a>
-                          <a href="/shareboard/user?id=${post.author.id}" class = grey-text>posted by ${post.author.username}</a>
+                          <a href="/shareboard/user?name=${post.author.username}" class = grey-text>posted by ${post.author.username}</a>
                       </div>
                       <div class = "white-text ${empty post.content ? 'post-big-title' : ''}">
                           ${post.title}
