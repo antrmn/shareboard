@@ -73,6 +73,10 @@
                             <i class="fas fa-address-card"></i>
                             Profile
                         </a>
+                        <a href="${context}/edituser?id=${loggedUser.id}">
+                            <i class="fas fa-sliders-h"></i>
+                            Edit profile
+                        </a>
 
                     <c:if test="${loggedUser.admin.booleanValue() == true}">
                         <a href="${context}/admin">

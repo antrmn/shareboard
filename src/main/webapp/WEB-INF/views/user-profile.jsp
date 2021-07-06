@@ -30,7 +30,16 @@
   </div>
   <div id="header-container" class = "grid-x-nw" >
 
-    <span> <img id = "header-icon" src="${pageContext.request.contextPath}/images/default-logo.png"></span>
+    <span>
+      <c:choose>
+        <c:when test="${not empty user.picture}">
+          <img id="header-icon" src= "${applicationScope.picsLocation}/${user.picture}" >
+        </c:when>
+        <c:otherwise>
+          <img id = "header-icon" src="${pageContext.request.contextPath}/images/default-logo.png">
+        </c:otherwise>
+      </c:choose>
+    </span>
     <span class="grid-y">
       <h2>${user.username}</h2>
       <span>Utente dal <fmt:formatDate value="${creationDate}" pattern="dd/MM/yyyy"/></span>
