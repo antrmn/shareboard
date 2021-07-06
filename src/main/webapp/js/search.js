@@ -23,11 +23,13 @@ $("#search-form").submit(function() {
         }, postLoader.params);
         postLoader.params.page = 1;
         postLoader.fetch();
-        postLoader.start();
+        postLoader.start($("#posts-delimiter").get(0));
     }
 });
 
 $(() => {
+    postLoader.callbacks.before = () => $("#posts-delimiter").addClass("animated");
+    postLoader.callbacks.always = () => $("#posts-delimiter").removeClass("animated");
     if(!isSearchFormBlank())
         $("#search-form").submit();
     else

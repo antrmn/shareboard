@@ -20,7 +20,7 @@
             <div id = left-container class="selected-container">
                 <h2 style="border-bottom-style: solid; border-bottom-width: 1px; padding-bottom: 10px;">Edit user</h2>
                 <div id="post-data" class="greyContainer">
-
+<%--TODO: rendi decente --%>
                     <div id="action-container" style="margin:8px">
                         <form id="edit-user-form" class="grid-y-nw align-center justify-center" action="${pageContext.request.contextPath}/edituser" method="post" enctype="multipart/form-data">
                             <label>Email: <input type="email" id="email-field" class="input-field" name="email" placeholder="Email" value="${user.email}"></label>

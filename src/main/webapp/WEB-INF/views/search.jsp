@@ -22,7 +22,9 @@
     <div id="left-container" class="selected-container">
         <div id="post-container">
             <%-- vedi search.js --%>
+
         </div>
+        <div id="posts-delimiter"></div>
     </div>
     <div id = right-container >
         <div class = "greyContainer">
