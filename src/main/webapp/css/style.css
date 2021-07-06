@@ -362,6 +362,7 @@ navbar *{
     padding: 0 16px 0 40px;
     /*width: 100%;*/
     flex-grow: 0.9;
+    width:30px;
 }
 
 #nav-search input:hover, #nav-search input::selection{
