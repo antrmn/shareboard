@@ -10,10 +10,10 @@ let postLoader = {
     lock: false,
     params: {page: 1},
     target: null,
-    observer: new IntersectionObserver(()=>{
-        if (postLoader.lock === false)
+    observer: new IntersectionObserver(function(entry){
+        if (postLoader.lock === false && entry[0].isIntersecting === true)
             postLoader.fetch()
-    }, {rootMargin: '0px', threshold: 0.2}),
+    }, {threshold: 0.1}),
     callbacks: {
         before: $.noop,
         success: (data) => $("#post-container").append(data),
