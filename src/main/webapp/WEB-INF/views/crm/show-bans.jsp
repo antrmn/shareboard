@@ -1,5 +1,7 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="context" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -26,16 +28,36 @@
       <th>Sezione</th>
       <th>Data Inizio</th>
       <th>Data Fine</th>
+      <th>Bannato da</th>
       <th>Azioni</th>
     </tr>
     <c:forEach items="${requestScope.bans}" var="ban">
+      <jsp:useBean id="endDate" class="java.util.Date" />
+      <jsp:setProperty name="endDate" property="time" value="${ban.endTime.toEpochMilli()}" />
+      <jsp:useBean id="startDate" class="java.util.Date" />
+      <jsp:setProperty name="startDate" property="time" value="${ban.startTime.toEpochMilli()}" />
       <tr>
         <td>${ban.id}</td>
-        <td>${ban.section.name}</td>
-        <td>${ban.startTime}</td>
-        <td>${ban.endTime}</td>
+        <c:choose>
+          <c:when test="${ban.section.id eq 0}">
+            <td>Tutte</td>
+          </c:when>
+          <c:otherwise>
+            <td>${ban.section.id}</td>
+          </c:otherwise>
+        </c:choose>
+        <td><fmt:formatDate value="${startDate}" pattern="dd/MM/yyyy"/></td>
+        <c:choose>
+          <c:when test="${not empty ban.endTime}">
+            <td><fmt:formatDate value="${endDate}" pattern="dd/MM/yyyy"/></td>
+          </c:when>
+          <c:otherwise>
+            <td>MAI</td>
+          </c:otherwise>
+        </c:choose>
+        <td>${ban.admin.id}${ban.user.id}</td>
         <td>
-          <a href = "${context}/admin/deletuser?userId=${ban.id}">
+          <a href = "${context}/admin/deleteban?banId=${ban.id}&userId=${requestScope.userId}">
             <i class="fas fa-minus-circle"></i>
           </a>
         </td>
@@ -44,25 +66,29 @@
   </table>
   <div id="myModal" class="modal">
 
-    <!-- Modal content -->
     <div class="modal-content">
       <div class="modal-header">
         <span class="close" onclick="closeModal();">&times;</span>
         <h2>Aggiungi Ban</h2>
       </div>
       <div class="modal-body">
-        <form method = "get" action = "${context}/admin/addban">
-          <label for="start-date" style = "display: inline">Data Inizio:</label>
-          <input type = "date" name="'start-date" id = "start-date">
-          <label for="end-date" style = "display: inline">Data Fine:</label>
-          <input type = "date" name="'end-date" id = "end-date">
-          <label for="section-select" style = "display: inline">Scegli sezione:</label>
-          <select name="section" id="section-select">
-            <option value="all">Tutte</option>
-            <c:forEach items="${applicationScope.sections}" var="section">
-              <option value="${section.value.id}">${section.value.name}</option>
-            </c:forEach>
-          </select>
+        <ul id="error-list"></ul>
+
+        <form id = "ban-form" class="grid-x align-center justify-center">
+          <input type="hidden" value="${requestScope.userId}" name="userId">
+          <div>
+            <label for="end-date" style = "display: inline">Data Fine:</label>
+            <input type = "date" name="endDate" id = "end-date">
+          </div>
+          <div>
+            <label for="section-select" style = "display: inline">Scegli sezione:</label>
+            <select name="sectionId" id="section-select">
+              <option value="-1" selected>Tutte</option>
+              <c:forEach items="${applicationScope.sections}" var="section">
+                <option value="${section.value.id}">${section.value.name}</option>
+              </c:forEach>
+            </select>
+          </div>
           <button class = "lightGreyButton roundButton">Aggiungi</button>
         </form>
       </div>
