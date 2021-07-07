@@ -30,13 +30,13 @@
         <url-pattern>/vote</url-pattern>
         <url-pattern>/unvote</url-pattern>
         <url-pattern>/newcomment</url-pattern>
+        <url-pattern>/newpost</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter-mapping>
         <filter-name>redirectLoggedUser</filter-name>
         <url-pattern>/login</url-pattern>
         <url-pattern>/register</url-pattern>
-<!--        <url-pattern>/newpost</url-pattern>-->
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
     <filter-mapping>
@@ -44,6 +44,11 @@
         <url-pattern>/logout</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
+<!--    <filter-mapping>-->
+<!--        <filter-name>adminAuthorizer</filter-name>-->
+<!--        <url-pattern>/admin/*</url-pattern>-->
+<!--        <dispatcher>REQUEST</dispatcher>-->
+<!--    </filter-mapping>-->
     <filter-mapping>
         <filter-name>aliasesFilter</filter-name>
         <url-pattern>/*</url-pattern>
