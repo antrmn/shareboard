@@ -159,4 +159,47 @@ public class UserDAO{
         rs.close();
         return count;
     }
+
+
+
+    public void setAdmin(User user) throws SQLException {
+        String statement = "INSERT INTO admin (%s) VALUES %s";
+        String columns = "user_id";
+        String questionMarks = "(?)";
+
+        List<Pair<Object, Integer>> params = new ArrayList<>();
+        StringJoiner questionMarksJoiner = new StringJoiner(",");
+        params.add(new Pair<>(user.getId(), Types.INTEGER));
+        questionMarksJoiner.add(questionMarks);
+        statement = String.format(statement, columns, questionMarksJoiner.toString());
+        PreparedStatement ps = con.prepareStatement(statement, Statement.RETURN_GENERATED_KEYS);
+        StatementSetters.setParameters(ps, params).executeUpdate();
+        ResultSet rs = ps.getGeneratedKeys();
+//        List<Integer> ids = new ArrayList<>();
+//        while(rs.next()){
+//            ids.add(rs.getInt(1));
+//            System.out.println("BLABLA");
+//            System.out.println(rs.getInt(1));
+//        }
+//        int id = rs.getInt(1);
+        ps.close();
+        rs.close();
+//        return id;
+    }
+
+    public int removeAdmin(User user) throws SQLException {
+        String statement = "DELETE FROM admin WHERE %s";
+
+        StringJoiner whereJoiner = new StringJoiner(" OR ");
+        List<Pair<Object, Integer>> params = new ArrayList<>();
+        params.add(new Pair<>(user.getId(), Types.INTEGER));
+        whereJoiner.add(" user_id=? ");
+
+        statement = String.format(statement, whereJoiner.toString());
+        PreparedStatement ps = con.prepareStatement(statement);
+        StatementSetters.setParameters(ps,params);
+        int rowsDeleted = ps.executeUpdate();
+        ps.close();
+        return rowsDeleted;
+    }
 }

@@ -31,7 +31,6 @@ import java.util.Map;
 public class NewPostServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String sectionId = req.getParameter("section");
         req.getRequestDispatcher("/WEB-INF/views/section/create-post.jsp").forward(req, resp);
     }
 

@@ -27,6 +27,7 @@ public class ShowBans extends HttpServlet {
             List<Ban> bans = service.fetch(bsb.build());
 
             req.setAttribute("bans", bans);
+            req.setAttribute("userId", userId);
             req.getRequestDispatcher("/WEB-INF/views/crm/show-bans.jsp").forward(req, resp);
         } catch(SQLException e){
             e.printStackTrace();
