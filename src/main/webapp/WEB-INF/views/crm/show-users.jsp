@@ -33,10 +33,10 @@
                 <td>
                     <c:choose>
                         <c:when test="${user.admin}">
-                            <input type="checkbox" id="admin-checkbox" name="isAdmin" onchange="toggleAdminStatus(this);" checked>
+                            <input type="checkbox" name="isAdmin" onchange="toggleAdminStatus(this, ${user.id});" checked autocomplete="off">
                         </c:when>
                         <c:otherwise>
-                            <input type="checkbox" id="admin-checkbox" name="isAdmin" onchange="toggleAdminStatus(this);">
+                            <input type="checkbox" name="isAdmin" onchange="toggleAdminStatus(this, ${user.id});" autocomplete="off">
                         </c:otherwise>
                     </c:choose>
                 </td>

@@ -55,7 +55,7 @@
             <td>MAI</td>
           </c:otherwise>
         </c:choose>
-        <td>${ban.admin.id}${ban.user.id}</td>
+        <td>${ban.admin.id} ${ban.user.id}</td>
         <td>
           <a href = "${context}/admin/deleteban?banId=${ban.id}&userId=${requestScope.userId}">
             <i class="fas fa-minus-circle"></i>
