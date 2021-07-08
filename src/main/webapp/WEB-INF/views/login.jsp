@@ -30,7 +30,7 @@
         <input type="text" id="username" name="username" value="${fn:trim(fn:escapeXml(param.username))}">
         <label for="pass">Password:</label>
         <input type="password" id="pass" name="pass">
-        <input type="submit" value="Log In" class="roundButton">
+        <input type="submit" value="Log In" class="roundButton" style = "margin-top:10px;">
       </form>
     </div>
   </div>

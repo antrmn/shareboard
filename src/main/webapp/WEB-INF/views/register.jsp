@@ -35,7 +35,7 @@
           <input type="password" id="pass" name="pass">
           <label for="pass2">Confirm Password:</label>
           <input type="password" id="pass2" name="pass2">
-          <input type="submit" value="Sign Up" class="roundButton">
+          <input type="submit" value="Sign Up" class="roundButton" style = "margin-top:10px;">
         </form>
       </div>
     </div>
