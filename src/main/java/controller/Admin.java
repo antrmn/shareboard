@@ -28,20 +28,8 @@ import java.util.concurrent.ConcurrentMap;
 public class Admin extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String path = (req.getPathInfo() != null) ? req.getPathInfo() : "/";
-//        System.out.print(path);
+
         req.getRequestDispatcher("/WEB-INF/views/crm/admin.jsp").forward(req,resp);
-//        switch(path){
-//            case "/editsection":
-//                req.getRequestDispatcher("/WEB-INF/views/crm/edit-section.jsp").forward(req,resp);
-//                break;
-//            case "/user-panel":
-//                //temp
-//                req.getRequestDispatcher("/WEB-INF/views/crm/admin.jsp").forward(req,resp);
-//                break;
-//            default:
-//                req.getRequestDispatcher("/WEB-INF/views/crm/admin.jsp").forward(req,resp);
-//        }
     }
 
     @Override

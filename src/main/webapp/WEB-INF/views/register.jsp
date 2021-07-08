@@ -14,10 +14,10 @@
     <jsp:param name="currentSection" value="Register" />
   </jsp:include>
 
-  <div style = "display: flex; margin-top:300px; justify-content: center; align-items:center;">
-    <div class="greyContainer" style = "display: flex;">
-      <img src="images/bg-planet.png">
-      <div style="display: flex; justify-content: center; align-items:center; flex-direction: column; padding:100px 200px 100px 200px;">
+  <div class = "auth-body-container">
+    <div class="greyContainer auth-container" >
+      <img id = "user-auth-image" src="images/bg-planet.png">
+      <div style="display: flex; justify-content: center; align-items:center; flex-direction: column; flex-grow:1;">
         <h2>Register</h2>
         <ul>
           <c:if test = "${not empty requestScope.errors}">
@@ -35,7 +35,7 @@
           <input type="password" id="pass" name="pass">
           <label for="pass2">Confirm Password:</label>
           <input type="password" id="pass2" name="pass2">
-          <input type="submit" value="Sign Up" class="roundButton">
+          <input type="submit" value="Sign Up" class="roundButton" style = "margin-top:10px;">
         </form>
       </div>
     </div>

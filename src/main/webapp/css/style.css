@@ -471,8 +471,6 @@ navbar *{
     display: flex;
     margin-top: 80px;
     align-items: flex-start;
-    /*flex-direction: row;*/
-    /*margin: 0 auto;*/
 }
 
 #left-container{
@@ -688,6 +686,20 @@ navbar *{
     background-color: #c3c3c3;
 }
 
+.auth-body-container{
+    height:100vh;
+    display: flex;
+    margin-top:50px;
+    justify-content: center;
+    align-items:center;
+}
+
+.auth-container{
+    display: flex;
+    flex-basis: 800px;
+    height: 500px;
+}
+
 /*MEDIA QUERIES*/
 @media screen and (max-width: 769px) {
     #nav-profile-data{
@@ -775,6 +787,10 @@ navbar *{
     }
 
     #nav-logo h3{
+        display:none;
+    }
+
+    #user-auth-image{
         display:none;
     }
 
