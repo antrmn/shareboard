@@ -6,7 +6,7 @@
 */
 
 
-let postLoader = {
+const postLoader = {
     lock: false,
     params: {page: 1},
     target: null,
@@ -21,7 +21,7 @@ let postLoader = {
         empty: $.noop,
         always: $.noop
     },
-    fetch: function(callbacks = postLoader.callbacks){
+    fetch(callbacks = postLoader.callbacks){
         postLoader.lock = true;
         Object.assign(callbacks, postLoader.callbacks, callbacks);
         if (typeof postLoader.lastRequest === "object" && typeof postLoader.lastRequest.abort === "function")
@@ -32,18 +32,18 @@ let postLoader = {
 
         //setTimeout impostato solo per far vedere l'animazione di caricamento.
         setTimeout(()=>{
-            postLoader.lastRequest = $.get(window.location.origin+ "/shareboard/loadposts", postLoader.params)
+            this.lastRequest = $.get(window.location.origin+ "/shareboard/loadposts", postLoader.params)
                 .done((data) => {
                     if(!data || data.trim() === ""){
                         callbacks.empty();
                         postLoader.stop();
                     } else {
                         callbacks.success(data);
-                        postLoader.params.page += 1;
+                        this.params.page += 1;
                         //forza ricontrollo
-                        postLoader.lock = false;
-                        postLoader.observer.unobserve(postLoader.target);
-                        postLoader.observer.observe(postLoader.target);
+                        this.lock = false;
+                        this.observer.unobserve(this.target);
+                        this.observer.observe(this.target);
                     }
                 })
                 .fail(() => {
@@ -51,19 +51,19 @@ let postLoader = {
                     postLoader.stop();
                 })
                 .always(() => {
-                    callbacks.always();
-                    postLoader.lock = false;
+                    this.callbacks.always();
+                    this.lock = false;
                 });
         }, 800);
 
     },
-    start: function(el) {
-        postLoader.target = el;
-        postLoader.observer.observe(postLoader.target);
+    start(el) {
+        this.target = el;
+        this.observer.observe(this.target);
     },
-    stop: function() {
-        postLoader.observer.disconnect();
-        postLoader.lock = false;
+    stop() {
+        this.observer.disconnect();
+        this.lock = false;
     }
 }
 
