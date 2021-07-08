@@ -84,11 +84,11 @@ public class BanMapper implements AbstractMapper<Ban> {
 
             User admin = null;
             if (columns.contains("admin_id")) {
-                admin = users.get(rs.getInt("admin_id"));
+                admin = admins.get(rs.getInt("admin_id"));
                 if (admin == null) {
                     admin = new User();
                     for (String column : columns) {
-                        SQL_TriConsumer<User> consumer = mapUser.get(column);
+                        SQL_TriConsumer<User> consumer = mapAdmin.get(column);
                         if(consumer != null)
                             consumer.accept(admin, column, rs);
                     }
