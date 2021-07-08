@@ -40,9 +40,9 @@
                 <i class="fas fa-user-plus" style = "font-size: 80px; display:inline; color: #4295b5; float: right"></i>
             </div>
         </div>
-
-
-        <div id="chart_div"></div>
+        <div class="dashboard-card">
+            <div id="piechart"></div>
+        </div>
         <div id="curve_chart" style="width: 900px; height: 500px"></div>
     </div>
 </body>
