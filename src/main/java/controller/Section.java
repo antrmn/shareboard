@@ -22,6 +22,8 @@ public class Section extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        //TODO: la sezione ormai la prendiamo dall'application scope.
+
         //String path = (req.getPathInfo() != null) ? req.getPathInfo() : "/";
         //System.out.println(path);
         String sectionName = req.getParameter("section");

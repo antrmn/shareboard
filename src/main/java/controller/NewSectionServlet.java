@@ -5,7 +5,7 @@ import controller.util.FileUtils;
 import model.persistence.ConPool;
 import model.section.Section;
 import model.section.SectionDAO;
-import model.section.SectionSpecificationBuilder;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -21,8 +21,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentMap;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @WebServlet("/admin/newsection")
 @MultipartConfig
@@ -48,8 +47,9 @@ public class NewSectionServlet extends HttpServlet {
         if(name == null || name.isBlank())
             errors.add("Specificare un titolo");
 
-        ConcurrentMap<Integer, Section> sections = (ConcurrentMap<Integer, Section>) getServletContext().getAttribute("sections");
-        for(ConcurrentMap.Entry<Integer, Section> entry : sections.entrySet()){
+        Map<Integer, Section> sections = (Map<Integer, Section>) getServletContext().getAttribute("sections");
+
+        for(Map.Entry<Integer, Section> entry : sections.entrySet()){
             if (entry.getValue().getName().equalsIgnoreCase(name))
                 errors.add("Sezione già esistente");
         }
@@ -83,9 +83,7 @@ public class NewSectionServlet extends HttpServlet {
                     Files.copy(fileStream, file.toPath());
                 }
                 service.insert(s);
-                List<Section> _sections = service.fetch(new SectionSpecificationBuilder().sortById().build());
-                sections = _sections.stream().collect(Collectors.toConcurrentMap(x -> x.getId(), x -> x));
-                getServletContext().setAttribute("sections", sections);
+                UpdateSectionsServlet.updateSections(getServletContext());
             } catch(SQLException | IOException e){
                 con.rollback();
                 throw new ServletException(e);
@@ -95,6 +93,7 @@ public class NewSectionServlet extends HttpServlet {
         } catch (SQLException e2) {
             throw new ServletException(e2);
         }
+
         resp.sendRedirect(getServletContext().getContextPath()+"admin/showsections");
     }
 }

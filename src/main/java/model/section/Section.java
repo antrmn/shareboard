@@ -1,11 +1,5 @@
 package model.section;
 
-import model.post.Post;
-import model.user.User;
-
-import java.util.Collection;
-import java.util.List;
-
 public class Section {
     private static final int MAX_NAME_LENGTH = 50;
     private static final int MAX_DESCRIPTION_LENGTH = 255;
@@ -15,10 +9,24 @@ public class Section {
     private String description;
     private String picture;
     private String banner;
-    private Integer nFollowers;
-    private Boolean isFollowed;
-    private Collection<User> followers;
-    private List<Post> posts;
+    private Integer nFollowersTotal;
+    private Integer nFollowersWeekly;
+
+    public Integer getnFollowersTotal() {
+        return nFollowersTotal;
+    }
+
+    public void setnFollowersTotal(Integer nFollowersTotal) {
+        this.nFollowersTotal = nFollowersTotal;
+    }
+
+    public Integer getnFollowersWeekly() {
+        return nFollowersWeekly;
+    }
+
+    public void setnFollowersWeekly(Integer nFollowersWeekly) {
+        this.nFollowersWeekly = nFollowersWeekly;
+    }
 
     public Integer getId() {
         return id;
@@ -50,38 +58,6 @@ public class Section {
 
     public void setPicture(String picture) {
         this.picture = picture;
-    }
-
-    public Integer getnFollowers() {
-        return nFollowers;
-    }
-
-    public void setnFollowers(Integer nFollowers) {
-        this.nFollowers = nFollowers;
-    }
-
-    public Boolean getFollowed() {
-        return isFollowed;
-    }
-
-    public void setFollowed(Boolean followed) {
-        isFollowed = followed;
-    }
-
-    public Collection<User> getFollowers() {
-        return followers;
-    }
-
-    public void setFollowers(Collection<User> followers) {
-        this.followers = followers;
-    }
-
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
     }
 
     public String getBanner() {

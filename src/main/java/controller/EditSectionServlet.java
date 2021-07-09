@@ -84,6 +84,7 @@ public class EditSectionServlet extends HttpServlet {
                     Files.copy(fileStream, file.toPath());
                 }
                 service.update(s);
+                UpdateSectionsServlet.updateSections(getServletContext());
             } catch(SQLException | IOException e){
                 con.rollback();
                 throw new ServletException(e);
@@ -93,6 +94,6 @@ public class EditSectionServlet extends HttpServlet {
         } catch (SQLException e2) {
             throw new ServletException(e2);
         }
-        resp.sendRedirect(getServletContext().getContextPath()+"/admin/showsections");
+        resp.sendRedirect(req.getContextPath()+"/admin/showsections");
     }
 }

@@ -1,31 +1,18 @@
 package controller.listener;
 
-import model.persistence.ConPool;
-import model.section.Section;
-import model.section.SectionDAO;
-import model.section.SectionSpecificationBuilder;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.annotation.WebListener;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.concurrent.ConcurrentMap;
-import java.util.stream.Collectors;
 
 @WebListener
 public class ServletContextListener implements javax.servlet.ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        try(Connection con = ConPool.getConnection()){
-            SectionDAO service = new SectionDAO(con);
-            List<Section> _sections = service.fetch(new SectionSpecificationBuilder().sortById().build());
-            ConcurrentMap<Integer, Section> sections
-                    = _sections.stream().collect(Collectors.toConcurrentMap(x -> x.getId(), x -> x));
-            sce.getServletContext().setAttribute("sections", sections);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-            throw new RuntimeException("Impossibile caricare le sezioni nel servletContext");
-        }
+        //idk non so più cosa mettere qui
+
+        /* Codice va messo qui se:
+         * 1. Troppo generico per essere messo in qualunque init()
+         * 2. Operazione critica e fondamentale al funzionamento della webapp (una sua eccezione ne impedirà il deploy)
+         * 3. Va eseguito _prima_ di qualunque init(), indistintamente dal parametro loadOnStartup
+         */
     }
 }

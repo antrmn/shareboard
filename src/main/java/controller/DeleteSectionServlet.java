@@ -1,14 +1,7 @@
 package controller;
 
-import controller.util.ErrorForwarder;
-import controller.util.InputValidator;
 import model.persistence.ConPool;
-import model.post.Post;
-import model.post.PostDAO;
-import model.section.Section;
 import model.section.SectionDAO;
-import model.section.SectionSpecificationBuilder;
-import model.user.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @WebServlet("/admin/deletesection")
 public class DeleteSectionServlet extends HttpServlet {
@@ -33,8 +24,7 @@ public class DeleteSectionServlet extends HttpServlet {
             if(service.delete(sectionId) < 1)
                 throw new RuntimeException("Sezione non eliminata");
             else{
-                List<Section> _sections = service.fetch(new SectionSpecificationBuilder().sortById().build());
-                getServletContext().setAttribute("sections", _sections.stream().collect(Collectors.toConcurrentMap(x -> x.getId(), x -> x)));
+                UpdateSectionsServlet.updateSections(getServletContext());
             }
         } catch (SQLException throwables) {
             throw new ServletException(throwables);

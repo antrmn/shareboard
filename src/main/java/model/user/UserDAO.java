@@ -154,6 +154,7 @@ public class UserDAO{
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = StatementSetters.setParameters(ps, specification.getParams())
                 .executeQuery();
+        rs.next();
         int count = rs.getInt(1);
         ps.close();
         rs.close();

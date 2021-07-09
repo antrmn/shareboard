@@ -24,7 +24,7 @@
         <div class="dashboard-card">
             <div style = "padding-left: 30px;">
                 <div style = "display:inline-block;">
-                    <h1>7</h1>
+                    <h1>${requestScope.count}</h1>
                     <h3>Utenti Registrati</h3>
                 </div>
                 <i class="fas fa-user-plus" style = "font-size: 80px; display:inline; color: #4295b5; float: right"></i>

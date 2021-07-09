@@ -3,7 +3,9 @@ package model.follow;
 import model.persistence.Specification;
 import util.Pair;
 
+import java.sql.Timestamp;
 import java.sql.Types;
+import java.time.Instant;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -47,6 +49,18 @@ public class FollowSpecificationBuilder extends Specification.Builder<FollowSpec
     public FollowSpecificationBuilder bySectionId(int id){
         wheresJoiner.add(" section_id=? ");
         params.add(new Pair<>(id, Types.INTEGER));
+        return this;
+    }
+
+    public FollowSpecificationBuilder isOlderThan(Instant date){
+        wheresJoiner.add(" follow_date <= ? ");
+        params.add(new Pair<>(Timestamp.from(date), Types.TIMESTAMP));
+        return this;
+    }
+
+    public FollowSpecificationBuilder isNewerThan(Instant date){
+        wheresJoiner.add(" follow_date >= ? ");
+        params.add(new Pair<>(Timestamp.from(date), Types.TIMESTAMP));
         return this;
     }
 

@@ -107,6 +107,19 @@ public class FollowDAO {
         return delete(List.of(new Pair<>(u,s)));
     }
 
+    public int count(Specification specification) throws SQLException {
+        String query = "SELECT count(*) FROM follow %s %s LIMIT ? OFFSET ?";
+        query = String.format(query, specification.getJoins(), specification.getWheres());
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet rs = StatementSetters.setParameters(ps, specification.getParams())
+                .executeQuery();
+        rs.next();
+        int count = rs.getInt(1);
+        ps.close();
+        rs.close();
+        return count;
+    }
+
     public Follow get(Pair<User,Section> pk) throws SQLException{
         FollowSpecificationBuilder fsb = new FollowSpecificationBuilder().byUserId(pk.getLeft().getId())
                                                                          .bySectionId(pk.getRight().getId());
