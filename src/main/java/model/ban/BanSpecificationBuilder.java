@@ -36,7 +36,7 @@ public class BanSpecificationBuilder extends Specification.Builder<BanSpecificat
             joinsJoiner.add(" JOIN section ON section.id=ban.section_id");
         if(joinUserNeeded)
             joinsJoiner.add(" JOIN user ON user.id=ban.user_id");
-        if(joinUserNeeded)
+        if(joinAdminNeeded)
             joinsJoiner.add(" JOIN user AS admin_user ON admin_user.id=ban.admin_id");
 
         joins = joinsJoiner.toString();
@@ -110,7 +110,7 @@ public class BanSpecificationBuilder extends Specification.Builder<BanSpecificat
     }
 
     public BanSpecificationBuilder showAdminNames(){
-        joinUserNeeded = true;
+        joinAdminNeeded = true;
         columnsList.add("user_admin.username AS admin_username");
         return this;
     }
