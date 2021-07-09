@@ -11,6 +11,6 @@ public class SessionListener implements HttpSessionListener {
     @Override
     public void sessionCreated(HttpSessionEvent se) {
         Set<Integer> follows = ConcurrentHashMap.newKeySet();
-        se.getSession().setAttribute("follows", follows);
+        se.getSession().setAttribute("userFollows", follows);
     }
 }

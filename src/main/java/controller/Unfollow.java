@@ -38,7 +38,7 @@ public class Unfollow extends HttpServlet {
         HttpSession session = req.getSession(true);
         User user = (User) req.getAttribute("loggedUser");
         if(user == null){
-            Set<Integer> follows = (Set<Integer>) session.getAttribute("follows");
+            Set<Integer> follows = (Set<Integer>) session.getAttribute("userFollows");
             follows.remove(sectionId);
         } else {
             try(Connection con = ConPool.getConnection()){

@@ -60,7 +60,7 @@ public class Login extends HttpServlet {
                 session.setAttribute("loggedUserId", user.getId());
 
                 /* Aggiunge nel db le sezioni seguite da guest */
-                Set<Integer> follows = (Set<Integer>) session.getAttribute("follows");
+                Set<Integer> follows = (Set<Integer>) session.getAttribute("userFollows");
                 if(!follows.isEmpty()) {
                     FollowDAO followService = new FollowDAO(con);
                     followService.insert(follows, user.getId());

@@ -29,20 +29,12 @@
                         <div class = "section-element" style=" padding: 12px 0px 12px 0px;">
                             <a href="${context}/s?section=${section.value.name}" style="display: inline;">${section.value.name}</a>
                             <input type = "hidden" name = "sectionId" value = "${section.value.id}">
-                            <c:set var="contains" value="false" />
-                            <c:forEach var="item" items="${follows}">
-                                <c:if test="${item eq section.value.id}">
-                                    <c:set var="contains" value="true" />
-                                </c:if>
-                            </c:forEach>
-                            <c:choose>
-                                <c:when test="${contains eq true}">
-                                    <i class="fas fa-star star favorite-star" onclick="toggleFollowStar(this)"></i>
-                                </c:when>
-                                <c:otherwise>
-                                    <i class="far fa-star star" onclick="toggleFollowStar(this)"></i>
-                                </c:otherwise>
-                            </c:choose>
+
+                            <%-- NOTA - userFollows in session scope: follow da guest           --%>
+                            <%--        userFollows in request scope: follow da logged user     --%>
+                            <i class="${userFollows.contains(section.value.id) ? 'fas fa-star star favorite-star' : 'far fa-star star'}"
+                               onclick="toggleFollowStar(this)">
+                            </i>
                         </div>
                     </c:forEach>
                 </div>
