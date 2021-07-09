@@ -21,9 +21,5 @@
         <i class="fas fa-users"></i>
         Gestione Utenti
     </a>
-<%--    <a href="${context}/admin/showbans">--%>
-<%--        <i class="fas fa-gavel"></i>--%>
-<%--        Gestione Ban--%>
-<%--    </a>--%>
 </div>
 <span style="font-size:40px;cursor:pointer; position: fixed; top:50px; left:0;" onclick="openNav()">&#9776;</span>
