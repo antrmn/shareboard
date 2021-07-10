@@ -3,23 +3,23 @@ package util;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-public final class InstantFormatter {
-    public static String printRelative(Instant then){
+public final class DateUtils {
+    public static String printTimeSince(Instant then){
         long n;
         if ((n = Math.abs(Instant.now().until(then, ChronoUnit.SECONDS))) < 60){
-            return n == 1 ? n + " secondo fa" : n + " secondi fa";
+            return n == 1 ? n + " secondo" : n + " secondi";
         } else if ((n = Math.abs(Instant.now().until(then, ChronoUnit.MINUTES))) < 60){
-            return n == 1 ? n + " minuto fa" : n + " minuti fa";
+            return n == 1 ? n + " minuto" : n + " minuti";
         } else if ((n = Math.abs(Instant.now().until(then, ChronoUnit.HOURS))) < 24){
-            return n == 1 ? n + " ora fa" : n + " ore fa";
+            return n == 1 ? n + " ora" : n + " ore";
         } else if ((n = Math.abs(Instant.now().until(then, ChronoUnit.DAYS))) < 30) {
-            return n == 1 ? n + " giorno fa" : n + " giorni fa";
+            return n == 1 ? n + " giorno" : n + " giorni";
         } else if ((n = Math.abs(Instant.now().until(then, ChronoUnit.DAYS))) < 365) {
             n /= 30;
-            return n == 1 ? n + " mese fa" : n + " mesi fa";
+            return n == 1 ? n + " mese" : n + " mesi";
         } else {
             n = Math.abs(Instant.now().until(then, ChronoUnit.YEARS));
-            return n == 1 ? n + " anno fa" : n + " anni fa";
+            return n == 1 ? n + " anno" : n + " anni";
         }
     }
 }
