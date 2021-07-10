@@ -1,14 +1,11 @@
 package model.post;
 
-import model.comment.Comment;
 import model.section.Section;
 import model.user.User;
 
 import java.time.Instant;
-import java.util.List;
 
 public class Post {
-
     public enum Type {TEXT, IMG}
 
     private Integer id;
@@ -21,11 +18,6 @@ public class Post {
     private Integer vote;
     private User author;
     private Section section;
-    private List<Comment> comments;
-
-    public String getStringCreationDate() {
-        return creationDate.toString();
-    }
 
     public Integer getVote() {
         return vote;
@@ -105,13 +97,5 @@ public class Post {
 
     public void setSection(Section section) {
         this.section = section;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
 }

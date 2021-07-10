@@ -95,6 +95,8 @@ public class CommentVoteDAO {
         return rowsDeleted;
     }
 
+    /*--- Shorthands ---*/
+
     public int delete(Pair<User, Comment> pk) throws SQLException {
         return delete(List.of(pk));
     }

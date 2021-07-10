@@ -5,8 +5,6 @@ import model.persistence.Specification;
 import model.post.Post;
 import model.post.PostDAO;
 import model.post.PostSpecificationBuilder;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,7 +19,6 @@ import java.util.List;
 
 @WebServlet("/home")
 public class Home extends HttpServlet {
-    private static Logger logger = LogManager.getLogger(Home.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

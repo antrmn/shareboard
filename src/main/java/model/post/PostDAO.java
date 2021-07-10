@@ -119,10 +119,15 @@ public class PostDAO {
         return delete(List.of(id));
     }
 
+
     public Post get(int id, int loggedUserId) throws SQLException{
         PostSpecificationBuilder psb = new PostSpecificationBuilder().byId(id).loggedUser(loggedUserId);
         List<Post> singleton = fetch(psb.build());
         return singleton.isEmpty() ? null : singleton.get(0);
+    }
+
+    public Post get(int id) throws SQLException{
+        return get(id, -1);
     }
 
     public int insert(Post post) throws SQLException {
