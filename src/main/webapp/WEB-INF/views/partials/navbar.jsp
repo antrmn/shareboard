@@ -34,8 +34,8 @@
 
                             <%-- NOTA - userFollows in session scope: follow da guest           --%>
                             <%--        userFollows in request scope: follow da logged user     --%>
-                            <i class="${userFollows.contains(section.value.id) ? 'fas fa-star star favorite-star' : 'far fa-star star'}"
-                               onclick="toggleFollowStar(this)">
+                            <i class="${userFollows.contains(section.value.id) ? 'fas fa-star star favorite-star follow-button follow-button-isfollowing' : 'far fa-star star follow-button'}"
+                               onclick="toggleFollow(this)" data-section-id = "${section.value.id}">
                             </i>
                         </div>
                     </c:forEach>

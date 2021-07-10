@@ -23,9 +23,9 @@
             </c:when>
             <c:otherwise>
                 <sb:printComments comments="${comments}" idParent="${comment.id}" depth="${depth+1}">
-            <jsp:attribute name="commentFragment">
-                <%@ include file="/WEB-INF/views/partials/comment.jsp" %>
-            </jsp:attribute>
+                    <jsp:attribute name="commentFragment">
+                        <%@ include file="/WEB-INF/views/partials/comment.jsp" %>
+                    </jsp:attribute>
                 </sb:printComments>
             </c:otherwise>
         </c:choose>

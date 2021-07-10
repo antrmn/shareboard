@@ -23,31 +23,25 @@ function toggleDropdown(action, id){
     }
 }
 
-$('.fa-star').on('click', function(e) {
-    e.stopPropagation();
-});
+function toggleFollow(e){
+    let addFollow = false
+    let sectionId = $(e).attr("data-section-id")
 
-function toggleFollowStar(e){
-    let addFollow = false;
-    //se la sezione è nei preferiti
-    if(e.classList.contains("fas")){
-        e.classList.remove("fas");
-        e.classList.add("far");
-        e.classList.remove("favorite-star");
-    }else{
-        e.classList.remove("far");
-        e.classList.add("fas");
-        e.classList.add("favorite-star");
-        addFollow = true
+    if(!$(e).hasClass('follow-button-isfollowing')){
+        addFollow = true;
+    }
+    $(e).toggleClass('follow-button-isfollowing')
+    toggleFollowAjax(sectionId, addFollow)
+
+    let elements = $(`.follow-button[data-section-id = "${sectionId}"]`);
+
+    for (let element of elements){
+        updateAllFollowButtons(element, addFollow)
     }
 
-    let id = $(e).parent().find("input").val();
-    console.log(id);
-    //send ajax request
-    toggleFollow(id, addFollow)
 }
 
-function toggleFollow(id, addFollow){
+function toggleFollowAjax(id, addFollow){
     let url = window.location.origin+"/shareboard/unfollow";
     if(addFollow){
         url = window.location.origin+"/shareboard/follow"
@@ -57,6 +51,44 @@ function toggleFollow(id, addFollow){
         {
             section: id,
         });
+}
+
+function updateAllFollowButtons(e, addFollow){
+    if($(e).hasClass('fa-star')){
+        toggleFollowStar(e, addFollow)
+    } else if($(e).hasClass('follow-roundbutton')){
+        toggleFollowButton(e, addFollow)
+    }
+}
+
+$('.fa-star').on('click', function(e) {
+    e.stopPropagation();
+});
+
+function toggleFollowStar(e, addFollow){
+    //se la sezione non è nei preferiti
+    if(!addFollow){
+        e.classList.remove("fas");
+        e.classList.add("far");
+        e.classList.remove("favorite-star");
+    }else{
+        e.classList.remove("far");
+        e.classList.add("fas");
+        e.classList.add("favorite-star");
+    }
+}
+
+function toggleFollowButton(e, addFollow){
+
+    if(addFollow){
+        $(e).removeClass("lightGreyButton")
+        $(e).addClass('darkGreyButton')
+        $(e).text("Joined");
+    }else{
+        $(e).removeClass("darkGreyButton")
+        $(e).addClass('lightGreyButton')
+        $(e).text("Join");
+    }
 }
 
 function toggleVote(el, actiontype, elementType){
@@ -140,9 +172,7 @@ let getUrlParameter = function getUrlParameter(sParam) {
 };
 
 
-
 /* Responsive left/right container */
-
 $(() => {
     let toggleView = ()=>{
         if(!window.matchMedia('(max-width: 767px)').matches)

@@ -47,7 +47,10 @@
                         <div id = "top-sections-container" style = "display:flex; flex-direction: row; justify-content: space-between; align-content: center">
                             <i class="fas fa-globe-europe" style = "color:#0079D3; font-size: 25px"></i>
                             <p>${section.name}</p>
-                            <button type="submit" class = "roundButton lightGreyButton">Join</button>
+                            <button type="submit" class = "${userFollows.contains(section.id) ? 'roundButton darkGreyButton follow-button follow-roundbutton follow-button-isfollowing' :  'roundButton lightGreyButton follow-button follow-roundbutton' } "
+                                    onclick="toggleFollow(this)" data-section-id = "${section.id}">
+                                    ${userFollows.contains(section.id) ? 'Joined' : 'Join'}
+                            </button>
                         </div>
                     </c:forEach>
                 </div>

@@ -37,7 +37,9 @@
       <h4>s/${section.name}</h4>
     </span>
     <span>
-      <button class = "darkGreyButton roundButton">Joined</button>
+      <button class = "${userFollows.contains(section.id) ? 'darkGreyButton roundButton follow-button follow-button-isfollowing follow-roundbutton' : 'lightGreyButton roundButton follow-button follow-roundbutton'}" onclick="toggleFollow(this)" data-section-id = "${section.id}">
+        ${userFollows.contains(section.id) ?  'Joined' : 'Join'}
+      </button>
     </span>
   </div>
 </div>

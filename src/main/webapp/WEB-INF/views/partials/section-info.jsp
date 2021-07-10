@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <c:set var="context" value="${pageContext.request.contextPath}" />
-<div class="greyContainer grid-y-nw  align-center">
+<div class="greyContainer grid-y-nw  align-center" style=" word-break: break-word;">
   <h3>About Community</h3>
   <h4> ${empty param.description ? "Nessuna descrizione." : param.description}</h4>
   <h4> ${param.nFollowers} Membri</h4>
