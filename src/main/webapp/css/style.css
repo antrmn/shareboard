@@ -772,9 +772,9 @@ navbar *{
         display: none;
     }
 
-    /*#profile-container{*/
-    /*    display:inline-block !important;*/
-    /*}*/
+    #profile-container{
+        display:unset !important;
+    }
 
     #right-container{
         margin:0px;
