@@ -22,7 +22,16 @@
     <a href="${pageContext.request.contextPath}" style = "height:inherit; width:100%; display: inline-block;"></a>
   </div>
   <div id="header-container" class = "grid-x-nw" >
-    <span> <img id = "header-icon" src="${pageContext.request.contextPath}/images/default-logo.png"></span>
+    <span>
+      <c:choose>
+        <c:when test="${not empty section.picture}">
+          <img id="header-icon" src= "${applicationScope.picsLocation}/${section.picture}" >
+        </c:when>
+        <c:otherwise>
+          <img id = "header-icon" src="${pageContext.request.contextPath}/images/default-logo.png">
+        </c:otherwise>
+      </c:choose>
+    </span>
     <span class = "grid-y">
       <h2>${section.name}</h2>
       <h4>s/${section.name}</h4>

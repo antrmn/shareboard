@@ -436,6 +436,14 @@ navbar *{
     font-size: 30px;
 }
 
+#nav-profile-photo-logged{
+    border-radius: 100%;
+    border: 2px solid #fff;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+}
+
 .nav-right-dropdown{
     display:inline-block;
     margin-bottom:0px;

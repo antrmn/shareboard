@@ -53,9 +53,18 @@
     <div id="nav-profile">
         <c:choose>
             <c:when test="${not empty loggedUser}">
-                <a href = "${context}/newpost"style="margin-right: 20px;"><i class="fas fa-edit"></i></a>
-                <span id = "profile-container" class = "interactable" href = "${context}/profile/?id=${loggedUser.id}" onclick="toggleDropdown('toggle', 'profile-dropdown')" >
-                    <i id = "nav-profile-photo" class="fas fa-user-circle"></i>
+                <a href = "${context}/newpost" style="margin-right: 20px;"><i class="fas fa-edit"></i></a>
+                <span id = "profile-container" class = "interactable" href = "${context}/me" onclick="toggleDropdown('toggle', 'profile-dropdown')" >
+                    <c:choose>
+                        <c:when test="${empty loggedUser.picture}">
+                            <i id = "nav-profile-photo" class="fas fa-user-circle"></i>
+                        </c:when>
+                        <c:otherwise>
+                            <img id="nav-profile-photo-logged" src="${context}/pics/${loggedUser.picture}">
+                        </c:otherwise>
+                    </c:choose>
+
+
                     <div id="nav-profile-data" >
                         <p style="display: block; margin-bottom:0px; ">${loggedUser.username}</p>
                         <div style="display: block; font-size: 12px; margin-top:0px;">
