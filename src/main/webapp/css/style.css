@@ -781,6 +781,11 @@ navbar *{
     .filter-dropdown-content{
         right: 0;
     }
+
+    .mobile-fullscreen-container{
+        margin-right: 0px !important;
+        margin-left: 0px !important;
+    }
 }
 
 @media screen and (max-width: 481px) {
