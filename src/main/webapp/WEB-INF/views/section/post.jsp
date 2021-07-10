@@ -16,9 +16,9 @@
 
 <div id="body-container" class = "justify-center align-center">
 
-    <div id = left-container class = "greyContainer selected-container">
-        <div id="post-container" class = "grid-x-nw" style = "flex-basis: 1280px;">
-            <div id = "post-data" style = "flex-grow: 1; width: 100%;">
+    <div id = left-container class = "greyContainer selected-container mobile-fullscreen-container">
+        <div id="post-container" class = "grid-x-nw">
+            <div id = "post-data" style = "flex-grow: 1;">
                 <div class = "grid-x-nw" style = "align-items: start; margin-top:10px;">
                     <div class = "vote-container">
                         <input type = "hidden" name = "id" value = ${post.id}>
@@ -80,19 +80,21 @@
                         <jsp:include page="../partials/comment-form.jsp">
                             <jsp:param name="id" value="${post.id}"/>
                         </jsp:include>
-                        <div class ="grid-x-nw" style = "width: 100%">
-                            <div id = "comments-container" style = "margin:8px; width: 100%">
-                                <c:if test="${not empty param.comment}">
-                                    <a href="${pageContext.request.contextPath}/post?id=${post.id}#comment-container" class="underline-some"><span class="to-underline">Torna ai commenti principali</span> <i class="fas fa-long-arrow-alt-up"></i></a>
-                                </c:if>
-                                <sb:printComments comments="${requestScope.comments}" idParent="${requestScope.initialIndex}" depth="${0}">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id = "comments-flex" class = "grid-x-nw">
+            <div class ="grid-x-nw" style = "width: 100%">
+                <div id = "comments-container" style = "margin:8px; width: 100%">
+                    <c:if test="${not empty param.comment}">
+                        <a href="${pageContext.request.contextPath}/post?id=${post.id}#comment-container" class="underline-some"><span class="to-underline">Torna ai commenti principali</span> <i class="fas fa-long-arrow-alt-up"></i></a>
+                    </c:if>
+                    <sb:printComments comments="${requestScope.comments}" idParent="${requestScope.initialIndex}" depth="${0}">
                                   <jsp:attribute name="commentFragment">
                                         <%@ include file="/WEB-INF/views/partials/comment.jsp" %>
                                   </jsp:attribute>
-                                </sb:printComments>
-                            </div>
-                        </div>
-                    </div>
+                    </sb:printComments>
                 </div>
             </div>
         </div>

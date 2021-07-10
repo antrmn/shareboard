@@ -13,8 +13,8 @@
         <i class="fas fa-chevron-down voteIcon downvoteIcon interactable ${comment.vote == -1 ? "downvote-icon-active" : ""}" onclick = "toggleVote(this, 'downvote', 'comment')"></i>
     </div>
     <div class = "grid-y-nw" style="flex-grow:1; align-items: start;padding-bottom: 10px; padding-right: 10px;">
-        <div style = "flex-basis: 100%">
-            <a class = "grey-text" href="${pageContext.request.contextPath}/u/${comment.author.username}">posted by ${comment.author.username}</a>
+        <div style = "margin-top:5px;">
+            <a class = "grey-text" href="${pageContext.request.contextPath}/u/${comment.author.username}">${comment.author.username}</a>
             <a href="javascript:void(0)" class="grey-text" title="${sbfn:getDate(comment.creationDate)}" >${sbfn:printTimeSince(comment.creationDate)} fa</a>
         </div>
         <div>
