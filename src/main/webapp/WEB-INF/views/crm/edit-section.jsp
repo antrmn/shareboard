@@ -20,7 +20,7 @@
 </jsp:include>
 <div class = "grid-y-nw align-center justify-center" style = "margin-top: 100px;">
     <div id = "size-container">
-        <h2 style = "border-bottom-style: solid; border-bottom-width: 1px; padding-bottom: 10px;">Modifica Sezione</h2>
+        <h2 style = "border-bottom-style: solid; border-bottom-width: 1px; padding-bottom: 10px;">Modifica Sezione "${requestScope.section.name}"</h2>
         <div id = "section-data" class = "greyContainer">
             <div id="action-container" style = "margin:8px;">
                 <form id = "create-post-form" class = "grid-y-nw align-center justify-center" action="${pageContext.request.contextPath}/admin/editsection" method="post" enctype="multipart/form-data">
