@@ -36,7 +36,7 @@
           <img id="header-icon" src= "${applicationScope.picsLocation}/${user.picture}" >
         </c:when>
         <c:otherwise>
-          <img id = "header-icon" src="${pageContext.request.contextPath}/images/default-logo.png">
+          <img id = "header-icon" src="${pageContext.request.contextPath}/images/default-user-icon.webp">
         </c:otherwise>
       </c:choose>
     </span>
