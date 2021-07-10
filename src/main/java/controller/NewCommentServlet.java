@@ -53,9 +53,10 @@ public class NewCommentServlet extends HttpServlet {
             comments.add(c);
             CommentDAO service = new CommentDAO(con);
             service.insert(comments);
-            resp.sendRedirect(req.getContextPath() + "/post/" + postId);
+
         } catch(SQLException   e){
-            e.printStackTrace();
+            throw new ServletException(e);
         }
+        resp.sendRedirect(req.getContextPath() + "/post/" + postId);
     }
 }
