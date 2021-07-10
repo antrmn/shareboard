@@ -11,7 +11,7 @@
     </jsp:include>
 </head>
 <body>
-<jsp:include page="/WEB-INF/navbar">
+<jsp:include page="/WEB-INF/views/partials/navbar.jsp">
     <jsp:param name="currentSection" value="Create Post" />
 </jsp:include>
 
@@ -36,7 +36,10 @@
                                 <label for="section-select" style = "display: inline">Choose a section:</label>
                                 <select name="section" id="section-select">
                                     <c:forEach items="${applicationScope.sections}" var="section">
-                                        <option value="${section.value.id}">${section.value.name}</option>
+                                        <option ${section.value.id == param.section ? 'selected' : ''}
+                                                value="${section.value.id}">
+                                                ${section.value.name}
+                                        </option>
                                     </c:forEach>
                                 </select>
                             </div>

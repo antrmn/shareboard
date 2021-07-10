@@ -25,7 +25,6 @@ public class UserServlet extends HttpServlet {
             return;
         }
 
-        Integer userId;
         try(Connection con = ConPool.getConnection()){
             UserDAO service = new UserDAO(con);
             User user = service.get(username, false);
@@ -33,7 +32,6 @@ public class UserServlet extends HttpServlet {
                 ErrorForwarder.sendError(req, resp, "L'utente specificato non esiste", 400);
                 return;
             }
-            userId = user.getId();
             req.setAttribute("user", user);
         } catch (SQLException throwables) {
             throw new ServletException(throwables);

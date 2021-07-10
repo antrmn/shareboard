@@ -134,6 +134,6 @@ public class NewPostServlet extends HttpServlet {
             }
         }
 
-        resp.sendRedirect(getServletContext().getContextPath() + "/post?id=" + newPostId);
+        resp.sendRedirect(getServletContext().getContextPath() + "/post/" + newPostId);
     }
 }

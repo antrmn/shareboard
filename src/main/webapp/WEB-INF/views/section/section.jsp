@@ -10,7 +10,7 @@
   </jsp:include>
 </head>
 <body>
-<jsp:include page="/WEB-INF/navbar">
+<jsp:include page="/WEB-INF/views/partials/navbar.jsp">
   <jsp:param name="isLogged" value="true" />
   <jsp:param name="currentSection" value="${section.name}" />
   <jsp:param name="userName" value="Testus" />
@@ -46,9 +46,9 @@
 
   <div id="right-container">
     <jsp:include page="../partials/section-info.jsp">
-      <jsp:param name="description" value="${section.name}" />
-      <jsp:param name="nFollowers" value="${applicationScope.sections[section.id].nFollowersTotal}" />
-      <jsp:param name="link" value="${pageContext.request.contextPath}/newpost?sectionId=${section.id}" />
+      <jsp:param name="description" value="${section.description}" />
+      <jsp:param name="nFollowers" value="${section.nFollowersTotal}" />
+      <jsp:param name="sectionId" value="${section.id}" />
     </jsp:include>
     <jsp:include page="../partials/rules.jsp"/>
     <jsp:include page="../partials/footer.jsp"/>

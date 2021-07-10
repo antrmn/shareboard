@@ -11,7 +11,7 @@
     </jsp:include>
 </head>
 <body>
-<jsp:include page="/WEB-INF/navbar">
+<jsp:include page="/WEB-INF/views/partials/navbar.jsp">
     <jsp:param name="currentSection" value="Edit User" />
 </jsp:include>
 

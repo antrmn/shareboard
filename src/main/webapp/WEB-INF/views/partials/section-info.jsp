@@ -3,7 +3,7 @@
 <c:set var="context" value="${pageContext.request.contextPath}" />
 <div class="greyContainer grid-y-nw  align-center">
   <h3>About Community</h3>
-  <h4> ${param.description}</h4>
+  <h4> ${empty param.description ? "Nessuna descrizione." : param.description}</h4>
   <h4> ${param.nFollowers} Membri</h4>
-  <a class = "lightGreyButton roundButton" href = "${param.link}">Invia Contenuto</a>
+  <a class = "lightGreyButton roundButton" href = "${context}/newpost?section=${param.sectionId}">Invia Contenuto</a>
 </div>

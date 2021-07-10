@@ -13,7 +13,7 @@
         <c:choose >
             <c:when test="${depth >= applicationScope.maxCommentDepth}">
                 <div class="grid-x-nw">
-                    <a href="${pageContext.request.contextPath}/post?id=${comment.post.id}&comment=${comment.id}#comment-container"
+                    <a href="${pageContext.request.contextPath}/post/${comment.post.id}?comment=${comment.id}#comment-container"
                        class="underline-some"
                        style="margin-top:10px">
                         <span class="to-underline">Visualizza risposte a questo commento</span>

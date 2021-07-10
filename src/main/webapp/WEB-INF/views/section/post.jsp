@@ -1,6 +1,7 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
 <%@ taglib prefix="sb" tagdir="/WEB-INF/tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
 <!DOCTYPE html>
 <html>
 <jsp:include page="../partials/head.jsp">
@@ -9,7 +10,7 @@
   <jsp:param name="scripts" value="comment" />
 </jsp:include>
 <body>
-<jsp:include page="/WEB-INF/navbar">
+<jsp:include page="/WEB-INF/views/partials/navbar.jsp">
   <jsp:param name="currentSection" value="${post.section.name}" />
 </jsp:include>
 
@@ -49,8 +50,8 @@
                     </div>
                     <div class = "grid-y-nw" style="flex-grow:1; align-items: start; margin-right: 40px;">
                         <div style = "flex-basis: 100%">
-                            <a href="/shareboard/s?section=${post.section.name}" class = white-text>s/${post.section.name}</a>
-                            <a href="/shareboard/user?name=${post.author.username}" class = grey-text>posted by ${post.author.username}</a>
+                            <a href="/shareboard/s/${post.section.name}" class = white-text>s/${fn:toLowerCase(requestScope.post.section.name)}</a>
+                            <a href="/shareboard/u/${post.author.username}" class = grey-text>posted by ${post.author.username}</a>
                         </div>
                         <div class = "white-text ${empty post.content ? 'post-big-title' : ''}">
                             ${post.title}
@@ -99,8 +100,8 @@
     <div id="right-container">
         <jsp:include page="../partials/section-info.jsp">
             <jsp:param name="description" value="${applicationScope.sections[post.section.id].description}" />
-            <jsp:param name="nFollowers" value="${section.nFollowers}" />
-            <jsp:param name="link" value="${pageContext.request.contextPath}/newpost?sectionId=${section.id}" />
+            <jsp:param name="nFollowers" value="${applicationScope.sections[post.section.id].nFollowersTotal}" />
+            <jsp:param name="sectionId" value="${post.section.id}" />
         </jsp:include>
         <jsp:include page="../partials/rules.jsp"/>
         <jsp:include page="../partials/footer.jsp"/>

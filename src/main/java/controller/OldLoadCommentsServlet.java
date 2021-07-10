@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import model.comment.Comment;
 import model.comment.CommentDAO;
 import model.persistence.ConPool;
-import model.user.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,8 +17,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Map;
 
-@WebServlet("/loadComments")
-public class CommentLoader extends HttpServlet {
+@WebServlet("/WEB-INF/loadComments")
+public class OldLoadCommentsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     }

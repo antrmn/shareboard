@@ -15,20 +15,17 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
+import java.util.Map;
 import java.util.Set;
-import java.util.concurrent.ConcurrentMap;
 
-@WebServlet("/follow")
-public class Follow extends HttpServlet {
+@WebServlet("/unfollow")
+public class UnfollowServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        ConcurrentMap<Integer, Section> sections =
-                (ConcurrentMap<Integer,Section>) getServletContext().getAttribute("sections");
+        Map<Integer, Section> sections =
+                (Map<Integer,Section>) getServletContext().getAttribute("sections");
 
         String section = req.getParameter("section");
-
         if (section == null || !InputValidator.assertInt(section)) {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
             return;
@@ -42,11 +39,11 @@ public class Follow extends HttpServlet {
         User user = (User) req.getAttribute("loggedUser");
         if(user == null){
             Set<Integer> follows = (Set<Integer>) session.getAttribute("userFollows");
-            follows.add(sectionId);
+            follows.remove(sectionId);
         } else {
             try(Connection con = ConPool.getConnection()){
                 FollowDAO service = new FollowDAO(con);
-                service.insert(List.of(sectionId), user.getId());
+                service.delete(user.getId(), sectionId);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
                 resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

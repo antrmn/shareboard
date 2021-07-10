@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 @WebServlet("/post")
-public class Post extends HttpServlet {
+public class PostServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         getServletContext().setAttribute("maxCommentDepth", 3);

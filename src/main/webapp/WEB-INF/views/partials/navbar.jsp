@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<%@ taglib prefix="sbfn" uri="/WEB-INF/tlds/tagUtils.tld" %>
 <c:set var="context" value="${pageContext.request.contextPath}" />
 <c:set var="loggedUser" value="${requestScope.loggedUser}" />
 <navbar>
@@ -20,14 +21,15 @@
             <div id="section-dropdown" class="dropdown-content greyContainer">
                 <div style = "padding: 12px 16px; color: #77797a; font-size: 10px; font-weight: 500; line-height: 16px;text-transform: uppercase; ">Home Feeds</div>
                     <a class = "section-element" href="${context}/home">Home</a>
-                    <a class = "section-element" href="${context}/home?order=popular">Popular</a>
+                    <a class = "section-element" href="${context}/popular">All</a>
+                    <a class = "section-element" href="${context}/feed">Feed</a>
                     <a class = "section-element" href="${context}/home?order=new">New</a>
                 <div style = "padding: 12px 16px; color: #77797a; font-size: 10px; font-weight: 500; line-height: 16px;text-transform: uppercase; ">Sections</div>
 
                 <div id = "section-container">
                     <c:forEach items="${applicationScope.sections}" var="section">
                         <div class = "section-element" style=" padding: 12px 0px 12px 0px;">
-                            <a href="${context}/s?section=${section.value.name}" style="display: inline;">${section.value.name}</a>
+                            <a href="${context}/s/${section.value.name}" style="display: inline;">${section.value.name}</a>
                             <input type = "hidden" name = "sectionId" value = "${section.value.id}">
 
                             <%-- NOTA - userFollows in session scope: follow da guest           --%>
@@ -62,7 +64,7 @@
                     </div>
                     <i class="fas fa-sort-down" style="display: inline-block;"></i>
                     <div id="profile-dropdown" class="dropdown-content greyContainer">
-                        <a href="${context}/user?name=${loggedUser.username}">
+                        <a href="${context}/me">
                             <i class="fas fa-address-card"></i>
                             Profile
                         </a>

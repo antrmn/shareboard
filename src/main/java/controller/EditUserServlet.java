@@ -160,6 +160,6 @@ public class EditUserServlet extends HttpServlet {
         if(oldPicture != null){
             Files.deleteIfExists(Path.of(FileServlet.BASE_PATH + File.separator + oldPicture));
         }
-        resp.sendRedirect(req.getContextPath() + "/user?name=" + userToEdit.getUsername());
+        resp.sendRedirect(req.getContextPath() + "/u/" + userToEdit.getUsername());
     }
 }

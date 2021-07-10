@@ -49,7 +49,7 @@ public class PostLoader extends HttpServlet {
         }
         if(onlyFollow != null && onlyFollow.equals("on")){
             if(loggedUser == null){
-                Set<Integer> follows = (Set<Integer>) req.getSession(true).getAttribute("follows");
+                Set<Integer> follows = (Set<Integer>) req.getSession(true).getAttribute("userFollows");
                 if(follows.isEmpty())
                     psb.isInSection(-1);
                 else

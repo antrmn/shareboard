@@ -26,7 +26,7 @@
            </a>
     </span>
     <span>
-        <a href = "${pageContext.request.contextPath}/post?id=${post.id}">
+        <a href = "${pageContext.request.contextPath}/post/${post.id}">
             <h3 style = "display: block; margin-top: 5px; margin-bottom: 1px; margin-right:2px;">${post.title}</h3>
             <div id="post-meta-container">
                 <a href="${pageContext.request.contextPath}/s?section=${post.section.name}" style="font-size:12px;font-weight:400;line-height:16px">s/${post.section.name}</a>

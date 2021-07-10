@@ -47,7 +47,6 @@ public class EditCommentServlet extends HttpServlet {
         int parentPostId;
         try(Connection con = ConPool.getConnection()){
             CommentDAO commentService = new CommentDAO(con);
-            //TODO: fixa il fatto che get non restituisce mai null.
             Comment comment = commentService.get(commentId);
             if (comment == null){
                 ErrorForwarder.sendError(req, resp, List.of("Il commento specificato non esiste"), 400);
@@ -66,6 +65,6 @@ public class EditCommentServlet extends HttpServlet {
             throw new ServletException(throwables);
         }
 
-        resp.sendRedirect( getServletContext().getContextPath() + "/post?id=" + parentPostId);
+        resp.sendRedirect( getServletContext().getContextPath() + "/post/" + parentPostId);
     }
 }

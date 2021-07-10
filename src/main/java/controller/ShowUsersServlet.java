@@ -2,9 +2,6 @@ package controller;
 
 
 import model.persistence.ConPool;
-import model.persistence.Specification;
-import model.post.Post;
-import model.post.PostDAO;
 import model.user.User;
 import model.user.UserDAO;
 import model.user.UserSpecificationBuilder;
@@ -20,7 +17,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @WebServlet("/admin/showusers")
-public class ShowUsers extends HttpServlet {
+public class ShowUsersServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try (Connection con = ConPool.getConnection()){

@@ -9,7 +9,7 @@
     </jsp:include>
 </head>
 <body>
-        <jsp:include page="/WEB-INF/navbar">
+        <jsp:include page="/WEB-INF/views/partials/navbar.jsp">
             <jsp:param name="currentSection" value="Home" />
             <jsp:param name="userName" value="${empty requestScope.loggedUser ? 'unlogged' : requestScope.loggedUser.username}" />
             <jsp:param name="userKarma" value="4316" />
@@ -43,10 +43,10 @@
                     <div class="card-image" style = "background-image: url('${pageContext.request.contextPath}/images/banner-background.png');height: 80px;">
                         <h2 class="card-img-text">Top Sections</h2>
                     </div>
-                    <c:forEach var = "i" begin = "1" end = "5">
+                    <c:forEach items="${requestScope.topSections}" var="section" end="4">
                         <div id = "top-sections-container" style = "display:flex; flex-direction: row; justify-content: space-between; align-content: center">
                             <i class="fas fa-globe-europe" style = "color:#0079D3; font-size: 25px"></i>
-                            <p>TEXT</p>
+                            <p>${section.name}</p>
                             <button type="submit" class = "roundButton lightGreyButton">Join</button>
                         </div>
                     </c:forEach>
@@ -55,11 +55,11 @@
                     <div class="card-image" style = "background-image: url('${pageContext.request.contextPath}/images/bg-orange.png');">
                         <h2 class="card-img-text">Trending Sections</h2>
                     </div>
-                    <c:forEach var = "i" begin = "1" end = "5">
+                    <c:forEach items="${requestScope.trendingSections}" var="section" end="4">
                         <div id = "trending-sections-container" style = "display:flex; flex-direction: row; align-content: center; justify-content: space-between">
                             <span>
                                 <i class="fas fa-caret-up" style = "display:inline; color:green;"></i>
-                                <p style = "display:inline;">TEXT</p>
+                                <p style = "display:inline;">${section.name}</p>
                             </span>
                         </div>
                     </c:forEach>

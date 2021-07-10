@@ -17,7 +17,7 @@
   </jsp:include>
 </head>
 <body>
-<jsp:include page="/WEB-INF/navbar">
+<jsp:include page="/WEB-INF/views/partials/navbar.jsp">
   <jsp:param name="isLogged" value="true" />
   <jsp:param name="currentSection" value="${user.username}" />
   <jsp:param name="userName" value="Testus" />

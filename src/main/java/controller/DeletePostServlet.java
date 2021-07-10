@@ -48,7 +48,7 @@ public class DeletePostServlet extends HttpServlet {
             throw new ServletException(throwables);
         }
 
-        resp.sendRedirect(getServletContext().getContextPath() + "/s?section=" + post.getSection().getName());
+        resp.sendRedirect(getServletContext().getContextPath() + "/s/" + post.getSection().getName());
     }
 
     @Override

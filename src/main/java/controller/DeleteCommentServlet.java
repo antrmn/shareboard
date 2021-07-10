@@ -48,7 +48,7 @@ public class DeleteCommentServlet extends HttpServlet {
             throw new ServletException(throwables);
         }
 
-        resp.sendRedirect(getServletContext().getContextPath() + "/post?id=" + comment.getPost().getId());
+        resp.sendRedirect(getServletContext().getContextPath() + "/post/" + comment.getPost().getId());
     }
 
     @Override

@@ -1,7 +1,6 @@
 package controller;
 
 import com.google.gson.Gson;
-import controller.util.ErrorForwarder;
 import model.ban.Ban;
 import model.ban.BanDAO;
 import model.persistence.ConPool;
@@ -26,7 +25,7 @@ import java.util.List;
 
 @WebServlet("/admin/addban")
 @MultipartConfig
-public class NewBanServlet extends HttpServlet {
+public class AddBanServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
     }

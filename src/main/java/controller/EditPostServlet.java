@@ -169,6 +169,6 @@ public class EditPostServlet extends HttpServlet {
         if(postToEdit.getType() != oldType){
             Files.deleteIfExists(Path.of(FileServlet.BASE_PATH + File.separator + oldContent));
         }
-        resp.sendRedirect(getServletContext().getContextPath() + "/post?id=" + postToEdit.getId());
+        resp.sendRedirect(getServletContext().getContextPath() + "/post/" + postToEdit.getId());
     }
 }

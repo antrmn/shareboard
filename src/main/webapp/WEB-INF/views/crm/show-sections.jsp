@@ -11,7 +11,7 @@
   </jsp:include>
 </head>
 <body>
-<jsp:include page="/WEB-INF/navbar">
+<jsp:include page="/WEB-INF/views/partials/navbar.jsp">
   <jsp:param name="currentSection" value="Admin" />
 </jsp:include>
 
@@ -30,7 +30,7 @@
         <tr>
           <td>${section.value.id}</td>
           <td>${section.value.name}</td>
-          <td>${section.value.nFollowers}</td>
+          <td>${section.value.nFollowersTotal}</td>
           <td>
             <a href = "${context}/admin/editsection?sectionId=${section.value.id}">
               <i class="fas fa-edit"></i>

@@ -1,3 +1,4 @@
+<%@ taglib prefix="sbfn" uri="/WEB-INF/tlds/tagUtils.tld" %>
 <%--@elvariable id="comment" type="model.comment.Comment"--%>
 <%-- Quello sopra è un commento di IntelliJ che permette di ignorare l'errore "cannot resolve variable" e
      fornisce l'auto-complete anche se l'oggetto non è presente (Ancora) in nessuno scope --%>
@@ -13,7 +14,8 @@
     </div>
     <div class = "grid-y-nw" style="flex-grow:1; align-items: start;padding-bottom: 10px; padding-right: 10px;">
         <div style = "flex-basis: 100%">
-            <a class = grey-text href="${pageContext.request.contextPath}/user?name=${comment.author.username}">posted by ${comment.author.username}</a>
+            <a class = "grey-text" href="${pageContext.request.contextPath}/u/${comment.author.username}">posted by ${comment.author.username}</a>
+            <a href="javascript:void(0)" class="grey-text" title="${sbfn:getDate(comment.creationDate)}" >${sbfn:printTimeSince(comment.creationDate)} fa</a>
         </div>
         <div>
             <p class = "white-text comment-text">

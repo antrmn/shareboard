@@ -12,7 +12,7 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
 <body>
-    <jsp:include page="/WEB-INF/navbar">
+    <jsp:include page="/WEB-INF/views/partials/navbar.jsp">
         <jsp:param name="currentSection" value="Admin" />
     </jsp:include>
 

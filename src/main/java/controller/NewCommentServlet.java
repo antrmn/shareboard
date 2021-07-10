@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet("/newcomment")
-public class CommentAdder extends HttpServlet {
+public class NewCommentServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -53,7 +53,7 @@ public class CommentAdder extends HttpServlet {
             comments.add(c);
             CommentDAO service = new CommentDAO(con);
             service.insert(comments);
-            resp.sendRedirect("./post?id=" + postId);
+            resp.sendRedirect("./post/" + postId);
         } catch(SQLException   e){
             e.printStackTrace();
         }

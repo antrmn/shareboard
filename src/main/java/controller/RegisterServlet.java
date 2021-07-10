@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Set;
 
 @WebServlet("/register")
-public class Register extends HttpServlet {
+public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(req,resp);
