@@ -23,7 +23,7 @@
                     <a class = "section-element" href="${context}/home">Home</a>
                     <a class = "section-element" href="${context}/popular">All</a>
                     <a class = "section-element" href="${context}/feed">Feed</a>
-                    <a class = "section-element" href="${context}/home?order=new">New</a>
+                    <a class = "section-element" href="${context}/home?sort=new">New</a>
                 <div style = "padding: 12px 16px; color: #77797a; font-size: 10px; font-weight: 500; line-height: 16px;text-transform: uppercase; ">Sections</div>
 
                 <div id = "section-container">

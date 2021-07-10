@@ -58,12 +58,11 @@ public class UpdateSectionsServlet extends HttpServlet {
         ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
         scheduler.scheduleAtFixedRate(() -> {
             try {
-                System.out.println("lol");
                 updateSections(getServletContext());
             } catch (Throwable throwables) {
                 throwables.printStackTrace();
             }
-        },0,10, TimeUnit.SECONDS); //10 secondi per testare
+        },0,10, TimeUnit.MINUTES); //10 secondi per testare
     }
 
     /* Aggiorna manualmente */
