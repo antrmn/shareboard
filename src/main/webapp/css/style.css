@@ -321,19 +321,16 @@ navbar *{
     overflow-y: scroll;
 }
 
+.filter-dropdown-content{
+    top: unset;
+    /*right: 0;*/
+}
+
 .dropdown-content a {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
-
-/*.dropdown-content a:hover {*/
-/*    background-color: #868789;*/
-/*}*/
-
-/*#section-dropdown div:hover{*/
-/*    background-color: #2e5fc6;*/
-/*}*/
 
 .section-element:hover {
     background-color: #868789;
@@ -500,20 +497,27 @@ navbar *{
     margin-bottom:25px;
 }
 
-#filter *{
+#filter a, #filter > i{
     padding: 12px 12px;
-    margin: 5px 10px 5px 5px;
-
+    margin-right: 12px;
 }
 
-#filter > *:hover{
-    margin-right: 10px;
+#filter a:first-child{
+    margin-left: 15px;
+}
+
+#filter a > i{
+    padding-right: 5px;
+}
+
+#filter > a:hover, #filter > i:hover{
+    /*margin-right: 10px;*/
     background-color: #86878955;
     border-radius: 4px;
 }
 
-#filter a.selected{
-    margin-right: 10px;
+#filter a.selected, #filter > i:hover{
+    /*margin-right: 10px;*/
     background-color: #868789cc;
     border-radius: 4px;
 }
@@ -521,7 +525,6 @@ navbar *{
 .post{
     display: flex;
     align-content: center;
-    /*border-bottom-style: none;*/
     border-radius:unset !important;
 }
 
@@ -536,7 +539,6 @@ navbar *{
     align-content: center;
     justify-content: center;
     flex-direction: column;
-    /*background-color: #151516;*/
 }
 
 .voteButton{
@@ -583,7 +585,6 @@ navbar *{
 }
 
 .post-generic-holder{
-    /*padding:20px 40px 20px 40px;*/
     background-color: #242323;
     border-radius: 4px;
     margin:10px;
@@ -593,7 +594,6 @@ navbar *{
     display: flex !important;
     align-content: center;
     justify-content: center;
-    /*box-sizing: border-box;*/
 }
 
 .post-generic-holder.post-image-holder:hover {
@@ -607,7 +607,6 @@ navbar *{
 
 #post-container *{
     align-items: center;
-    /*word-break: break-all;*/
     word-break: break-word;
 }
 
@@ -709,6 +708,11 @@ navbar *{
 }
 
 /*MEDIA QUERIES*/
+
+/*320px-480px: Mobile devices*/
+/*481px—768px: iPads, Tablets*/
+/*769px—In poi: Small screens, laptops, TV*/
+
 @media screen and (max-width: 769px) {
     #nav-profile-data{
         display:none;
@@ -766,14 +770,9 @@ navbar *{
         display:initial;
     }
 
-
-    /*#post-media-container{*/
-    /*    order:3;*/
-    /*}*/
-
-    /*320px-480px: Mobile devices*/
-    /*481px—768px: iPads, Tablets*/
-    /*769px—In poi: Small screens, laptops, TV*/
+    .filter-dropdown-content{
+        right: 0;
+    }
 }
 
 @media screen and (max-width: 481px) {
@@ -790,6 +789,11 @@ navbar *{
         margin-left: 10px;
     }
 
+    #left-container{
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+
     #nav-profile{
         margin-right: 10px;
     }
@@ -802,9 +806,6 @@ navbar *{
         display:none;
     }
 
-    /*#post-media-container{*/
-    /*    order:3;*/
-    /*}*/
 }
 
 @media screen and (max-width: 320px) {
@@ -813,6 +814,11 @@ navbar *{
     }
 
     #left{
+        margin-left: 10px;
+    }
+
+    #left-container{
+        margin-right: 10px;
         margin-left: 10px;
     }
 
