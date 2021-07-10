@@ -120,6 +120,8 @@ public class BanDAO {
         return rowsDeleted;
     }
 
+    /*--- Shorthands ---*/
+
     public int delete(int id) throws SQLException {
         return delete(List.of(id));
     }
@@ -131,6 +133,7 @@ public class BanDAO {
     }
 
     public int insert(Ban ban) throws SQLException {
-        return insert(List.of(ban)).size();
+        List<Integer> single = insert(List.of(ban));
+        return single.isEmpty() ? null : single.get(0);
     }
 }

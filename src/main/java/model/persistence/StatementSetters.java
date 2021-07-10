@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public final class StatementSetters {
-    private static Logger logger = LogManager.getLogger(StatementSetters.class);
+    private static final Logger logger = LogManager.getLogger(StatementSetters.class);
 
     //QUESTO NON FUNZIONA. Appena posso lo rimuovo.
     /**
@@ -34,7 +34,7 @@ public final class StatementSetters {
         int i=1;
         String paramsString = params.stream().map(x -> String.format("(%s,%s)", x.getLeft(), x.getRight()))
                                              .collect(Collectors.joining(","));
-        logger.debug("Preparing an SQL statement with these parameters: " + paramsString);
+        //logger.debug("Preparing an SQL statement with these parameters: " + paramsString);
         for (Pair<Object, Integer> param : params) {
             if(param.getLeft() == NULL){
                 ps.setNull(i++, param.getRight());
@@ -42,7 +42,7 @@ public final class StatementSetters {
                 ps.setObject(i++, param.getLeft(), param.getRight());
             }
         }
-        logger.debug("Prepared an SQL statement: " + ps.toString().replace(";", ";\n"));
+        //logger.debug("Prepared an SQL statement: " + ps.toString().replace(";", ";\n"));
         return ps;
     }
 

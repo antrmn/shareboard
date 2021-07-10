@@ -95,18 +95,6 @@ public class FollowDAO {
         return rowsDeleted;
     }
 
-    public int delete(Pair<User, Section> pk) throws SQLException {
-        return delete(List.of(pk));
-    }
-
-    public int delete (int userId, int sectionId) throws SQLException {
-        User u = new User();
-        u.setId(userId);
-        Section s = new Section();
-        s.setId(sectionId);
-        return delete(List.of(new Pair<>(u,s)));
-    }
-
     public int count(Specification specification) throws SQLException {
         String query = "SELECT count(*) FROM follow %s %s LIMIT ? OFFSET ?";
         query = String.format(query, specification.getJoins(), specification.getWheres());
@@ -118,6 +106,20 @@ public class FollowDAO {
         ps.close();
         rs.close();
         return count;
+    }
+
+    /*--- Shorthands ---*/
+
+    public int delete(Pair<User, Section> pk) throws SQLException {
+        return delete(List.of(pk));
+    }
+
+    public int delete (int userId, int sectionId) throws SQLException {
+        User u = new User();
+        u.setId(userId);
+        Section s = new Section();
+        s.setId(sectionId);
+        return delete(List.of(new Pair<>(u,s)));
     }
 
     public Follow get(Pair<User,Section> pk) throws SQLException{

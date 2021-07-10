@@ -109,6 +109,9 @@ public class SectionDAO {
         return rowsDeleted;
     }
 
+
+    /*--- Shorthands ---*/
+
     public int delete(int id) throws SQLException {
         return delete(List.of(id));
     }
@@ -120,7 +123,8 @@ public class SectionDAO {
     }
 
     public int insert(Section section) throws SQLException {
-        return insert(List.of(section)).size();
+        List<Integer> single = insert(List.of(section));
+        return single.isEmpty() ? null : single.get(0);
     }
 
 }

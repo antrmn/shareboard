@@ -125,7 +125,8 @@ public class CommentDAO {
      *         I commenti al "root level" (ossia quelli che non rispondono a nessun commento) sono mappati a indice 0.
      * @throws SQLException In caso di errore SQL
      */
-    public Map<Integer, ArrayList<Comment>> fetchHierarchy(int id, boolean isCommentId, int maxDepth, int loggedUserId) throws SQLException {
+    public Map<Integer, ArrayList<Comment>> fetchHierarchy(int id, boolean isCommentId, int maxDepth, int loggedUserId)
+            throws SQLException {
         String query = " WITH RECURSIVE Recurse_Comments AS ( \n" +
                             " %s \n" + //Se l'utente è loggato: CTE per vedere i voti. Altrimenti: stringa vuota
                             " %s \n" + //SELECT per passo base
@@ -215,6 +216,8 @@ public class CommentDAO {
         return commentsMap;
     }
 
+    /*--- Shorthands ---*/
+
     public int delete(int id) throws SQLException {
         return delete(List.of(id));
     }
@@ -225,7 +228,8 @@ public class CommentDAO {
         return singleton.isEmpty() ? null : singleton.get(0);
     }
 
-    public int insert(Comment comment) throws SQLException {
-        return insert(List.of(comment)).size();
+    public Integer insert(Comment comment) throws SQLException {
+        List<Integer> single = insert(List.of(comment));
+        return single.isEmpty() ? null : single.get(0);
     }
 }

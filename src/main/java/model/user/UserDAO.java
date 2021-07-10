@@ -65,7 +65,7 @@ public class UserDAO{
         ps.close();
         return rowsUpdated;
     }
-    
+
     public List<Integer> insert(List<User> users) throws SQLException {
         String statement = "INSERT INTO user (%s) VALUES %s";
         String columns = "username, password, salt, email, description, picture";
@@ -115,39 +115,6 @@ public class UserDAO{
         return rowsDeleted;
     }
 
-    public int delete(int id) throws SQLException {
-        return delete(List.of(id));
-    }
-
-    public User get(int id, boolean getPassword) throws SQLException{
-        UserSpecificationBuilder usb = new UserSpecificationBuilder().byId(id);
-        if(getPassword)
-            usb.getPassword();
-        List<User> singleton = fetch(usb.build());
-        return singleton.isEmpty() ? null : singleton.get(0);
-        //TODO: propaga in altri DAO
-    }
-
-    public User get(String username, boolean getPassword) throws SQLException{
-        UserSpecificationBuilder usb = new UserSpecificationBuilder().byUsernameExact(username);
-        if(getPassword)
-            usb.getPassword();
-        List<User> singleton = fetch(usb.build());
-        return singleton.isEmpty() ? null : singleton.get(0);
-    }
-
-    public User getByEmail(String email) throws SQLException{
-        UserSpecificationBuilder usb = new UserSpecificationBuilder().byEmail(email);
-        List<User> singleton = fetch(usb.build());
-        return singleton.isEmpty() ? null : singleton.get(0);
-    }
-
-    //TODO: propaga a tutti
-    public Integer insert(User user) throws SQLException {
-        List<Integer> single = insert(List.of(user));
-        return single.isEmpty() ? null : single.get(0);
-    }
-
     public int count(Specification specification) throws SQLException {
         String query = "SELECT COUNT(*) FROM v_user AS user %s %s LIMIT ? OFFSET ?";
         query = String.format(query, specification.getJoins(), specification.getWheres());
@@ -160,8 +127,6 @@ public class UserDAO{
         rs.close();
         return count;
     }
-
-
 
     public void setAdmin(User user) throws SQLException {
         String statement = "INSERT INTO admin (%s) VALUES %s";
@@ -176,16 +141,8 @@ public class UserDAO{
         PreparedStatement ps = con.prepareStatement(statement, Statement.RETURN_GENERATED_KEYS);
         StatementSetters.setParameters(ps, params).executeUpdate();
         ResultSet rs = ps.getGeneratedKeys();
-//        List<Integer> ids = new ArrayList<>();
-//        while(rs.next()){
-//            ids.add(rs.getInt(1));
-//            System.out.println("BLABLA");
-//            System.out.println(rs.getInt(1));
-//        }
-//        int id = rs.getInt(1);
         ps.close();
         rs.close();
-//        return id;
     }
 
     public int removeAdmin(User user) throws SQLException {
@@ -202,5 +159,39 @@ public class UserDAO{
         int rowsDeleted = ps.executeUpdate();
         ps.close();
         return rowsDeleted;
+    }
+
+    /*--- Shorthands ---*/
+
+    public int delete(int id) throws SQLException {
+        return delete(List.of(id));
+    }
+
+    public User get(int id, boolean getPassword) throws SQLException{
+        UserSpecificationBuilder usb = new UserSpecificationBuilder().byId(id);
+        if(getPassword)
+            usb.getPassword();
+        List<User> singleton = fetch(usb.build());
+        return singleton.isEmpty() ? null : singleton.get(0);
+    }
+
+    public User get(String username, boolean getPassword) throws SQLException{
+        UserSpecificationBuilder usb = new UserSpecificationBuilder().byUsernameExact(username);
+        if(getPassword)
+            usb.getPassword();
+        List<User> singleton = fetch(usb.build());
+        return singleton.isEmpty() ? null : singleton.get(0);
+    }
+
+    public User getByEmail(String email) throws SQLException{
+        UserSpecificationBuilder usb = new UserSpecificationBuilder().byEmail(email);
+        List<User> singleton = fetch(usb.build());
+        return singleton.isEmpty() ? null : singleton.get(0);
+    }
+
+
+    public Integer insert(User user) throws SQLException {
+        List<Integer> single = insert(List.of(user));
+        return single.isEmpty() ? null : single.get(0);
     }
 }

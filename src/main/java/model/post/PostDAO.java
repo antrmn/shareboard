@@ -113,14 +113,10 @@ public class PostDAO {
         return rowsDeleted;
     }
 
+    /*--- Shorthands ---*/
+
     public int delete(int id) throws SQLException {
         return delete(List.of(id));
-    }
-
-    public Post get(int id) throws SQLException{
-        PostSpecificationBuilder psb = new PostSpecificationBuilder().byId(id);
-        List<Post> singleton = fetch(psb.build());
-        return singleton.isEmpty() ? null : singleton.get(0);
     }
 
     public Post get(int id, int loggedUserId) throws SQLException{

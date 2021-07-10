@@ -53,6 +53,7 @@ public class PostVoteDAO {
         return rowsUpdated;
     }
 
+    //Restituisce numero righe inserite (Questa entità non ha chiavi generate)
     public int insert(List<PostVote> postVotes) throws SQLException {
         String statement = "INSERT INTO post_vote (%s) VALUES %s AS new ON DUPLICATE KEY UPDATE vote = new.vote";
         String columns = "user_id, post_id, vote";
@@ -94,6 +95,8 @@ public class PostVoteDAO {
         ps.close();
         return rowsDeleted;
     }
+
+    /*--- Shorthands ---*/
 
     public int delete(Pair<User,Post> pk) throws SQLException {
         return delete(List.of(pk));
