@@ -67,9 +67,9 @@
 
                     <div id="nav-profile-data" >
                         <p style="display: block; margin-bottom:0px; ">${loggedUser.username}</p>
-                        <div style="display: block; font-size: 12px; margin-top:0px;">
-                            <i class="far fa-arrow-alt-circle-up" style="color: orangered; display: inline; margin-top:0px;"></i>
-                        </div>
+<%--                        <div style="display: block; font-size: 12px; margin-top:0px;">--%>
+<%--                            <i class="far fa-arrow-alt-circle-up" style="color: orangered; display: inline; margin-top:0px;"></i>--%>
+<%--                        </div>--%>
                     </div>
                     <i class="fas fa-sort-down" style="display: inline-block;"></i>
                     <div id="profile-dropdown" class="dropdown-content greyContainer">

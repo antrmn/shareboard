@@ -444,6 +444,26 @@ navbar *{
     width: 30px;
 }
 
+.small-round-image{
+    border-radius: 100%;
+    border: 2px solid #fff;
+    display: inline-block;
+    height: 30px;
+    width: 30px;
+    margin-left: 10px;
+}
+
+.trending-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #353535
+}
+
 .nav-right-dropdown{
     display:inline-block;
     margin-bottom:0px;
@@ -462,12 +482,13 @@ navbar *{
 
 #nav-profile-data{
     display:inline-block;
+    margin-bottom: 10px;
 }
 
 #profile-container{
     display:inline-flex;
     justify-content:center;
-    /*flex-direction: column;*/
+    align-items: center;
     border-color: rgba(134, 135, 137, 0);
     border-style:solid;
     border-width: 1px;
@@ -476,6 +497,7 @@ navbar *{
 
 #profile-container:hover{
     border-color: #868789;
+    border-radius: 4px;
 }
 /*NAVBAR END*/
 
@@ -750,9 +772,9 @@ navbar *{
         display: none;
     }
 
-    #profile-container{
-        display:inline-block !important;
-    }
+    /*#profile-container{*/
+    /*    display:inline-block !important;*/
+    /*}*/
 
     #right-container{
         margin:0px;
