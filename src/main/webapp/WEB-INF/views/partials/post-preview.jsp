@@ -32,7 +32,7 @@
                 <a href="${pageContext.request.contextPath}/s?section=${post.section.name}" style="font-size:12px;font-weight:400;line-height:16px">s/${post.section.name}</a>
                 <a href="${pageContext.request.contextPath}/user?name=${post.author.username}" style = "font-size: 12px;font-weight: 400;line-height: 16px">Posted by: ${post.author.username}</a>
                 <a href="" title="${sbfn:getDate(post.creationDate)}"  style = "font-size: 12px;font-weight: 400;line-height: 16px">${sbfn:printTimeSince(post.creationDate)} fa</a>
-                <a href="${pageContext.request.contextPath}/post?id=${post.id}#comments-container" id="post-comment-container" style = "display: block; font-size: 12px;font-weight: 400;line-height: 16px; width: 120px; margin-bottom: 5px;">
+                <a href="${pageContext.request.contextPath}/post?id=${post.id}" id="post-comment-container" style = "display: block; font-size: 12px;font-weight: 400;line-height: 16px; width: 120px; margin-bottom: 5px;">
                     <i class="fas fa-comment-dots"></i>
                     ${post.nComments} comments
                 </a>

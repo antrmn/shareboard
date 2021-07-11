@@ -33,10 +33,10 @@
                             background-position-x: center;"></div>
                     <c:choose>
                         <c:when test="${empty requestScope.loggedUser}">
-                            <h4>Welcome on Shareboard!</h4>
+                            <h4 style = "margin-left: 10px;">Welcome on Shareboard!</h4>
                         </c:when>
                         <c:otherwise>
-                            <h4>Welcome back ${requestScope.loggedUser.username}</h4>
+                            <h4 style = "margin-left: 10px;">Welcome back ${requestScope.loggedUser.username}</h4>
                         </c:otherwise>
                     </c:choose>
                 </div>

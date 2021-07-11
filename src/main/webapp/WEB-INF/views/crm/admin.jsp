@@ -7,7 +7,7 @@
     <jsp:include page="../partials/head.jsp">
         <jsp:param name="currentPage" value="Admin" />
         <jsp:param name="styles" value="admin" />
-        <jsp:param name="scripts" value="admin" />
+        <jsp:param name="scripts" value="charts,admin" />
     </jsp:include>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
@@ -20,7 +20,7 @@
         <jsp:param name="currentSection" value="dashboard" />
     </jsp:include>
 
-    <div class = "grid-x justify-center align-center" style = "margin-top: 150px;">
+    <div id="admin-panel-container" class = "grid-x justify-center align-center">
 
 <%--        <div class="dashboard-card dashboard-card-big">--%>
 <%--            <div id="users-"></div>--%>
