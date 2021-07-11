@@ -39,13 +39,13 @@
         <form class = "comment-form reply-form" method = "POST" action= "${pageContext.request.contextPath}/newcomment" hidden>
             <input type = "hidden" name = "id" value = ${comment.post.id}>
             <input type = "hidden" name = "parent" value = ${comment.id}>
-            <textarea name = "text" rows="5" placeholder="Scrivi una risposta..."></textarea>
+            <textarea class = 'dark-textarea' name = "text" rows="5" placeholder="Scrivi una risposta..."></textarea>
             <br>
             <button class = roundButton>Rispondi</button>
         </form>
         <form class = "comment-form edit-form" method = "POST" action= "${pageContext.request.contextPath}/editcomment" hidden>
             <input type = "hidden" name = "id" value = ${comment.id}>
-            <textarea name = "text" rows="5">${comment.text}</textarea>
+            <textarea class = 'dark-textarea' name = "text" rows="5">${comment.text}</textarea>
             <br>
             <button class = roundButton>Modifica</button>
         </form>

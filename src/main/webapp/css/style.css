@@ -9,6 +9,7 @@
     --shareboard-container-1: #1A1A1B;
     --shareboard-container-2: #272729;
     --shareboard-border-color1:#313132;
+    --shareboard-border-color2: #323434;
     --shareboard-downvote: #0079D3;
     --shareboard-upvote: orangered;
     --shareboard-blue-1: #0079D3;
@@ -115,6 +116,13 @@ footer {
 
 /*GENERIC STYLES*/
 
+.dark-textarea{
+    color: #fff;
+    border-radius: 4px;
+    background-color: var(--shareboard-container-2);
+    border: solid 1px var(--shareboard-border-color2);
+}
+
 .dark-date-select{
     background-color: var(--shareboard-container-2);
     border-width: 1px;
@@ -151,13 +159,13 @@ footer {
 }
 
 .comment-form textarea {
-    color: #fff;
+    /*color: #fff;*/
     resize: vertical;
     width:100%;
-    border-radius: 4px;
-    background-color: var(--shareboard-container-2);
-    border-color: var(--shareboard-container-1);
-    border: solid 1px;
+    /*border-radius: 4px;*/
+    /*background-color: var(--shareboard-container-2);*/
+    /*border-color: var(--shareboard-container-1);*/
+    /*border: solid 1px;*/
 }
 
 .white-text{
@@ -308,9 +316,10 @@ navbar{
     background-color: var(--shareboard-container-1);
     display:flex;
     justify-content: space-between;
-    border-bottom-color: #353535;
+    border-bottom-color: var(--shareboard-border-color2);
     border-bottom-style: solid;
     border-bottom-width: 1px;
+    /*#353535*/
 }
 
 navbar *{
@@ -387,7 +396,7 @@ navbar *{
 
 #nav-search input{
     background-color: var(--shareboard-container-2);
-    border-color: #868789;
+    border-color: var(--shareboard-border-color1);
     border-radius: 5px;
     border-style: solid;
     border-width: 1px 1px;

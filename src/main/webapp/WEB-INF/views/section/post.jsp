@@ -54,7 +54,7 @@
                             <a href="/shareboard/u/${post.author.username}" class = grey-text>posted by ${post.author.username}</a>
                         </div>
                         <div class = "white-text ${empty post.content ? 'post-big-title' : ''}">
-                            ${post.title}
+                            <h3>${post.title}</h3>
                         </div>
 
                         <div>
