@@ -94,6 +94,6 @@ public class NewSectionServlet extends HttpServlet {
             throw new ServletException(e2);
         }
 
-        resp.sendRedirect(getServletContext().getContextPath()+"admin/showsections");
+        resp.sendRedirect(getServletContext().getContextPath()+"/admin/showsections");
     }
 }

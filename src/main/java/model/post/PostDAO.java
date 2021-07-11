@@ -5,9 +5,8 @@ import model.persistence.StatementSetters;
 import util.Pair;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringJoiner;
+import java.time.Instant;
+import java.util.*;
 
 
 public class PostDAO {
@@ -134,5 +133,37 @@ public class PostDAO {
         List<Integer> single = insert(List.of(post));
         return single.isEmpty() ? null : single.get(0);
     }
+
+    public Map<String, Integer> getPostCountBySection() throws SQLException {
+        String query = "SELECT COUNT(*),section.name FROM post INNER JOIN section ON post.section_id = section.id GROUP BY(section.name)";
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        Map<String, Integer> data = new HashMap<>();
+        while(rs.next()){
+            String section = rs.getString(2);
+            Integer postCount = rs.getInt(1);
+            data.put(section, postCount);
+        }
+        ps.close();
+        rs.close();
+        return data;
+    }
+
+    public Map<Instant, Integer> getPostCountByDays() throws SQLException {
+        String query = "SELECT COUNT(*), creation_date FROM post where post.creation_date >= now() - interval 5 day GROUP BY CAST(post.creation_date AS DATE) ORDER BY post.creation_date DESC;";
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        Map<Instant, Integer> data = new HashMap<>();
+        while(rs.next()){
+            Instant date = rs.getTimestamp(2).toInstant();
+            Integer postCount = rs.getInt(1);
+            data.put(date, postCount);
+        }
+        ps.close();
+        rs.close();
+        return data;
+    }
+
+
 
 }

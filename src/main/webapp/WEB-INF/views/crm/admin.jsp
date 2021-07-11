@@ -21,29 +21,22 @@
     </jsp:include>
 
     <div class = "grid-x justify-center align-center" style = "margin-top: 150px;">
-        <div class="dashboard-card">
-            <div style = "padding-left: 30px;">
-                <div style = "display:inline-block;">
-                    <h1>${requestScope.count}</h1>
-                    <h3>Utenti Registrati</h3>
-                </div>
-                <i class="fas fa-user-plus" style = "font-size: 80px; display:inline; color: #4295b5; float: right"></i>
-            </div>
-        </div>
 
-        <div class="dashboard-card">
-            <div style = "padding-left: 30px;">
-                <div style = "display:inline-block;">
-                    <h1>7</h1>
-                    <h3>Visite</h3>
-                </div>
-                <i class="fas fa-user-plus" style = "font-size: 80px; display:inline; color: #4295b5; float: right"></i>
-            </div>
+<%--        <div class="dashboard-card dashboard-card-big">--%>
+<%--            <div id="users-"></div>--%>
+<%--        </div>--%>
+        <div class="dashboard-card dashboard-card-big grid-x">
+            <div id="posts-bysection-chart"></div>
         </div>
-        <div class="dashboard-card">
-            <div id="piechart"></div>
+        <div class="dashboard-card dashboard-card-big grid-x">
+            <div id="users-bysection-chart"></div>
         </div>
-        <div id="curve_chart" style="width: 900px; height: 500px"></div>
+        <div class="dashboard-card dashboard-card-big grid-x">
+            <div id="recent-registrations-chart"></div>
+        </div>
+        <div class="dashboard-card dashboard-card-big grid-x">
+            <div id="recent-posts-chart"></div>
+        </div>
     </div>
 </body>
 </html>

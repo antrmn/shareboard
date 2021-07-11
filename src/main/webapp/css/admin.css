@@ -58,8 +58,8 @@
 .dashboard-card{
     margin: 20px;
     background-color: #171717;
-    width: 600px;
-    height: 200px;
+    /*width: 600px;*/
+    /*height: 200px;*/
     display: flex;
     align-content: start;
     justify-content: center;
@@ -69,6 +69,11 @@
     border-left-width: 8px;
     border-radius: 4px;;
 }
+
+/*.dashboard-card-big{*/
+/*    width: 1000px;*/
+/*    height: 400px;*/
+/*}*/
 
 
 table {

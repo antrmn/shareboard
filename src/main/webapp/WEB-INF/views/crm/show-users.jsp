@@ -44,7 +44,7 @@
                     <a href = "${context}/admin/showbans?userId=${user.id}">
                         <i class="fas fa-gavel"></i>
                     </a>
-                    <a href = "${context}/admin/deleteuser?userId=${user.id}">
+                    <a href = "${context}/admin/deleteuser?userId=${user.id}" onclick="return confirm('Cancellare l utente?')">
                         <i class="fas fa-minus-circle"></i>
                     </a>
                 </td>

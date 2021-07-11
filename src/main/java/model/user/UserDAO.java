@@ -1,13 +1,13 @@
 package model.user;
 
+import model.persistence.SQL_TriConsumer;
 import model.persistence.Specification;
 import model.persistence.StatementSetters;
 import util.Pair;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.StringJoiner;
+import java.time.Instant;
+import java.util.*;
 
 public class UserDAO{
     private static final UserMapper um = new UserMapper();
@@ -193,5 +193,20 @@ public class UserDAO{
     public Integer insert(User user) throws SQLException {
         List<Integer> single = insert(List.of(user));
         return single.isEmpty() ? null : single.get(0);
+    }
+
+    public Map<Instant, Integer> getRegistrationsinRange() throws SQLException {
+        String query = "SELECT COUNT(*),creation_date  FROM user where creation_date >= now() - interval 5 day GROUP BY CAST(creation_date AS DATE) ORDER BY creation_date ASC";
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        Map<Instant, Integer> data = new HashMap<>();
+        while(rs.next()){
+            Instant date = rs.getTimestamp(2).toInstant();
+            Integer registrations = rs.getInt(1);
+            data.put(date, registrations);
+        }
+        ps.close();
+        rs.close();
+        return data;
     }
 }

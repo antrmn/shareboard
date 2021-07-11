@@ -90,11 +90,23 @@
                     <c:if test="${not empty param.comment}">
                         <a href="${pageContext.request.contextPath}/post?id=${post.id}#comment-container" class="underline-some"><span class="to-underline">Torna ai commenti principali</span> <i class="fas fa-long-arrow-alt-up"></i></a>
                     </c:if>
-                    <sb:printComments comments="${requestScope.comments}" idParent="${requestScope.initialIndex}" depth="${0}">
+                    <c:choose>
+                        <c:when test="${empty requestScope.comments}">
+                            <div class = "grid-x-nw justify-center align-center">
+                                <i class="fas fa-comment-alt" style = " color: rgb(215, 218, 220); font-size: 35px; margin-right: 15px;"></i>
+                                <h2 style = " color: rgb(215, 218, 220); font-size: 20px;">
+                                    Non ci sono commenti
+                                </h2>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <sb:printComments comments="${requestScope.comments}" idParent="${requestScope.initialIndex}" depth="${0}">
                           <jsp:attribute name="commentFragment">
                                 <%@ include file="/WEB-INF/views/partials/comment.jsp" %>
                           </jsp:attribute>
-                    </sb:printComments>
+                            </sb:printComments>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
             </div>
         </div>
