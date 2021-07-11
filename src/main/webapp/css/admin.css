@@ -59,8 +59,8 @@
 .dashboard-card{
     margin: 20px;
     background-color: #171717;
-    /*width: 600px;*/
-    /*height: 200px;*/
+    width: 40%;
+    min-height: 450px;
     display: flex;
     align-content: start;
     justify-content: center;

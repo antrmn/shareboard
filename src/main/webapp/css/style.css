@@ -10,6 +10,7 @@
     --shareboard-container-2: #272729;
     --shareboard-border-color1:#313132;
     --shareboard-border-color2: #323434;
+    --shareboard-border-color2-selected: #535252;
     --shareboard-downvote: #0079D3;
     --shareboard-upvote: orangered;
     --shareboard-blue-1: #0079D3;
@@ -121,6 +122,10 @@ footer {
     border-radius: 4px;
     background-color: var(--shareboard-container-2);
     border: solid 1px var(--shareboard-border-color2);
+}
+
+.dark-textarea:hover, .dark-textarea:focus-within{
+    border-color: var(--shareboard-border-color2-selected);
 }
 
 .dark-date-select{
@@ -303,6 +308,9 @@ footer {
     border-width: 1px;
     border-color: #323434;
     color:white;
+}
+.input-field:hover, .input-field:focus-within{
+    border-color: var(--shareboard-border-color2-selected);
 }
 
 /*NAVBAR START*/

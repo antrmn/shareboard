@@ -23,8 +23,8 @@ $(() => {
             legendTextSize: 20,
             titleTextStyle: { color: '#FFF' },
             backgroundColor: { fill:'transparent' },
-            height: 500,
-            width: 500,
+            // height: 500,
+            // width: 500,
         };
 
         let chart = new google.visualization.PieChart(document.getElementById('users-bysection-chart'));
@@ -62,8 +62,8 @@ $(() => {
             legendTextStyle: { color: '#FFF' },
             titleTextStyle: { color: '#FFF' },
             backgroundColor: { fill:'transparent' },
-            height: 500,
-            width: 500,
+            // height: 500,
+            // width: 500,
             bar: {groupWidth: "95%"},
             legend: { position: "none" },
             hAxis : {
@@ -110,8 +110,8 @@ $(() => {
             legendTextStyle: { color: '#FFF' },
             titleTextStyle: { color: '#FFF' },
             backgroundColor: { fill:'transparent' },
-            height: 500,
-            width: 500,
+            // height: 500,
+            // width: 500,
             bar: {groupWidth: "95%"},
             legend: { position: "none" },
             hAxis : {
@@ -151,8 +151,8 @@ $(() => {
             legendTextSize: 20,
             titleTextStyle: { color: '#FFF' },
             backgroundColor: { fill:'transparent' },
-            height: 500,
-            width: 500,
+            // height: 500,
+            // width: 500,
         };
 
         let chart = new google.visualization.PieChart(document.getElementById('posts-bysection-chart'));
@@ -160,10 +160,12 @@ $(() => {
         chart.draw(formattedData, options);
     }
 
+    let save;
     function drawCharts(){
         $.post(
             window.location.origin+"/shareboard/admin",
             function(data){
+                save = data
                 // console.log(data);
                 drawUserBySectionChart(JSON.parse(data.section_data));
                 drawPostBySectionChart(JSON.parse(data.post_bysection_data))
@@ -171,4 +173,12 @@ $(() => {
                 drawRecentPostsChart(JSON.parse(data.post_recent_data))
             })
     }
+    $(window).resize(function(){
+        if(save){
+            drawUserBySectionChart(JSON.parse(save.section_data));
+            drawPostBySectionChart(JSON.parse(save.post_bysection_data))
+            drawRecentRegistrationsChart(JSON.parse(save.registration_data))
+            drawRecentPostsChart(JSON.parse(save.post_recent_data))
+        }
+    });
 });
