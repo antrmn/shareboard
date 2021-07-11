@@ -91,9 +91,9 @@
                         <a href="${pageContext.request.contextPath}/post?id=${post.id}#comment-container" class="underline-some"><span class="to-underline">Torna ai commenti principali</span> <i class="fas fa-long-arrow-alt-up"></i></a>
                     </c:if>
                     <sb:printComments comments="${requestScope.comments}" idParent="${requestScope.initialIndex}" depth="${0}">
-                                  <jsp:attribute name="commentFragment">
-                                        <%@ include file="/WEB-INF/views/partials/comment.jsp" %>
-                                  </jsp:attribute>
+                          <jsp:attribute name="commentFragment">
+                                <%@ include file="/WEB-INF/views/partials/comment.jsp" %>
+                          </jsp:attribute>
                     </sb:printComments>
                 </div>
             </div>

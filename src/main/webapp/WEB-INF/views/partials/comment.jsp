@@ -3,7 +3,7 @@
 <%-- Quello sopra è un commento di IntelliJ che permette di ignorare l'errore "cannot resolve variable" e
      fornisce l'auto-complete anche se l'oggetto non è presente (Ancora) in nessuno scope --%>
 
-<div id = "${comment.id}" class = "grid-x-nw" style = "width: 100%; align-items: start; margin-top:10px; background-color: #242323; border-radius: 4px; border: solid 1px #313132; ">
+<div id = "${comment.id}" class = "grid-x-nw comment-container" style = "width: 100%; align-items: start; margin-top:10px; background-color: ${actualDepth%2 eq 0 ? "#242323" : "#1A1A1B"}; border-radius: 4px; border: solid 1px #313132; ">
     <div class = "vote-container">
         <input type = "hidden" name = "id" value = !ID>
         <i class="fas fa-chevron-up voteIcon upvoteIcon interactable ${comment.vote == 1 ? "upvote-icon-active" : ""}" onclick = "toggleVote(this, 'upvote', 'comment')"></i>

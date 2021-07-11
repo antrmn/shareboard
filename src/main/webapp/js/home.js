@@ -1,6 +1,7 @@
 $(() => {
     postLoader.callbacks.before = () => $("#posts-delimiter").addClass("animated");
     postLoader.callbacks.always = () => $("#posts-delimiter").removeClass("animated");
+    postLoader.callbacks.empty = () => $("#post-container").append(createEmptyElement("fas fa-frown","Nessun Contenuto"))
 })
 
 $("#filter").on("filterchanged", function (){

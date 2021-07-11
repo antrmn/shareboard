@@ -190,3 +190,15 @@ $(() => {
     }
 
 })
+
+function createEmptyElement(icon, text){
+    let emptyElement = `
+    <div class = "grid-x-nw justify-center align-center">
+        <i class="${icon}" style = " color: rgb(215, 218, 220); font-size: 35px; margin-left: 15px;"></i>
+        <h2 style = " color: rgb(215, 218, 220); font-size: 30px;">
+            ${text}
+        </h2>
+    </div>
+`
+    return emptyElement;
+}

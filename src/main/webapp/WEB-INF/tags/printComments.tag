@@ -22,6 +22,7 @@
                 </div>
             </c:when>
             <c:otherwise>
+                <c:set var = "actualDepth"  value = "${depth+1}"></c:set>
                 <sb:printComments comments="${comments}" idParent="${comment.id}" depth="${depth+1}">
                     <jsp:attribute name="commentFragment">
                         <%@ include file="/WEB-INF/views/partials/comment.jsp" %>

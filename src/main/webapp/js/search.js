@@ -27,9 +27,11 @@ $("#search-form").submit(function() {
     }
 });
 
+
 $(() => {
     postLoader.callbacks.before = () => $("#posts-delimiter").addClass("animated");
     postLoader.callbacks.always = () => $("#posts-delimiter").removeClass("animated");
+    postLoader.callbacks.empty = () => $("#post-container").append(createEmptyElement("fas fa-frown","Nessun Risultato"))
     if(!isSearchFormBlank())
         $("#search-form").submit();
     else
