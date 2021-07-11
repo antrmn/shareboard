@@ -43,7 +43,7 @@
             <td>Tutte</td>
           </c:when>
           <c:otherwise>
-            <td>${ban.section.id}</td>
+            <td>${applicationScope.sections[ban.section.id].name}</td>
           </c:otherwise>
         </c:choose>
         <td><fmt:formatDate value="${startDate}" pattern="dd/MM/yyyy"/></td>
@@ -74,15 +74,15 @@
       <div class="modal-body">
         <ul id="error-list"></ul>
 
-        <form id = "ban-form" class="grid-x align-center justify-center">
+        <form id = "ban-form" class="grid-y align-center justify-center">
           <input type="hidden" value="${requestScope.userId}" name="userId">
           <div>
             <label for="end-date" style = "display: inline">Data Fine:</label>
-            <input type = "date" name="endDate" id = "end-date">
+            <input type = "date" name="endDate" id = "end-date" class = "dark-date-select">
           </div>
           <div>
             <label for="section-select" style = "display: inline">Scegli sezione:</label>
-            <select name="sectionId" id="section-select">
+            <select name="sectionId" id="section-select" class = "dark-select">
               <option value="-1" selected>Tutte</option>
               <c:forEach items="${applicationScope.sections}" var="section">
                 <option value="${section.value.id}">${section.value.name}</option>

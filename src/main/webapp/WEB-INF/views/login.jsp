@@ -25,11 +25,12 @@
           </c:forEach>
         </c:if>
       </ul>
-      <form id = "login-form" action="${pageContext.request.contextPath}/login" method="post" style="display: flex; justify-content: center; align-items:center; flex-direction: column;">
+<%--      style="display: flex; justify-content: center; align-items:center; flex-direction: column;"--%>
+      <form class = "grid-y-nw align-center justify-center" id = "login-form" action="${pageContext.request.contextPath}/login" method="post">
         <label for="username">Username:</label>
-        <input type="text" id="username" name="username" value="${fn:trim(fn:escapeXml(param.username))}">
+        <input class = "auth-input-field" type="text" id="username" name="username" value="${fn:trim(fn:escapeXml(param.username))}">
         <label for="pass">Password:</label>
-        <input type="password" id="pass" name="pass">
+        <input class = "auth-input-field" type="password" id="pass" name="pass">
         <input type="submit" value="Log In" class="roundButton" style = "margin-top:10px;">
       </form>
     </div>

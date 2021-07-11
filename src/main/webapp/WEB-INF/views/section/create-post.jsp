@@ -34,7 +34,7 @@
                         <form id = "create-post-form" class = "grid-y-nw align-center justify-center" action="${pageContext.request.contextPath}/newpost" method="post" enctype="multipart/form-data">
                             <div style = "align-self: start">
                                 <label for="section-select" style = "display: inline">Choose a section:</label>
-                                <select name="section" id="section-select">
+                                <select name="section" id="section-select" class = "dark-select">
                                     <c:forEach items="${applicationScope.sections}" var="section">
                                         <option ${section.value.id == param.section ? 'selected' : ''}
                                                 value="${section.value.id}">

@@ -115,8 +115,19 @@ footer {
 
 /*GENERIC STYLES*/
 
+.dark-date-select{
+    background-color: var(--shareboard-container-2);
+    border-width: 1px;
+    /*border-color: black;*/
+    padding: 8px;
+    border-radius: 4px;
+    color: white;
+    border-color: #323434;
+}
+
 .dark-select{
     background-color: var(--shareboard-container-2);
+    border-color: #323434;
     color:white;
     margin-bottom: 8px;
     border-radius: 4px;
@@ -729,9 +740,22 @@ navbar *{
 
 /*REGISTER AND LOGIN STYLE*/
 
-#register-form input, #login-form input{
-    border-radius:30px;
-    background-color: #c3c3c3;
+/*#register-form input, #login-form input{*/
+/*    !*border-radius:30px;*!*/
+/*    !*background-color: #c3c3c3;*!*/
+/*    background-color: #c6c6c6;*/
+/*    border-width: 1px;*/
+/*    border: 1px solid rgba(0,0,0,.1);*/
+/*    border-radius: 4px;*/
+/*    padding: 4px;*/
+/*}*/
+
+.auth-input-field{
+    background-color: #c6c6c6;
+    border-width: 1px;
+    border: 1px solid rgba(0,0,0,.1);
+    border-radius: 4px;
+    padding: 4px;
 }
 
 .auth-body-container{
