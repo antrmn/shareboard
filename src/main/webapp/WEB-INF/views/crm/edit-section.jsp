@@ -25,7 +25,7 @@
             <div id="action-container" style = "margin:8px;">
                 <form id = "create-post-form" class = "grid-y-nw align-center justify-center" action="${pageContext.request.contextPath}/admin/editsection" method="post" enctype="multipart/form-data">
 
-                    <textarea id="text-field" class = "input-field" name = "description" rows="5" placeholder="Descrizione" >${requestScope.section.description}</textarea>
+                    <textarea id="text-field" class = "input-field" name = "description" rows="5" placeholder="Descrizione" pattern="^.{0,255}$">${requestScope.section.description}</textarea>
                     <label for="img" hidden>Select image:</label>
                     <input type="file" id="img" name="picture" accept="image/*">
                     <input type="hidden" id="sectionId" name="sectionId" value="${requestScope.section.id}">
@@ -38,7 +38,7 @@
                         </c:if>
                     </ul>
 
-                    <input type="submit" value="Aggiorna" class="roundButton">
+                    <input type="submit" value="Aggiorna" class="roundButton" onclick="validateTextAreaBySibling(this, 'Lunghezza massima: 255')">
                 </form>
             </div>
         </div>
