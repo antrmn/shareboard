@@ -84,13 +84,13 @@ public class EditSectionServlet extends HttpServlet {
                     Files.copy(fileStream, file.toPath());
                 }
                 service.update(s);
-                UpdateSectionsServlet.updateSections(getServletContext());
             } catch(SQLException | IOException e){
                 con.rollback();
                 throw new ServletException(e);
             } finally {
                 con.setAutoCommit(true);
             }
+            UpdateSectionsServlet.updateSections(getServletContext());
         } catch (SQLException e2) {
             throw new ServletException(e2);
         }
