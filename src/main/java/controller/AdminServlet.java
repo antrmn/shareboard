@@ -50,6 +50,7 @@ public class AdminServlet extends HttpServlet {
             Instant currentTime = Instant.now();
             for(int i = 0; i<5; i++){
                 LocalDate date = currentTime.minus(i, ChronoUnit.DAYS).atOffset(ZoneOffset.UTC).toLocalDate();
+//                System.out.println(date.getDayOfMonth());
                 recentRegistrations.put(date, 0);
                 recentPosts.put(date, 0);
             }
@@ -67,6 +68,7 @@ public class AdminServlet extends HttpServlet {
             for (Map.Entry<Instant, Integer> entry : postsByDate.entrySet()) {
                 LocalDate date = entry.getKey().atOffset(ZoneOffset.UTC).toLocalDate();
                 if (recentPosts.containsKey(date)){
+//                    System.out.println(date.getDayOfMonth());
                     recentPosts.put(date, entry.getValue());
                 }
             }

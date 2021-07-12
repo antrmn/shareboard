@@ -29,6 +29,7 @@
         <form id = "register-form" action="${pageContext.request.contextPath}/register" method="post" style="display: flex; justify-content: center; align-items:center; flex-direction: column;">
           <label for="mail">Email:</label>
           <input class = "auth-input-field" type="mail" id="mail" name="mail" value="${fn:trim(fn:escapeXml(param.mail))}">
+<%--          <div class = "animated-error-message"></div>--%>
           <label for="username">Username:</label>
           <input class = "auth-input-field" type="text" id="username" name="username" value="${fn:trim(fn:escapeXml(param.username))}">
           <label for="pass">Password:</label>

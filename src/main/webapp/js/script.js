@@ -202,3 +202,23 @@ function createEmptyElement(icon, text){
 `
     return emptyElement;
 }
+
+function validateTextAreaById(elementId, message){
+    let textarea = document.getElementById(elementId);
+    return validateTextArea(textarea, message)
+}
+
+function validateTextArea(e, message){
+    let textarea = e
+    let pattern = new RegExp($(textarea).attr('pattern'));
+    let hasError = !pattern.test($(textarea).val());
+    console.log($(textarea).val())
+    textarea.setCustomValidity(hasError? message : "")
+    return !hasError;
+}
+
+function validateTextAreaBySibling(e, message){
+    let textarea = $(e.form).find('textarea').get(0)
+    console.log(textarea)
+    return validateTextArea(textarea, message)
+}
