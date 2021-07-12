@@ -8,8 +8,6 @@
         <welcome-file>home</welcome-file>
     </welcome-file-list>
 
-    <!-- TODO: error page per 401 403 e 500 -->
-
     <session-config>
         <session-timeout>30</session-timeout>
         <cookie-config>
