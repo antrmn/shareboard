@@ -17,13 +17,14 @@ const postLoader = {
     callbacks: {
         before: $.noop,
         success: (data) => $("#post-container").append(data),
-        error: $.noop,
+        error: () => $("#post-container").append(createEmptyElement("fas fa-exclamation", "Si &egrave; verificato un errore")),
         empty: $.noop,
         always: $.noop
     },
-    fetch(callbacks = postLoader.callbacks){
+    fetch(_callbacks = postLoader.callbacks){
         postLoader.lock = true;
-        Object.assign(callbacks, postLoader.callbacks, callbacks);
+        let callbacks = {};
+        Object.assign(callbacks, postLoader.callbacks, _callbacks);
         if (typeof postLoader.lastRequest === "object" && typeof postLoader.lastRequest.abort === "function")
             postLoader.lastRequest.abort();
         if(!Number.isInteger(postLoader.params.page))

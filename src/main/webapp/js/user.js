@@ -9,6 +9,6 @@ $("#filter").on("filterchanged", function (){
     postLoader.params.orderby = $("#filter #new-button").hasClass("selected") ? "newest" : postLoader.params.orderby;
     postLoader.params.orderby = $("#filter #top-button").hasClass("selected") ? "mostvoted" : postLoader.params.orderby;
     postLoader.params.page = 1;
-    postLoader.fetch();
+    postLoader.fetch({empty : ()=>$("#post-container").append(createEmptyElement("fas fa-frown","Nessun contenuto"))});
     postLoader.start($("#posts-delimiter").get(0));
 })

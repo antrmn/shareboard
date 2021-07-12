@@ -22,7 +22,7 @@ $("#search-form").submit(function() {
             return object
         }, postLoader.params);
         postLoader.params.page = 1;
-        postLoader.fetch();
+        postLoader.fetch({empty : ()=>$("#post-container").append(createEmptyElement("fas fa-frown","Nessun contenuto"))});
         postLoader.start($("#posts-delimiter").get(0));
     }
 });
@@ -35,6 +35,5 @@ $(() => {
     if(!isSearchFormBlank())
         $("#search-form").submit();
     else
-        //TODO: messaggio a schermo del tipo "cerca qualcosa"
-        ;
+        $("#post-container").append(createEmptyElement("fas fa-search", "Cerca qualcosa"));
 });
