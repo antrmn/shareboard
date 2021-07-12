@@ -28,6 +28,8 @@
                     <textarea id="text-field" class = "input-field" name = "description" rows="5" placeholder="Descrizione" pattern="^.{0,255}$">${requestScope.section.description}</textarea>
                     <label for="img" hidden>Select image:</label>
                     <input type="file" id="img" name="picture" accept="image/*">
+                    <label for="img">Banner:</label>
+                    <input type="file" id="banner" name="banner" accept="image/*">
                     <input type="hidden" id="sectionId" name="sectionId" value="${requestScope.section.id}">
 
                     <ul>
@@ -38,7 +40,7 @@
                         </c:if>
                     </ul>
 
-                    <input type="submit" value="Aggiorna" class="roundButton" onclick="validateTextAreaBySibling(this, 'Lunghezza massima: 255')">
+                    <input type="submit" value="Aggiorna" class="roundButton">
                 </form>
             </div>
         </div>

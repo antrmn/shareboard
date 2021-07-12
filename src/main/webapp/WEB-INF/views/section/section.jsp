@@ -18,7 +18,11 @@
 </jsp:include>
 
 <div class = "grid-y-nw" style = "height:324px; left:0; right:0; position:relative; top:30px;">
-  <div id = "header-image" style ='background: url("https://styles.redditmedia.com/t5_2zf9m/styles/bannerBackgroundImage_h8gepdvfwqb61.png?width=4000&s=ff692337d4b54b575ec3b23d32037b63d919f096") no-repeat scroll center center / cover;'>
+  <div id = "header-image"
+       <c:if test="${not empty section.banner}">
+         style ='background-image: url("${applicationScope.picsLocation}/${section.banner}")'
+       </c:if> >
+
     <a href="${pageContext.request.contextPath}" style = "height:inherit; width:100%; display: inline-block;"></a>
   </div>
   <div id="header-container" class = "grid-x-nw" >

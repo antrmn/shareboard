@@ -112,28 +112,6 @@ public class PostDAO {
         return rowsDeleted;
     }
 
-    /*--- Shorthands ---*/
-
-    public int delete(int id) throws SQLException {
-        return delete(List.of(id));
-    }
-
-
-    public Post get(int id, int loggedUserId) throws SQLException{
-        PostSpecificationBuilder psb = new PostSpecificationBuilder().byId(id).loggedUser(loggedUserId);
-        List<Post> singleton = fetch(psb.build());
-        return singleton.isEmpty() ? null : singleton.get(0);
-    }
-
-    public Post get(int id) throws SQLException{
-        return get(id, -1);
-    }
-
-    public int insert(Post post) throws SQLException {
-        List<Integer> single = insert(List.of(post));
-        return single.isEmpty() ? null : single.get(0);
-    }
-
     public Map<String, Integer> getPostCountBySection() throws SQLException {
         String query = "SELECT COUNT(*),section.name FROM post INNER JOIN section ON post.section_id = section.id GROUP BY(section.name)";
         PreparedStatement ps = con.prepareStatement(query);
@@ -164,6 +142,25 @@ public class PostDAO {
         return data;
     }
 
+    /*--- Shorthands ---*/
+
+    public int delete(int id) throws SQLException {
+        return delete(List.of(id));
+    }
 
 
+    public Post get(int id, int loggedUserId) throws SQLException{
+        PostSpecificationBuilder psb = new PostSpecificationBuilder().byId(id).loggedUser(loggedUserId);
+        List<Post> singleton = fetch(psb.build());
+        return singleton.isEmpty() ? null : singleton.get(0);
+    }
+
+    public Post get(int id) throws SQLException{
+        return get(id, -1);
+    }
+
+    public int insert(Post post) throws SQLException {
+        List<Integer> single = insert(List.of(post));
+        return single.isEmpty() ? null : single.get(0);
+    }
 }
