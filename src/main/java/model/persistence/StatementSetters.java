@@ -22,11 +22,11 @@ public final class StatementSetters {
         int i=1;
         String paramsString = params.stream().map(x -> String.format("(%s,%s)", x.getLeft(), x.getRight()))
                                              .collect(Collectors.joining(","));
-        //logger.debug("Preparing an SQL statement with these parameters: " + paramsString);
+        //System.out.println("Preparing an SQL statement with these parameters: " + paramsString);
         for (Pair<Object, Integer> param : params) {
             ps.setObject(i++, param.getLeft(), param.getRight());
         }
-        //logger.debug("Prepared an SQL statement: " + ps.toString().replace(";", ";\n"));
+        //System.out.println("Prepared an SQL statement: " + ps.toString().replace(";", ";\n"));
         return ps;
     }
 

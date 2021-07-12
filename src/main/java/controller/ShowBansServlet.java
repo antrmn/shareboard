@@ -23,7 +23,7 @@ public class ShowBansServlet extends HttpServlet {
         int userId = Integer.parseInt(req.getParameter("userId"));
         try (Connection con = ConPool.getConnection()){
             BanDAO service = new BanDAO(con);
-            BanSpecificationBuilder bsb = new BanSpecificationBuilder().byUserId(userId);
+            BanSpecificationBuilder bsb = new BanSpecificationBuilder().byUserId(userId).showAdminNames();
             List<Ban> bans = service.fetch(bsb.build());
 
             req.setAttribute("bans", bans);

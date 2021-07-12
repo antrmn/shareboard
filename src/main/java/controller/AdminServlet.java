@@ -6,20 +6,17 @@ import com.google.gson.JsonObject;
 import model.persistence.ConPool;
 import model.post.PostDAO;
 import model.user.UserDAO;
-import model.user.UserSpecificationBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
 import java.util.HashMap;
@@ -29,12 +26,6 @@ import java.util.Map;
 public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        try(Connection con = ConPool.getConnection()){
-            UserDAO service = new UserDAO(con);
-            req.setAttribute("count",service.count(new UserSpecificationBuilder().build()));
-        } catch (SQLException throwables) {
-            throw new ServletException(throwables);
-        }
         req.getRequestDispatcher("/WEB-INF/views/crm/admin.jsp").forward(req,resp);
     }
 

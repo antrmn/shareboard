@@ -6,12 +6,13 @@ import util.Pair;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
 public class BanSpecificationBuilder extends Specification.Builder<BanSpecificationBuilder>{
-    private List<String> columnsList = List.of("id AS ban_id", "admin_id", "section_id", "user_id", "start_time",
-                                               "end_time", "is_global");
+    private final List<String> columnsList = new ArrayList<>(List.of("ban.id AS ban_id", "admin_id", "section_id", "user_id", "start_time",
+            "end_time", "is_global"));
 
     private StringJoiner joinsJoiner = new StringJoiner("\n");
     private StringJoiner wheresJoiner = new StringJoiner(" AND ", " WHERE ", " ").setEmptyValue(" ");
@@ -22,7 +23,6 @@ public class BanSpecificationBuilder extends Specification.Builder<BanSpecificat
 
     public BanSpecificationBuilder() {
         super("ban");
-        columns = String.join(", ", columnsList);
         this.orderBy = "ban_id";
     }
 
@@ -38,6 +38,8 @@ public class BanSpecificationBuilder extends Specification.Builder<BanSpecificat
             joinsJoiner.add(" JOIN user ON user.id=ban.user_id");
         if(joinAdminNeeded)
             joinsJoiner.add(" JOIN user AS admin_user ON admin_user.id=ban.admin_id");
+
+        columns = String.join(",", columnsList);
 
         joins = joinsJoiner.toString();
         wheres = wheresJoiner.toString();
@@ -111,7 +113,7 @@ public class BanSpecificationBuilder extends Specification.Builder<BanSpecificat
 
     public BanSpecificationBuilder showAdminNames(){
         joinAdminNeeded = true;
-        columnsList.add("user_admin.username AS admin_username");
+        columnsList.add("admin_user.username AS admin_username");
         return this;
     }
 }
