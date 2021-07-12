@@ -24,25 +24,25 @@
                     <div id="action-container" style="margin:8px">
                         <form id="edit-user-form" class="grid-y-nw align-center" action="${pageContext.request.contextPath}/edituser" method="post" enctype="multipart/form-data" style = "align-items: flex-start;">
                             <label>Email:</label>
-                            <input type="email" id="email-field" class="input-field" name="email" placeholder="Email" value="${user.email}" style = "width: 300px;">
+                            <input type="email" id="email-field" class="input-field" name="email" placeholder="Email" value="${user.email}" maxlength="255" style = "width: 300px;">
                             <label>Description:</label>
-                            <textarea id="description-field" class="input-field" name="description" rows="3" placeholder="..." style="height: 100px; width: 80%;">${user.description}</textarea>
+                            <textarea id="description-field" class="input-field" name="description" rows="3" placeholder="..." pattern="^.{0,255}$" style="height: 100px; width: 80%;">${user.description}</textarea>
 
                             <label for="img">Immagine del profilo: </label>
                             <input type="file" id="img" name="picture" accept="image/*">
 
                             <input id="user-id" type="hidden" name="id" value="${user.id}">
                             <label> Password:</label>
-                            <input type="password" class="input-field" name="pass" style = "width: 300px;">
+                            <input type="password" class="input-field" id = "pass" name="pass" minlength="3" maxlength="255"  style = "width: 300px;">
                             <label> Conferma password:</label>
-                            <input type="password" class="input-field" name="pass2" style = "width: 300px;">
+                            <input type="password" class="input-field" id = "pass2" name="pass2" minlength="3" maxlength="255"   style = "width: 300px;">
                             <ul>
                                 <c:forEach items="${errors}" var="error">
                                     <li>${error}</li>
                                 </c:forEach>
                             </ul>
 
-                            <input type="submit" value="Submit" class="roundButton" style = "align-self: center;">
+                            <input type="submit" value="Submit" class="roundButton" onclick="validateUserEdit(this)" style = "align-self: center;">
                         </form>
                     </div>
                 </div>

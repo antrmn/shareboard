@@ -222,3 +222,20 @@ function validateTextAreaBySibling(e, message){
     console.log(textarea)
     return validateTextArea(textarea, message)
 }
+
+function validatePassword(e){
+    let form = $(e.form).get(0)
+    // let pass1 = $(form).find('#pass')
+    // let pass2 = $(form).find('#pass2')
+    let error = false
+    if($(form).find('#pass').val() !== $(form).find('#pass2').val()){
+        error = true
+    }
+    console.log(error)
+    $(form).find('#pass2').get(0).setCustomValidity(error?"Le password devono coincidere" : "")
+    return !error
+}
+
+function validateUserEdit(e){
+    return validatePassword(e) && validateTextAreaBySibling(e, "Massimo 255 caratteri")
+}

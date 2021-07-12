@@ -28,15 +28,14 @@
         </ul>
         <form id = "register-form" action="${pageContext.request.contextPath}/register" method="post" style="display: flex; justify-content: center; align-items:center; flex-direction: column;">
           <label for="mail">Email:</label>
-          <input class = "auth-input-field" type="mail" id="mail" name="mail" value="${fn:trim(fn:escapeXml(param.mail))}">
-<%--          <div class = "animated-error-message"></div>--%>
+          <input class = "auth-input-field" type="mail" id="mail" name="mail" value="${fn:trim(fn:escapeXml(param.mail))}" required maxlength="255">
           <label for="username">Username:</label>
-          <input class = "auth-input-field" type="text" id="username" name="username" value="${fn:trim(fn:escapeXml(param.username))}">
+          <input class = "auth-input-field" type="text" id="username" name="username" value="${fn:trim(fn:escapeXml(param.username))}" required minlength="3" maxlength="30">
           <label for="pass">Password:</label>
-          <input class = "auth-input-field" type="password" id="pass" name="pass">
+          <input class = "auth-input-field" type="password" id="pass" name="pass" minlength="3" maxlength="255" required >
           <label for="pass2">Confirm Password:</label>
-          <input class = "auth-input-field" type="password" id="pass2" name="pass2">
-          <input type="submit" value="Sign Up" class="roundButton" style = "margin-top:10px;">
+          <input class = "auth-input-field" type="password" id="pass2" name="pass2" minlength="3" maxlength="255" required>
+          <input type="submit" value="Sign Up" class="roundButton" style = "margin-top:10px;" onclick = "validatePassword(this)">
         </form>
       </div>
     </div>
