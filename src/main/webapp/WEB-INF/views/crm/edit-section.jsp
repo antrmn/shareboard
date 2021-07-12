@@ -25,8 +25,8 @@
             <div id="action-container" style = "margin:8px;">
                 <form id = "create-post-form" class = "grid-y-nw align-center justify-center" action="${pageContext.request.contextPath}/admin/editsection" method="post" enctype="multipart/form-data">
 
-                    <textarea id="text-field" class = "input-field" name = "description" rows="5" placeholder="Descrizione" >${requestScope.section.description}</textarea>
-                    <label for="img" banner>Select image:</label>
+                    <textarea id="text-field" class = "input-field" name = "description" rows="5" placeholder="Descrizione" pattern="^.{0,255}$">${requestScope.section.description}</textarea>
+                    <label for="img" hidden>Select image:</label>
                     <input type="file" id="img" name="picture" accept="image/*">
                     <label for="img">Banner:</label>
                     <input type="file" id="banner" name="banner" accept="image/*">

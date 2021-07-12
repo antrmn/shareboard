@@ -229,6 +229,10 @@ footer {
     min-width: 32px;
 }
 
+.roundButton:hover{
+    cursor: pointer;
+}
+
 .lightGreyButton{
     background-color: #d7dadc;
     border-color: #d7dadc;
@@ -946,4 +950,15 @@ navbar *{
 
 #edit-user-form *{
     margin-bottom: 10px;
+}
+
+.animated-error-message{
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    margin-top: 4px;
+    max-height: 1000px;
+    opacity: 1;
+    color: #ea0027;
+    transition: all .2s ease-in-out;
 }

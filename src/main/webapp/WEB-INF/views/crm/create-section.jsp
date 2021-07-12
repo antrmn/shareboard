@@ -25,8 +25,8 @@
                 <div id="action-container" style = "margin:8px;">
                     <form id = "create-post-form" class = "grid-y-nw align-center justify-center" action="${pageContext.request.contextPath}/admin/newsection" method="post" enctype="multipart/form-data">
 
-                        <input type="text" id="title-field" class = "input-field" name="name" placeholder="Nome" value="${param.title}">
-                        <textarea id="text-field" class = "input-field" name = "description" rows="5" placeholder="Descrizione" >${param.content}</textarea>
+                        <input type="text" id="title-field" class = "input-field" name="name" placeholder="Nome" value="${param.title}" minlength="1" maxlength="50" required>
+                        <textarea id="text-field" class = "input-field" name = "description" rows="5" placeholder="Descrizione" pattern="^.{0,255}$">${param.content}</textarea>
 
                         <label for="img">Immagine:</label>
                         <input type="file" id="img" name="picture" accept="image/*">
@@ -42,7 +42,7 @@
                             </c:if>
                         </ul>
 
-                        <input type="submit" value="Crea" class="roundButton">
+                        <input type="submit" value="Crea" class="roundButton" onclick="validateTextAreaBySibling(this, 'Lunghezza massima: 255')">
                     </form>
                 </div>
         </div>

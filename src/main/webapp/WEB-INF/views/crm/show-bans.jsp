@@ -78,7 +78,7 @@
           <input type="hidden" value="${requestScope.userId}" name="userId">
           <div>
             <label for="end-date" style = "display: inline">Data Fine:</label>
-            <input type = "date" name="endDate" id = "end-date" class = "dark-date-select">
+            <input type = "date" name="endDate" id = "end-date" class = "dark-date-select" required>
           </div>
           <div>
             <label for="section-select" style = "display: inline">Scegli sezione:</label>
