@@ -145,6 +145,9 @@ public class EditUserServlet extends HttpServlet {
                     if (!file.getParentFile().exists())
                         file.getParentFile().mkdir();
                     Files.copy(fileStream, file.toPath());
+                    if(oldPicture != null){
+                        Files.deleteIfExists(Path.of(FileServlet.BASE_PATH + File.separator + oldPicture));
+                    }
                 }
             } catch (SQLException | IOException e) {
                 con.rollback();
@@ -156,10 +159,6 @@ public class EditUserServlet extends HttpServlet {
             throw new ServletException(e2);
         }
 
-
-        if(oldPicture != null){
-            Files.deleteIfExists(Path.of(FileServlet.BASE_PATH + File.separator + oldPicture));
-        }
         resp.sendRedirect(req.getContextPath() + "/u/" + userToEdit.getUsername());
     }
 }
