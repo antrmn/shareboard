@@ -55,7 +55,7 @@
             <td>MAI</td>
           </c:otherwise>
         </c:choose>
-        <td>${ban.admin.id}</td>
+        <td>${ban.admin.username} (${ban.admin.id})</td>
         <td>
           <a href = "${context}/admin/deleteban?banId=${ban.id}&userId=${requestScope.userId}" onclick="return confirm('Cancellare il ban?')">
             <i class="fas fa-minus-circle"></i>

@@ -669,6 +669,31 @@ navbar *{
     justify-content: center;
 }
 
+#error-body{
+    height:100vh;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+#error-body #error-code{
+    height: 280px;
+    position: relative;
+}
+
+#error-code > h1 {
+    font-size: 230px;
+    font-weight: 900;
+    background: linear-gradient(to left, #ff6c00,#ff9d00, gold);
+    background-size: auto;
+    background-clip: border-box;
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    animation: GradientMove 1.5s linear infinite alternate;
+    background-size: 600%;
+}
+
 .post-generic-holder.post-image-holder:hover {
     -webkit-transition: all 1s cubic-bezier(.94,-0.29,.02,1.02);
     -moz-transition: all 1s cubic-bezier(.94,-0.29,.02,1.02);
