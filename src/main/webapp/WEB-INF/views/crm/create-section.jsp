@@ -28,8 +28,11 @@
                         <input type="text" id="title-field" class = "input-field" name="name" placeholder="Nome" value="${param.title}">
                         <textarea id="text-field" class = "input-field" name = "description" rows="5" placeholder="Descrizione" >${param.content}</textarea>
 
-                        <label for="img" hidden>Select image:</label>
+                        <label for="img">Immagine:</label>
                         <input type="file" id="img" name="picture" accept="image/*">
+
+                        <label for="img">Banner:</label>
+                        <input type="file" id="banner" name="banner" accept="image/*">
 
                         <ul>
                             <c:if test = "${not empty requestScope.errors}">

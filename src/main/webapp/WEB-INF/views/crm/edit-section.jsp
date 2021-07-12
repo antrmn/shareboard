@@ -26,8 +26,10 @@
                 <form id = "create-post-form" class = "grid-y-nw align-center justify-center" action="${pageContext.request.contextPath}/admin/editsection" method="post" enctype="multipart/form-data">
 
                     <textarea id="text-field" class = "input-field" name = "description" rows="5" placeholder="Descrizione" >${requestScope.section.description}</textarea>
-                    <label for="img" hidden>Select image:</label>
+                    <label for="img" banner>Select image:</label>
                     <input type="file" id="img" name="picture" accept="image/*">
+                    <label for="img">Banner:</label>
+                    <input type="file" id="banner" name="banner" accept="image/*">
                     <input type="hidden" id="sectionId" name="sectionId" value="${requestScope.section.id}">
 
                     <ul>

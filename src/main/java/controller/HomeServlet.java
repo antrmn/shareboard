@@ -20,12 +20,12 @@ public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Map<Integer, Section> sections = (Map<Integer, Section>) getServletContext().getAttribute("sections");
         List<Section> topSections = sections.values().stream()
-                .sorted(Comparator.comparingInt(Section::getnFollowersTotal))
+                .sorted(Comparator.comparingInt(Section::getnFollowersTotal).reversed())
                 .collect(Collectors.toUnmodifiableList());
         req.setAttribute("topSections", topSections);
 
         List<Section> trendingSections = sections.values().stream()
-                .sorted(Comparator.comparingInt(Section::getnFollowersWeekly))
+                .sorted(Comparator.comparingInt(Section::getnFollowersWeekly).reversed())
                 .collect(Collectors.toUnmodifiableList());
         req.setAttribute("trendingSections", trendingSections);
 

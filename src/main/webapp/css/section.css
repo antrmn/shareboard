@@ -1,5 +1,5 @@
 #header-image{
-    background: rgb(70, 175, 255) no-repeat scroll center center / cover;
+    background: url("../images/section-banner-background.png") no-repeat scroll center center / cover;
     height: 228px;
 }
 
