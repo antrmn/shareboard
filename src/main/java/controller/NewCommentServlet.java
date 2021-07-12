@@ -1,8 +1,12 @@
 package controller;
 
+import controller.util.ErrorForwarder;
+import model.ban.Ban;
 import model.comment.Comment;
 import model.comment.CommentDAO;
 import model.persistence.ConPool;
+import model.post.Post;
+import model.post.PostDAO;
 import model.user.User;
 
 import javax.servlet.ServletException;
@@ -26,15 +30,22 @@ public class NewCommentServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        //todo: input check.
+
         int postId = Integer.parseInt(req.getParameter("id"));
         int parentId = Integer.parseInt(req.getParameter("parent"));
         String text = req.getParameter("text");
 
-
-        System.out.println(postId);
-        System.out.println(parentId);
-        System.out.println(text);
         try (Connection con = ConPool.getConnection()){
+            PostDAO servicePosts = new PostDAO(con);
+            Post post = servicePosts.get(postId);
+            List<Ban> bans = (List<Ban>) req.getAttribute("loggedUserBans");
+            if(bans.stream().anyMatch(ban -> ban.getSection().getId().equals(post.getSection().getId())
+                                             || ban.getGlobal().equals(true))){
+                ErrorForwarder.sendError(req, resp, "Ti è stato impedito di commentare in questa sezione", 403);
+                return;
+            }
+
             Comment c = new Comment();
             Comment parent = new Comment();
             if (parentId > 0){
@@ -46,7 +57,7 @@ public class NewCommentServlet extends HttpServlet {
             c.setAuthor(u);
             c.setText(text);
             c.setParentComment(parent);
-            model.post.Post parentPost = new model.post.Post();
+            Post parentPost = new Post();
             parentPost.setId(postId);
             c.setPost(parentPost);
             List<Comment> comments = new ArrayList<>();

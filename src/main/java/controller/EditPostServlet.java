@@ -3,9 +3,11 @@ package controller;
 import controller.util.ErrorForwarder;
 import controller.util.FileUtils;
 import controller.util.InputValidator;
+import model.ban.Ban;
 import model.persistence.ConPool;
 import model.post.Post;
 import model.post.PostDAO;
+import model.section.Section;
 import model.user.User;
 
 import javax.servlet.ServletException;
@@ -55,11 +57,22 @@ public class EditPostServlet extends HttpServlet {
             ErrorForwarder.sendError(req, resp, List.of("Il post non esiste"), 400);
             return false;
         }
+
         if(!post.getAuthor().getId().equals(loggedUser.getId())
                 && loggedUser.getAdmin().equals(false)){
             ErrorForwarder.sendError(req, resp, List.of(""), HttpServletResponse.SC_FORBIDDEN);
             return false;
         }
+
+        List<Ban> bans = (List<Ban>) req.getAttribute("loggedUserBans");
+        Section section = post.getSection();
+        if(bans.stream().anyMatch(ban -> ban.getSection().getId().equals(section.getId())
+                                         || ban.getGlobal().equals(true))){
+            ErrorForwarder.sendError(req, resp, "Ti è stato impedito di modificare post in questa sezione",
+                                                    HttpServletResponse.SC_FORBIDDEN);
+            return false;
+        }
+
         if(req.getAttribute("post") == null)
             req.setAttribute("post", post);
         return true;

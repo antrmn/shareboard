@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.Instant;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -47,9 +48,9 @@ public class LoggedUserChecker extends HttpFilter {
 
         if(user != null){
             try(Connection con = ConPool.getConnection()){
-                /* Carico i ban utente nella request */
+                /* Carico i ban utente _attuali_ nella request */
                 BanDAO service = new BanDAO(con);
-                BanSpecificationBuilder bsb = new BanSpecificationBuilder().byUserId(id);
+                BanSpecificationBuilder bsb = new BanSpecificationBuilder().byUserId(id).endAfter(Instant.now());
                 List<Ban> bans = service.fetch(bsb.build());
                 req.setAttribute("loggedUserBans", bans);
 

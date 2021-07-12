@@ -2,9 +2,12 @@ package controller;
 
 import controller.util.ErrorForwarder;
 import controller.util.InputValidator;
+import model.ban.Ban;
 import model.comment.Comment;
 import model.comment.CommentDAO;
 import model.persistence.ConPool;
+import model.post.Post;
+import model.post.PostDAO;
 import model.user.User;
 
 import javax.servlet.ServletException;
@@ -55,6 +58,14 @@ public class EditCommentServlet extends HttpServlet {
             User loggedUser = (User) req.getAttribute("loggedUser");
             if(!loggedUser.getId().equals(comment.getAuthor().getId()) && loggedUser.getAdmin().equals(false)){
                 ErrorForwarder.sendError(req, resp, List.of(""), 400);
+                return;
+            }
+            List<Ban> bans = (List<Ban>) req.getAttribute("loggedUserBans");
+            PostDAO postService = new PostDAO(con);
+            Post post = postService.get(comment.getPost().getId());
+            if(bans.stream().anyMatch(ban -> ban.getSection().getId().equals(post.getSection().getId())
+                                             || ban.getGlobal().equals(true))){
+                ErrorForwarder.sendError(req, resp, "Non ti è permesso modificare commenti in questa sezione", 403);
                 return;
             }
 

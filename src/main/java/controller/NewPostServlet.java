@@ -3,6 +3,7 @@ package controller;
 import controller.util.ErrorForwarder;
 import controller.util.FileUtils;
 import controller.util.InputValidator;
+import model.ban.Ban;
 import model.persistence.ConPool;
 import model.post.Post;
 import model.post.PostDAO;
@@ -50,12 +51,26 @@ public class NewPostServlet extends HttpServlet {
         Part picture = req.getPart("picture");
 
 
+
+        List<Ban> bans = (List<Ban>) req.getAttribute("loggedUserBans");
         Map<Integer, Section> sections = (Map<Integer, Section>) getServletContext().getAttribute("sections");
+
         Section section = null;
-        if(sectionId == null || !InputValidator.assertInt(sectionId))
+        if(sectionId == null || !InputValidator.assertInt(sectionId)) {
             errors.add("Specificare una sezione");
-        else if(null == (section = sections.get(Integer.parseInt(sectionId))))
-            errors.add("La sezione specificata non esiste");
+        } else {
+            section = sections.get(Integer.parseInt(sectionId));
+            if (section == null) {
+                errors.add("La sezione specificata non esiste");
+            } else {
+                Section finalSection = section; //altrimenti la lambda fa capricci
+                if (bans.stream().anyMatch(ban -> ban.getSection().getId().equals(finalSection.getId())
+                        || ban.getGlobal().equals(true))) {
+                    errors.add("Ti è stato impedito di postare in questa sezione.");
+                    ErrorForwarder.sendError(req, resp, errors, 403, "/newpost");
+                }
+            }
+        }
 
         if(title == null || title.isBlank())
             errors.add("Specificare un titolo");
