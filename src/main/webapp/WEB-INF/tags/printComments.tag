@@ -4,6 +4,7 @@
 <%@ attribute name="comments" type="java.util.Map" required="true"%>
 <%@ attribute name="idParent" type="java.lang.Integer" required="true" %>
 <%@ attribute name="depth" type="java.lang.Integer" required="true" %>
+<%@ attribute name="isUserBanned" required="true" %>
 <%@ attribute name="commentFragment" fragment="true"%>
 <%@ variable name-given="comment" variable-class="model.comment.Comment" scope="NESTED" %>
 <%@ variable name-given="childComments" variable-class="java.lang.String" scope="NESTED"%>
@@ -22,8 +23,9 @@
                 </div>
             </c:when>
             <c:otherwise>
+                <c:set var = "userBanned" value="${userBanned}"/>
                 <c:set var = "actualDepth"  value = "${depth+1}"></c:set>
-                <sb:printComments comments="${comments}" idParent="${comment.id}" depth="${depth+1}">
+                <sb:printComments comments="${comments}" idParent="${comment.id}" depth="${depth+1}" isUserBanned="${isUserBanned}">
                     <jsp:attribute name="commentFragment">
                         <%@ include file="/WEB-INF/views/partials/comment.jsp" %>
                     </jsp:attribute>

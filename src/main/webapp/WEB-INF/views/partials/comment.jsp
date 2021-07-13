@@ -23,7 +23,7 @@
             </p>
         </div>
         <div>
-            <c:if test="${not empty requestScope.loggedUser}">
+            <c:if test="${not empty requestScope.loggedUser && isUserBanned == false}">
              <span id = "reply-button" class = "grey-text" onclick="toggleTextArea(this)">
                 <input type = "hidden" name = "commentId" value = ${comment.id}>
                 <i class="fas fa-comment-dots"></i>
@@ -32,7 +32,9 @@
             </c:if>
             <c:if test="${not empty requestScope.loggedUser
                         and (comment.author.id == requestScope.loggedUser.id or requestScope.loggedUser.admin.equals(true))}">
-                <span id = "edit-button" class = "grey-text" onclick="toggleTextArea(this)">Edit</span>
+                <c:if test="${isUserBanned == false}">
+                    <span id = "edit-button" class = "grey-text" onclick="toggleTextArea(this)">Edit</span>
+                </c:if>
                 <span class="grey-text"><a href="${pageContext.request.contextPath}/deletecomment?id=${comment.id}" id="delete-button" onclick="return confirm('Cancellare il commento?')">Delete</a></span>
             </c:if>
         </div>

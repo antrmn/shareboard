@@ -2,6 +2,11 @@
 <%@ taglib prefix="sb" tagdir="/WEB-INF/tags"%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
+<%-- Sta roba (l'anyMatch) è un optional diverso da java.util.stream. Vedi org.apache.el.stream.Optional  --%>
+<c:set var="isUserBanned"
+       value="${not empty requestScope.loggedUserBans.stream().filter(ban -> ban.global.booleanValue() == true
+                                                                            || ban.section.id == post.section.id)
+                                                              .findFirst().orElse(null)}"/>
 <!DOCTYPE html>
 <html>
 <jsp:include page="../partials/head.jsp">
@@ -73,13 +78,17 @@
                             <i class="fas fa-comment-dots"></i>
                             ${post.nComments}
                             <c:if test="${requestScope.loggedUser.id == post.author.id || requestScope.loggedUser.admin.booleanValue() == true}">
-                                <a href="${pageContext.request.contextPath}/editpost?id=${post.id}">Edit</a>
+                                <c:if test="${!isUserBanned}">
+                                    <a href="${pageContext.request.contextPath}/editpost?id=${post.id}">Edit</a>
+                                </c:if>
                                 <a href="${pageContext.request.contextPath}/deletepost?id=${post.id}" onclick="return confirm('Cancellare il post?')">Delete</a>
                             </c:if>
                         </div>
-                        <jsp:include page="../partials/comment-form.jsp">
-                            <jsp:param name="id" value="${post.id}"/>
-                        </jsp:include>
+                        <c:if test="${not empty requestScope.loggedUser && !isUserBanned}">
+                            <jsp:include page="../partials/comment-form.jsp">
+                                <jsp:param name="id" value="${post.id}"/>
+                            </jsp:include>
+                        </c:if>
                     </div>
                 </div>
             </div>
@@ -100,7 +109,7 @@
                             </div>
                         </c:when>
                         <c:otherwise>
-                            <sb:printComments comments="${requestScope.comments}" idParent="${requestScope.initialIndex}" depth="${0}">
+                            <sb:printComments comments="${requestScope.comments}" idParent="${requestScope.initialIndex}" depth="${0}" isUserBanned="${isUserBanned}">
                           <jsp:attribute name="commentFragment">
                                 <%@ include file="/WEB-INF/views/partials/comment.jsp" %>
                           </jsp:attribute>
