@@ -77,7 +77,9 @@ Ogni post ha come autore un **utente registrato**. Un utente registrato ha i seg
 
 ## DB Schema
 
-![](assets/db_schema.jpg)
+![](assets/db_conceptual_schema.png)
+
+![](assets/mysql_model.png)
 
 ## Sitemap
 
@@ -101,6 +103,3 @@ Il menù laterale fornisce informazioni riguardanti l&#39;intero sito. Lo scopo 
 
 ![](assets/layout/post.png)
 
-### Color palette
-
-![](assets/color_palette.png)

@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"model.ban"},{"l":"model.comment"},{"l":"model.follow"},{"l":"model.persistence"},{"l":"model.post"},{"l":"model.postvote"},{"l":"model.section"},{"l":"model.user"},{"l":"util"}]
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"model.ban"},{"l":"model.comment"},{"l":"model.commentvote"},{"l":"model.follow"},{"l":"model.persistence"},{"l":"model.post"},{"l":"model.postvote"},{"l":"model.section"},{"l":"model.user"},{"l":"util"}]
