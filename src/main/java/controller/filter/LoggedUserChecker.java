@@ -34,7 +34,6 @@ public class LoggedUserChecker extends HttpFilter {
             chain.doFilter(req, res);
             return;
         }
-
         int id = (int)session.getAttribute("loggedUserId");
 
         User user = null;
@@ -43,7 +42,7 @@ public class LoggedUserChecker extends HttpFilter {
             user = service.get(id, false);
             req.setAttribute("loggedUser", user);
         } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            throw new ServletException(throwables);
         }
 
         if(user != null){

@@ -25,11 +25,19 @@ import java.util.Set;
 public class RegisterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(req.getAttribute("loggedUser") != null){
+            resp.sendRedirect(req.getContextPath());
+            return;
+        }
         req.getRequestDispatcher("/WEB-INF/views/register.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        if(req.getAttribute("loggedUser") != null){
+            resp.sendRedirect(req.getContextPath());
+            return;
+        }
         if(req.getAttribute("errors") != null) {
             doGet(req, resp);
             return;

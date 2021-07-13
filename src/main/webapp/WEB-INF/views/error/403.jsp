@@ -18,6 +18,7 @@
         </div>
         <h2>Forbidden</h2>
         <p>Non disponi dei permessi necessari per accedere alla risorsa</p>
+        <p>${fn:escapeXml(requestScope['javax.servlet.error.message'])}</p>
         <a href="${pageContext.request.contextPath}/">Torna alla homepage</a>
     </div>
 </div>

@@ -1,10 +1,3 @@
-/*TODO:
-- Messaggio "la ricerca non ha prodotto risultati"
-- Messaggio "post finiti" (facoltativo)
-- Messaggio "errore, riprova"
-- Messaggio "cerca qualcosa"
- */
-
 function isSearchFormBlank() {
     return $("#search-form [name=content]").val().trim() === "" &&
         !$("#search-form [name=onlyfollow]").is(":checked") &&
@@ -31,7 +24,6 @@ $("#search-form").submit(function() {
 $(() => {
     postLoader.callbacks.before = () => $("#posts-delimiter").addClass("animated");
     postLoader.callbacks.always = () => $("#posts-delimiter").removeClass("animated");
-    postLoader.callbacks.empty = () => $("#post-container").append(createEmptyElement("fas fa-frown","Nessun Risultato"))
     if(!isSearchFormBlank())
         $("#search-form").submit();
     else

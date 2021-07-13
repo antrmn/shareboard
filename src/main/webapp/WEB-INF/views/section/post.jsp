@@ -88,7 +88,7 @@
             <div class ="grid-x-nw" style = "width: 100%">
                 <div id = "comments-container" style = "margin:8px; width: 100%">
                     <c:if test="${not empty param.comment}">
-                        <a href="${pageContext.request.contextPath}/post?id=${post.id}#comment-container" class="underline-some"><span class="to-underline">Torna ai commenti principali</span> <i class="fas fa-long-arrow-alt-up"></i></a>
+                        <a href="${pageContext.request.contextPath}/post/${post.id}#comment-container" class="underline-some"><span class="to-underline">Torna ai commenti principali</span> <i class="fas fa-long-arrow-alt-up"></i></a>
                     </c:if>
                     <c:choose>
                         <c:when test="${empty requestScope.comments}">

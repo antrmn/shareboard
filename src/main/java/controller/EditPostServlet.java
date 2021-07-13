@@ -27,6 +27,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static model.post.Post.Type.IMG;
+
 @WebServlet("/editpost")
 @MultipartConfig
 public class EditPostServlet extends HttpServlet {
@@ -111,13 +113,13 @@ public class EditPostServlet extends HttpServlet {
         if (type != null && type.equalsIgnoreCase("text")) {
             postToEdit.setType(Post.Type.TEXT);
         } else if (type != null && type.equalsIgnoreCase("picture")) {
-            postToEdit.setType(Post.Type.IMG);
+            postToEdit.setType(IMG);
         }
 
         if (postToEdit.getType() != oldType) {
             if (postToEdit.getType() == Post.Type.TEXT && content == null)
                 errors.add("Specificare il contenuto del post");
-            if (postToEdit.getType() == Post.Type.IMG && (picture == null || picture.getSize() <= 0))
+            if (postToEdit.getType() == IMG && (picture == null || picture.getSize() <= 0))
                 errors.add("Caricare un'immagine");
         }
 
@@ -139,8 +141,8 @@ public class EditPostServlet extends HttpServlet {
         String oldContent = postToEdit.getContent();
         if (postToEdit.getType() == Post.Type.TEXT) {
             postToEdit.setContent(content);
-        } else if (postToEdit.getType() == Post.Type.IMG) {
-            if (picture == null) {
+        } else if (postToEdit.getType() == IMG) {
+            if (picture == null || picture.getSize() == 0) {
                 postToEdit.setContent(null);
             } else {
                 postToEdit.setContent(FileUtils.generateFileName(picture));
@@ -179,7 +181,7 @@ public class EditPostServlet extends HttpServlet {
             }
         }
 
-        if(postToEdit.getType() != oldType){
+        if(oldType == IMG && !oldContent.isBlank()){
             Files.deleteIfExists(Path.of(FileServlet.BASE_PATH + File.separator + oldContent));
         }
         resp.sendRedirect(getServletContext().getContextPath() + "/post/" + postToEdit.getId());

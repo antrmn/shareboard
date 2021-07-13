@@ -35,17 +35,6 @@
         <url-pattern>/newpost</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
-    <filter-mapping>
-        <filter-name>redirectLoggedUser</filter-name>
-        <url-pattern>/login</url-pattern>
-        <url-pattern>/register</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
-    <filter-mapping>
-        <filter-name>redirectGuest</filter-name>
-        <url-pattern>/logout</url-pattern>
-        <dispatcher>REQUEST</dispatcher>
-    </filter-mapping>
 <!--    <filter-mapping>-->
 <!--        <filter-name>adminAuthorizer</filter-name>-->
 <!--        <url-pattern>/admin/*</url-pattern>-->

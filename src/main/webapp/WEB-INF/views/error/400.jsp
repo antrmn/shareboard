@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -19,6 +20,7 @@
         </div>
         <h2>Bad Request</h2>
         <p>Il client ha rilasciato una richiesta non valida o mal formata</p>
+        <p>${fn:escapeXml(requestScope['javax.servlet.error.message'])}</p>
         <ul>
             <c:forEach items="${requestScope.errors}" var="error">
                 <li>${error}</li>

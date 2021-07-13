@@ -1,4 +1,5 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -38,7 +39,7 @@
     </span>
     <span class = "grid-y">
       <h2>${section.name}</h2>
-      <h4>s/${section.name}</h4>
+      <h4>s/${fn:toLowerCase(section.name)}</h4>
     </span>
     <span>
       <button class = "${userFollows.contains(section.id) ? 'darkGreyButton roundButton follow-button follow-button-isfollowing follow-roundbutton' : 'lightGreyButton roundButton follow-button follow-roundbutton'}" onclick="toggleFollow(this)" data-section-id = "${section.id}">

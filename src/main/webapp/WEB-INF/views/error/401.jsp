@@ -19,6 +19,7 @@
         <h2>Unauthorized</h2>
         <p>Il server non ha potuto verificare se disponi dei permessi necessari per accedere alla risorsa richiesta.<br>
             Ciò potrebbe essere dovuto a una mancata autenticazione o a credenziali non valide.</p>
+        <p>${fn:escapeXml(requestScope['javax.servlet.error.message'])}</p>
         <a href="${pageContext.request.contextPath}/login">Effettua il login</a><br>
         <a href="${pageContext.request.contextPath}/">Torna alla homepage</a>
     </div>
