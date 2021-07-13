@@ -18,6 +18,14 @@
         <tracking-mode>COOKIE</tracking-mode>
     </session-config>
 
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+            <scripting-invalid>true</scripting-invalid> <!-- Disabilita scriptlet !-->
+        </jsp-property-group>
+    </jsp-config>
+
     <filter-mapping>
         <filter-name>encodingFilter</filter-name>
         <url-pattern>*</url-pattern>
@@ -29,17 +37,22 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>userAuthorizer</filter-name>
-        <url-pattern>/vote</url-pattern>
-        <url-pattern>/unvote</url-pattern>
+        <url-pattern>/deletecomment</url-pattern>
+        <url-pattern>/deletepost</url-pattern>
+        <url-pattern>/editcomment</url-pattern>
+        <url-pattern>/editpost</url-pattern>
+        <url-pattern>/edituser</url-pattern>
         <url-pattern>/newcomment</url-pattern>
         <url-pattern>/newpost</url-pattern>
+        <url-pattern>/unvote</url-pattern>
+        <url-pattern>/vote</url-pattern>
         <dispatcher>REQUEST</dispatcher>
     </filter-mapping>
-<!--    <filter-mapping>-->
-<!--        <filter-name>adminAuthorizer</filter-name>-->
-<!--        <url-pattern>/admin/*</url-pattern>-->
-<!--        <dispatcher>REQUEST</dispatcher>-->
-<!--    </filter-mapping>-->
+    <filter-mapping>
+        <filter-name>adminAuthorizer</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
     <filter-mapping>
         <filter-name>aliasesFilter</filter-name>
         <url-pattern>/*</url-pattern>
@@ -69,12 +82,4 @@
     <error-page>
         <location>/WEB-INF/views/error/generic.jsp</location>
     </error-page>
-
-    <jsp-config>
-        <jsp-property-group>
-            <url-pattern>*.jsp</url-pattern>
-            <page-encoding>UTF-8</page-encoding>
-            <scripting-invalid>true</scripting-invalid> <!-- Disabilita scriptlet !-->
-        </jsp-property-group>
-    </jsp-config>
 </web-app>
