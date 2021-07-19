@@ -29,7 +29,7 @@
         <c:forEach items="${requestScope.users}" var="user">
             <tr>
                 <td>${user.id}</td>
-                <td>${user.username}</td>
+                <td><a href="${pageContext.servletContext.contextPath}/u/${user.username}">${user.username}</a></td>
                 <td>
                     <c:choose>
                         <c:when test="${user.admin}">

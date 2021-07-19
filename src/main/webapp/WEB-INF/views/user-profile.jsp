@@ -43,6 +43,12 @@
     <span class="grid-y">
       <h2>${user.username}</h2>
       <span>Utente dal <fmt:formatDate value="${creationDate}" pattern="dd/MM/yyyy"/></span>
+      <c:if test="${requestScope.loggedUser.id == user.id || requestScope.loggedUser.admin.equals(true)}">
+        <a href="${pageContext.request.contextPath}/edituser?id=${user.id}"
+           style="margin-right: auto; margin-bottom:10px; margin-top:10px" class="roundButton darkGreyButton">
+        Edit profile
+        </a>
+      </c:if>
     </span>
   </div>
 </div>
