@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -22,6 +23,12 @@ public class ToggleAdminServlet extends HttpServlet {
         Boolean isAdmin = Boolean.parseBoolean(req.getParameter("isAdmin")) ;
         if(userId == null || userId.equals(0)){
             ErrorForwarder.sendError(req, resp, "Specificare un utente", 400);
+            return;
+        }
+
+        User u = (User)req.getAttribute("loggedUser");
+        if(userId == u.getId()){
+            ErrorForwarder.sendError(req, resp, "Azione non permessa", 400);
             return;
         }
 
