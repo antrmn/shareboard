@@ -28,8 +28,8 @@
 
                 <div id = "section-container">
                     <c:forEach items="${applicationScope.sections}" var="section">
-                        <div class = "section-element" style=" padding: 12px 0px 12px 0px;">
-                            <a href="${context}/s/${section.value.name}" style="display: inline;">${section.value.name}</a>
+                        <div class = "section-element" style="display: flex; ">
+                            <a href="${context}/s/${section.value.name}" style=" flex-grow:1">${section.value.name}</a>
                             <input type = "hidden" name = "sectionId" value = "${section.value.id}">
 
                             <%-- NOTA - userFollows in session scope: follow da guest           --%>
