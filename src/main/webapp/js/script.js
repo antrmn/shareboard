@@ -216,7 +216,7 @@ function validateTextArea(e, message){
     let textarea = e
     let pattern = new RegExp($(textarea).attr('pattern'));
     let hasError = !pattern.test($(textarea).val());
-    console.log($(textarea).val())
+    // console.log($(textarea).val())
     textarea.setCustomValidity(hasError? message : "")
     return !hasError;
 }

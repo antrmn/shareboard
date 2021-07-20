@@ -105,14 +105,14 @@ $(() => {
             legend: { position: "none" },
             hAxis : {
                 textStyle : {
-                    fontSize: 12, // or the number you want,
+                    fontSize: 12,
                     baselineColor: '#CCCCCC',
                     color: "#FFFFFF"
                 }
             },
             vAxis : {
                 textStyle : {
-                    fontSize: 12, // or the number you want,
+                    fontSize: 12,
                     baselineColor: '#CCCCCC',
                     color: "#FFFFFF"
                 }
@@ -156,6 +156,7 @@ $(() => {
             function(data){
                 save = data
                 // console.log(data);
+                $(".dashboard-card").removeClass("hide")
                 drawUserBySectionChart(JSON.parse(data.section_data));
                 drawPostBySectionChart(JSON.parse(data.post_bysection_data))
                 drawRecentRegistrationsChart(JSON.parse(data.registration_data))

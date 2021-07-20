@@ -39,7 +39,7 @@ $('#ban-form').submit(function(e) {
 
     $.post('./addban', $('#ban-form').serialize(), function (data) {
         if(data!=""){
-            console.log(data)
+            //console.log(data)
             $('#error-list').empty();
             for(let error of data){
                 $('#error-list').append(` <li>${error}</li>`)
