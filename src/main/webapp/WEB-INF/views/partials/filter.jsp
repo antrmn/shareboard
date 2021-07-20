@@ -15,8 +15,8 @@
   <a id="top-button" href="javascript:void(0)" class="${param.sort == 'top' ? 'selected' : ''}"><i class="fas fa-burn"></i>Top</a>
   <a id="new-button" href="javascript:void(0)" class="${param.sort == 'new' ? 'selected' : ''}"><i class="fas fa-certificate"></i>New</a>
   <i class="fas fa-ellipsis-h" id = "filter-icon" style = "margin-left: auto;" onclick="toggleDropdown('toggle', 'filter-dropdown')">
-    <div id="filter-dropdown" class="dropdown-content greyContainer filter-dropdown-content">
-      <a id="set-default-button" href="javascript:void(0)" style = "font-family: Verdana">
+    <div id="filter-dropdown" class="dropdown-content greyContainer filter-dropdown-content" style = "overflow-y: hidden; width: 150px;">
+      <a class="dropdown-link" id="set-default-button" href="javascript:void(0)" style = "font-family: Verdana; margin:0px; padding: 12px 0px 12px 20px;">
         Set Default
       </a>
     </div>

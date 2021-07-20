@@ -29,6 +29,14 @@
                 <div id = "section-container">
                     <c:forEach items="${applicationScope.sections}" var="section">
                         <div class = "section-element" style="display: flex; ">
+                             <c:choose>
+                                 <c:when test="${empty section.value.picture }">
+                                     <img class = "small-round-image-borderless" src="${pageContext.request.contextPath}/images/default-logo.png">
+                                 </c:when>
+                                 <c:otherwise>
+                                     <img class = "small-round-image-borderless" src= "${applicationScope.picsLocation}/${ section.value.picture}">
+                                 </c:otherwise>
+                             </c:choose>
                             <a class = "dropdown-section-link" href="${context}/s/${section.value.name}">${section.value.name}</a>
                             <input type = "hidden" name = "sectionId" value = "${section.value.id}">
 
@@ -73,23 +81,23 @@
                     </div>
                     <i class="fas fa-sort-down" style="display: inline-block;"></i>
                     <div id="profile-dropdown" class="dropdown-content greyContainer">
-                        <a href="${context}/me">
+                        <a class="dropdown-link" href="${context}/me">
                             <i class="fas fa-address-card"></i>
                             Profile
                         </a>
-                        <a href="${context}/edituser?id=${loggedUser.id}">
+                        <a class="dropdown-link" href="${context}/edituser?id=${loggedUser.id}">
                             <i class="fas fa-sliders-h"></i>
                             Edit profile
                         </a>
 
                     <c:if test="${loggedUser.admin.booleanValue() == true}">
-                        <a href="${context}/admin">
+                        <a class="dropdown-link" href="${context}/admin">
                             <i class="fas fa-user-shield"></i>
                             Pannello Admin
                         </a>
                     </c:if>
 
-                        <a href="${context}/logout">
+                        <a class="dropdown-link" href="${context}/logout">
                             <i class="fas fa-sign-out-alt"></i>
                             Log Out
                         </a>
@@ -105,12 +113,12 @@
                 <span id = "profile-container" class = "interactable hide" onclick="toggleDropdown('toggle', 'right-dropdown')" >
                     <i class="fas fa-user-circle nav-right-dropdown"></i>
                     <div id="right-dropdown" class="dropdown-content greyContainer">
-                        <a href="${context}/login">
+                        <a class="dropdown-link" href="${context}/login">
                            <i class="fas fa-sign-in-alt"></i>
                             Login
                         </a>
 
-                        <a href="${context}/register">
+                        <a class="dropdown-link" href="${context}/register">
                             <i class="fas fa-user-plus"></i>
                             Register
                         </a>
