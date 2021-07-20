@@ -23,6 +23,9 @@
             </p>
         </div>
         <div>
+            <c:if test="${not empty comment.parentComment && comment.parentComment.id > 0 && empty actualDepth}">
+                <span id="parent-button" class="grey-text"><a href="${pageContext.request.contextPath}/post/${comment.post.id}?comment=${comment.parentComment.id}" id="parent-button"><i class="fas fa-level-up-alt"></i>&nbsp;<span>Parent</span></a></span>
+            </c:if>
             <c:if test="${not empty requestScope.loggedUser && isUserBanned == false}">
              <span id = "reply-button" class = "grey-text" onclick="toggleTextArea(this)">
                 <input type = "hidden" name = "commentId" value = ${comment.id}>
@@ -33,9 +36,9 @@
             <c:if test="${not empty requestScope.loggedUser
                         and (comment.author.id == requestScope.loggedUser.id or requestScope.loggedUser.admin.equals(true))}">
                 <c:if test="${isUserBanned == false}">
-                    <span id = "edit-button" class = "grey-text" onclick="toggleTextArea(this)">Edit</span>
+                    <span id = "edit-button" class = "grey-text" onclick="toggleTextArea(this)"><i class="fas fa-pencil-alt"></i>&nbsp;Edit</span>
                 </c:if>
-                <span class="grey-text"><a href="${pageContext.request.contextPath}/deletecomment?id=${comment.id}" id="delete-button" onclick="return confirm('Cancellare il commento?')">Delete</a></span>
+                <span class="grey-text"><a href="${pageContext.request.contextPath}/deletecomment?id=${comment.id}" id="delete-button" onclick="return confirm('Cancellare il commento?')"><i class="far fa-trash-alt"></i>&nbsp;Delete</a></span>
             </c:if>
         </div>
         <form class = "comment-form reply-form" method = "POST" action= "${pageContext.request.contextPath}/newcomment" hidden>

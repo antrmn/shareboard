@@ -113,9 +113,7 @@ public class CommentDAO {
      * <p>Se l'id specificato corrisponde all'id di un post, verranno restituiti tutti i commenti di quel post.<br>
      *     Se invece l'id specificato corrisponde a un commento, verranno restituiti tutti i commenti
      *     a partire da quello specificato (incluso)</p><br>
-     * <p>Se viene invocata la {@link Comment#getParentComment()} ai root comment verrà restituito un dummy comment con id 0. <br>
-     * Se vengono mostrati i commenti a partire da un dato commento (quindi, con isCommentId settato a true)
-     * il commento di partenza restituirà null al metodo {@link Comment#getParentComment()}</p><br>
+     * <p>Se viene invocata la {@link Comment#getParentComment()} ai root comment verrà restituito un dummy comment con id 0. </p>
      *
      * @param id L'id del commento/post da dove far partire la ricerca
      * @param isCommentId True se l'id corrisponde all'id di un commento, false se corrisponde all'id di un post

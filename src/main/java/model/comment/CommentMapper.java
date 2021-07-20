@@ -80,6 +80,12 @@ public class CommentMapper implements AbstractMapper<Comment> {
             }
             comment.setPost(post);
 
+            for (String column : columns) {
+                SQL_TriConsumer<Comment> consumer = mapComment.get(column);
+                if(consumer != null)
+                    consumer.accept(comment, column, rs);
+            }
+
             Comment parentComment = null;
             if (columns.contains("parent_comment_id")) {
                 parentComment = parentComments.get(rs.getInt("parent_comment_id"));
@@ -95,11 +101,6 @@ public class CommentMapper implements AbstractMapper<Comment> {
             }
             comment.setParentComment(parentComment);
 
-            for (String column : columns) {
-                SQL_TriConsumer<Comment> consumer = mapComment.get(column);
-                if(consumer != null)
-                    consumer.accept(comment, column, rs);
-            }
             beans.add(comment);
         }
         return beans;
@@ -160,26 +161,29 @@ public class CommentMapper implements AbstractMapper<Comment> {
                 comments.put(parentCommentId, new ArrayList<>());
             }
             comments.get(parentCommentId).add(comment);
+        }
 
-
-            Comment nullComment = new Comment();
-            nullComment.setId(0);
+        if(!comments.isEmpty()) {
             Stack<Comment> stack = new Stack<>();
-            List<Comment> rootComments = comments.get(0);
-            if(rootComments != null)
-                rootComments.forEach(c -> {
-                                                c.setParentComment(nullComment);
-                                                stack.add(c);
-                                            });
-            while(!stack.isEmpty()) {
+            Comment minParent = new Comment();
+            minParent.setId(Collections.min(comments.keySet()));
+
+            List<Comment> rootComments = comments.get(minParent.getId());
+            rootComments.forEach(c -> {
+                c.setParentComment(minParent);
+                stack.add(c);
+            });
+
+            while (!stack.isEmpty()) {
                 Comment parent = stack.pop();
-                List <Comment> parentsOf = comments.get(parent.getId());
-                if(parentsOf != null)
+                List<Comment> parentsOf = comments.get(parent.getId());
+                if (parentsOf != null)
                     parentsOf.forEach(c -> {
-                                            stack.add(c);
-                                            c.setParentComment(parent);
-                                         });
+                        stack.add(c);
+                        c.setParentComment(parent);
+                    });
             }
+            return comments;
         }
         return comments;
     }

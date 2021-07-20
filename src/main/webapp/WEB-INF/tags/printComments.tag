@@ -23,8 +23,7 @@
                 </div>
             </c:when>
             <c:otherwise>
-                <c:set var = "userBanned" value="${userBanned}"/>
-                <c:set var = "actualDepth"  value = "${depth+1}"></c:set>
+                <c:set var = "actualDepth"  value = "${depth+1}"/>
                 <sb:printComments comments="${comments}" idParent="${comment.id}" depth="${depth+1}" isUserBanned="${isUserBanned}">
                     <jsp:attribute name="commentFragment">
                         <%@ include file="/WEB-INF/views/partials/comment.jsp" %>

@@ -3,13 +3,17 @@
     border-radius: 4px;
 }
 
-/* TODO: questi sotto non funzionano! */
 #edit-button:hover{
     background-color: #676869;
     border-radius: 4px;
 }
 
 #delete-button:hover{
+    background-color: #676869;
+    border-radius: 4px;
+}
+
+#parent-button:hover{
     background-color: #676869;
     border-radius: 4px;
 }
