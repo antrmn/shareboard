@@ -375,6 +375,13 @@ navbar *{
     display: block;
 }
 
+.dropdown-section-link{
+    flex-grow:1;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
 .section-element:hover {
     background-color: #868789;
 }
