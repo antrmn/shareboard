@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title><c:out value="${param.currentPage}" /></title>
     <meta name = "description" content = "Shareboard forum">
-    <link rel = "icon" type = "image/png" href = "images/logo.ico">
+    <link rel = "icon" type = "image/png" href = "${pageContext.request.contextPath}/images/logo.ico">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content = "telephone-no">
     <meta name ="apple-mobile-web-app-title" content = "Shareboard">
