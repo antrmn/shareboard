@@ -1,18 +1,17 @@
-// window.onclick = function(event) {
-//     // console.log(event.target)
-//
-//     //console.log($(event.target).parents().has("#section-dropdown"))
-//     // console.log($(event.target).parents("#section-dropdown"))
-//     // if (!$(event.target).is("#section-dropdown") && $(event.target).parents("#section-dropdown").length === 0) {
-//     //     console.log("NOPE");
-//     //     toggleDropdown("close", "section-dropdown")
-//     // }
-//     //
-//     // if (!$(event.target).is("#profile-dropdown") && $(event.target).parents("#profile-drowdown").length === 0){
-//     //     console.log("NOPE2");
-//     //     toggleDropdown("close", "profile-drowdown")
-//     // }
-// }
+window.onclick = function(event) {
+    if (!$(event.target).is("#nav-crt-sctn") && $(event.target).parents("#nav-crt-sctn").length === 0) {
+        toggleDropdown("close", "section-dropdown")
+    }
+
+    if (!$(event.target).is("#profile-container") && $(event.target).parents("#profile-container").length === 0){
+        toggleDropdown("close", "profile-dropdown")
+        toggleDropdown("close", "right-dropdown")
+    }
+
+    if (!$(event.target).is("#filter-icon") && $(event.target).parents("#filter-icon").length === 0){
+        toggleDropdown("close", "filter-dropdown")
+    }
+}
 
 function toggleDropdown(action, id){
     // console.log(document.getElementById(id).classList.contains("show"))
