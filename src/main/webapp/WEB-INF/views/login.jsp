@@ -30,6 +30,7 @@
         <input class = "auth-input-field" type="text" id="username" name="username" value="${fn:trim(fn:escapeXml(param.username))}" required maxlength="30">
         <label for="pass">Password:</label>
         <input class = "auth-input-field" type="password" id="pass" name="pass" minlength="3" maxlength="255" required>
+        <span>Non hai un account? <a href="./register">Registrati</a></span>
         <input type="submit" value="Log In" class="roundButton" style = "margin-top:10px;">
       </form>
     </div>

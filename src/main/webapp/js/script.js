@@ -145,13 +145,17 @@ function toggleVote(el, actiontype, elementType){
                 id: _id,
                 vote: actiontype,
                 type: elementType
-            });
+            }).fail(function (){
+            window.location.replace(window.location.origin+ "/shareboard/login")
+        });
     } else {
         $.post(window.location.origin+"/shareboard/unvote",
             {
                 id: _id,
                 type: elementType
-            });
+            }).fail(function (){
+            window.location.replace(window.location.origin+ "/shareboard/login")
+        });
     }
 }
 
@@ -225,8 +229,6 @@ function validateTextAreaBySibling(e, message){
 
 function validatePassword(e){
     let form = $(e.form).get(0)
-    // let pass1 = $(form).find('#pass')
-    // let pass2 = $(form).find('#pass2')
     let error = false
     if($(form).find('#pass').val() !== $(form).find('#pass2').val()){
         error = true

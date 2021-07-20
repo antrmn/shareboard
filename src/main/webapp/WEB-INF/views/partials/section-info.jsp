@@ -16,7 +16,7 @@
   <h4> ${param.nFollowers} Membri</h4>
   <c:choose>
     <c:when test="${not empty maxLengthBan}">
-      <h4>Non puoi postare in questa sezione fino al <fmt:formatDate value="${sbfn:getDate(maxLengthBan.endTime)}" pattern="dd-MM-YYYY"/></h4>
+      <h4 style = "text-align: center;">Non puoi postare in questa sezione fino al <fmt:formatDate value="${sbfn:getDate(maxLengthBan.endTime)}" pattern="dd-MM-YYYY"/></h4>
     </c:when>
     <c:otherwise>
       <c:if test="${not empty requestScope.loggedUser}">
