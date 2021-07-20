@@ -28,11 +28,12 @@ import java.util.List;
 public class AddBanServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+        resp.setContentType("application/json");
         List<String> errors = new ArrayList<>();
 
         String date = req.getParameter("endDate");
@@ -55,8 +56,6 @@ public class AddBanServlet extends HttpServlet {
 
 
         if(!errors.isEmpty()){
-            resp.setContentType("application/json");
-            resp.setCharacterEncoding("UTF-8");
             Gson gson = new Gson();
             resp.getWriter().print(gson.toJson(errors));
             resp.getWriter().flush();

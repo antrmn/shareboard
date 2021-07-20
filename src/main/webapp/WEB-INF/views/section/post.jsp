@@ -7,6 +7,7 @@
        value="${not empty requestScope.loggedUserBans.stream().filter(ban -> ban.global.booleanValue() == true
                                                                             || ban.section.id == post.section.id)
                                                               .findFirst().orElse(null)}"/>
+
 <!DOCTYPE html>
 <html>
 <jsp:include page="../partials/head.jsp">
@@ -110,9 +111,9 @@
                         </c:when>
                         <c:otherwise>
                             <sb:printComments comments="${requestScope.comments}" idParent="${requestScope.initialIndex}" depth="${0}" isUserBanned="${isUserBanned}">
-                          <jsp:attribute name="commentFragment">
-                                <%@ include file="/WEB-INF/views/partials/comment.jsp" %>
-                          </jsp:attribute>
+                              <jsp:attribute name="commentFragment">
+                                  <%@ include file="/WEB-INF/views/partials/comment.jsp" %>
+                              </jsp:attribute>
                             </sb:printComments>
                         </c:otherwise>
                     </c:choose>

@@ -24,7 +24,7 @@
         </div>
         <div>
             <c:if test="${not empty comment.parentComment && comment.parentComment.id > 0 && empty actualDepth}">
-                <span id="parent-button" class="grey-text"><a href="${pageContext.request.contextPath}/post/${comment.post.id}?comment=${comment.parentComment.id}" id="parent-button"><i class="fas fa-level-up-alt"></i>&nbsp;<span>Parent</span></a></span>
+                <span id="parent-button" class="grey-text"><a href="${pageContext.request.contextPath}/post/${comment.post.id}?comment=${comment.parentComment.id}"><i class="fas fa-level-up-alt"></i>&nbsp;<span>Parent</span></a></span>
             </c:if>
             <c:if test="${not empty requestScope.loggedUser && isUserBanned == false}">
              <span id = "reply-button" class = "grey-text" onclick="toggleTextArea(this)">

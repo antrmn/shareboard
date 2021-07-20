@@ -35,7 +35,6 @@ window.addEventListener("click", function(event) {
 $('#ban-form').submit(function(e) {
     e.preventDefault();
 
-
     $.post('./addban', $('#ban-form').serialize(), function (data) {
         if(data!==""){
             //console.log(data)
