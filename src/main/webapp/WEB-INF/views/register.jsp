@@ -35,6 +35,7 @@
           <input class = "auth-input-field" type="password" id="pass" name="pass" minlength="3" maxlength="255" required >
           <label for="pass2">Confirm Password:</label>
           <input class = "auth-input-field" type="password" id="pass2" name="pass2" minlength="3" maxlength="255" required>
+          <span>Hai già un account? <a href="./login">Accedi</a></span>
           <input type="submit" value="Sign Up" class="roundButton" style = "margin-top:10px;" onclick = "validatePassword(this)">
         </form>
       </div>

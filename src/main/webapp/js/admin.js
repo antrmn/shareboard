@@ -7,14 +7,13 @@ function closeNav() {
 }
 
 function toggleAdminStatus(e, id){
-    console.log(e.checked)
     $.get('./toggleAdmin',
         {
             isAdmin: e.checked,
             userId: id
-        },
-        function (data) {
-        //add notification
+        }).fail(function(){
+            $(e).prop("checked", true)
+            alert("Azione non permessa")
     });
 }
 
@@ -38,8 +37,8 @@ $('#ban-form').submit(function(e) {
 
 
     $.post('./addban', $('#ban-form').serialize(), function (data) {
-        if(data!=""){
-            console.log(data)
+        if(data!==""){
+            //console.log(data)
             $('#error-list').empty();
             for(let error of data){
                 $('#error-list').append(` <li>${error}</li>`)

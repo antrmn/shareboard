@@ -1,7 +1,9 @@
 package controller;
 
+import controller.util.ErrorForwarder;
 import model.persistence.ConPool;
 
+import model.user.User;
 import model.user.UserDAO;
 
 import javax.servlet.ServletException;
@@ -19,6 +21,11 @@ public class DeleteUserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         int userId = Integer.parseInt(req.getParameter("userId"));
+        User u = (User)req.getAttribute("loggedUser");
+        if(userId == u.getId()){
+            ErrorForwarder.sendError(req, resp, "Azione non permessa", 400);
+            return;
+        }
         try(Connection con = ConPool.getConnection()){
             UserDAO service = new UserDAO(con);
 

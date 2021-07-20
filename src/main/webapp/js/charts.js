@@ -41,21 +41,10 @@ $(() => {
         formattedData.addColumn('number', 'Numero');
 
         for(let x of Object.entries(data)){
-            //console.log(x)
-            // console.log(section[1].name)
-            // console.log(section[1].nFollowersTotal)
-            // let name = section[1].name
-            // let count = section[1].nFollowersTotal
             formattedData.addRow([x[0], x[1]])
         }
 
         let view = new google.visualization.DataView(formattedData);
-        // view.setColumns([0, 1,
-        //     { calc: "stringify",
-        //         sourceColumn: 1,
-        //         type: "string",
-        //         role: "annotation" },
-        //     2]);
 
         let options = {
             title: 'Utenti Iscritti Di Recente',
@@ -68,14 +57,14 @@ $(() => {
             legend: { position: "none" },
             hAxis : {
                 textStyle : {
-                    fontSize: 12, // or the number you want,
+                    fontSize: 12,
                     baselineColor: '#CCCCCC',
                     color: "#FFFFFF"
                 }
             },
             vAxis : {
                 textStyle : {
-                    fontSize: 12, // or the number you want,
+                    fontSize: 12,
                     baselineColor: '#CCCCCC',
                     color: "#FFFFFF"
                 }
@@ -116,14 +105,14 @@ $(() => {
             legend: { position: "none" },
             hAxis : {
                 textStyle : {
-                    fontSize: 12, // or the number you want,
+                    fontSize: 12,
                     baselineColor: '#CCCCCC',
                     color: "#FFFFFF"
                 }
             },
             vAxis : {
                 textStyle : {
-                    fontSize: 12, // or the number you want,
+                    fontSize: 12,
                     baselineColor: '#CCCCCC',
                     color: "#FFFFFF"
                 }
@@ -167,6 +156,7 @@ $(() => {
             function(data){
                 save = data
                 // console.log(data);
+                $(".dashboard-card").removeClass("hide")
                 drawUserBySectionChart(JSON.parse(data.section_data));
                 drawPostBySectionChart(JSON.parse(data.post_bysection_data))
                 drawRecentRegistrationsChart(JSON.parse(data.registration_data))
