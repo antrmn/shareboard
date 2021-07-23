@@ -1,14 +1,17 @@
 window.onclick = function(event) {
-    if (!$(event.target).is("#nav-crt-sctn") && $(event.target).parents("#nav-crt-sctn").length === 0) {
+    if ($("#nav-crt-sctn").length && !$(event.target).is("#nav-crt-sctn") && $(event.target).parents("#nav-crt-sctn").length === 0) {
         toggleDropdown("close", "section-dropdown")
     }
 
-    if (!$(event.target).is("#profile-container") && $(event.target).parents("#profile-container").length === 0){
+    if ($("#profile-dropdown").length && !$(event.target).is("#profile-container") && $(event.target).parents("#profile-container").length === 0){
         toggleDropdown("close", "profile-dropdown")
+    }
+
+    if ($("#right-dropdown").length && !$(event.target).is("#profile-container") && $(event.target).parents("#profile-container").length === 0){
         toggleDropdown("close", "right-dropdown")
     }
 
-    if (!$(event.target).is("#filter-icon") && $(event.target).parents("#filter-icon").length === 0){
+    if ($("#filter-dropdown").length && !$(event.target).is("#filter-icon") && $(event.target).parents("#filter-icon").length === 0){
         toggleDropdown("close", "filter-dropdown")
     }
 }
@@ -239,4 +242,19 @@ function validatePassword(e){
 
 function validateUserEdit(e){
     return validatePassword(e) && validateTextAreaBySibling(e, "Massimo 255 caratteri")
+}
+
+function openTooltip(e){
+    let tooltip = document.getElementById("tooltip");
+    tooltip.innerHTML = $(e).attr("data-ttp-message");
+    tooltip.style.display = "block";
+    tooltip.style.top = e.offsetTop - tooltip.offsetHeight - 10 + "px";
+    tooltip.style.left = e.offsetLeft + "px";
+}
+
+function closeTooltip(e){
+    let tooltip = document.getElementById("tooltip");
+    tooltip.style.display = "none";
+    tooltip.style.top = "-9999px";
+    tooltip.style.left = "-9999px";
 }

@@ -317,6 +317,47 @@ footer {
     border-color: var(--shareboard-border-color2-selected);
 }
 
+.tooltip {
+    /*width: 120px;*/
+    background-color: #232b32;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -60px;
+}
+
+
+#tooltip {
+    position: absolute;
+    display: none;
+    /*border: 1px solid #999;*/
+    border-radius: 6px;
+    padding: 5px;
+    z-index: 1;
+    background-color: #2c2c37;
+    color: #fff;
+    height:30px;
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+#tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 20px;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #232b32 transparent transparent transparent;
+    margin-bottom: 20px;
+}
+
 /*NAVBAR START*/
 navbar{
     height: 48px;
@@ -813,6 +854,22 @@ navbar *{
 /*    border-radius: 4px;*/
 /*    padding: 4px;*/
 /*}*/
+
+.auth-alternative-text{
+    margin-top:30px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 18px;
+}
+
+.auth-alternative-link{
+    color: #0079d3 !important;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: .5px;
+    line-height: 24px;
+    text-transform: uppercase;
+}
 
 .auth-input-field{
     background-color: #c6c6c6;

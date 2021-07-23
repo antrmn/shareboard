@@ -27,11 +27,13 @@
       </ul>
       <form class = "grid-y-nw align-center justify-center" id = "login-form" action="${pageContext.request.contextPath}/login" method="post">
         <label for="username">Username:</label>
-        <input class = "auth-input-field" type="text" id="username" name="username" value="${fn:trim(fn:escapeXml(param.username))}" required maxlength="30">
+        <input class = "auth-input-field" type="text" id="username" name="username" value="${fn:trim(fn:escapeXml(param.username))}" required maxlength="30" data-ttp-message = "Richiesto, Max: 30 char" onfocus="openTooltip(this);" onblur="closeTooltip(this);">
         <label for="pass">Password:</label>
-        <input class = "auth-input-field" type="password" id="pass" name="pass" minlength="3" maxlength="255" required>
-        <span>Non hai un account? <a href="./register">Registrati</a></span>
+        <input class = "auth-input-field" type="password" id="pass" name="pass" minlength="3" maxlength="255" required onfocus="openTooltip(this);" onblur="closeTooltip(this);"  data-ttp-message = "Min: 3 char, Max: 30 char">
         <input type="submit" value="Log In" class="roundButton" style = "margin-top:10px;">
+
+        <span class = "auth-alternative-text">Non hai un account? <a href="./register" class="auth-alternative-link">Registrati</a></span>
+        <div id="tooltip"></div>
       </form>
     </div>
   </div>
