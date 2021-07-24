@@ -25,12 +25,22 @@
           </c:forEach>
         </c:if>
       </ul>
-      <form class = "grid-y-nw align-center justify-center" id = "login-form" action="${pageContext.request.contextPath}/login" method="post">
-        <label for="username">Username:</label>
-        <input class = "auth-input-field" type="text" id="username" name="username" value="${fn:trim(fn:escapeXml(param.username))}" required maxlength="30" data-ttp-message = "Richiesto, Max: 30 char" onfocus="openTooltip(this);" onblur="closeTooltip(this);">
-        <label for="pass">Password:</label>
-        <input class = "auth-input-field" type="password" id="pass" name="pass" minlength="3" maxlength="255" required onfocus="openTooltip(this);" onblur="closeTooltip(this);"  data-ttp-message = "Min: 3 char, Max: 30 char">
-        <input type="submit" value="Log In" class="roundButton" style = "margin-top:10px;">
+      <form class = "grid-y-nw justify-center" id = "login-form" action="${pageContext.request.contextPath}/login" method="post">
+        <label for="username">
+          Username
+          <i class="fas fa-info-circle tooltipicon">
+            <div class="tooltip">Richiesto, Max: 30 char</div>
+          </i>
+        </label>
+        <input class = "auth-input-field" type="text" id="username" name="username" value="${fn:trim(fn:escapeXml(param.username))}" required maxlength="30">
+        <label for="pass">
+          Password
+          <i class="fas fa-info-circle tooltipicon">
+            <div class="tooltip">Min: 3 char, Max: 30 char</div>
+          </i>
+        </label>
+        <input class = "auth-input-field" type="password" id="pass" name="pass" minlength="3" maxlength="255" required>
+        <input type="submit" value="Log In" class="roundButton" style = "margin-top:10px; align-self: center;">
 
         <span class = "auth-alternative-text">Non hai un account? <a href="./register" class="auth-alternative-link">Registrati</a></span>
         <div id="tooltip"></div>

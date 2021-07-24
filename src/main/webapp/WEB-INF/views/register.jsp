@@ -5,7 +5,7 @@
 <html>
 <head>
   <jsp:include page="partials/head.jsp">
-    <jsp:param name="currentPage" value="" />
+    <jsp:param name="currentPage" value="Register" />
   </jsp:include>
 </head>
 <body>
@@ -26,16 +26,36 @@
             </c:forEach>
           </c:if>
         </ul>
-        <form id = "register-form" action="${pageContext.request.contextPath}/register" method="post" style="display: flex; justify-content: center; align-items:center; flex-direction: column;">
-          <label for="mail">Email:</label>
+        <form id = "register-form" action="${pageContext.request.contextPath}/register" method="post" style="display: flex; justify-content: center; flex-direction: column;">
+          <label for="mail">
+            Email
+            <i class="fas fa-info-circle tooltipicon">
+              <div class="tooltip">Richiesto, Max: 255 char</div>
+            </i>
+          </label>
           <input class = "auth-input-field" type="mail" id="mail" name="mail" value="${fn:trim(fn:escapeXml(param.mail))}" required maxlength="255">
-          <label for="username">Username:</label>
+          <label for="username">
+            Username
+            <i class="fas fa-info-circle tooltipicon">
+              <div class="tooltip">Richiesto, Min: 3 char, Max: 30 char</div>
+            </i>
+          </label>
           <input class = "auth-input-field" type="text" id="username" name="username" value="${fn:trim(fn:escapeXml(param.username))}" required minlength="3" maxlength="30">
-          <label for="pass">Password:</label>
+          <label for="pass">
+            Password
+            <i class="fas fa-info-circle tooltipicon">
+              <div class="tooltip">Richiesto, Min: 3 char, Max: 255 char</div>
+            </i>
+          </label>
           <input class = "auth-input-field" type="password" id="pass" name="pass" minlength="3" maxlength="255" required >
-          <label for="pass2">Confirm Password:</label>
+          <label for="pass2">
+            Confirm Password
+            <i class="fas fa-info-circle tooltipicon">
+              <div class="tooltip">Richiesto, Min: 3 char, Max: 255 char</div>
+            </i>
+          </label>
           <input class = "auth-input-field" type="password" id="pass2" name="pass2" minlength="3" maxlength="255" required>
-          <input type="submit" value="Sign Up" class="roundButton" style = "margin-top:10px;" onclick = "validatePassword(this)">
+          <input type="submit" value="Sign Up" class="roundButton" style = "margin-top:10px; align-self: center" onclick = "validatePassword(this)">
           <span class = "auth-alternative-text">Hai già un account? <a class = "auth-alternative-link" href="./login">Accedi</a></span>
         </form>
       </div>
