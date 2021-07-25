@@ -35,16 +35,13 @@ window.addEventListener("click", function(event) {
 $('#ban-form').submit(function(e) {
     e.preventDefault();
 
-    $.post('./addban', $('#ban-form').serialize(), function (data) {
-        if(data!==""){
-            //console.log(data)
+    $.post('./addban', $('#ban-form').serialize())
+        .done(function(){ window.location.reload(false);})
+        .fail(function(xhr, status, error){
+            let errors = JSON.parse(xhr.responseText)
             $('#error-list').empty();
-            for(let error of data){
-                $('#error-list').append(` <li>${error}</li>`)
+            for(let error of errors){
+                $('#error-list').append(`<li>${error}</li>`)
             }
-        } else{
-            window.location.reload(false);
-        }
-    });
-
+        });
 });

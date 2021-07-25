@@ -1,6 +1,7 @@
 package controller;
 
 import com.google.gson.Gson;
+import controller.util.ErrorForwarder;
 import model.ban.Ban;
 import model.ban.BanDAO;
 import model.persistence.ConPool;
@@ -33,9 +34,7 @@ public class AddBanServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.setContentType("application/json");
         List<String> errors = new ArrayList<>();
-
         String date = req.getParameter("endDate");
         int userId = Integer.parseInt(req.getParameter("userId"));
         int sectionId = Integer.parseInt(req.getParameter("sectionId"));
@@ -56,6 +55,8 @@ public class AddBanServlet extends HttpServlet {
 
 
         if(!errors.isEmpty()){
+            resp.setContentType("application/json");
+            resp.setStatus(400);
             Gson gson = new Gson();
             resp.getWriter().print(gson.toJson(errors));
             resp.getWriter().flush();
