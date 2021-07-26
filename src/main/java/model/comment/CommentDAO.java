@@ -49,7 +49,10 @@ public class CommentDAO {
             valuesToSet.add("author_id=?");
         }
         if(comment.getParentComment() != null && comment.getParentComment().getId() != null){
-            params.add(new Pair<>(comment.getParentComment().getId(), Types.VARCHAR));
+            if(comment.getParentComment().getId() == 0)
+                params.add(new Pair<>(null, Types.INTEGER));
+            else
+                params.add(new Pair<>(comment.getParentComment().getId(), Types.INTEGER));
             valuesToSet.add("parent_comment_id=?");
         }
         params.add(new Pair<>(comment.getId(), Types.INTEGER));
