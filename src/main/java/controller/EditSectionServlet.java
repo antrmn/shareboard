@@ -68,7 +68,7 @@ public class EditSectionServlet extends HttpServlet {
         if(banner!= null && banner.getSize() > 0){
             if (banner.getSize() > 5 * 1024 * 1024)
                 errors.add("Il file per il banner non deve superare i 5MB");
-            String mimeType = getServletContext().getMimeType(picture.getSubmittedFileName());
+            String mimeType = getServletContext().getMimeType(banner.getSubmittedFileName());
             if (mimeType == null || !mimeType.startsWith("image/"))
                 errors.add("Il file caricato per il banner non è un'immagine");
         }
