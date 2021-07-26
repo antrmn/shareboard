@@ -1,4 +1,5 @@
 <%@ taglib prefix="sbfn" uri="/WEB-INF/tlds/tagUtils.tld" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%--@elvariable id="comment" type="model.comment.Comment"--%>
 <%-- Quello sopra è un commento di IntelliJ che permette di ignorare l'errore "cannot resolve variable" e
      fornisce l'auto-complete anche se l'oggetto non è presente (Ancora) in nessuno scope --%>
@@ -19,7 +20,7 @@
         </div>
         <div>
             <p class = "white-text comment-text">
-                ${comment.text}
+                ${fn:escapeXml(comment.text)}
             </p>
         </div>
         <div>
@@ -49,7 +50,7 @@
         </form>
         <form class = "comment-form edit-form" method = "POST" action= "${pageContext.request.contextPath}/editcomment" hidden>
             <input type = "hidden" name = "id" value = ${comment.id}>
-            <textarea class = 'dark-textarea' name = "text" rows="5" pattern="^.{1,255}$">${comment.text}</textarea>
+            <textarea class = 'dark-textarea' name = "text" rows="5" pattern="^.{1,255}$">${fn:escapeXml(comment.text)}</textarea>
             <br>
             <button class = roundButton onclick="validateTextAreaBySibling(this, 'lunghezza massima: 1000, lunghezza minima: 1')">Modifica</button>
         </form>

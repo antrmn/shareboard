@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html>
 <jsp:include page="../partials/head.jsp">
-  <jsp:param name="currentPage" value="${post.title}" />
+  <jsp:param name="currentPage" value="${fn:escapeXml(post.title)}" />
   <jsp:param name="styles" value="section,comment,post" />
   <jsp:param name="scripts" value="comment" />
 </jsp:include>
@@ -60,7 +60,7 @@
                             <a href="/shareboard/u/${post.author.username}" class = grey-text>posted by ${post.author.username}</a>
                         </div>
                         <div class = "white-text ${empty post.content ? 'post-big-title' : ''}">
-                            <h3>${post.title}</h3>
+                            <h3>${fn:escapeXml(post.title)}</h3>
                         </div>
 
                         <div>
@@ -70,7 +70,7 @@
                                 </c:when>
                                 <c:when test="${post.type == 'TEXT' && not empty post.content}">
                                     <p class = white-text style = "border: solid 1px gray; border-radius: 4px; padding: 7px; word-break: break-word;">
-                                            ${post.content}
+                                            ${fn:escapeXml(post.content)}
                                     </p>
                                 </c:when>
                             </c:choose>

@@ -5,6 +5,7 @@
      fornisce l'auto-complete anche se l'oggetto non è presente (Ancora) in nessuno scope --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sbfn" uri="/WEB-INF/tlds/tagUtils.tld" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <div class="post greyContainer interactable">
         <span class = "vote-container">
@@ -27,7 +28,7 @@
     </span>
     <span>
         <a href = "${pageContext.request.contextPath}/post/${post.id}">
-            <h3 style = "display: block; margin-top: 5px; margin-bottom: 1px; margin-right:2px;">${post.title}</h3>
+            <h3 style = "display: block; margin-top: 5px; margin-bottom: 1px; margin-right:2px;">${fn:escapeXml(post.title)}</h3>
             <div id="post-meta-container">
                 <a href="${pageContext.request.contextPath}/s/${post.section.name}" style="font-size:12px;font-weight:400;line-height:16px">s/${post.section.name}</a>
                 <a href="${pageContext.request.contextPath}/u/${post.author.username}" style = "font-size: 12px;font-weight: 400;line-height: 16px">Posted by: ${post.author.username}</a>
