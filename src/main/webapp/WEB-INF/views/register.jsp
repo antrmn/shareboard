@@ -33,7 +33,7 @@
               <div class="tooltip">Richiesto, Max: 255 char</div>
             </i>
           </label>
-          <input class = "auth-input-field" type="mail" id="mail" name="mail" value="${fn:trim(fn:escapeXml(param.mail))}" required maxlength="255">
+          <input class = "auth-input-field" type="email" id="mail" name="mail" value="${fn:trim(fn:escapeXml(param.mail))}" required maxlength="255">
           <label for="username">
             Username
             <i class="fas fa-info-circle tooltipicon">
