@@ -79,7 +79,7 @@ WITH RECURSIVE Recurse_Comments AS (
 SELECT * FROM Recurse_Comments  WHERE post_id = 58;
 
 
-/* guest, vedi risposte ai commenti */
+/* logged user, vedi risposte ai commenti */
 WITH RECURSIVE Recurse_Comments AS (
     WITH votes_from_user_cte AS (
         SELECT
