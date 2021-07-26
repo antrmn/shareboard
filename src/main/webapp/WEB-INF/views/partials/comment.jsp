@@ -42,7 +42,6 @@
             </c:if>
         </div>
         <form class = "comment-form reply-form" method = "POST" action= "${pageContext.request.contextPath}/newcomment" hidden>
-            <input type = "hidden" name = "id" value = ${comment.post.id}>
             <input type = "hidden" name = "parent" value = ${comment.id}>
             <textarea class = 'dark-textarea' name = "text" rows="5" placeholder="Scrivi una risposta..." pattern="^.{1,255}$"></textarea>
             <br>
