@@ -52,7 +52,7 @@ public class NewCommentServlet extends HttpServlet {
                     ErrorForwarder.sendError(req, resp, "Il post specificato non esiste", 400);
                     return;
                 }
-                if(!hasBan.apply(post.getSection().getId())){
+                if(hasBan.apply(post.getSection().getId())){
                     ErrorForwarder.sendError(req, resp, "Non ti è permesso commentare in questa sezione", 403);
                     return;
                 }
@@ -75,7 +75,7 @@ public class NewCommentServlet extends HttpServlet {
                     return;
                 }
                 int sectionId = new PostDAO(con).get(parentComment.getPost().getId()).getSection().getId();
-                if(!hasBan.apply(sectionId)){
+                if(hasBan.apply(sectionId)){
                     ErrorForwarder.sendError(req, resp, "Non ti è permesso commentare in questa sezione", 403);
                     return;
                 }
