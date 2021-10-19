@@ -1,0 +1,181 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{shareboard}
+
+
+\RequirePackage{titlesec}
+\RequirePackage{fancyhdr}
+\RequirePackage{setspace}
+\RequirePackage{enumitem}
+\RequirePackage{lastpage}
+\RequirePackage{graphicx}
+\RequirePackage{wrapfig}
+\RequirePackage{anyfontsize}
+\RequirePackage{soul}
+\RequirePackage{colortbl}
+\RequirePackage{hhline}
+\RequirePackage{xcolor}
+\RequirePackage[owncaptions]{vhistory}
+\RequirePackage{iftex}
+\RequirePackage[a4paper,
+            left=2cm,
+            right=2.5cm,
+            top=1.5cm,
+            bottom=2cm,
+            %showframe,
+            includeheadfoot,
+            headheight=2.2cm
+            ]{geometry}
+
+%% FONTS
+\ifPDFTeX
+    \newcommand{\CenturyGothic}{\sffamily}
+\else
+    \RequirePackage{fontspec}
+    \IfFontExistsTF{Garamond}{
+        \setmainfont{Garamond}
+    }{%else
+        \IfFontExistsTF{EB Garamond}{
+            \setmainfont{EB Garamond}
+    }
+    }
+    \IfFontExistsTF{Century Gothic}{
+        \newfontfamily\CenturyGothic{Century Gothic}   
+    }{  %else
+        \newfontfamily\CenturyGothic{Trebuchet MS} %fallback
+    }
+\fi
+
+
+%% VARIABLES
+\def\progetto{}
+\def\riferimento{}
+\def\presentatoda{}
+\def\approvatoda{}
+\def\destinatario{}
+\def\footer{}
+
+%% LINE SPACING
+\onehalfspacing 
+
+%% COLORS
+\definecolor{LineRuleColor}{HTML}{DEEAF6}
+\definecolor{SectionTitleColor}{HTML}{1F4E79}
+\definecolor{RevHistoryHeadingColor}{HTML}{2E74B5}
+\definecolor{RevHistoryEvenColor}{HTML}{DEEAF6}
+\definecolor{RevHistoryOddColor}{HTML}{BDD6EE}
+\definecolor{GreyishTableColor}{HTML}{606D7A}
+
+%% ITEMIZE
+\setlist[itemize,1]{label=$\bullet$, labelsep=1.5em, leftmargin=*}
+
+%% SECTION HEADINGS FORMATTING
+\titlespacing*{\section}{0.64cm}{16pt}{8pt}
+\titlespacing*{\subsection}{0.64cm}{16pt}{8pt}
+\titlespacing*{\subsubsection}{0.64cm}{16pt}{8pt}
+
+\titleformat{\section}[hang]
+            {\fontsize{18}{12}\color{SectionTitleColor}\CenturyGothic}
+            {\thetitle. }
+            {0em}
+            {}
+            [\vspace{1.5ex}\color{LineRuleColor}{\titlerule[0.25pt]{}}]
+\titleformat{\subsection}
+            [hang]
+            {\fontsize{16}{12}\color{SectionTitleColor}\CenturyGothic}
+            {\thetitle. }
+            {0em}
+            {}
+            [\vspace{1.5ex}\color{LineRuleColor}{\titlerule[0.25pt]{}}]
+\titleformat{\subsubsection}
+            [hang]
+            {\fontsize{14}{12}\color{SectionTitleColor}\CenturyGothic}
+            {\thetitle. }
+            {0em}
+            {}
+            [\vspace{1.5ex}\color{LineRuleColor}{\titlerule[0.25pt]{}}]
+
+
+%% HEADER AND FOOTER
+\pagestyle{fancyplain}
+\fancyhf{}
+\chead{
+        \begin{minipage}{0.25\textwidth}
+            \includegraphics[width=2.14cm, height=2.14cm]{unisa.png}
+        \end{minipage}
+        \begin{minipage}{0.70\textwidth}
+            \CenturyGothic 
+                Laurea Triennale in informatica - Università di Salerno\\
+                Corso di \emph{Ingegneria del Software} - Prof. C. Gravino 
+        \end{minipage}}
+\lhead{}
+\rhead{}
+\renewcommand{\headrulewidth}{0.0pt}
+
+\cfoot{}
+\lfoot{\CenturyGothic{}\fontsize{8}{8}\color{SectionTitleColor} \footer}
+\rfoot{\CenturyGothic{}\fontsize{8}{8}\color{SectionTitleColor} Pag. \thepage|\pageref{LastPage}}
+
+
+%% REVISION HISTORY TABLE
+\renewcommand{\vhchangename}{Descrizione}
+\renewcommand{\vhversionname}{Versione}
+\renewcommand{\vhdatename}{Data}
+\renewcommand{\vhauthorname}{Autori}
+
+\renewcommand{\vhAuthorColWidth}{.3\hsize}
+\renewcommand{\vhChangeColWidth}{.4\hsize}
+
+\newcommand\isVHistoryTable{0}
+
+\BeforeBeginEnvironment{longtable}{
+    \centering
+}
+
+\AtBeginEnvironment{longtable}{
+    \ifnum\numexpr\isVHistoryTable=1
+        \rowcolors{1}
+                {\ifnum\numexpr\rownum<2
+                        RevHistoryHeadingColor%
+                 \else 
+                 RevHistoryOddColor%
+                 \fi}
+                {RevHistoryEvenColor}
+        \CenturyGothic
+        \let\oldtextbf\textbf
+        \renewcommand{\textbf}[1]{\textcolor{white}{\fontsize{14}{14}\oldtextbf{#1}}}
+        \def\arraystretch{1.5}
+    \fi
+}
+
+\AtBeginEnvironment{versionhistory}{\renewcommand\isVHistoryTable{1}}
+\AfterEndEnvironment{versionhistory}{\renewcommand\isVHistoryTable{0}}
+
+
+
+%% MAKETITLE
+\makeatletter
+\def\@maketitle{%
+    \clearpage
+    \null
+    \vskip 0pt plus 0.35fil % 1fil = 40% spazio dello spazio rimanente
+    \raggedleft\CenturyGothic{}\fontsize{48}{50}\selectfont\color{SectionTitleColor}\@title\\
+    \color{red}\progetto\\~\\
+    \normalcolor\fontsize{11}{11}\CenturyGothic{}
+    \arrayrulecolor{GreyishTableColor}
+    \setlength{\arrayrulewidth}{0.5pt}
+    \renewcommand{\arraystretch}{1.5}
+    \begin{tabular}{ p{3cm} | p{10cm} }
+        Riferimento & \riferimento\\
+        \hline
+        Versione & \vhCurrentVersion \\
+         \hline
+        Data & \vhCurrentDate \\
+         \hline
+        Destinatario & \destinatario \\
+         \hline
+        Presentato da & \presentatoda \\
+         \hline
+        Approvato da & \approvatoda\\
+    \end{tabular}
+    \clearpage}
+\makeatother

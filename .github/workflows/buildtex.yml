@@ -1,0 +1,28 @@
+name: Build
+on:
+  push:
+    paths-ignore:
+      - '*.pdf'
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    container:
+      image: danteev/texlive:latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build LaTeX
+        run: |
+          cd ./doc
+          mkdir -p out
+          for file in *.tex
+          do
+            latexmk -xelatex -output-directory=out $file
+          done
+      - name: Publish LaTeX
+        run : |
+          git config --global user.email "bot@example.org"
+          git config --global user.name "BOT_WORKFLOW"
+          git add -f ./doc/out/*.pdf
+          git commit -m "WORKFLOW_COMMIT - Update PDFs [skip ci]"
+          git push

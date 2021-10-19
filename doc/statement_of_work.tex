@@ -1,0 +1,90 @@
+\documentclass[12pt]{article}
+
+\usepackage[owncaptions]{vhistory}
+\usepackage[table]{xcolor}
+\usepackage{shareboard}
+
+\def\progetto{Shareboard}
+\def\riferimento{}
+\def\presentatoda{Antonio Romano, Alessandro Saverio De Maio, Carmine Leo}
+\def\approvatoda{}
+\def\destinatario{Studenti di Ingegneria del Software 2021/22}
+\def\footer{SOW}
+
+\title{Statement of Work\\Progetto}
+\author{\presentatoda}
+
+\begin{document}
+\maketitle
+
+\begin{versionhistory}
+  \vhEntry{1.0}{18/10/2021}{Antonio Romano}{Documento creato}
+\end{versionhistory}
+\clearpage
+
+\section{Piano Strategico/Strategic Plan}
+  Il team di Shareboard intende promuovere lo scambio di idee e l’interazione tra persone, incoraggiando la curiosità verso argomenti, nuovi o già di proprio interesse, e incentivando gli utenti a proporre contenuti stimolanti.
+  
+  \section{Obiettivi di Business/Business Needs}
+  Il team di Shareboard intende allestire uno spazio di comunicazione che sia accessibile e di uso immediato per i suoi utenti, promuovendo la fruizione e la creazione di contenuti.
+  
+  \section{Ambito del Prodotto/Product Scope}
+  
+  \begin{itemize}
+  
+  \item Un interfaccia semplice ed intuitiva,
+  \item Un interfaccia responsive per permetterne l’uso su ogni tipo di dispositivo,
+  \item Pubblicazione di contenuti da parte degli utenti,
+  \item Possibilità per gli utenti di esprimere opinioni sui contenuti pubblicati da altri utenti,
+  \item Possibilità di assegnare un feedback positivo o negativo ai contenuti e alle opinioni degli altri utenti,
+  \item Promuovere la visibilità dei contenuti con il maggior numero di feedback positivi.
+  
+  \end{itemize}
+  
+  Scenario 1:
+  Utente effettua il login, visualizza la home page, decide di interagire con un contenuto, assegnando un feedback ed un commento.
+  
+  \section{Data di Inizio e di Fine}
+  Inizio: Ottobre 2021
+  Fine: Gennaio-Febbraio 2022. E’ possibile concordare la data di consegna che potrà essere una delle seguenti:
+  
+  \begin{itemize}
+      \item I: circa metà Gennaio 2022
+      \item II: fine Gennaio 2022
+      \item III: prima decade di Febbraio 2022
+  \end{itemize}
+  
+  \section{Deliverables}
+  \begin{itemize}
+      \item RAD, SDD, ODD, Matrice di Tracciabilità, Test Plan, Test Case Specification, Test incident Report, Test Summary Report, Manuale D’Uso, Manuale Installazione e ogni altro documento richiesto per lo sviluppo del sistema.
+  \end{itemize}
+  
+  \section{Vincoli/Constraints}
+  \begin{itemize}
+  \item Rispetto scadenze
+  \item Budget/Effort non superiore a 50*n ore dove n sono i membri del team 
+  \item Uso di tre Design Pattern
+  \item Uso di UML
+  \item Utilizzo di un sistema di versioning, dove tutti i membri del team forniscono il loro contributo
+  \item Utilizzo di Trello per divisione compiti
+  \item Utilizzo di Discord, Teams e Telegram per comunicazione
+  \item Utilizzo di quality tool come Checkstyle
+  \item Parte di progetto con approccio Agile (Scrum)
+  \end{itemize}
+  
+  \section{Criteri di Accettazione/Acceptance Criteria}
+  \begin{itemize}
+      \item Branch coverage dei casi di test: almeno 75\%
+      \item Buona manutenibilità
+      \item \colorbox{yellow}{Il numero di warning dati in output da Checkstyle inferiore ad una soglia da definire (molto bassa).}
+  \end{itemize}
+  
+  \section{Criteri di premialità}
+  
+  \begin{itemize}
+      \item Utilizzo di sistemi di build, come Maven;
+      \item \colorbox{yellow}{Utilizzo del pull-based development tramite l’applicazione di code review;}
+      \item \colorbox{yellow}{Utilizzo di un processo di Continuous Integration, tramite l’utilizzo di Travis.}
+  \end{itemize}
+
+\end{document}
