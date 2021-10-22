@@ -2,6 +2,10 @@
 
 \usepackage[owncaptions]{vhistory}
 \usepackage[table]{xcolor}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{makecell}
 \usepackage{shareboard}
 
 \def\progetto{Shareboard}
@@ -39,6 +43,45 @@
 \subsection{Modelli di sistema}
 \subsubsection{Scenari}
 \subsubsection{Modello dei casi d'uso}
+\begin{tabularx}{\linewidth}{|c|X|c|c|}
+  \hline
+  \textbf{Identificativo} & Nome del caso d'uso & Data  & dd/mm/aa\\
+  \cline{3-4}
+  Nome                    &                     & Vers. & 0.00.00\\
+  \cline{3-4}
+                          &                     & Autore& Cognome Nome\\
+  \hline
+  \textbf{Descrizione} & \multicolumn{3}{c|}{Descrizione generale}\\
+  \hline
+  \textbf{Attore principale} & \multicolumn{3}{c|}{\makecell{afammooookk\\yeee}}\\
+  \hline
+  \textbf{Attori secondari} & \multicolumn{3}{c|}{\makecell{afammooookk\\yeee}}\\
+  \hline
+  \textbf{Entry condition} & \multicolumn{3}{c|}{Descrizione}\\
+  \hline
+  \makecell{\textbf{Exit condition}\\ \raggedleft{On success}} & \multicolumn{3}{c|}{Descrizione generale}\\
+  \hline
+  \makecell{\textbf{Exit condition}\\ \raggedleft{On error}} & \multicolumn{3}{c|}{Descrizione generale}\\
+  \hline
+  \textbf{Rilevanza/User priority} & \multicolumn{3}{c|}{Descrizione generale}\\
+  \hline
+  \textbf{Frequenza stimata} & \multicolumn{3}{c|}{Descrizione generale}\\
+  \hline
+  \textbf{Extension point} & \multicolumn{3}{c|}{Descrizione generale}\\
+  \hline
+  \textbf{Generalization of} & \multicolumn{3}{c|}{Descrizione generale}\\
+  \hline
+\end{tabularx}
+%piccolo spazio da risolvere
+\begin{tabularx}{\linewidth}{|c|c|X|}
+  \multicolumn{3}{|c|}{Titolo}\\
+  \hline
+  1 & sistema & desc\\
+  \hline
+  \multicolumn{3}{|c|}{}\\
+  \hline
+\end{tabularx}
+
 \subsubsection{Modello ad oggetti}
 \subsubsection{Modello dinamico}
 \subsubsection{Interfaccia utente - percorso navigazionale e mock-up grafico}
