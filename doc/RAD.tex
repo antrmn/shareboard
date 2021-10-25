@@ -168,6 +168,7 @@
   \end{scenario}
   \begin{scenario}{Scenario alternativo}
     \system{ciao}
+    \actor{questo è uno step}
   \end{scenario}
   \begin{note}
     \entry{NUMERO}{bla bla bla}
@@ -176,7 +177,23 @@
   \begin{specialreq}
     \entry{test test test}
   \end{specialreq}
-\end{usecase}
+\end{usecase}\\
+
+\begin{tabularx}{\linewidth}{|c|X|}
+  \hline
+  Nome scenario: & SC\_1\_Login\\ 
+  \hline
+  Partecipanti:  & Giovanni:utente\\
+  \hline
+  Flusso degli eventi: & \raggedright Giovanni desidera interagire con la community quindi necessita di effettuare il login.
+  {\begin{tabularx}{\linewidth}{|c|X|}
+    \hline
+    Actor Steps & System Steps\\
+    \hline
+    test & test\\
+    \hline
+  \end{tabularx}}\\
+\end{tabularx}
 
 
 \subsubsection{Modello ad oggetti}
