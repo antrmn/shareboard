@@ -6,6 +6,7 @@
 \usepackage{multirow}
 \usepackage{tabularx}
 \usepackage{makecell}
+\usepackage{environ}
 \usepackage{shareboard}
 
 \def\progetto{Shareboard}
@@ -18,7 +19,97 @@
 \title{Requirements\\Elicitation}
 \author{\presentatoda}
 
+\newcounter{scenario}
+\newcounter{scenariostep}[scenario]
+\counterwithin{scenariostep}{scenario}
+\newcommand{\refcounter}[1]{\addtocounter{#1}{-1}\refstepcounter{#1}}
+
+\NewEnviron{scenario}[1]{
+    \stepcounter{scenario}
+    \newcommand{\system}[1]{
+      \stepcounter{scenariostep}
+      \thescenariostep & System: & \refcounter{scenariostep}##1\\
+      \hline
+    }
+    \newcommand{\actor}[1]{
+      \stepcounter{scenariostep}\thescenariostep & Actor: & \refcounter{scenariostep}##1\\
+      \hline
+    }
+    \begin{tabularx}{\linewidth}{|c|c|X|}
+        \hline
+        \multicolumn{3}{|c|}{\textbf{#1}}\\
+        \hline
+        \BODY
+        \multicolumn{3}{|c|}{}\\
+        \hline
+    \end{tabularx}\par\vskip-1.4pt
+}
+
+\NewEnviron{note}{
+    \newcommand{\entry}[2]{\multicolumn{2}{|c|}{##1} &  ##2\\\hline}
+    \begin{tabularx}{\linewidth}{|c|c|X|}
+        \multicolumn{3}{|c|}{\textbf{Note}}\\
+        \hline
+        \BODY
+        \multicolumn{3}{|c|}{}\\
+        \hline
+    \end{tabularx}\par\vskip-1.4pt
+}
+
+\NewEnviron{specialreq}{
+    \newcounter{entry}
+    \newcommand{\entry}[1]{\multicolumn{2}{|c|}{\stepcounter{entry}\theentry} & ##1\\\hline}
+    \begin{tabularx}{\linewidth}{|c|c|X|}
+        \hline
+        \multicolumn{3}{|c|}{\textbf{Special Requirements}}\\
+        \hline
+        \BODY
+        \multicolumn{3}{|c|}{}\\
+        \hline
+    \end{tabularx}
+}
+
+\NewEnviron{usecase}{
+    \sffamily
+    \centering
+    \setcounter{scenario}{0}
+    \setcounter{scenariostep}{0}
+    \newcommand{\makeheader}{
+        \begin{tabularx}{\linewidth}{|c|X|c|c|}
+        \hline
+        \textbf{Identificativo} & \nome & \textbf{Data}  & \data\\
+        \cline{3-4}
+        \id&&\textbf{Vers.}&\versione\\
+        \cline{3-4}
+        &&\textbf{Autore}&\autore\\
+        \hline
+        \textbf{Descrizione} & \multicolumn{3}{c|}{\descrizione}\\
+        \hline
+        \textbf{Attore principale} & \multicolumn{3}{c|}{\makecell{\attoreprincipale}}\\
+        \hline
+        \textbf{Attori secondari} & \multicolumn{3}{c|}{\makecell{\attorisecondari}}\\
+        \hline
+        \textbf{Entry condition} & \multicolumn{3}{c|}{\entrycondition}\\
+        \hline
+        \makecell{\textbf{Exit condition}\\ \raggedleft{On success}} & \multicolumn{3}{c|}{\onsuccess}\\
+        \hline
+        \makecell{\textbf{Exit condition}\\ \raggedleft{On error}} & \multicolumn{3}{c|}{\onerror}\\
+        \hline
+        \textbf{Rilevanza/User priority} & \multicolumn{3}{c|}{\rilevanza}\\
+        \hline
+        \textbf{Frequenza stimata} & \multicolumn{3}{c|}{\frequenzastimata}\\
+        \hline
+        \textbf{Extension point} & \multicolumn{3}{c|}{\extensionpoint}\\
+        \hline
+        \textbf{Generalization of} & \multicolumn{3}{c|}{\generalizationof}\\
+        \hline
+        \end{tabularx}\par\vskip-1.4pt
+    }
+    \BODY
+}
+
 \begin{document}
+
 \maketitle
 
 \tableofcontents
@@ -43,44 +134,50 @@
 \subsection{Modelli di sistema}
 \subsubsection{Scenari}
 \subsubsection{Modello dei casi d'uso}
-\begin{tabularx}{\linewidth}{|c|X|c|c|}
-  \hline
-  \textbf{Identificativo} & Nome del caso d'uso & Data  & dd/mm/aa\\
-  \cline{3-4}
-  Nome                    &                     & Vers. & 0.00.00\\
-  \cline{3-4}
-                          &                     & Autore& Cognome Nome\\
-  \hline
-  \textbf{Descrizione} & \multicolumn{3}{c|}{Descrizione generale}\\
-  \hline
-  \textbf{Attore principale} & \multicolumn{3}{c|}{\makecell{afammooookk\\yeee}}\\
-  \hline
-  \textbf{Attori secondari} & \multicolumn{3}{c|}{\makecell{afammooookk\\yeee}}\\
-  \hline
-  \textbf{Entry condition} & \multicolumn{3}{c|}{Descrizione}\\
-  \hline
-  \makecell{\textbf{Exit condition}\\ \raggedleft{On success}} & \multicolumn{3}{c|}{Descrizione generale}\\
-  \hline
-  \makecell{\textbf{Exit condition}\\ \raggedleft{On error}} & \multicolumn{3}{c|}{Descrizione generale}\\
-  \hline
-  \textbf{Rilevanza/User priority} & \multicolumn{3}{c|}{Descrizione generale}\\
-  \hline
-  \textbf{Frequenza stimata} & \multicolumn{3}{c|}{Descrizione generale}\\
-  \hline
-  \textbf{Extension point} & \multicolumn{3}{c|}{Descrizione generale}\\
-  \hline
-  \textbf{Generalization of} & \multicolumn{3}{c|}{Descrizione generale}\\
-  \hline
-\end{tabularx}
-%piccolo spazio da risolvere
-\begin{tabularx}{\linewidth}{|c|c|X|}
-  \multicolumn{3}{|c|}{Titolo}\\
-  \hline
-  1 & sistema & desc\\
-  \hline
-  \multicolumn{3}{|c|}{}\\
-  \hline
-\end{tabularx}
+
+\begin{usecase}
+  \def\nome{nome}
+  \def\data{data}
+  \def\id{id}
+  \def\versione{versione}
+  \def\autore{autore}
+  \def\descrizione{descrizione}
+  \def\attoreprincipale{attoreprincipale}
+  \def\attorisecondari{attorisecondari}
+  \def\entrycondition{entrycondition}
+  \def\onsuccess{onsuccess}
+  \def\onerror{onerror}
+  \def\rilevanza{rilevanza}
+  \def\frequenzastimata{frequenzastimata}
+  \def\extensionpoint{extensionpoint}
+  \def\generalizationof{generalizationof}
+
+  \makeheader
+
+  \begin{scenario}{Main scenario}
+    \system{Sono un'azione di sistema}
+    \actor{Sono un'azione da parte dell'attore}
+    \actor{
+      \label{azione:mia}
+      lorem ipsum bla bla
+      \begin{enumerate}
+        \item lista da parte dell'attore
+        \item wow
+      \end{enumerate}
+    }
+  \end{scenario}
+  \begin{scenario}{Scenario alternativo}
+    \system{ciao}
+  \end{scenario}
+  \begin{note}
+    \entry{NUMERO}{bla bla bla}
+    \entry{\ref{azione:mia}}{<- dimostrazione di label e ref.}
+  \end{note}
+  \begin{specialreq}
+    \entry{test test test}
+  \end{specialreq}
+\end{usecase}
+
 
 \subsubsection{Modello ad oggetti}
 \subsubsection{Modello dinamico}
