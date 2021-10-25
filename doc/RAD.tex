@@ -121,6 +121,7 @@
 
 \section{Introduzione}
 \subsection{Scopo del sistema}
+
 \subsection{Ambito del sistema}
 \subsection{Obiettivi e criteri di successo del progetto}
 \subsection{Definizione, acronimi e abbreviazioni}
@@ -133,6 +134,157 @@
 \subsection{Requisiti non funzionali}
 \subsection{Modelli di sistema}
 \subsubsection{Scenari}
+
+\begin{tabularx}{\linewidth}{|c|X|}
+  \hline
+  Nome scenario: & SC\_1\_Login\\ 
+  \hline
+  Partecipanti:  & Giovanni:utente\\
+  \hline
+  Flusso degli eventi: & \raggedright Giovanni desidera interagire con la community quindi necessita di effettuare il login.
+  {\begin{tabularx}{\linewidth}{|X|X|}
+    \hline
+    Actor Steps & System Steps\\
+    \hline
+    1. Giovanni inserisce le sue credenziali d’accesso & 2.	Il sistema verifica nel repository se le credenziali sono corrette e autentica Giovanni.\\
+    \hline
+  \end{tabularx}}\\
+\end{tabularx}
+
+\bigskip
+
+\begin{tabularx}{\linewidth}{|c|X|}
+  \hline
+  Nome scenario: & SC\_2\_Registrazione\\ 
+  \hline
+  Partecipanti:  & Rita:utente\\
+  \hline
+  Flusso degli eventi: & \raggedright Rita scopre la community di Shareboard e desidera farne parte, decide di registrarsi in modo da poter interagire con la community.
+  {\begin{tabularx}{\linewidth}{|X|X|}  
+    \hline
+    Actor Steps & System Steps\\
+    \hline
+    1. Rita inserisce le informazioni richieste nell'apposito form dedicato alla registrazione. & 2. Il sistema verifica che le informazioni inserite siano corrette e le memorizza.\\
+    \hline
+  \end{tabularx}}\\
+\end{tabularx}
+
+\bigskip
+
+\begin{tabularx}{\linewidth}{|c|X|}
+  \hline
+  Nome scenario: & SC\_3\_Ban\\ 
+  \hline
+  Partecipanti:  & Lucia:admin, Marco:utente\\
+  \hline
+  Flusso degli eventi: & \raggedright Lucia intende bandire Marco, un utente che non ha rispettato le linee guida della community.
+  {\begin{tabularx}{\linewidth}{|X|X|}
+    \hline
+    Actor Steps & System Steps\\
+    \hline
+    1.	Lucia inserisce le sue credenziali d’accesso. & 2.	Il sistema verifica nel repository se le credenziali sono corrette e autentica Lucia come admin.\\
+    \hline
+    3.	Lucia apre il pannello admin e si dirige nella gestione utenti. & 4.	Il sistema mostra la lista di utenti.\\
+    \hline
+    5.	Lucia identifica l’utente e seleziona l’apposita azione per bandire un utente. & 6.	Il sistema risponde con la pagina che permette di specificare la durata del ban.\\
+    \hline
+    7.	Lucia inserisce la data di inizio e fine del ban. & 8.	Il sistema memorizza la durata del ban.\\
+    \hline
+  \end{tabularx}}\\
+\end{tabularx}
+
+\bigskip
+
+\begin{tabularx}{\linewidth}{|c|X|}
+  \hline
+  Nome scenario: & SC\_4\_Voto\\ 
+  \hline
+  Partecipanti:  & Tony:utente\\
+  \hline
+  Flusso degli eventi: & \raggedright Tony visualizzando un post decide di assegnare un voto positivo perché considera interessanti i contenuti riportati.
+  {\begin{tabularx}{\linewidth}{|X|X|}  
+    \hline
+    Actor Steps & System Steps\\
+    \hline
+    1. Tony effettua il login inserendo le proprie credenziali nel form di login. & 2. Il sistema verifica nel repository se le credenziali sono corrette e autentica Tony.\\
+    \hline
+    3. Tony seleziona un post dalla sua homepage. & 4. Il sistema riceve la richiesta e mostra il post selezionato in una pagina dedicata.\\
+    \hline
+    5. Tony ritiene interessanti i contenuti del post e decide di assegnargli un voto positivo. & 6. Il sistema riceve la richiesta e incrementa il contatore di voti positivi.\\
+    \hline
+  \end{tabularx}}\\
+\end{tabularx}
+
+\bigskip
+
+\begin{tabularx}{\linewidth}{|c|X|}
+  \hline
+  Nome scenario: & SC\_5\_CommentoPost\\ 
+  \hline
+  Partecipanti:  & Sara:utente\\
+  \hline
+  Flusso degli eventi: & \raggedright Sara visualizzando un post decide di commentare per aggiungere un suo parere sui contenuti.
+  {\begin{tabularx}{\linewidth}{|X|X|}  
+    \hline
+    Actor Steps & System Steps\\
+    \hline
+    1. Sara effettua il login inserendo le proprie credenziali nel form di login. & 2. Il sistema verifica nel repository se le credenziali sono corrette e autentica Sara.\\
+    \hline
+    3. Sara seleziona un post dalla sua homepage. & 4. Il sistema riceve la richiesta e mostra il post selezionato in una pagina dedicata.\\
+    \hline
+    5. Sara desidera aggiungere delle sue opinioni sull'argomento quindi scrive il testo da condividere e lo invia al sistema. & 6. Il sistema riceve il testo inserito da Sara verificando che il numero di caratteri sia corretto e lo memorizza per pubblicarlo nel post.\\
+    \hline
+  \end{tabularx}}\\
+\end{tabularx}
+
+\bigskip
+
+\begin{tabularx}{\linewidth}{|c|X|}
+  \hline
+  Nome scenario: & SC\_6\_CreazioneSezione\\ 
+  \hline
+  Partecipanti:  & Joel:admin\\
+  \hline
+  Flusso degli eventi: & \raggedright Joel, admin della community Shareboard, nota la mancanza di una sezione che potrebbe interessare un gran numero di utenti e decide quindi di crearla.
+  {\begin{tabularx}{\linewidth}{|X|X|}  
+    \hline
+    Actor Steps & System Steps\\
+    \hline
+    1. Joel effettua il login inserendo le proprie credenziali nel form di login. & 2. Il sistema verifica nel repository se le credenziali sono corrette e autentica Jeol come admin.\\
+    \hline
+    3. Joel apre il pannello dedicato agli admin. & 4. Il sistema riceve la richiesta e mostra il pannello admin.\\
+    \hline
+    5. Joel seleziona l'apposita funzione per la creazione di una sezione. & 6. Il sistema mostra il form che permette di inserire le informazioni necessarie alla creazione della sezione.\\
+    \hline
+    7. Joel inserisce le informazioni richieste e le invia al sistema. & 8. Il sistema mostra a Joel la pagina di gestione delle sezioni contenente la sezione da lui creata.\\
+    \hline
+  \end{tabularx}}\\
+\end{tabularx}
+
+\bigskip
+
+\begin{tabularx}{\linewidth}{|c|X|}
+  \hline
+  Nome scenario: & SC\_7\_CancellazioneSezione\\ 
+  \hline
+  Partecipanti:  & Antonella:admin\\
+  \hline
+  Flusso degli eventi: & \raggedright Antonella, admin della community Shareboard, nota che una particolare sezione non genera interesse nella community e decide quindi di eliminarla.
+  {\begin{tabularx}{\linewidth}{|X|X|}  
+    \hline
+    Actor Steps & System Steps\\
+    \hline
+    1. Antonella effettua il login inserendo le proprie credenziali nel form di login. & 2. Il sistema verifica nel repository se le credenziali sono corrette e autentica Antonella come admin.\\
+    \hline
+    3. Antonella apre il pannello dedicato agli admin. & 4. Il sistema riceve la richiesta e mostra il pannello admin.\\
+    \hline
+    5. Antonella apre la pagina che permette di gestire le sezioni. & 6. Il sistema mostra la lista di sezioni attualmente presenti.\\
+    \hline
+    7. Antonella seleziona l'apposita funzione per eliminare la sezione. & 8. Il sistema chiede conferma ad Antonella ed elimina la sezione dal repository.\\
+    \hline
+  \end{tabularx}}\\
+\end{tabularx}
+
 \subsubsection{Modello dei casi d'uso}
 
 \begin{usecase}
@@ -178,22 +330,6 @@
     \entry{test test test}
   \end{specialreq}
 \end{usecase}\\
-
-\begin{tabularx}{\linewidth}{|c|X|}
-  \hline
-  Nome scenario: & SC\_1\_Login\\ 
-  \hline
-  Partecipanti:  & Giovanni:utente\\
-  \hline
-  Flusso degli eventi: & \raggedright Giovanni desidera interagire con la community quindi necessita di effettuare il login.
-  {\begin{tabularx}{\linewidth}{|c|X|}
-    \hline
-    Actor Steps & System Steps\\
-    \hline
-    test & test\\
-    \hline
-  \end{tabularx}}\\
-\end{tabularx}
 
 
 \subsubsection{Modello ad oggetti}
