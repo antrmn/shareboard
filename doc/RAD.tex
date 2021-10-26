@@ -288,43 +288,67 @@
 \subsubsection{Modello dei casi d'uso}
 
 \begin{usecase}
-  \def\nome{nome}
-  \def\data{data}
-  \def\id{id}
-  \def\versione{versione}
-  \def\autore{autore}
-  \def\descrizione{descrizione}
-  \def\attoreprincipale{attoreprincipale}
-  \def\attorisecondari{attorisecondari}
-  \def\entrycondition{entrycondition}
-  \def\onsuccess{onsuccess}
-  \def\onerror{onerror}
-  \def\rilevanza{rilevanza}
-  \def\frequenzastimata{frequenzastimata}
-  \def\extensionpoint{extensionpoint}
-  \def\generalizationof{generalizationof}
+  \def\nome{Login}
+  \def\data{26/10/2021}
+  \def\id{UC\_1}
+  \def\versione{0.1}
+  \def\autore{Leo Carmine}
+  \def\descrizione{Lo UC fornisce la funzionalità per il login di un utente.}
+  \def\attoreprincipale{Utente}
+  \def\attorisecondari{NA}
+  \def\entrycondition{È visualizzato il comando per il login.}
+  \def\onsuccess{L'utente risulta registrato ed effettua il login con successo.}
+  \def\onerror{Accesso negato all'utente}
+  \def\rilevanza{Hight}
+  \def\frequenzastimata{1000 usi/giorno}
+  \def\extensionpoint{NA}
+  \def\generalizationof{NA}
 
   \makeheader
 
-  \begin{scenario}{Main scenario}
-    \system{Sono un'azione di sistema}
-    \actor{Sono un'azione da parte dell'attore}
-    \actor{
-      \label{azione:mia}
-      lorem ipsum bla bla
-      \begin{enumerate}
-        \item lista da parte dell'attore
-        \item wow
-      \end{enumerate}
+  \begin{scenario}{Flusso di eventi principale/Main scenario}
+    \actor{Richiede di effettuare il login tramite il comando apposito.}
+    \system{
+      \label{azione:FormV}
+    Visualizza un form che richiede l'inserimento di:
+      \begin{itemize}
+        \item Username: Stringa di massimo 30 caratteri.
+        \item Password: Stringa compresa tra 3 e 30 caratteri.
+      \end{itemize}
     }
+    \actor{Riempie tutti i campi richiesti e sottomette la form compilata}
+    \system{
+      \label{azione:Check}
+      Verifica che:
+      \begin{itemize}
+        \item tutti i campi obbligatori siano stati compilati.
+        \item la stringa username sia di massimo 30 caratteri.
+        \item la password sia compresa tra 3 e 30 caratteri.
+        \item lo username sia presente nel sistema.
+        \item la password inserita corrisponda allo username.
+      \end{itemize}
+    }
+    \system{Mostra la homepage con l'accesso effettuato.}
   \end{scenario}
-  \begin{scenario}{Scenario alternativo}
-    \system{ciao}
-    \actor{questo è uno step}
+  \begin{scenario}{Flusso di eventi alternativo: Un campo obbligatorio non è stato compilato}
+    \system{Visualizza un messaggio di errore che segnala all'utente che non ha inserito tutti i campi obbligatori.}
+    \system{Resta in attesa di una nuova sottomissione del form.}
+  \end{scenario}
+  \begin{scenario}{Flusso di eventi alternativo: La password è inferiore ai 3 caratteri}
+    \system{Visualizza un messaggio di errore che segnala all'utente che la password inserita è inferiore ai 3 caratteri.}
+    \system{Resta in attesa di una nuova sottomissione del form.}
+  \end{scenario}
+  \begin{scenario}{Flusso di eventi alternativo: Le credenziali inserite non sono valide}
+    \system{Visualizza un messaggio di errore che segnala all'utente che le credenziali inserite non sono valide.}
+    \system{Resta in attesa di una nuova sottomissione del form.}
+  \end{scenario}
+  \begin{scenario}{Flusso di eventi di ERRORE: Da definire}
+    \system{NA}
+    \system{NA}
   \end{scenario}
   \begin{note}
     \entry{NUMERO}{bla bla bla}
-    \entry{\ref{azione:mia}}{<- dimostrazione di label e ref.}
+    \entry{\ref{azione:FormV}}{<- dimostrazione di label e ref.}
   \end{note}
   \begin{specialreq}
     \entry{test test test}
