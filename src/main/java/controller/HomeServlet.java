@@ -2,6 +2,7 @@ package controller;
 
 import model.section.Section;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-@WebServlet("/home")
+@WebServlet(value = "/home", loadOnStartup = 0)
 public class HomeServlet extends HttpServlet {
 
     @Override
